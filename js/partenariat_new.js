@@ -22,12 +22,12 @@ function renderPartenariatData(data) {
     }
     
     // Charger les niveaux de partenariat
-    if (data.partenariat && data.partenariat.niveaux) {
-        renderNiveauxPartenariat(data.partenariat.niveaux);
+    if (data.sponsoring && data.sponsoring.niveaux) {
+        renderNiveauxPartenariat(data.sponsoring.niveaux);
     }
     
     // Charger les avantages fiscaux
-    if (data.avantages_fiscaux_entreprises || data.avantages_fiscaux_particuliers) {
+    if (data.sponsoring && data.sponsoring.avantages_fiscaux) {
         renderAvantagesFiscaux(data);
     }
 }
@@ -47,7 +47,7 @@ function renderSponsors(sponsors) {
             </div>
             <div class="sponsor-info">
                 <h3 class="sponsor-name">${sponsor.nom}</h3>
-                <span class="sponsor-niveau">${sponsor.niveau}</span>
+                <span class="sponsor-niveau ${getSponsorLevelClass(sponsor.niveau)}">${sponsor.niveau}</span>
                 <p class="sponsor-description">${sponsor.description}</p>
                 <div class="sponsor-details">
                     ${sponsor.website ? `<a href="${sponsor.website}" target="_blank" class="sponsor-link">🌐 Site web</a>` : ''}
@@ -71,7 +71,7 @@ function renderNiveauxPartenariat(niveaux) {
     
     niveaux.forEach(niveau => {
         const niveauCard = document.createElement('div');
-        niveauCard.className = 'niveau-card';
+        niveauCard.className = `niveau-card ${getSponsorLevelClass(niveau.nom)}`;
         niveauCard.innerHTML = `
             <div class="niveau-header">
                 <h3 class="niveau-nom">${niveau.nom}</h3>
@@ -96,17 +96,29 @@ function renderAvantagesFiscaux(data) {
         <div class="avantages-fiscaux-content">
             <h3>Avantages Fiscaux</h3>
             <div class="avantages-grid">
-                ${data.avantages_fiscaux_entreprises ? `
                 <div class="avantage-fiscal">
                     <h4>🏢 Pour les Entreprises</h4>
-                    <p>${data.avantages_fiscaux_entreprises}</p>
-                </div>` : ''}
-                ${data.avantages_fiscaux_particuliers ? `
+                    <p>${data.sponsoring.avantages_fiscaux}</p>
+                </div>
+                ${data.dons && data.dons.avantages_fiscaux ? `
                 <div class="avantage-fiscal">
                     <h4>👤 Pour les Particuliers</h4>
-                    <p>${data.avantages_fiscaux_particuliers}</p>
+                    <p>${data.dons.avantages_fiscaux}</p>
                 </div>` : ''}
             </div>
         </div>
     `;
+}
+
+function getSponsorLevelClass(niveau) {
+    switch(niveau) {
+        case 'Sponsor Or':
+            return 'niveau-or';
+        case 'Sponsor Argent':
+            return 'niveau-argent';
+        case 'Partenaire Bronze':
+            return 'niveau-bronze';
+        default:
+            return 'niveau-bronze';
+    }
 }

@@ -3,7 +3,7 @@
     {
       "id": 1,
       "nom": "Boulangerie Martin",
-      "logo": "assets/sponsors/boulangerie-martin.png",
+      "logo": "assets/sponsors/boulangerie-martin.svg",
       "description": "Boulangerie artisanale familiale depuis 3 générations, spécialisée dans les produits frais et de qualité.",
       "niveau": "Partenaire Bronze",
       "website": "https://boulangerie-martin.fr",
@@ -15,7 +15,7 @@
     {
       "id": 2,
       "nom": "Garage Automobile Dupont",
-      "logo": "assets/sponsors/garage-dupont.png",
+      "logo": "assets/sponsors/garage-dupont.svg",
       "description": "Garage multimarques proposant vente, réparation et entretien de véhicules. Service de qualité et conseils personnalisés.",
       "niveau": "Sponsor Or",
       "website": "https://garage-dupont.com",
@@ -27,7 +27,7 @@
     {
       "id": 3,
       "nom": "Restaurant Le Stade",
-      "logo": "assets/sponsors/restaurant-stade.png",
+      "logo": "assets/sponsors/restaurant-stade.svg",
       "description": "Restaurant traditionnel avec terrasse, cuisine du terroir et spécialités locales. Idéal pour les repas d'équipe !",
       "niveau": "Sponsor Argent",
       "website": "https://restaurant-le-stade.fr",
@@ -39,7 +39,7 @@
     {
       "id": 4,
       "nom": "Banque Crédit Local",
-      "logo": "assets/sponsors/credit-local.png",
+      "logo": "assets/sponsors/credit-local.svg",
       "description": "Banque coopérative locale accompagnant particuliers et professionnels dans leurs projets.",
       "niveau": "Sponsor Or",
       "website": "https://credit-local.fr",
@@ -51,7 +51,7 @@
     {
       "id": 5,
       "nom": "Magasin Sport Plus",
-      "logo": "assets/sponsors/sport-plus.png",
+      "logo": "assets/sponsors/sport-plus.svg",
       "description": "Magasin d'articles de sport proposant équipements et conseils pour tous les sports. Spécialiste rugby.",
       "niveau": "Sponsor Argent",
       "website": "https://sport-plus.com",
