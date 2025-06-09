@@ -1,0 +1,36 @@
+{
+  "azureFunctions.deploySubpath": "api",
+  "azureFunctions.projectLanguage": "C#",
+  "azureFunctions.projectRuntime": "~4",
+  "debug.internalConsoleOptions": "neverOpen",
+  "extensions.ignoreRecommendations": false,
+  "files.exclude": {
+    "**/bin": true,
+    "**/obj": true,
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true
+  },
+  "dotnet.completion.showCompletionItemsFromUnimportedNamespaces": true,
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "staticwebapp.config.json"
+      ],
+      "url": "https://aka.ms/azure/static-web-apps/schema"
+    },
+    {
+      "fileMatch": [
+        "swa-cli.config.json"
+      ],
+      "url": "https://aka.ms/azure/static-web-apps-cli/schema"
+    }
+  ],
+  "liveServer.settings.port": 3000,
+  "liveServer.settings.CustomBrowser": "chrome",
+  "liveServer.settings.donotShowInfoMsg": true,
+  "html.suggest.html5": true,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "tarifs": [
+    {
+      "id": 1,
+      "categorie": "École de Rugby (U6-U8)",
+      "prix": 120,
+      "description": "Comprend : licence FFR, assurance, maillot d'entraînement",
+      "age_min": 3,
+      "age_max": 7,
+      "reductions": [
+        {
+          "type": "2ème enfant de la famille",
+          "montant": "-15€"
+        },
+        {
+          "type": "3ème enfant et plus",
+          "montant": "-25€"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "categorie": "École de Rugby (U10-U12)",
+      "prix": 150,
+      "description": "Comprend : licence FFR, assurance, maillot d'entraînement, short",
+      "age_min": 8,
+      "age_max": 11,
+      "reductions": [
+        {
+          "type": "2ème enfant de la famille",
+          "montant": "-20€"
+        },
+        {
+          "type": "3ème enfant et plus",
+          "montant": "-30€"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "categorie": "École de Rugby (U14)",
+      "prix": 180,
+      "description": "Comprend : licence FFR, assurance, équipement complet d'entraînement",
+      "age_min": 12,
+      "age_max": 13,
+      "reductions": [
+        {
+          "type": "2ème enfant de la famille",
+          "montant": "-25€"
+        },
+        {
+          "type": "3ème enfant et plus",
+          "montant": "-35€"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "categorie": "Seniors",
+      "prix": 220,
+      "description": "Comprend : licence FFR, assurance, équipement complet",
+      "age_min": 18,
+      "age_max": 99,
+      "reductions": [
+        {
+          "type": "Étudiant (sur justificatif)",
+          "montant": "-50€"
+        },
+        {
+          "type": "Demandeur d'emploi",
+          "montant": "-40€"
+        }
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "id": 1,
+      "nom": "Certificat médical d'aptitude au rugby",
+      "obligatoire": true,
+      "description": "Certificat médical datant de moins de 6 mois",
+      "modele_telecharger": "assets/documents/certificat-medical-modele.pdf"
+    },
+    {
+      "id": 2,
+      "nom": "Fiche d'inscription complétée",
+      "obligatoire": true,
+      "description": "Fiche d'inscription du club dûment remplie et signée",
+      "modele_telecharger": "assets/documents/fiche-inscription.pdf"
+    },
+    {
+      "id": 3,
+      "nom": "Copie de la carte d'identité du licencié",
+      "obligatoire": true,
+      "description": "Pièce d'identité en cours de validité (recto-verso)"
+    },
+    {
+      "id": 4,
+      "nom": "Autorisation parentale (mineurs)",
+      "obligatoire": true,
+      "description": "Pour les mineurs : autorisation signée des deux parents",
+      "modele_telecharger": "assets/documents/autorisation-parentale.pdf"
+    },
+    {
+      "id": 5,
+      "nom": "Photos d'identité",
+      "obligatoire": true,
+      "description": "2 photos d'identité récentes"
+    },
+    {
+      "id": 6,
+      "nom": "Questionnaire de santé",
+      "obligatoire": true,
+      "description": "Questionnaire de santé réglementaire",
+      "modele_telecharger": "assets/documents/questionnaire-sante.pdf"
+    },
+    {
+      "id": 7,
+      "nom": "RIB (prélèvement automatique)",
+      "obligatoire": false,
+      "description": "Pour le prélèvement automatique en 3 fois (optionnel)"
+    },
+    {
+      "id": 8,
+      "nom": "Certificat de radiation (mutation)",
+      "obligatoire": false,
+      "description": "En cas de mutation d'un autre club"
+    }
+  ],
+  "paiement": {
+    "modes": [
+      "Chèque en 1, 2 ou 3 fois",
+      "Espèces",
+      "Prélèvement automatique en 3 fois",
+      "Chèques vacances",
+      "Coupons sport"
+    ],
+    "echeances": {
+      "1_fois": "À l'inscription",
+      "2_fois": "50% à l'inscription, 50% en janvier",
+      "3_fois": "40% à l'inscription, 30% en novembre, 30% en janvier"
+    },
+    "aide_financiere": {
+      "description": "Des aides financières peuvent être accordées sur demande motivée au bureau du club.",
+      "contact": "tresorier@rugbyclub.fr"
+    }
+  },
+  "procedure": {
+    "etapes": [
+      "Remplir le formulaire d'inscription en ligne",
+      "Rassembler les documents obligatoires",
+      "Déposer le dossier complet au secrétariat",
+      "Effectuer le règlement selon le mode choisi",
+      "Récupérer la licence et l'équipement"
+    ],
+    "dates_limites": {
+      "inscription_ecole": "30 septembre 2024",
+      "inscription_seniors": "31 octobre 2024"
+    },
+    "contact": {
+      "secretariat": {
+        "email": "secretaire@rugbyclub.fr",
+        "telephone": "01 23 45 67 89",
+        "permanences": "Mercredi 18h-20h, Samedi 9h-12h"
+      }
+    }
+  },
+  "reglement_interieur": {
+    "url": "assets/documents/reglement-interieur.pdf",
+    "derniere_mise_a_jour": "2024-06-15"
+  },
+  "assurance": {
+    "compagnie": "MAIF",
+    "garanties": [
+      "Accidents corporels lors des activités rugby",
+      "Responsabilité civile",
+      "Assistance rapatriement"
+    ],
+    "exclusions": [
+      "Accidents en dehors des activités encadrées",
+      "Sports autres que le rugby"
+    ]
+  }
+}

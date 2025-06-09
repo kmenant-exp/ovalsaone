@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Direct DataLoader</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .result { margin: 10px 0; padding: 10px; border: 1px solid #ccc; }
+        .success { background-color: #d4edda; }
+        .error { background-color: #f8d7da; }
+        button { padding: 10px 15px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Test Direct DataLoader</h1>
+    <div>
+        <button onclick="testActualites()">Test Actualités</button>
+        <button onclick="testEquipes()">Test Équipes</button>
+        <button onclick="testEcole()">Test École</button>
+        <button onclick="testBoutique()">Test Boutique</button>
+        <button onclick="clearResults()">Clear</button>
+    </div>
+    <div id="results"></div>
+
+    <script src="js/data-loader.js"></script>
+    <script>
+        const dataLoader = new DataLoader();
+        
+        function addResult(message, isSuccess = true) {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            div.className = 'result ' + (isSuccess ? 'success' : 'error');
+            div.innerHTML = `<strong>${new Date().toLocaleTimeString()}</strong>: ${message}`;
+            results.appendChild(div);
+        }
+
+        async function testActualites() {
+            try {
+                addResult('Chargement des actualités...', true);
+                const data = await dataLoader.loadActualites();
+                if (data && data.actualites) {
+                    addResult(`✓ ${data.actualites.length} actualités chargées. Première: "${data.actualites[0].titre}"`, true);
+                } else {
+                    addResult('✗ Aucune actualité trouvée', false);
+                }
+            } catch (error) {
+                addResult(`✗ Erreur: ${error.message}`, false);
+            }
+        }
+
+        async function testEquipes() {
+            try {
+                addResult('Chargement des équipes...', true);
+                const data = await dataLoader.loadEquipes();
+                if (data && data.categories) {
+                    addResult(`✓ ${data.categories.length} catégories d'équipes chargées. Première: "${data.categories[0].nom}"`, true);
+                } else {
+                    addResult('✗ Aucune équipe trouvée', false);
+                }
+            } catch (error) {
+                addResult(`✗ Erreur: ${error.message}`, false);
+            }
+        }
+
+        async function testEcole() {
+            try {
+                addResult('Chargement des données école...', true);
+                const data = await dataLoader.loadEcole();
+                if (data) {
+                    let info = [];
+                    if (data.entraineurs) info.push(`${data.entraineurs.length} entraîneurs`);
+                    if (data.bureau) info.push(`${data.bureau.length} membres du bureau`);
+                    if (data.categories_age) info.push(`${data.categories_age.length} catégories`);
+                    addResult(`✓ Données école chargées: ${info.join(', ')}`, true);
+                } else {
+                    addResult('✗ Aucune donnée école trouvée', false);
+                }
+            } catch (error) {
+                addResult(`✗ Erreur: ${error.message}`, false);
+            }
+        }
+
+        async function testBoutique() {
+            try {
+                addResult('Chargement de la boutique...', true);
+                const data = await dataLoader.loadBoutique();
+                if (data && data.produits) {
+                    addResult(`✓ ${data.produits.length} produits chargés. Premier: "${data.produits[0].nom}"`, true);
+                } else {
+                    addResult('✗ Aucun produit trouvé', false);
+                }
+            } catch (error) {
+                addResult(`✗ Erreur: ${error.message}`, false);
+            }
+        }
+
+        function clearResults() {
+            document.getElementById('results').innerHTML = '';
+        }
+
+        // Test automatique au chargement
+        window.addEventListener('load', () => {
+            addResult('DataLoader initialisé', true);
+        });
+    </script>
+</body>
+</html>

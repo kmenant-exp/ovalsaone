@@ -1,0 +1,107 @@
+{
+  "sponsors": [
+    {
+      "id": 1,
+      "nom": "Boulangerie Martin",
+      "logo": "assets/sponsors/boulangerie-martin.png",
+      "description": "Boulangerie artisanale familiale depuis 3 générations, spécialisée dans les produits frais et de qualité.",
+      "niveau": "Partenaire Bronze",
+      "website": "https://boulangerie-martin.fr",
+      "telephone": "01 23 45 67 89",
+      "email": "contact@boulangerie-martin.fr",
+      "adresse": "12 Place du Marché, 12345 Ville",
+      "partenariat_depuis": 2018
+    },
+    {
+      "id": 2,
+      "nom": "Garage Automobile Dupont",
+      "logo": "assets/sponsors/garage-dupont.png",
+      "description": "Garage multimarques proposant vente, réparation et entretien de véhicules. Service de qualité et conseils personnalisés.",
+      "niveau": "Sponsor Or",
+      "website": "https://garage-dupont.com",
+      "telephone": "01 23 45 67 90",
+      "email": "info@garage-dupont.com",
+      "adresse": "Route Nationale, 12345 Ville",
+      "partenariat_depuis": 2015
+    },
+    {
+      "id": 3,
+      "nom": "Restaurant Le Stade",
+      "logo": "assets/sponsors/restaurant-stade.png",
+      "description": "Restaurant traditionnel avec terrasse, cuisine du terroir et spécialités locales. Idéal pour les repas d'équipe !",
+      "niveau": "Sponsor Argent",
+      "website": "https://restaurant-le-stade.fr",
+      "telephone": "01 23 45 67 91",
+      "email": "reservation@restaurant-le-stade.fr",
+      "adresse": "Avenue du Stade, 12345 Ville",
+      "partenariat_depuis": 2019
+    },
+    {
+      "id": 4,
+      "nom": "Banque Crédit Local",
+      "logo": "assets/sponsors/credit-local.png",
+      "description": "Banque coopérative locale accompagnant particuliers et professionnels dans leurs projets.",
+      "niveau": "Sponsor Or",
+      "website": "https://credit-local.fr",
+      "telephone": "01 23 45 67 92",
+      "email": "agence.ville@credit-local.fr",
+      "adresse": "1 Place de la République, 12345 Ville",
+      "partenariat_depuis": 2016
+    },
+    {
+      "id": 5,
+      "nom": "Magasin Sport Plus",
+      "logo": "assets/sponsors/sport-plus.png",
+      "description": "Magasin d'articles de sport proposant équipements et conseils pour tous les sports. Spécialiste rugby.",
+      "niveau": "Sponsor Argent",
+      "website": "https://sport-plus.com",
+      "telephone": "01 23 45 67 93",
+      "email": "contact@sport-plus.com",
+      "adresse": "Centre Commercial, 12345 Ville",
+      "partenariat_depuis": 2020
+    }
+  ],
+  "sponsoring": {
+    "description": "Notre club recherche des partenaires pour nous accompagner dans notre développement et le financement de nos activités. En devenant partenaire, vous soutenez le sport local et bénéficiez d'une visibilité auprès de notre communauté.",
+    "contact": "Michel Dubois - Président (president@rugbyclub.fr - 06 12 34 56 78)",
+    "niveaux": [
+      {
+        "nom": "Partenaire Bronze",
+        "montant": "200€ - 500€",
+        "avantages": [
+          "Logo sur le site internet",
+          "Mention dans le bulletin du club",
+          "Invitation aux événements"
+        ]
+      },
+      {
+        "nom": "Sponsor Argent",
+        "montant": "500€ - 1500€",
+        "avantages": [
+          "Logo sur les maillots d'entraînement",
+          "Bannière au stade",
+          "Logo sur le site internet (taille moyenne)",
+          "Invitation VIP aux matchs"
+        ]
+      },
+      {
+        "nom": "Sponsor Or",
+        "montant": "1500€ et plus",
+        "avantages": [
+          "Logo sur les maillots de match",
+          "Bannière premium au stade",
+          "Logo sur le site internet (grande taille)",
+          "Naming d'événements",
+          "Hospitalité VIP complète"
+        ]
+      }
+    ],
+    "avantages_fiscaux": "Les entreprises peuvent déduire 60% de leur don de leur impôt sur les sociétés, dans la limite de 5‰ du chiffre d'affaires."
+  },
+  "dons": {
+    "description": "Vous pouvez également soutenir notre club par un don. Chaque contribution, même modeste, nous aide à développer nos activités et à maintenir des tarifs accessibles pour tous.",
+    "avantages_fiscaux": "Les dons ouvrent droit à une réduction d'impôt de 66% du montant versé, dans la limite de 20% du revenu imposable pour les particuliers.",
+    "utilisation": "Vos dons nous permettent de financer l'achat d'équipements, l'entretien des terrains, la formation des entraîneurs et l'organisation d'événements.",
+    "helloasso_link": "https://www.helloasso.com/associations/rugby-club"
+  }
+}

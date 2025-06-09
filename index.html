@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Association de Rugby - Accueil</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+</head>
+<body>
+    <!-- Bandeau cookies RGPD -->
+    <div id="cookie-banner" class="cookie-banner hidden">
+        <div class="cookie-content">
+            <p>Ce site utilise des cookies pour améliorer votre expérience. En continuant à naviguer, vous acceptez notre utilisation des cookies.</p>
+            <div class="cookie-buttons">
+                <button id="accept-cookies" class="btn btn-primary">Accepter</button>
+                <button id="decline-cookies" class="btn btn-secondary">Refuser</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation fixe -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="assets/logo.svg" alt="Logo Association Rugby" id="nav-logo-img">
+                <span>Rugby Club</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#accueil" class="nav-link active">Accueil</a>
+                <a href="equipes.html" class="nav-link">Équipes</a>
+                <a href="ecole.html" class="nav-link">L'École</a>
+                <a href="partenariat.html" class="nav-link">Partenariat</a>
+                <a href="boutique.html" class="nav-link">Boutique</a>
+                <a href="inscription.html" class="nav-link">Inscription</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Hero avec effet parallax -->
+    <section id="accueil" class="hero">
+        <div class="hero-background">
+            <img src="assets/hero-image.svg" alt="Rugby Team" class="hero-image">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">Bienvenue au Rugby Club</h1>
+            <p class="hero-subtitle">Passion, Respect, Excellence</p>
+            <a href="inscription.html" class="btn btn-primary btn-large">Rejoignez-nous</a>
+        </div>
+    </section>
+
+    <!-- Section Actualités -->
+    <section class="actualites section">
+        <div class="container">
+            <h2 class="section-title">Actualités</h2>
+            <div class="actualites-grid" id="actualites-grid">
+                <!-- Les actualités seront chargées dynamiquement depuis JSON -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Histoire du club avec parallax -->
+    <section class="histoire parallax-section">
+        <div class="parallax-background">
+            <img src="assets/histoire-bg.svg" alt="Histoire du club" class="parallax-image">
+            <div class="parallax-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="histoire-content">
+                <h2 class="section-title white">Notre Histoire</h2>
+                <p class="histoire-text">Depuis plus de 50 ans, notre club forme les rugbymen de demain dans un esprit de camaraderie et de dépassement de soi.</p>
+                <a href="ecole.html" class="btn btn-outline-white">En savoir plus</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Sponsors -->
+    <section class="sponsors">
+        <div class="container">
+            <h2 class="section-title">Ils nous soutiennent</h2>
+            <div class="sponsors-carousel-container">
+                <div class="sponsors-carousel" id="sponsors-carousel">
+                    <!-- Les sponsors seront chargés dynamiquement depuis JSON -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> contact@rugbyclub.fr</p>
+                    <p><i class="fas fa-phone"></i> 01 23 45 67 89</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Stade Municipal, 12345 Ville</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Liens rapides</h3>
+                    <ul>
+                        <li><a href="inscription.html">Inscription</a></li>
+                        <li><a href="equipes.html">Nos équipes</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Suivez-nous</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Rugby Club. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/data-loader.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>

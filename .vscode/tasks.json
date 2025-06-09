@@ -1,0 +1,159 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Install SWA CLI",
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "install",
+        "-g",
+        "@azure/static-web-apps-cli"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Build Functions",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "build"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/api"
+      },
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "func: host start",
+      "type": "shell",
+      "command": "func",
+      "args": [
+        "start",
+        "--verbose"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/api"
+      },
+      "isBackground": true,
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": {
+        "owner": "azure-functions",
+        "pattern": {
+          "regexp": "^.*$"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*Azure Functions Core Tools.*$",
+          "endsPattern": "^.*Host lock lease acquired by instance ID.*$"
+        }
+      }
+    },
+    {
+      "label": "Build and Start Functions",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Build Functions",
+        "func: host start"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Start SWA CLI",
+      "type": "shell",
+      "command": "npx",
+      "args": [
+        "swa",
+        "start",
+        ".",
+        "--api-location",
+        "api",
+        "--port",
+        "4280"
+      ],
+      "isBackground": true,
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "group": "build",
+      "problemMatcher": {
+        "owner": "swa-cli",
+        "pattern": {
+          "regexp": "^.*$"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*Starting Azure Static Web Apps CLI.*$",
+          "endsPattern": "^.*Azure Static Web Apps emulator started at.*$"
+        }
+      }
+    },
+    {
+      "label": "Stop SWA CLI",
+      "type": "shell",
+      "command": "pkill",
+      "args": [
+        "-f",
+        "swa"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Clean",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "clean"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/api"
+      },
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": "$msCompile"
+    }
+  ]
+}

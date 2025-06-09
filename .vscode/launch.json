@@ -1,0 +1,64 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Attach to .NET Functions",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}",
+      "preLaunchTask": "func: host start"
+    },
+    {
+      "name": "Launch SWA CLI",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/@azure/static-web-apps-cli/dist/cli/index.js",
+      "args": [
+        "start",
+        ".",
+        "--api-location",
+        "api"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "preLaunchTask": "Install SWA CLI"
+    },
+    {
+      "name": "Debug Static Web App (Full Stack)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/@azure/static-web-apps-cli/dist/cli/index.js",
+      "args": [
+        "start",
+        ".",
+        "--api-location",
+        "api",
+        "--port",
+        "4280"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "preLaunchTask": "Build and Start Functions",
+      "serverReadyAction": {
+        "pattern": "Azure Static Web Apps emulator started at http://localhost:([0-9]+)",
+        "uriFormat": "http://localhost:%s",
+        "action": "openExternally"
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug Full Stack (SWA + Functions)",
+      "configurations": [
+        "Debug Static Web App (Full Stack)"
+      ],
+      "stopAll": true
+    }
+  ]
+}

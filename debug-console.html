@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Console Debug - Rugby Club</title>
+    <style>
+        body { font-family: monospace; margin: 20px; background: #000; color: #00ff00; }
+        .console { border: 1px solid #333; padding: 20px; background: #111; height: 80vh; overflow-y: auto; }
+        .log { margin: 5px 0; }
+        .error { color: #ff6b6b; }
+        .warn { color: #ffd93d; }
+        .info { color: #74c0fc; }
+        h1 { color: #00ff00; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Console Debug - Rugby Club</h1>
+    <div class="console" id="console"></div>
+
+    <script>
+        // Override console methods to display in page
+        const consoleDiv = document.getElementById('console');
+        
+        function addLog(message, type = 'log') {
+            const div = document.createElement('div');
+            div.className = `log ${type}`;
+            div.innerHTML = `[${new Date().toLocaleTimeString()}] ${message}`;
+            consoleDiv.appendChild(div);
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        }
+        
+        const originalLog = console.log;
+        const originalError = console.error;
+        const originalWarn = console.warn;
+        
+        console.log = function(...args) {
+            originalLog(...args);
+            addLog(args.join(' '), 'info');
+        };
+        
+        console.error = function(...args) {
+            originalError(...args);
+            addLog(args.join(' '), 'error');
+        };
+        
+        console.warn = function(...args) {
+            originalWarn(...args);
+            addLog(args.join(' '), 'warn');
+        };
+        
+        // Start testing
+        addLog('🔌 Console override activé', 'info');
+        addLog('🚀 Début des tests...', 'info');
+    </script>
+
+    <script src="js/data-loader.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>

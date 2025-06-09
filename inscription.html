@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - Rugby Club</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="assets/logo.svg" alt="Logo Association Rugby" id="nav-logo-img">
+                <span>Rugby Club</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="equipes.html" class="nav-link">Équipes</a>
+                <a href="ecole.html" class="nav-link">L'École</a>
+                <a href="partenariat.html" class="nav-link">Partenariat</a>
+                <a href="boutique.html" class="nav-link">Boutique</a>
+                <a href="inscription.html" class="nav-link active">Inscription</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Inscription</h1>
+            <p>Rejoignez notre club et vivez la passion du rugby</p>
+        </div>
+    </section>
+
+    <!-- Section Tarifs -->
+    <section class="tarifs section">
+        <div class="container">
+            <div class="tarifs-card">
+                <h2>Tarifs Saison 2024-2025</h2>
+                <div class="tarifs-grid" id="tarifs-grid">
+                    <!-- Les tarifs seront chargés dynamiquement -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulaire d'inscription -->
+    <section class="inscription-form section">
+        <div class="container">
+            <div class="form-card">
+                <h2>Formulaire d'inscription</h2>
+                <form id="inscription-form" class="form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nom-enfant">Nom de l'enfant *</label>
+                            <input type="text" id="nom-enfant" name="nomEnfant" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="prenom-enfant">Prénom de l'enfant *</label>
+                            <input type="text" id="prenom-enfant" name="prenomEnfant" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date-naissance">Date de naissance *</label>
+                            <input type="date" id="date-naissance" name="dateNaissance" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="categorie">Catégorie d'âge *</label>
+                            <select id="categorie" name="categorie" required>
+                                <option value="">Sélectionner une catégorie</option>
+                                <option value="U6">U6 (moins de 6 ans)</option>
+                                <option value="U8">U8 (moins de 8 ans)</option>
+                                <option value="U10">U10 (moins de 10 ans)</option>
+                                <option value="U12">U12 (moins de 12 ans)</option>
+                                <option value="U14">U14 (moins de 14 ans)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nom-responsable">Nom du responsable légal *</label>
+                            <input type="text" id="nom-responsable" name="nomResponsable" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="prenom-responsable">Prénom du responsable légal *</label>
+                            <input type="text" id="prenom-responsable" name="prenomResponsable" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telephone">Téléphone *</label>
+                            <input type="tel" id="telephone" name="telephone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="accepte-conditions" name="accepteConditions" required>
+                        <label for="accepte-conditions">J'accepte les conditions d'inscription et le règlement intérieur du club *</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-large">Envoyer l'inscription</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Documents -->
+    <section class="documents section bg-light">
+        <div class="container">
+            <h2>Documents nécessaires</h2>
+            <div class="documents-grid" id="documents-grid">
+                <!-- Les documents seront chargés dynamiquement -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> contact@rugbyclub.fr</p>
+                    <p><i class="fas fa-phone"></i> 01 23 45 67 89</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Stade Municipal, 12345 Ville</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Liens rapides</h3>
+                    <ul>
+                        <li><a href="inscription.html">Inscription</a></li>
+                        <li><a href="equipes.html">Nos équipes</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Suivez-nous</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Rugby Club. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/data-loader.js"></script>
+    <script src="js/inscription.js"></script>
+</body>
+</html>

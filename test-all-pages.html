@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de toutes les pages - Rugby Club</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .test-section h2 {
+            color: #2c5530;
+            border-bottom: 2px solid #8fbc8f;
+            padding-bottom: 10px;
+        }
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .loading {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        .page-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .page-link {
+            display: block;
+            padding: 10px;
+            background-color: #2c5530;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .page-link:hover {
+            background-color: #8fbc8f;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Test de chargement des données - Rugby Club</h1>
+        
+        <div class="test-section">
+            <h2>Navigation vers les pages</h2>
+            <div class="page-links">
+                <a href="index.html" class="page-link" target="_blank">Accueil</a>
+                <a href="equipes.html" class="page-link" target="_blank">Équipes</a>
+                <a href="ecole.html" class="page-link" target="_blank">École</a>
+                <a href="partenariat.html" class="page-link" target="_blank">Partenariat</a>
+                <a href="boutique.html" class="page-link" target="_blank">Boutique</a>
+                <a href="inscription.html" class="page-link" target="_blank">Inscription</a>
+                <a href="contact.html" class="page-link" target="_blank">Contact</a>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>Test du DataLoader</h2>
+            <div id="dataloader-test" class="test-result loading">
+                Initialisation du DataLoader...
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>Test des données - Actualités</h2>
+            <div id="actualites-test" class="test-result loading">
+                Chargement des actualités...
+            </div>
+            <div id="actualites-preview"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>Test des données - Sponsors</h2>
+            <div id="sponsors-test" class="test-result loading">
+                Chargement des sponsors...
+            </div>
+            <div id="sponsors-preview"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>Test des données - Équipes</h2>
+            <div id="equipes-test" class="test-result loading">
+                Chargement des équipes...
+            </div>
+            <div id="equipes-preview"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>Test des données - École</h2>
+            <div id="ecole-test" class="test-result loading">
+                Chargement des données de l'école...
+            </div>
+            <div id="ecole-preview"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>Test des données - Boutique</h2>
+            <div id="boutique-test" class="test-result loading">
+                Chargement des produits...
+            </div>
+            <div id="boutique-preview"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>Test des données - Partenariat</h2>
+            <div id="partenariat-test" class="test-result loading">
+                Chargement des données de partenariat...
+            </div>
+            <div id="partenariat-preview"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>Test des données - Inscription</h2>
+            <div id="inscription-test" class="test-result loading">
+                Chargement des données d'inscription...
+            </div>
+            <div id="inscription-preview"></div>
+        </div>
+    </div>
+
+    <script src="js/data-loader.js"></script>
+    <script>
+        async function runTests() {
+            const dataLoader = new DataLoader();
+            
+            // Test du DataLoader
+            try {
+                document.getElementById('dataloader-test').innerHTML = '<span class="success">✓ DataLoader initialisé avec succès</span>';
+            } catch (error) {
+                document.getElementById('dataloader-test').innerHTML = `<span class="error">✗ Erreur d'initialisation: ${error.message}</span>`;
+                return;
+            }
+
+            // Test des actualités
+            try {
+                const actualitesData = await dataLoader.loadActualites();
+                if (actualitesData && actualitesData.actualites && actualitesData.actualites.length > 0) {
+                    document.getElementById('actualites-test').innerHTML = `<span class="success">✓ ${actualitesData.actualites.length} actualités chargées</span>`;
+                    document.getElementById('actualites-preview').innerHTML = `<strong>Dernière actualité:</strong> ${actualitesData.actualites[0].titre}`;
+                } else {
+                    document.getElementById('actualites-test').innerHTML = '<span class="error">✗ Aucune actualité trouvée</span>';
+                }
+            } catch (error) {
+                document.getElementById('actualites-test').innerHTML = `<span class="error">✗ Erreur: ${error.message}</span>`;
+            }
+
+            // Test des sponsors
+            try {
+                const sponsorsData = await dataLoader.loadSponsors();
+                if (sponsorsData && sponsorsData.sponsors && sponsorsData.sponsors.length > 0) {
+                    document.getElementById('sponsors-test').innerHTML = `<span class="success">✓ ${sponsorsData.sponsors.length} sponsors chargés</span>`;
+                    document.getElementById('sponsors-preview').innerHTML = `<strong>Premier sponsor:</strong> ${sponsorsData.sponsors[0].nom}`;
+                } else {
+                    document.getElementById('sponsors-test').innerHTML = '<span class="error">✗ Aucun sponsor trouvé</span>';
+                }
+            } catch (error) {
+                document.getElementById('sponsors-test').innerHTML = `<span class="error">✗ Erreur: ${error.message}</span>`;
+            }
+
+            // Test des équipes
+            try {
+                const equipesData = await dataLoader.loadEquipes();
+                if (equipesData && equipesData.categories && equipesData.categories.length > 0) {
+                    document.getElementById('equipes-test').innerHTML = `<span class="success">✓ ${equipesData.categories.length} catégories d'équipes chargées</span>`;
+                    document.getElementById('equipes-preview').innerHTML = `<strong>Première catégorie:</strong> ${equipesData.categories[0].nom}`;
+                } else {
+                    document.getElementById('equipes-test').innerHTML = '<span class="error">✗ Aucune équipe trouvée</span>';
+                }
+            } catch (error) {
+                document.getElementById('equipes-test').innerHTML = `<span class="error">✗ Erreur: ${error.message}</span>`;
+            }
+
+            // Test de l'école
+            try {
+                const ecoleData = await dataLoader.loadEcole();
+                if (ecoleData) {
+                    let details = [];
+                    if (ecoleData.entraineurs) details.push(`${ecoleData.entraineurs.length} entraîneurs`);
+                    if (ecoleData.bureau) details.push(`${ecoleData.bureau.length} membres du bureau`);
+                    if (ecoleData.categories_age) details.push(`${ecoleData.categories_age.length} catégories d'âge`);
+                    
+                    document.getElementById('ecole-test').innerHTML = `<span class="success">✓ Données école chargées: ${details.join(', ')}</span>`;
+                    document.getElementById('ecole-preview').innerHTML = `<strong>Histoire:</strong> ${ecoleData.histoire ? ecoleData.histoire.substring(0, 100) + '...' : 'Non disponible'}`;
+                } else {
+                    document.getElementById('ecole-test').innerHTML = '<span class="error">✗ Aucune donnée école trouvée</span>';
+                }
+            } catch (error) {
+                document.getElementById('ecole-test').innerHTML = `<span class="error">✗ Erreur: ${error.message}</span>`;
+            }
+
+            // Test de la boutique
+            try {
+                const boutiqueData = await dataLoader.loadBoutique();
+                if (boutiqueData && boutiqueData.produits && boutiqueData.produits.length > 0) {
+                    document.getElementById('boutique-test').innerHTML = `<span class="success">✓ ${boutiqueData.produits.length} produits chargés</span>`;
+                    document.getElementById('boutique-preview').innerHTML = `<strong>Premier produit:</strong> ${boutiqueData.produits[0].nom} - ${boutiqueData.produits[0].prix}€`;
+                } else {
+                    document.getElementById('boutique-test').innerHTML = '<span class="error">✗ Aucun produit trouvé</span>';
+                }
+            } catch (error) {
+                document.getElementById('boutique-test').innerHTML = `<span class="error">✗ Erreur: ${error.message}</span>`;
+            }
+
+            // Test du partenariat
+            try {
+                const partenariatData = await dataLoader.loadPartenariat();
+                if (partenariatData && partenariatData.avantages && partenariatData.avantages.length > 0) {
+                    document.getElementById('partenariat-test').innerHTML = `<span class="success">✓ ${partenariatData.avantages.length} avantages partenariat chargés</span>`;
+                    document.getElementById('partenariat-preview').innerHTML = `<strong>Premier avantage:</strong> ${partenariatData.avantages[0].titre}`;
+                } else {
+                    document.getElementById('partenariat-test').innerHTML = '<span class="error">✗ Aucune donnée partenariat trouvée</span>';
+                }
+            } catch (error) {
+                document.getElementById('partenariat-test').innerHTML = `<span class="error">✗ Erreur: ${error.message}</span>`;
+            }
+
+            // Test de l'inscription
+            try {
+                const inscriptionData = await dataLoader.loadInscription();
+                if (inscriptionData) {
+                    let details = [];
+                    if (inscriptionData.categories) details.push(`${inscriptionData.categories.length} catégories`);
+                    if (inscriptionData.tarifs) details.push(`${inscriptionData.tarifs.length} tarifs`);
+                    
+                    document.getElementById('inscription-test').innerHTML = `<span class="success">✓ Données inscription chargées: ${details.join(', ')}</span>`;
+                    if (inscriptionData.categories && inscriptionData.categories.length > 0) {
+                        document.getElementById('inscription-preview').innerHTML = `<strong>Première catégorie:</strong> ${inscriptionData.categories[0].nom}`;
+                    }
+                } else {
+                    document.getElementById('inscription-test').innerHTML = '<span class="error">✗ Aucune donnée inscription trouvée</span>';
+                }
+            } catch (error) {
+                document.getElementById('inscription-test').innerHTML = `<span class="error">✗ Erreur: ${error.message}</span>`;
+            }
+        }
+
+        // Lancer les tests au chargement de la page
+        document.addEventListener('DOMContentLoaded', runTests);
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{
+  "sponsors": [
+    {
+      "id": 1,
+      "nom": "Boulangerie Martin",
+      "logo": "assets/sponsors/boulangerie-martin.svg",
+      "type": "partenaire"
+    },
+    {
+      "id": 2,
+      "nom": "Garage Automobile Dupont",
+      "logo": "assets/sponsors/garage-dupont.svg",
+      "type": "sponsor_or"
+    },
+    {
+      "id": 3,
+      "nom": "Pharmacie de la Place",
+      "logo": "assets/sponsors/pharmacie-place.svg",
+      "type": "partenaire"
+    },
+    {
+      "id": 4,
+      "nom": "Restaurant Le Stade",
+      "logo": "assets/sponsors/restaurant-stade.svg",
+      "type": "sponsor_argent"
+    },
+    {
+      "id": 5,
+      "nom": "Banque Crédit Local",
+      "logo": "assets/sponsors/credit-local.svg",
+      "type": "sponsor_or"
+    },
+    {
+      "id": 6,
+      "nom": "Magasin Sport Plus",
+      "logo": "assets/sponsors/sport-plus.svg",
+      "type": "sponsor_argent"
+    }
+  ]
+}

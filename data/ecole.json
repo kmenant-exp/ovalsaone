@@ -1,0 +1,132 @@
+{
+  "histoire": {
+    "description": "Fondé en 1972, notre club de rugby s'est développé autour des valeurs fondamentales de ce sport : le respect, l'intégrité et la solidarité. Depuis plus de 50 ans, nous formons des générations de rugbymen et rugbywomen dans un esprit familial et convivial.",
+    "annee_creation": 1972,
+    "licencies": 180,
+    "equipes": 8,
+    "titres": [
+      "Champion départemental U12 (2019, 2023)",
+      "Finaliste championnat régional U14 (2021)",
+      "Vainqueur Coupe départementale Seniors (2018)"
+    ]
+  },
+  "bureau": [
+    {
+      "id": 1,
+      "nom": "Dubois",
+      "prenom": "Michel",
+      "poste": "Président",
+      "description": "Ancien joueur du club, Michel préside aux destinées du club depuis 2015. Passionné de rugby, il œuvre pour le développement de notre association.",
+      "photo": "assets/bureau/michel-dubois.jpg",
+      "email": "president@rugbyclub.fr",
+      "experience": "8 ans au bureau"
+    },
+    {
+      "id": 2,
+      "nom": "Petit",
+      "prenom": "Anne",
+      "poste": "Vice-Présidente",
+      "description": "Responsable de l'école de rugby, Anne coordonne les activités jeunes et veille au bon déroulement des entraînements.",
+      "photo": "assets/bureau/anne-petit.jpg",
+      "email": "vicepresident@rugbyclub.fr",
+      "experience": "6 ans au bureau"
+    },
+    {
+      "id": 3,
+      "nom": "Bernard",
+      "prenom": "François",
+      "poste": "Secrétaire",
+      "description": "François gère les aspects administratifs du club et assure la communication avec la fédération.",
+      "photo": "assets/bureau/francois-bernard.jpg",
+      "email": "secretaire@rugbyclub.fr",
+      "experience": "4 ans au bureau"
+    },
+    {
+      "id": 4,
+      "nom": "Leroy",
+      "prenom": "Christine",
+      "poste": "Trésorière",
+      "description": "Christine veille à la bonne gestion financière du club et supervise les budgets des différentes sections.",
+      "photo": "assets/bureau/christine-leroy.jpg",
+      "email": "tresorier@rugbyclub.fr",
+      "experience": "7 ans au bureau"
+    },
+    {
+      "id": 5,
+      "nom": "Garcia",
+      "prenom": "Julien",
+      "poste": "Responsable Équipement",
+      "description": "Julien s'occupe de l'entretien du matériel et de l'équipement des joueurs.",
+      "photo": "assets/bureau/julien-garcia.jpg",
+      "experience": "3 ans au bureau"
+    }
+  ],
+  "entraineurs": [
+    {
+      "id": 1,
+      "nom": "Durand",
+      "prenom": "Sophie",
+      "categories": ["U6"],
+      "experience": "5 ans d'expérience en école de rugby",
+      "diplomes": ["Éducateur Rugby", "BAFA"],
+      "photo": "assets/entraineurs/sophie-durand.jpg",
+      "specialites": ["Éveil rugby", "Motricité"],
+      "formation_continue": "Formation FFR annuelle"
+    },
+    {
+      "id": 2,
+      "nom": "Leblanc",
+      "prenom": "Marc",
+      "categories": ["U8"],
+      "experience": "8 ans d'expérience",
+      "diplomes": ["Éducateur Rugby", "CQP Rugby"],
+      "photo": "assets/entraineurs/marc-leblanc.jpg",
+      "specialites": ["Rugby à 5", "Apprentissage ludique"],
+      "formation_continue": "Stage national FFR 2023"
+    },
+    {
+      "id": 3,
+      "nom": "Moreau",
+      "prenom": "Pierre",
+      "categories": ["U10"],
+      "experience": "12 ans d'expérience",
+      "diplomes": ["Éducateur Rugby", "Initiateur FFR"],
+      "photo": "assets/entraineurs/pierre-moreau.jpg",
+      "specialites": ["Rugby à 7", "Technique individuelle"],
+      "formation_continue": "Formation continue FFR"
+    },
+    {
+      "id": 4,
+      "nom": "Martin",
+      "prenom": "Jean-Claude",
+      "categories": ["U12"],
+      "experience": "15 ans d'expérience",
+      "diplomes": ["Entraîneur FFR", "BEES 1"],
+      "photo": "assets/entraineurs/jc-martin.jpg",
+      "specialites": ["Rugby à 9", "Préparation physique"],
+      "formation_continue": "Diplôme d'État mis à jour 2024"
+    },
+    {
+      "id": 5,
+      "nom": "Rousseau",
+      "prenom": "David",
+      "categories": ["U14"],
+      "experience": "10 ans d'expérience",
+      "diplomes": ["Entraîneur FFR", "DEJEPS"],
+      "photo": "assets/entraineurs/david-rousseau.jpg",
+      "specialites": ["Rugby à 12", "Tactique"],
+      "formation_continue": "Formation DEJEPS renouvelée 2023"
+    },
+    {
+      "id": 6,
+      "nom": "Thomas",
+      "prenom": "Alain",
+      "categories": ["Seniors"],
+      "experience": "20 ans d'expérience",
+      "diplomes": ["Entraîneur Fédéral", "BEES 2"],
+      "photo": "assets/entraineurs/alain-thomas.jpg",
+      "specialites": ["Rugby à 15", "Préparation mentale"],
+      "formation_continue": "Formation fédérale continue"
+    }
+  ]
+}

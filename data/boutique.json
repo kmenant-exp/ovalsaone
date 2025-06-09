@@ -1,0 +1,163 @@
+{
+  "produits": [
+    {
+      "id": 1,
+      "nom": "Maillot de match domicile",
+      "description": "Maillot officiel du club avec logo brodé, technologie anti-transpiration",
+      "prix": 65,
+      "image": "assets/boutique/maillot-domicile.jpg",
+      "tailles": ["XS", "S", "M", "L", "XL", "XXL"],
+      "categories": ["Maillots", "Officiel"],
+      "stock": 25,
+      "disponible": true
+    },
+    {
+      "id": 2,
+      "nom": "Maillot de match extérieur",
+      "description": "Maillot extérieur du club avec logo brodé, coupe moderne",
+      "prix": 65,
+      "image": "assets/boutique/maillot-exterieur.jpg",
+      "tailles": ["XS", "S", "M", "L", "XL", "XXL"],
+      "categories": ["Maillots", "Officiel"],
+      "stock": 18,
+      "disponible": true
+    },
+    {
+      "id": 3,
+      "nom": "Short de rugby",
+      "description": "Short officiel du club, tissu résistant et confortable",
+      "prix": 35,
+      "image": "assets/boutique/short-rugby.jpg",
+      "tailles": ["XS", "S", "M", "L", "XL", "XXL"],
+      "categories": ["Shorts", "Officiel"],
+      "stock": 30,
+      "disponible": true
+    },
+    {
+      "id": 4,
+      "nom": "Chaussettes de match",
+      "description": "Chaussettes hautes aux couleurs du club, renforts techniques",
+      "prix": 12,
+      "image": "assets/boutique/chaussettes.jpg",
+      "tailles": ["35-38", "39-42", "43-46", "47-50"],
+      "categories": ["Chaussettes", "Officiel"],
+      "stock": 45,
+      "disponible": true
+    },
+    {
+      "id": 5,
+      "nom": "Sweat-shirt à capuche",
+      "description": "Sweat confortable avec logo du club, parfait pour l'échauffement",
+      "prix": 45,
+      "image": "assets/boutique/sweat-capuche.jpg",
+      "tailles": ["XS", "S", "M", "L", "XL", "XXL"],
+      "categories": ["Sweats", "Casual"],
+      "stock": 22,
+      "disponible": true
+    },
+    {
+      "id": 6,
+      "nom": "Polo du club",
+      "description": "Polo élégant avec logo brodé, idéal pour représenter le club",
+      "prix": 38,
+      "image": "assets/boutique/polo-club.jpg",
+      "tailles": ["XS", "S", "M", "L", "XL", "XXL"],
+      "categories": ["Polos", "Casual"],
+      "stock": 28,
+      "disponible": true
+    },
+    {
+      "id": 7,
+      "nom": "Casquette Rugby Club",
+      "description": "Casquette ajustable aux couleurs du club",
+      "prix": 18,
+      "image": "assets/boutique/casquette.jpg",
+      "tailles": ["Unique"],
+      "categories": ["Accessoires", "Casual"],
+      "stock": 35,
+      "disponible": true
+    },
+    {
+      "id": 8,
+      "nom": "Sac de sport",
+      "description": "Grand sac de sport avec compartiments, logo du club",
+      "prix": 32,
+      "image": "assets/boutique/sac-sport.jpg",
+      "tailles": ["Unique"],
+      "categories": ["Accessoires", "Pratique"],
+      "stock": 15,
+      "disponible": true
+    },
+    {
+      "id": 9,
+      "nom": "Ballon de rugby officiel",
+      "description": "Ballon de rugby taille 5, aux couleurs du club",
+      "prix": 28,
+      "image": "assets/boutique/ballon-rugby.jpg",
+      "tailles": ["Taille 5"],
+      "categories": ["Ballons", "Équipement"],
+      "stock": 12,
+      "disponible": true
+    },
+    {
+      "id": 10,
+      "nom": "Protège-dents personnalisé",
+      "description": "Protège-dents sur mesure aux couleurs du club",
+      "prix": 25,
+      "image": "assets/boutique/protege-dents.jpg",
+      "tailles": ["Junior", "Senior"],
+      "categories": ["Protection", "Équipement"],
+      "stock": 20,
+      "disponible": true
+    },
+    {
+      "id": 11,
+      "nom": "Mug Rugby Club",
+      "description": "Mug en céramique avec logo du club, parfait pour les supporters",
+      "prix": 8,
+      "image": "assets/boutique/mug-club.jpg",
+      "tailles": ["350ml"],
+      "categories": ["Goodies", "Supporters"],
+      "stock": 50,
+      "disponible": true
+    },
+    {
+      "id": 12,
+      "nom": "Écharpe de supporter",
+      "description": "Écharpe officielle aux couleurs du club",
+      "prix": 15,
+      "image": "assets/boutique/echarpe.jpg",
+      "tailles": ["Unique"],
+      "categories": ["Accessoires", "Supporters"],
+      "stock": 25,
+      "disponible": true
+    }
+  ],
+  "categories": [
+    "Maillots",
+    "Shorts",
+    "Chaussettes",
+    "Sweats",
+    "Polos",
+    "Accessoires",
+    "Ballons",
+    "Protection",
+    "Goodies",
+    "Supporters"
+  ],
+  "infos_commande": {
+    "livraison": {
+      "delai": "5-7 jours ouvrés",
+      "gratuite_a_partir_de": 50,
+      "frais": 5.90
+    },
+    "retour": {
+      "delai": "14 jours",
+      "conditions": "Produits non portés, étiquettes présentes"
+    },
+    "contact_boutique": {
+      "email": "boutique@rugbyclub.fr",
+      "telephone": "01 23 45 67 89"
+    }
+  }
+}
