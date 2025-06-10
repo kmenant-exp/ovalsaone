@@ -9,73 +9,59 @@ async function loadBoutiqueData(dataLoader) {
     try {
         const boutiqueData = await dataLoader.loadBoutique();
         if (boutiqueData && boutiqueData.produits) {
-            renderBoutique(boutiqueData.produits);
+            renderProduitsFeatured(boutiqueData.produits);
         }
     } catch (error) {
         console.error('Erreur lors du chargement des données de la boutique:', error);
     }
 }
 
-function renderBoutique(produits) {
-    const container = document.getElementById('boutique-container');
+function renderProduitsFeatured(produits) {
+    const container = document.getElementById('produits-featured');
     if (!container) return;
 
-    // Organiser les produits par catégories
-    const produitsParCategorie = {};
-    produits.forEach(produit => {
-        produit.categories.forEach(categorie => {
-            if (!produitsParCategorie[categorie]) {
-                produitsParCategorie[categorie] = [];
-            }
-            produitsParCategorie[categorie].push(produit);
-        });
-    });
+    // Sélectionner 3 produits phares (maillot domicile, sweat, ballon)
+    const produitsFeatured = [
+        produits.find(p => p.id === 1), // Maillot domicile
+        produits.find(p => p.id === 5), // Sweat-shirt à capuche
+        produits.find(p => p.id === 9)  // Ballon de rugby
+    ].filter(p => p); // Filtrer les produits non trouvés
 
-    container.innerHTML = '';
-    
-    Object.keys(produitsParCategorie).forEach(categorieNom => {
-        const categorieSection = document.createElement('div');
-        categorieSection.className = 'boutique-category';
-        categorieSection.innerHTML = `
-            <h3 class="category-title">${categorieNom}</h3>
-            <div class="produits-grid">
-                ${produitsParCategorie[categorieNom].map(produit => `
-                    <div class="produit-card ${!produit.disponible ? 'produit-indisponible' : ''}">
-                        <div class="produit-image">
-                            <img src="${produit.image}" alt="${produit.nom}" onerror="this.src='assets/logo.svg'">
-                            ${!produit.disponible ? '<div class="produit-rupture">Rupture de stock</div>' : ''}
-                        </div>
-                        <div class="produit-info">
-                            <h4 class="produit-nom">${produit.nom}</h4>
-                            <p class="produit-description">${produit.description}</p>
-                            <div class="produit-details">
-                                <span class="produit-prix">${produit.prix}€</span>
-                                ${produit.tailles ? `<span class="produit-tailles">Tailles: ${produit.tailles.join(', ')}</span>` : ''}
-                            </div>
-                            <div class="produit-stock">
-                                ${produit.stock ? `Stock: ${produit.stock}` : ''}
-                            </div>
-                            <button class="btn btn-primary produit-commander" ${!produit.disponible ? 'disabled' : ''}>
-                                ${produit.disponible ? 'Commander' : 'Indisponible'}
-                            </button>
-                        </div>
-                    </div>
-                `).join('')}
+    container.innerHTML = produitsFeatured.map(produit => `
+        <div class="produit-featured-card">
+            <div class="produit-image">
+                <img src="${produit.image}" alt="${produit.nom}" onerror="this.src='assets/logo.svg'">
+                <div class="produit-badge">Produit phare</div>
             </div>
-        `;
-        container.appendChild(categorieSection);
-    });
+            <div class="produit-info">
+                <h3 class="produit-nom">${produit.nom}</h3>
+                <p class="produit-description">${produit.description}</p>
+                <div class="produit-details">
+                    <span class="produit-prix">${produit.prix}€</span>
+                    ${produit.tailles ? `<span class="produit-tailles">Tailles: ${produit.tailles.join(', ')}</span>` : ''}
+                </div>
+                <div class="produit-stock">Stock: ${produit.stock}</div>
+                <button class="btn btn-secondary produit-voir-plus" data-produit="${produit.nom}">
+                    <i class="fas fa-eye"></i>
+                    Voir sur HelloAsso
+                </button>
+            </div>
+        </div>
+    `).join('');
 }
 
 function setupBoutiqueHandlers() {
-    // Gestionnaire pour les boutons de commande
+    // Gestionnaire pour les boutons "Voir sur HelloAsso"
     document.addEventListener('click', (e) => {
-        if (e.target.matches('.produit-card button')) {
-            const produitCard = e.target.closest('.produit-card');
-            const produitNom = produitCard.querySelector('.produit-nom').textContent;
-            
-            // Redirection vers un système de commande externe ou affichage d'un modal
-            RugbyClubApp.showNotification(`Commande de "${produitNom}" en cours de développement`, 'warning');
+        if (e.target.matches('.produit-voir-plus') || e.target.closest('.produit-voir-plus')) {
+            // Redirection vers HelloAsso
+            window.open('https://helloasso.com/associations/rugby-club', '_blank');
+        }
+        
+        // Gestionnaire pour le bouton principal CTA
+        if (e.target.matches('.boutique-cta-btn') || e.target.closest('.boutique-cta-btn')) {
+            // Analytics ou tracking si nécessaire
+            console.log('Redirection vers boutique HelloAsso');
         }
     });
 }

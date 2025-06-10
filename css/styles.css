@@ -1053,6 +1053,300 @@ ul, ol {
 }
 
 /* Styles pour la page Boutique */
+.boutique-intro {
+    text-align: center;
+    margin-bottom: var(--spacing-8);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.boutique-intro h2 {
+    color: var(--primary-color);
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-4);
+}
+
+.boutique-intro p {
+    color: var(--gray-700);
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+}
+
+/* Produits phares */
+.produits-featured {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-8);
+    margin-bottom: var(--spacing-12);
+}
+
+.produit-featured-card {
+    background: linear-gradient(135deg, var(--white) 0%, #f8f9ff 100%);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.4s ease;
+    border: 2px solid transparent;
+    position: relative;
+}
+
+.produit-featured-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--dark-color), var(--primary-color), var(--accent-color));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.produit-featured-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(44, 85, 48, 0.2);
+    border-color: var(--accent-color);
+}
+
+.produit-featured-card:hover::before {
+    transform: scaleX(1);
+}
+
+.produit-featured-card .produit-image {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+    background: var(--light-color);
+}
+
+.produit-featured-card .produit-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.produit-featured-card:hover .produit-image img {
+    transform: scale(1.05);
+}
+
+.produit-badge {
+    position: absolute;
+    top: var(--spacing-3);
+    right: var(--spacing-3);
+    background: var(--gold-color);
+    color: var(--white);
+    padding: var(--spacing-1) var(--spacing-3);
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+}
+
+.produit-featured-card .produit-info {
+    padding: var(--spacing-6);
+}
+
+.produit-featured-card .produit-nom {
+    color: var(--primary-color);
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    margin: 0 0 var(--spacing-3) 0;
+    line-height: 1.3;
+}
+
+.produit-featured-card .produit-description {
+    color: var(--gray-700);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-4);
+    height: auto;
+}
+
+.produit-featured-card .produit-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-3);
+    flex-wrap: wrap;
+    gap: var(--spacing-2);
+}
+
+.produit-featured-card .produit-prix {
+    color: var(--primary-color);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+}
+
+.produit-featured-card .produit-tailles {
+    font-size: var(--font-size-xs);
+    color: var(--gray-600);
+    background: var(--light-color);
+    padding: var(--spacing-1) var(--spacing-2);
+    border-radius: var(--border-radius);
+}
+
+.produit-featured-card .produit-stock {
+    font-size: var(--font-size-sm);
+    color: var(--success-color);
+    margin-bottom: var(--spacing-4);
+    font-weight: 600;
+}
+
+.produit-voir-plus {
+    width: 100%;
+    padding: var(--spacing-4);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+}
+
+/* Call to Action */
+.boutique-cta {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    padding: var(--spacing-12) var(--spacing-8);
+    border-radius: var(--border-radius-lg);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.boutique-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
+    opacity: 0.3;
+}
+
+.boutique-cta h3 {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-4);
+    position: relative;
+    z-index: 1;
+}
+
+.boutique-cta p {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-6);
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+}
+
+.boutique-cta-btn {
+    background: var(--accent-color) !important;
+    color: var(--primary-color) !important;
+    border: 3px solid var(--white);
+    font-size: var(--font-size-lg) !important;
+    padding: var(--spacing-4) var(--spacing-8) !important;
+    margin-bottom: var(--spacing-8);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.boutique-cta-btn:hover {
+    background: var(--white) !important;
+    color: var(--primary-color) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.boutique-cta-btn i {
+    margin-right: var(--spacing-3);
+    font-size: var(--font-size-xl);
+}
+
+/* Avantages boutique */
+.boutique-avantages {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-4);
+    margin-top: var(--spacing-6);
+    position: relative;
+    z-index: 1;
+}
+
+.avantage-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    background: rgba(255, 255, 255, 0.1);
+    padding: var(--spacing-3);
+    border-radius: var(--border-radius);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.avantage-item i {
+    color: var(--accent-color);
+    font-size: var(--font-size-lg);
+    flex-shrink: 0;
+}
+
+.avantage-item span {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+}
+
+/* Responsive pour la boutique */
+@media (max-width: 768px) {
+    .boutique-intro h2 {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .produits-featured {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-6);
+        margin-bottom: var(--spacing-8);
+    }
+    
+    .produit-featured-card {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    .boutique-cta {
+        padding: var(--spacing-8) var(--spacing-4);
+    }
+    
+    .boutique-cta h3 {
+        font-size: var(--font-size-xl);
+    }
+    
+    .boutique-cta p {
+        font-size: var(--font-size-md);
+    }
+    
+    .boutique-cta-btn {
+        font-size: var(--font-size-md) !important;
+        padding: var(--spacing-3) var(--spacing-6) !important;
+    }
+    
+    .boutique-avantages {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-3);
+    }
+}
+
 .boutique-category {
     margin-bottom: var(--spacing-8);
 }
@@ -1211,806 +1505,4 @@ ul, ol {
     background: var(--gray-400);
     cursor: not-allowed;
     transform: none;
-}
-
-/* Styles pour la page Partenariat */
-.sponsors-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: var(--spacing-6);
-    margin-bottom: var(--spacing-8);
-}
-
-.sponsor-card {
-    background: var(--white);
-    border-radius: var(--border-radius-lg);
-    padding: var(--spacing-6);
-    box-shadow: var(--shadow);
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-    display: flex;
-    gap: var(--spacing-4);
-}
-
-.sponsor-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(44, 85, 48, 0.15);
-    border-color: var(--accent-color);
-}
-
-.sponsor-logo {
-    flex-shrink: 0;
-    width: 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--light-color);
-    border-radius: var(--border-radius);
-}
-
-.sponsor-logo img {
-    max-width: 70px;
-    max-height: 70px;
-    object-fit: contain;
-}
-
-.sponsor-info {
-    flex: 1;
-}
-
-.sponsor-name {
-    color: var(--primary-color);
-    font-size: var(--font-size-lg);
-    font-weight: 600;
-    margin: 0 0 var(--spacing-2) 0;
-}
-
-.sponsor-niveau {
-    display: inline-block;
-    background: var(--accent-color);
-    color: var(--white);
-    padding: var(--spacing-1) var(--spacing-2);
-    border-radius: var(--border-radius);
-    font-size: var(--font-size-xs);
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-bottom: var(--spacing-3);
-}
-
-.sponsor-description {
-    color: var(--gray-700);
-    font-size: var(--font-size-sm);
-    line-height: 1.5;
-    margin-bottom: var(--spacing-3);
-}
-
-.sponsor-details {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-2);
-    margin-bottom: var(--spacing-2);
-}
-
-.sponsor-link, .sponsor-email {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-size: var(--font-size-xs);
-    padding: var(--spacing-1) var(--spacing-2);
-    background: rgba(44, 85, 48, 0.1);
-    border-radius: var(--border-radius);
-    transition: background-color 0.3s ease;
-}
-
-.sponsor-link:hover, .sponsor-email:hover {
-    background: var(--accent-color);
-    color: var(--white);
-    text-decoration: none;
-}
-
-.sponsor-phone {
-    font-size: var(--font-size-xs);
-    color: var(--gray-600);
-    padding: var(--spacing-1) var(--spacing-2);
-    background: var(--light-color);
-    border-radius: var(--border-radius);
-}
-
-.sponsor-partenariat {
-    font-size: var(--font-size-xs);
-    color: var(--gray-600);
-    font-style: italic;
-}
-
-/* Niveaux de partenariat */
-.niveaux-partenariat {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--spacing-6);
-    margin-bottom: var(--spacing-8);
-}
-
-.niveau-card {
-    background: linear-gradient(135deg, var(--white) 0%, #f8f9ff 100%);
-    border-radius: var(--border-radius-lg);
-    padding: var(--spacing-6);
-    box-shadow: var(--shadow);
-    border: 3px solid var(--accent-color);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.niveau-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 6px;
-    background: linear-gradient(90deg, var(--dark-color), var(--primary-color), var(--accent-color));
-}
-
-.niveau-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 30px rgba(44, 85, 48, 0.2);
-}
-
-.niveau-header {
-    text-align: center;
-    margin-bottom: var(--spacing-5);
-    padding-bottom: var(--spacing-4);
-    border-bottom: 2px solid var(--light-color);
-}
-
-.niveau-nom {
-    color: var(--primary-color);
-    font-size: var(--font-size-xl);
-    font-weight: 700;
-    margin: 0 0 var(--spacing-2) 0;
-    text-transform: uppercase;
-}
-
-.niveau-montant {
-    display: block;
-    color: var(--accent-color);
-    font-size: var(--font-size-lg);
-    font-weight: 600;
-}
-
-.niveau-avantages h4 {
-    color: var(--primary-color);
-    font-size: var(--font-size-md);
-    margin: 0 0 var(--spacing-3) 0;
-    font-weight: 600;
-}
-
-.niveau-avantages ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.niveau-avantages li {
-    padding: var(--spacing-2) 0;
-    border-bottom: 1px solid var(--light-color);
-    color: var(--gray-700);
-    font-size: var(--font-size-sm);
-}
-
-.niveau-avantages li:last-child {
-    border-bottom: none;
-}
-
-/* Avantages fiscaux */
-.avantages-fiscaux-content {
-    background: rgba(143, 188, 143, 0.1);
-    padding: var(--spacing-6);
-    border-radius: var(--border-radius-lg);
-    border: 2px solid var(--accent-color);
-}
-
-.avantages-fiscaux-content h3 {
-    color: var(--primary-color);
-    font-size: var(--font-size-xl);
-    text-align: center;
-    margin: 0 0 var(--spacing-5) 0;
-    font-weight: 700;
-}
-
-.avantages-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--spacing-4);
-}
-
-.avantage-fiscal {
-    background: var(--white);
-    padding: var(--spacing-4);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-}
-
-.avantage-fiscal h4 {
-    color: var(--primary-color);
-    font-size: var(--font-size-md);
-    margin: 0 0 var(--spacing-3) 0;
-    font-weight: 600;
-}
-
-.avantage-fiscal p {
-    color: var(--gray-700);
-    font-size: var(--font-size-sm);
-    line-height: 1.6;
-    margin: 0;
-}
-
-/* Styles pour la page Inscription */
-.tarifs-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--spacing-6);
-    margin-bottom: var(--spacing-8);
-}
-
-.tarif-card {
-    background: linear-gradient(135deg, var(--white) 0%, #f8f9ff 100%);
-    border-radius: var(--border-radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.tarif-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--dark-color), var(--primary-color), var(--accent-color));
-}
-
-.tarif-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 30px rgba(44, 85, 48, 0.2);
-    border-color: var(--accent-color);
-}
-
-.tarif-header {
-    background: rgba(143, 188, 143, 0.1);
-    padding: var(--spacing-5);
-    text-align: center;
-    border-bottom: 2px solid var(--light-color);
-}
-
-.tarif-title {
-    color: var(--primary-color);
-    font-size: var(--font-size-lg);
-    font-weight: 700;
-    margin: 0 0 var(--spacing-2) 0;
-}
-
-.tarif-prix {
-    display: block;
-    color: var(--accent-color);
-    font-size: var(--font-size-2xl);
-    font-weight: 700;
-    margin-bottom: var(--spacing-2);
-}
-
-.tarif-age {
-    display: inline-block;
-    background: var(--primary-color);
-    color: var(--white);
-    padding: var(--spacing-1) var(--spacing-3);
-    border-radius: var(--border-radius-full);
-    font-size: var(--font-size-sm);
-    font-weight: 600;
-}
-
-.tarif-content {
-    padding: var(--spacing-5);
-}
-
-.tarif-description {
-    color: var(--gray-700);
-    line-height: 1.6;
-    margin-bottom: var(--spacing-4);
-    font-size: var(--font-size-sm);
-}
-
-.tarif-reductions {
-    background: rgba(40, 167, 69, 0.1);
-    padding: var(--spacing-3);
-    border-radius: var(--border-radius);
-    border: 1px solid rgba(40, 167, 69, 0.2);
-}
-
-.tarif-reductions h5 {
-    color: #28a745;
-    font-size: var(--font-size-sm);
-    font-weight: 600;
-    margin: 0 0 var(--spacing-2) 0;
-}
-
-.tarif-reductions ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.tarif-reductions li {
-    font-size: var(--font-size-xs);
-    color: var(--gray-700);
-    padding: var(--spacing-1) 0;
-    border-bottom: 1px solid rgba(40, 167, 69, 0.1);
-}
-
-.tarif-reductions li:last-child {
-    border-bottom: none;
-}
-
-/* Informations d'inscription */
-.inscription-info-content {
-    background: rgba(143, 188, 143, 0.1);
-    padding: var(--spacing-6);
-    border-radius: var(--border-radius-lg);
-    border: 2px solid var(--accent-color);
-    margin-bottom: var(--spacing-6);
-}
-
-.inscription-info-content h3 {
-    color: var(--primary-color);
-    font-size: var(--font-size-xl);
-    text-align: center;
-    margin: 0 0 var(--spacing-5) 0;
-    font-weight: 700;
-}
-
-.pieces-necessaires, .dates-importantes, .contact-inscription {
-    background: var(--white);
-    padding: var(--spacing-4);
-    border-radius: var(--border-radius);
-    margin-bottom: var(--spacing-4);
-    box-shadow: var(--shadow);
-}
-
-.pieces-necessaires:last-child, .dates-importantes:last-child, .contact-inscription:last-child {
-    margin-bottom: 0;
-}
-
-.pieces-necessaires h4, .dates-importantes h4, .contact-inscription h4 {
-    color: var(--primary-color);
-    font-size: var(--font-size-md);
-    margin: 0 0 var(--spacing-3) 0;
-    font-weight: 600;
-}
-
-.pieces-necessaires ul, .dates-importantes ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.pieces-necessaires li, .dates-importantes li {
-    padding: var(--spacing-2) 0;
-    border-bottom: 1px solid var(--light-color);
-    font-size: var(--font-size-sm);
-    color: var(--gray-700);
-}
-
-.pieces-necessaires li:last-child, .dates-importantes li:last-child {
-    border-bottom: none;
-}
-
-.contact-inscription p {
-    color: var(--gray-700);
-    font-size: var(--font-size-sm);
-    line-height: 1.6;
-    margin: 0;
-}
-
-/* Formulaire d'inscription */
-.inscription-form {
-    background: var(--white);
-    padding: var(--spacing-6);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow);
-    border: 2px solid var(--light-color);
-}
-
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--spacing-4);
-}
-
-.form-group {
-    margin-bottom: var(--spacing-4);
-}
-
-.form-group label {
-    display: block;
-    color: var(--primary-color);
-    font-weight: 600;
-    margin-bottom: var(--spacing-2);
-    font-size: var(--font-size-sm);
-}
-
-.form-group input, .form-group select, .form-group textarea {
-    width: 100%;
-    padding: var(--spacing-3);
-    border: 2px solid var(--light-color);
-    border-radius: var(--border-radius);
-    font-size: var(--font-size-sm);
-    transition: border-color 0.3s ease;
-}
-
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-    outline: none;
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px rgba(143, 188, 143, 0.1);
-}
-
-.form-group.full-width {
-    grid-column: 1 / -1;
-}
-
-.form-submit {
-    text-align: center;
-    margin-top: var(--spacing-6);
-}
-
-.btn-submit {
-    background: var(--primary-color);
-    color: var(--white);
-    border: none;
-    padding: var(--spacing-3) var(--spacing-6);
-    border-radius: var(--border-radius);
-    font-size: var(--font-size-md);
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.btn-submit:hover {
-    background: var(--dark-color);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(44, 85, 48, 0.3);
-}
-
-.btn-submit:disabled {
-    background: var(--gray-400);
-    cursor: not-allowed;
-    transform: none;
-}
-
-/* Boutons */
-.btn {
-    display: inline-block;
-    padding: var(--spacing-3) var(--spacing-5);
-    border-radius: var(--border-radius);
-    font-weight: 600;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: none;
-    font-size: var(--font-size-sm);
-}
-
-.btn-primary {
-    background: var(--primary-color);
-    color: var(--white);
-    box-shadow: 0 4px 10px rgba(30, 58, 138, 0.2);
-}
-
-.btn-primary:hover {
-    background: var(--dark-color);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(30, 58, 138, 0.25);
-}
-
-.btn-secondary {
-    background: var(--accent-color);
-    color: var(--white);
-    box-shadow: 0 4px 10px rgba(143, 188, 143, 0.2);
-}
-
-.btn-secondary:hover {
-    background: #7da97d;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(143, 188, 143, 0.25);
-}
-
-.btn-outline-white {
-    background: transparent;
-    color: var(--white);
-    border: 2px solid var(--white);
-}
-
-.btn-outline-white:hover {
-    background: var(--white);
-    color: var(--primary-color);
-    transform: translateY(-2px);
-}
-
-.btn-large {
-    padding: var(--spacing-4) var(--spacing-8);
-    font-size: var(--font-size-md);
-    letter-spacing: 0.5px;
-}
-
-/* Styles pour la section Sponsors */
-.sponsors {
-    background: #f9fafb;
-    border-top: 1px solid rgba(44, 85, 48, 0.1);
-    border-bottom: 1px solid rgba(44, 85, 48, 0.1);
-    padding: var(--spacing-8) 0;
-    overflow: hidden;
-    position: relative;
-}
-
-.sponsors::before, .sponsors::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    width: 100px;
-    height: 100%;
-    z-index: 2;
-    pointer-events: none;
-}
-
-.sponsors::before {
-    left: 0;
-    background: linear-gradient(90deg, rgba(249, 250, 251, 1) 0%, rgba(249, 250, 251, 0) 100%);
-}
-
-.sponsors::after {
-    right: 0;
-    background: linear-gradient(90deg, rgba(249, 250, 251, 0) 0%, rgba(249, 250, 251, 1) 100%);
-}
-
-.sponsors .container {
-    width: 100%;
-    max-width: 100%;
-    padding: 0;
-}
-
-.sponsors .section-title {
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 var(--spacing-4);
-}
-
-.sponsors-carousel-container {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    margin: 0 auto;
-}
-
-.sponsors-carousel {
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-    will-change: transform;
-    padding: var(--spacing-4) 0;
-    animation: scrollSponsors 40s linear infinite;
-}
-
-.sponsors-carousel:hover {
-    animation-play-state: paused;
-}
-
-@keyframes scrollSponsors {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
-}
-
-.sponsor-item {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0 var(--spacing-6);
-    min-width: 180px;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.sponsor-item:hover {
-    transform: translateY(-5px);
-}
-
-.sponsor-logo {
-    height: 70px;
-    width: 120px;
-    object-fit: contain;
-    margin-bottom: var(--spacing-2);
-    filter: grayscale(0.7);
-    transition: filter 0.3s ease, transform 0.3s ease;
-}
-
-.sponsor-item:hover .sponsor-logo {
-    filter: grayscale(0);
-    transform: scale(1.05);
-}
-
-.sponsor-name {
-    font-size: var(--font-size-sm);
-    color: var(--primary-color);
-    font-weight: 600;
-    margin: 0;
-}
-
-/* Classes pour les niveaux de sponsoring */
-.niveau-or {
-    border-color: var(--gold-color) !important;
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
-}
-
-.niveau-argent {
-    border-color: var(--silver-color) !important;
-    box-shadow: 0 0 10px rgba(192, 192, 192, 0.3);
-}
-
-.niveau-bronze {
-    border-color: var(--bronze-color) !important;
-    box-shadow: 0 0 10px rgba(205, 127, 50, 0.3);
-}
-
-.sponsor-niveau.niveau-or {
-    background-color: var(--gold-color);
-    color: black;
-}
-
-.sponsor-niveau.niveau-argent {
-    background-color: var(--silver-color);
-    color: black;
-}
-
-.sponsor-niveau.niveau-bronze {
-    background-color: var(--bronze-color);
-    color: white;
-}
-
-/* Responsive pour les sponsors */
-@media (max-width: 768px) {
-    .sponsors {
-        padding: var(--spacing-6) 0;
-    }
-    
-    .sponsors::before, .sponsors::after {
-        width: 50px;
-    }
-    
-    .sponsor-item {
-        min-width: 140px;
-        padding: 0 var(--spacing-4);
-    }
-    
-    .sponsor-logo {
-        height: 50px;
-        width: 90px;
-    }
-    
-    .sponsor-name {
-        font-size: var(--font-size-xs);
-    }
-    
-    .sponsors-carousel {
-        animation-duration: 30s;
-    }
-}
-
-@media (max-width: 480px) {
-    .sponsors {
-        padding: var(--spacing-4) 0;
-    }
-    
-    .sponsors::before, .sponsors::after {
-        width: 30px;
-    }
-    
-    .sponsor-item {
-        min-width: 120px;
-        padding: 0 var(--spacing-3);
-    }
-    
-    .sponsor-logo {
-        height: 40px;
-        width: 70px;
-    }
-    
-    .sponsors-carousel {
-        animation-duration: 20s;
-    }
-}
-
-/* Animations */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.fade-in-up {
-    animation: fadeInUp 0.6s ease-out forwards;
-    opacity: 0;
-}
-
-@keyframes slideInRight {
-    from {
-        transform: translateX(30px);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-.slide-in-right {
-    animation: slideInRight 0.5s ease-out forwards;
-}
-
-/* Status messages */
-.form-status {
-    padding: var(--spacing-4);
-    border-radius: var(--border-radius);
-    margin-top: var(--spacing-4);
-    text-align: center;
-}
-
-.form-status.success {
-    background-color: #d1fae5;
-    color: #065f46;
-    border: 1px solid #a7f3d0;
-}
-
-.form-status.error {
-    background-color: #fee2e2;
-    color: #991b1b;
-    border: 1px solid #fecaca;
-}
-
-/* Loading states */
-.btn.loading {
-    position: relative;
-    color: transparent;
-}
-
-.btn.loading::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 20px;
-    height: 20px;
-    border: 2px solid transparent;
-    border-top: 2px solid currentColor;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
