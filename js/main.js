@@ -44,41 +44,32 @@ class RugbyClubApp {
 
     // Effet parallax pour les sections
     setupParallax() {
-        const parallaxElements = document.querySelectorAll('.parallax-image, .hero-image');
+        // Pour un vrai effet parallax, nous n'avons pas besoin de manipuler les images
+        // Les images sont positionnées avec position: fixed en CSS
+        // Le contenu défile naturellement par-dessus
         
-        if (parallaxElements.length === 0) return;
-
-        const handleParallax = () => {
-            const scrolled = window.pageYOffset;
-            const rate = scrolled * -0.5;
-
-            parallaxElements.forEach(element => {
-                const section = element.closest('.hero, .parallax-section');
-                if (!section) return;
-
-                const rect = section.getBoundingClientRect();
-                const isVisible = rect.bottom >= 0 && rect.top <= window.innerHeight;
-
-                if (isVisible) {
-                    element.style.transform = `translate3d(0, ${rate}px, 0)`;
-                }
-            });
-        };
-
-        // Throttle pour améliorer les performances
-        let ticking = false;
-        const throttledParallax = () => {
-            if (!ticking) {
-                requestAnimationFrame(() => {
-                    handleParallax();
-                    ticking = false;
-                });
-                ticking = true;
+        // Assurons-nous que les sections parallax ont les bonnes classes et attributs
+        const heroSection = document.querySelector('.hero');
+        const histoireSection = document.querySelector('.histoire');
+        
+        if (heroSection) {
+            const heroBackground = heroSection.querySelector('.hero-background');
+            if (heroBackground && heroBackground.querySelector('img')) {
+                heroBackground.querySelector('img').classList.add('hero-image');
             }
-        };
-
-        window.addEventListener('scroll', throttledParallax);
-        handleParallax(); // Initial call
+        }
+        
+        if (histoireSection) {
+            const parallaxBackground = histoireSection.querySelector('.parallax-background');
+            if (parallaxBackground && parallaxBackground.querySelector('img')) {
+                parallaxBackground.querySelector('img').classList.add('parallax-image');
+            }
+        }
+        
+        // Ajouter des écouteurs pour s'assurer que le z-index est correctement géré lors du défilement
+        window.addEventListener('scroll', () => {
+            document.body.style.setProperty('--scroll-y', `${window.scrollY}px`);
+        });
     }
 
     // Gestion du bandeau cookies RGPD
@@ -228,11 +219,22 @@ class RugbyClubApp {
     static getAgeCategory(birthDate) {
         const age = this.calculateAge(birthDate);
         
-        if (age < 6) return 'U6';
-        if (age < 8) return 'U8';
-        if (age < 10) return 'U10';
-        if (age < 12) return 'U12';
-        if (age < 14) return 'U14';
+        // Charger les catégories d'âge depuis les données en cache si disponibles
+        if (window.categoriesData) {
+            const categories = window.categoriesData;
+            for (const categorie of categories) {
+                if (age >= categorie.age_min && age <= categorie.age_max) {
+                    return categorie.nom;
+                }
+            }
+        } else {
+            // Fallback sur les valeurs codées en dur si les données ne sont pas disponibles
+            if (age < 6) return 'U6';
+            if (age < 8) return 'U8';
+            if (age < 10) return 'U10';
+            if (age < 12) return 'U12';
+            if (age < 14) return 'U14';
+        }
         return 'Senior';
     }
 }

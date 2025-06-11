@@ -8,30 +8,44 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function loadInscriptionData(dataLoader) {
     try {
         const inscriptionData = await dataLoader.loadInscription();
+        const equipesData = await dataLoader.loadEquipes();
+        
         if (inscriptionData) {
-            renderInscriptionData(inscriptionData);
+            renderInscriptionData(inscriptionData, equipesData);
         }
     } catch (error) {
         console.error('Erreur lors du chargement des données d\'inscription:', error);
     }
 }
 
-function renderInscriptionData(data) {
-    // Charger les tarifs qui contiennent les catégories
-    if (data.tarifs) {
-        renderCategoriesFromTarifs(data.tarifs);
-        renderTarifs(data.tarifs);
+function renderInscriptionData(data, equipesData) {
+    // Charger les catégories depuis les équipes
+    if (equipesData && equipesData.categories) {
+        renderCategories(equipesData.categories, data.tarifs[0].prix);
     }
     
-    // Charger les informations d'inscription si elles existent
-    if (data.inscription_info) {
-        renderInscriptionInfo(data.inscription_info);
+    // Charger les tarifs (prix unique maintenant)
+    if (data.tarifs) {
+        renderTarifUnique(data.tarifs[0]);
+    }
+    
+    // Charger les documents nécessaires
+    if (data.documents) {
+        renderDocuments(data.documents);
+    }
+    
+    // Charger les informations de procédure si elles existent
+    if (data.procedure) {
+        renderProcedureInfo(data.procedure);
     }
 }
 
-function renderCategoriesFromTarifs(tarifs) {
+function renderCategories(categories, prixUnique) {
     const select = document.getElementById('categorie');
     if (!select) return;
+
+    // Stocker les catégories dans une variable globale pour la fonction getAgeCategory
+    window.categoriesData = categories;
 
     // Garder l'option par défaut
     const defaultOption = select.querySelector('option[value=""]');
@@ -40,41 +54,64 @@ function renderCategoriesFromTarifs(tarifs) {
         select.appendChild(defaultOption);
     }
     
-    tarifs.forEach(tarif => {
+    categories.forEach(categorie => {
         const option = document.createElement('option');
-        option.value = tarif.categorie;
-        option.textContent = `${tarif.categorie} (${tarif.age_min}-${tarif.age_max} ans) - ${tarif.prix}€`;
+        option.value = categorie.nom;
+        option.textContent = `${categorie.nom} (${categorie.age_min}-${categorie.age_max} ans)`;
         select.appendChild(option);
     });
 }
 
-function renderTarifs(tarifs) {
-    const container = document.getElementById('tarifs-container');
+function renderTarifUnique(tarifReference) {
+    const container = document.getElementById('tarifs-grid');
     if (!container) return;
 
     container.innerHTML = '';
     
-    tarifs.forEach(tarif => {
-        const tarifCard = document.createElement('div');
-        tarifCard.className = 'tarif-card';
-        tarifCard.innerHTML = `
-            <div class="tarif-header">
-                <h4 class="tarif-title">${tarif.categorie}</h4>
-                <span class="tarif-prix">${tarif.prix}€</span>
-                <span class="tarif-age">${tarif.age_min}-${tarif.age_max} ans</span>
+    const tarifCard = document.createElement('div');
+    tarifCard.className = 'tarif-card tarif-unique';
+    tarifCard.innerHTML = `
+        <div class="tarif-header">
+            <h4 class="tarif-title">Tarif unique pour toutes les catégories</h4>
+            <span class="tarif-prix">${tarifReference.prix}€</span>
+        </div>
+        <div class="tarif-content">
+            <p class="tarif-description">${tarifReference.description}</p>
+            ${tarifReference.reductions && tarifReference.reductions.length > 0 ? `
+            <div class="tarif-reductions">
+                <h5>Réductions :</h5>
+                <ul>
+                    ${tarifReference.reductions.map(reduction => `<li>${reduction.type} : ${reduction.montant}</li>`).join('')}
+                </ul>
+            </div>` : ''}
+        </div>
+    `;
+    container.appendChild(tarifCard);
+}
+
+function renderDocuments(documents) {
+    const container = document.getElementById('documents-grid');
+    if (!container) return;
+
+    container.innerHTML = '';
+    
+    documents.forEach(doc => {
+        const documentCard = document.createElement('div');
+        documentCard.className = 'document-card';
+        documentCard.innerHTML = `
+            <div class="document-header">
+                <h4 class="document-nom">${doc.nom}</h4>
+                ${doc.obligatoire ? '<span class="document-obligatoire">Obligatoire</span>' : '<span class="document-optionnel">Optionnel</span>'}
             </div>
-            <div class="tarif-content">
-                <p class="tarif-description">${tarif.description}</p>
-                ${tarif.reductions && tarif.reductions.length > 0 ? `
-                <div class="tarif-reductions">
-                    <h5>Réductions :</h5>
-                    <ul>
-                        ${tarif.reductions.map(reduction => `<li>${reduction.type} : ${reduction.montant}</li>`).join('')}
-                    </ul>
-                </div>` : ''}
+            <div class="document-content">
+                <p class="document-description">${doc.description}</p>
+                ${doc.modele_telecharger ? `
+                <a href="${doc.modele_telecharger}" target="_blank" class="document-download">
+                    <i class="fas fa-download"></i> Télécharger le modèle
+                </a>` : ''}
             </div>
         `;
-        container.appendChild(tarifCard);
+        container.appendChild(documentCard);
     });
 }
 
@@ -108,6 +145,40 @@ function renderInscriptionInfo(info) {
     `;
 }
 
+function renderProcedureInfo(procedure) {
+    const container = document.getElementById('procedure-info');
+    if (!container) return;
+
+    container.innerHTML = `
+        <div class="procedure-content">
+            <h3>Procédure d'inscription</h3>
+            ${procedure.etapes ? `
+            <div class="procedure-etapes">
+                <h4>📋 Étapes à suivre :</h4>
+                <ol>
+                    ${procedure.etapes.map(etape => `<li>${etape}</li>`).join('')}
+                </ol>
+            </div>` : ''}
+            ${procedure.dates_limites ? `
+            <div class="procedure-dates">
+                <h4>⏰ Dates limites :</h4>
+                <ul>
+                    ${Object.entries(procedure.dates_limites).map(([key, date]) => `
+                        <li><strong>${key.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())} :</strong> ${date}</li>
+                    `).join('')}
+                </ul>
+            </div>` : ''}
+            ${procedure.contact ? `
+            <div class="procedure-contact">
+                <h4>📞 Contact secrétariat :</h4>
+                <p><strong>Email :</strong> ${procedure.contact.secretariat.email}</p>
+                <p><strong>Téléphone :</strong> ${procedure.contact.secretariat.telephone}</p>
+                <p><strong>Permanences :</strong> ${procedure.contact.secretariat.permanences}</p>
+            </div>` : ''}
+        </div>
+    `;
+}
+
 function setupInscriptionForm() {
     const form = document.getElementById('inscription-form');
     const dateNaissanceInput = document.getElementById('date-naissance');
@@ -115,18 +186,60 @@ function setupInscriptionForm() {
 
     if (!form) return;
 
+    // Marquer les champs comme "touchés" après interaction
+    const formInputs = form.querySelectorAll('input, select, textarea');
+    formInputs.forEach(input => {
+        const formGroup = input.closest('.form-group');
+        
+        // Marquer comme touché lors de la première interaction
+        input.addEventListener('blur', () => {
+            if (formGroup) {
+                formGroup.classList.add('touched');
+            }
+        });
+        
+        // Marquer comme touché dès la première saisie
+        input.addEventListener('input', () => {
+            if (formGroup) {
+                formGroup.classList.add('touched');
+            }
+        });
+        
+        // Pour les selects, marquer comme touché lors du changement
+        if (input.tagName === 'SELECT') {
+            input.addEventListener('change', () => {
+                if (formGroup) {
+                    formGroup.classList.add('touched');
+                }
+            });
+        }
+    });
+
     // Auto-calcul de la catégorie basée sur la date de naissance
     dateNaissanceInput?.addEventListener('change', (e) => {
         const birthDate = e.target.value;
         if (birthDate) {
             const category = RugbyClubApp.getAgeCategory(birthDate);
             categorieSelect.value = category;
+            // Marquer la catégorie comme touchée si elle est auto-remplie
+            const categorieFormGroup = categorieSelect.closest('.form-group');
+            if (categorieFormGroup) {
+                categorieFormGroup.classList.add('touched');
+            }
         }
     });
 
     // Gestion de la soumission du formulaire
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
+        
+        // Marquer tous les champs comme touchés lors de la soumission
+        formInputs.forEach(input => {
+            const formGroup = input.closest('.form-group');
+            if (formGroup) {
+                formGroup.classList.add('touched');
+            }
+        });
         
         const submitButton = form.querySelector('button[type="submit"]');
         const statusElement = document.getElementById('form-status') || createStatusElement();
@@ -168,7 +281,7 @@ function setupInscriptionForm() {
             };
 
             // Envoi via Azure Function
-            const response = await window.formHandler.submitForm(formDataWithExtras, 'inscription');
+            await window.formHandler.submitForm(formDataWithExtras, 'inscription');
             
             window.formHandler.showFormStatus(
                 statusElement,
@@ -177,6 +290,14 @@ function setupInscriptionForm() {
             );
             
             form.reset();
+            
+            // Retirer la classe "touched" après reset
+            formInputs.forEach(input => {
+                const formGroup = input.closest('.form-group');
+                if (formGroup) {
+                    formGroup.classList.remove('touched');
+                }
+            });
             
         } catch (error) {
             console.error('Erreur lors de l\'inscription:', error);
