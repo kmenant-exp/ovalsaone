@@ -245,6 +245,8 @@ ul, ol {
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
+    margin-top: 0; /* S'assure qu'il n'y a pas de marge */
+    will-change: transform; /* Optimise les performances de rendu */
 }
 
 .hero-overlay {

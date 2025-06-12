@@ -70,9 +70,7 @@ class RugbyClubApp {
         window.addEventListener('scroll', () => {
             document.body.style.setProperty('--scroll-y', `${window.scrollY}px`);
         });
-    }
-
-    // Gestion du bandeau cookies RGPD
+    }    // Gestion du bandeau cookies RGPD
     setupCookieBanner() {
         const cookieBanner = document.getElementById('cookie-banner');
         const acceptBtn = document.getElementById('accept-cookies');
@@ -84,8 +82,13 @@ class RugbyClubApp {
         const cookieConsent = localStorage.getItem('cookieConsent');
         
         if (!cookieConsent) {
+            // Nous utilisons une technique qui ne décale pas la mise en page
+            // Nous enlevons d'abord la classe 'hidden', puis nous laissons la CSS
+            // gérer la transition d'apparition
             setTimeout(() => {
                 cookieBanner.classList.remove('hidden');
+                // Nous forçons un reflow pour que la transition s'active correctement
+                void cookieBanner.offsetWidth;
             }, 2000);
         }
 

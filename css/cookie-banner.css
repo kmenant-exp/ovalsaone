@@ -1,0 +1,59 @@
+/* Styles pour le bandeau de cookies */
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(31, 41, 55, 0.95);
+    backdrop-filter: blur(10px);
+    color: var(--white);
+    z-index: 2000;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translateY(100%);
+    opacity: 0;
+}
+
+.cookie-banner.hidden {
+    display: none;
+}
+
+.cookie-banner:not(.hidden) {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.cookie-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--spacing-4);
+}
+
+.cookie-content p {
+    margin: 0;
+    flex: 1;
+    min-width: 300px;
+    font-size: var(--font-size-sm);
+}
+
+.cookie-buttons {
+    display: flex;
+    gap: var(--spacing-3);
+}
+
+@media (max-width: 768px) {
+    .cookie-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .cookie-buttons {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
