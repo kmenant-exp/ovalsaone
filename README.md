@@ -1,4 +1,4 @@
-# Site Web Rugby Club - Azure Static Web App
+# Site Web Oval Saône - Azure Static Web App
 
 Site web moderne pour un club de rugby développé avec Azure Static Web App, utilisant des technologies web standard et des Azure Functions en C#.
 

@@ -33,9 +33,8 @@ public class EmailService : IEmailService
     }
 
     public async Task SendContactEmailAsync(string nom, string prenom, string email, string? telephone, string sujet, string message)
-    {
-        var emailMessage = new MimeMessage();
-        emailMessage.From.Add(new MailboxAddress("Rugby Club Website", _fromEmail));
+    {        var emailMessage = new MimeMessage();
+        emailMessage.From.Add(new MailboxAddress("Oval Saône Website", _fromEmail));
         emailMessage.To.Add(new MailboxAddress("", _contactEmail));
         emailMessage.ReplyTo.Add(new MailboxAddress($"{prenom} {nom}", email));
         emailMessage.Subject = $"[Site Web] {sujet}";
@@ -53,8 +52,7 @@ public class EmailService : IEmailService
     public async Task SendInscriptionEmailAsync(string nomEnfant, string prenomEnfant, DateTime dateNaissance, string categorie, 
         string nomResponsable, string prenomResponsable, string email, string telephone, int age, string? commentaires)
     {
-        var emailMessage = new MimeMessage();
-        emailMessage.From.Add(new MailboxAddress("Rugby Club Website", _fromEmail));
+        var emailMessage = new MimeMessage();        emailMessage.From.Add(new MailboxAddress("Oval Saône Website", _fromEmail));
         emailMessage.To.Add(new MailboxAddress("", _inscriptionEmail));
         emailMessage.ReplyTo.Add(new MailboxAddress($"{prenomResponsable} {nomResponsable}", email));
         emailMessage.Subject = $"[Inscription] {prenomEnfant} {nomEnfant} - {categorie}";
@@ -94,7 +92,7 @@ public class EmailService : IEmailService
     private string CreateContactEmailHtml(string nom, string prenom, string email, string? telephone, string sujet, string message)
     {
         return $@"
-            <h2>Nouveau message de contact - Site Rugby Club</h2>
+            <h2>Nouveau message de contact - Site Oval Saône</h2>
             <h3>Informations du contact :</h3>
             <ul>
                 <li><strong>Nom :</strong> {nom}</li>
@@ -110,7 +108,7 @@ public class EmailService : IEmailService
             </div>
             
             <hr>
-            <p><small>Message envoyé depuis le site web du Rugby Club le {DateTime.Now:dd/MM/yyyy HH:mm}</small></p>
+            <p><small>Message envoyé depuis le site web de l'Oval Saône le {DateTime.Now:dd/MM/yyyy HH:mm}</small></p>
         ";
     }
 
@@ -120,7 +118,7 @@ public class EmailService : IEmailService
         var categorieCalculee = GetAgeCategory(age);
         
         return $@"
-            <h2>Nouvelle inscription - Site Rugby Club</h2>
+            <h2>Nouvelle inscription - Site Oval Saône</h2>
             
             <h3>Informations du licencié :</h3>
             <ul>

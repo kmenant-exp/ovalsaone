@@ -48,7 +48,7 @@ const validateContactForm = (data) => {
 // Fonction pour créer l'email de contact
 const createContactEmail = (data) => {
     const html = `
-        <h2>Nouveau message de contact - Site Rugby Club</h2>
+        <h2>Nouveau message de contact - Site Oval Saône</h2>
         <h3>Informations du contact :</h3>
         <ul>
             <li><strong>Nom :</strong> ${data.nom}</li>
@@ -64,7 +64,7 @@ const createContactEmail = (data) => {
         </div>
         
         <hr>
-        <p><small>Message envoyé depuis le site web du Rugby Club le ${new Date().toLocaleString('fr-FR')}</small></p>
+        <p><small>Message envoyé depuis le site web de l'Oval Saône le ${new Date().toLocaleString('fr-FR')}</small></p>
     `;
     
     return {

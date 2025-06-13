@@ -1,8 +1,8 @@
-# 🏉 Rugby Club Website - Documentation Finale
+# 🏉 Oval Saône Website - Documentation Finale
 
 ## ✅ Projet Complètement Fonctionnel
 
-Le site web du Rugby Club est maintenant entièrement opérationnel avec toutes les fonctionnalités demandées.
+Le site web de l'Oval Saône est maintenant entièrement opérationnel avec toutes les fonctionnalités demandées.
 
 ## 📋 Résumé des Corrections Effectuées
 

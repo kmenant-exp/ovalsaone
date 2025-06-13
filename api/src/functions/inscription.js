@@ -102,7 +102,7 @@ const createInscriptionEmail = (data) => {
     const categorieCalculee = getAgeCategory(data.dateNaissance);
     
     const html = `
-        <h2>Nouvelle inscription - Site Rugby Club</h2>
+        <h2>Nouvelle inscription - Site Oval Saône</h2>
         
         <h3>Informations du licencié :</h3>
         <ul>

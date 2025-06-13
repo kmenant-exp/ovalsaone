@@ -68,7 +68,7 @@
     },
     {
       "id": 7,
-      "nom": "Casquette Rugby Club",
+      "nom": "Casquette Oval Saône",
       "description": "Casquette ajustable aux couleurs du club",
       "prix": 18,
       "image": "assets/boutique/casquette.jpg",
@@ -112,7 +112,7 @@
     },
     {
       "id": 11,
-      "nom": "Mug Rugby Club",
+      "nom": "Mug Oval Saône",
       "description": "Mug en céramique avec logo du club, parfait pour les supporters",
       "prix": 8,
       "image": "assets/boutique/mug-club.jpg",

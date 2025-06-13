@@ -1,7 +1,7 @@
 {
   "name": "rugby-club-api",
   "version": "1.0.0",
-  "description": "Azure Functions for Rugby Club website",
+  "description": "Azure Functions for Oval Saône website",
   "main": "index.js",
   "scripts": {
     "start": "func start",
