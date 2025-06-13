@@ -16,7 +16,6 @@ class RugbyClubApp {
     // Navigation sticky avec effet de réduction
     setupNavigation() {
         const navbar = document.getElementById('navbar');
-        let lastScrollY = window.scrollY;
 
         window.addEventListener('scroll', () => {
             const currentScrollY = window.scrollY;
@@ -26,8 +25,6 @@ class RugbyClubApp {
             } else {
                 navbar.classList.remove('scrolled');
             }
-
-            lastScrollY = currentScrollY;
         });
 
         // Active link management
@@ -211,21 +208,28 @@ class RugbyClubApp {
         const age = this.calculateAge(birthDate);
         
         // Charger les catégories d'âge depuis les données en cache si disponibles
-        if (window.categoriesData) {
-            const categories = window.categoriesData;
-            for (const categorie of categories) {
-                if (age >= categorie.age_min && age <= categorie.age_max) {
-                    return categorie.nom;
-                }
+        return window.categoriesData 
+            ? this.getCategoryFromData(age) 
+            : this.getDefaultCategory(age);
+    }
+    
+    static getCategoryFromData(age) {
+        const categories = window.categoriesData;
+        for (const categorie of categories) {
+            if (age >= categorie.age_min && age <= categorie.age_max) {
+                return categorie.nom;
             }
-        } else {
-            // Fallback sur les valeurs codées en dur si les données ne sont pas disponibles
-            if (age < 6) return 'U6';
-            if (age < 8) return 'U8';
-            if (age < 10) return 'U10';
-            if (age < 12) return 'U12';
-            if (age < 14) return 'U14';
         }
+        return 'Senior';
+    }
+    
+    static getDefaultCategory(age) {
+        // Fallback sur les valeurs codées en dur
+        if (age < 6) return 'U6';
+        if (age < 8) return 'U8';
+        if (age < 10) return 'U10';
+        if (age < 12) return 'U12';
+        if (age < 14) return 'U14';
         return 'Senior';
     }
 }

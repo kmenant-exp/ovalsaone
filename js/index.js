@@ -60,6 +60,7 @@ function formatDateShort(dateStr) {
         const month = date.toLocaleDateString('fr-FR', { month: 'short' });
         return `${day} ${month}`;
     } catch (error) {
+        console.error('Erreur lors du formatage de la date:', error);
         return dateStr;
     }
 }

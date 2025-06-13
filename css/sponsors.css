@@ -43,10 +43,6 @@
     transition: all 0.3s ease;
 }
 
-/* .sponsor-item:hover .sponsor-logo-container {
-    box-shadow: var(--shadow-md);
-} */
-
 .sponsor-logo {
     width: 100%;
     height: 100%;
