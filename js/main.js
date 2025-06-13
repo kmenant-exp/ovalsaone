@@ -40,37 +40,25 @@ class RugbyClubApp {
                 link.classList.add('active');
             }
         });
-    }
-
-    // Effet parallax pour les sections
+    }    // Effet parallax pour les sections
     setupParallax() {
         // Pour un vrai effet parallax, nous n'avons pas besoin de manipuler les images
-        // Les images sont positionnées avec position: fixed en CSS
+        // Les images sont positionnées avec background-attachment: fixed en CSS
         // Le contenu défile naturellement par-dessus
         
-        // Assurons-nous que les sections parallax ont les bonnes classes et attributs
-        const heroSection = document.querySelector('.hero');
-        const histoireSection = document.querySelector('.histoire');
+        // Aucune manipulation JavaScript n'est nécessaire pour l'effet de base
+        // Si nous avions besoin d'une personnalisation supplémentaire, nous pourrions l'ajouter ici
+
+        // Désactivons tout code qui pourrait interférer avec l'effet parallax CSS
+        const parallaxElements = document.querySelectorAll('.parallax-section');
         
-        if (heroSection) {
-            const heroBackground = heroSection.querySelector('.hero-background');
-            if (heroBackground && heroBackground.querySelector('img')) {
-                heroBackground.querySelector('img').classList.add('hero-image');
-            }
+        if (parallaxElements.length > 0) {
+            window.addEventListener('scroll', () => {
+                // Juste pour s'assurer que le z-index est correctement géré
+                document.body.style.setProperty('--scroll-y', `${window.scrollY}px`);
+            });
         }
-        
-        if (histoireSection) {
-            const parallaxBackground = histoireSection.querySelector('.parallax-background');
-            if (parallaxBackground && parallaxBackground.querySelector('img')) {
-                parallaxBackground.querySelector('img').classList.add('parallax-image');
-            }
-        }
-        
-        // Ajouter des écouteurs pour s'assurer que le z-index est correctement géré lors du défilement
-        window.addEventListener('scroll', () => {
-            document.body.style.setProperty('--scroll-y', `${window.scrollY}px`);
-        });
-    }    // Gestion du bandeau cookies RGPD
+    }// Gestion du bandeau cookies RGPD
     setupCookieBanner() {
         const cookieBanner = document.getElementById('cookie-banner');
         const acceptBtn = document.getElementById('accept-cookies');

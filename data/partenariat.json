@@ -1,64 +1,57 @@
 {
   "sponsors": [
+  
     {
       "id": 1,
-      "nom": "Boulangerie Martin",
-      "logo": "assets/sponsors/boulangerie-martin.svg",
-      "description": "Boulangerie artisanale familiale depuis 3 générations, spécialisée dans les produits frais et de qualité.",
+      "nom": "Expertime",
+      "logo": "assets/sponsors/logo_expertime.png",
+      "description": "Services informatiques et solutions digitales pour les entreprises.",
       "niveau": "Partenaire Bronze",
-      "website": "https://boulangerie-martin.fr",
-      "telephone": "01 23 45 67 89",
-      "email": "contact@boulangerie-martin.fr",
-      "adresse": "12 Place du Marché, 12345 Ville",
-      "partenariat_depuis": 2018
+      "website": "https://expertime.com",
+      "telephone": "01 23 45 67 94",
+      "email": "contact@expertime.com",
+      "adresse": "Zone d'Activité, 12345 Ville",
+      "partenariat_depuis": 2021,
+      "type": "partenaire"
     },
     {
       "id": 2,
-      "nom": "Garage Automobile Dupont",
-      "logo": "assets/sponsors/garage-dupont.svg",
-      "description": "Garage multimarques proposant vente, réparation et entretien de véhicules. Service de qualité et conseils personnalisés.",
+      "nom": "Orange Business",
+      "logo": "assets/sponsors/logo_orange.jpg",
+      "description": "Solutions de télécommunication et services digitaux pour les professionnels.",
       "niveau": "Sponsor Or",
-      "website": "https://garage-dupont.com",
-      "telephone": "01 23 45 67 90",
-      "email": "info@garage-dupont.com",
-      "adresse": "Route Nationale, 12345 Ville",
-      "partenariat_depuis": 2015
+      "website": "https://business.orange.fr",
+      "telephone": "01 23 45 67 95",
+      "email": "business@orange.fr",
+      "adresse": "30 Rue des Télécoms, 12345 Ville",
+      "partenariat_depuis": 2018,
+      "type": "sponsor_or"
     },
     {
       "id": 3,
-      "nom": "Restaurant Le Stade",
-      "logo": "assets/sponsors/restaurant-stade.svg",
-      "description": "Restaurant traditionnel avec terrasse, cuisine du terroir et spécialités locales. Idéal pour les repas d'équipe !",
-      "niveau": "Sponsor Argent",
-      "website": "https://restaurant-le-stade.fr",
-      "telephone": "01 23 45 67 91",
-      "email": "reservation@restaurant-le-stade.fr",
-      "adresse": "Avenue du Stade, 12345 Ville",
-      "partenariat_depuis": 2019
+      "nom": "Pharmacie de la Place",
+      "logo": "assets/sponsors/logo_pharmacie.jpg",
+      "description": "Pharmacie de proximité proposant conseils santé et produits adaptés aux sportifs.",
+      "niveau": "Partenaire Bronze",
+      "website": "https://pharmaciedelaplace.fr",
+      "telephone": "01 23 45 67 96",
+      "email": "contact@pharmaciedelaplace.fr",
+      "adresse": "5 Place Centrale, 12345 Ville",
+      "partenariat_depuis": 2019,
+      "type": "partenaire"
     },
     {
       "id": 4,
-      "nom": "Banque Crédit Local",
-      "logo": "assets/sponsors/credit-local.svg",
-      "description": "Banque coopérative locale accompagnant particuliers et professionnels dans leurs projets.",
-      "niveau": "Sponsor Or",
-      "website": "https://credit-local.fr",
-      "telephone": "01 23 45 67 92",
-      "email": "agence.ville@credit-local.fr",
-      "adresse": "1 Place de la République, 12345 Ville",
-      "partenariat_depuis": 2016
-    },
-    {
-      "id": 5,
-      "nom": "Magasin Sport Plus",
-      "logo": "assets/sponsors/sport-plus.svg",
-      "description": "Magasin d'articles de sport proposant équipements et conseils pour tous les sports. Spécialiste rugby.",
+      "nom": "Décathlon Saint-Germain",
+      "logo": "assets/sponsors/logo_decathlon.webp",
+      "description": "Magasin d'articles de sport proposant un large choix d'équipements pour tous les sports.",
       "niveau": "Sponsor Argent",
-      "website": "https://sport-plus.com",
-      "telephone": "01 23 45 67 93",
-      "email": "contact@sport-plus.com",
-      "adresse": "Centre Commercial, 12345 Ville",
-      "partenariat_depuis": 2020
+      "website": "https://decathlon.fr",
+      "telephone": "01 23 45 67 97",
+      "email": "magasin.saintgermain@decathlon.fr",
+      "adresse": "Zone Commerciale, 12345 Ville",
+      "partenariat_depuis": 2022,
+      "type": "sponsor_argent"
     }
   ],
   "sponsoring": {

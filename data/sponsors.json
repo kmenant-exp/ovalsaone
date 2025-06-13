@@ -2,38 +2,26 @@
   "sponsors": [
     {
       "id": 1,
-      "nom": "Boulangerie Martin",
-      "logo": "assets/sponsors/boulangerie-martin.svg",
+      "nom": "Expertime",
+      "logo": "assets/sponsors/logo_expertime.png",
       "type": "partenaire"
     },
     {
       "id": 2,
-      "nom": "Garage Automobile Dupont",
-      "logo": "assets/sponsors/garage-dupont.svg",
+      "nom": "Orange Business",
+      "logo": "assets/sponsors/logo_orange.jpg",
       "type": "sponsor_or"
     },
     {
       "id": 3,
       "nom": "Pharmacie de la Place",
-      "logo": "assets/sponsors/pharmacie-place.svg",
+      "logo": "assets/sponsors/logo_pharmacie.jpg",
       "type": "partenaire"
     },
     {
       "id": 4,
-      "nom": "Restaurant Le Stade",
-      "logo": "assets/sponsors/restaurant-stade.svg",
-      "type": "sponsor_argent"
-    },
-    {
-      "id": 5,
-      "nom": "Banque Crédit Local",
-      "logo": "assets/sponsors/credit-local.svg",
-      "type": "sponsor_or"
-    },
-    {
-      "id": 6,
-      "nom": "Magasin Sport Plus",
-      "logo": "assets/sponsors/sport-plus.svg",
+      "nom": "Décathlon Saint-Germain",
+      "logo": "assets/sponsors/logo_decathlon.webp",
       "type": "sponsor_argent"
     }
   ]

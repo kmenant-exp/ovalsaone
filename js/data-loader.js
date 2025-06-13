@@ -27,13 +27,20 @@ class DataLoader {
         }
     }
 
-    // Méthodes pour charger les données spécifiques
+    // Méthodes pour charger les données spécifiques    
     async loadActualites() {
         return await this.loadData('actualites.json');
     }
 
     async loadSponsors() {
-        return await this.loadData('sponsors.json');
+        return await this.loadData('partenariat.json').then(data => {
+            if (data && data.sponsors) {
+                return { sponsors: data.sponsors };
+            } else {
+                console.warn('No sponsors found in the data');
+                return { sponsors: [] };
+            }
+        });
     }
 
     async loadEquipes() {

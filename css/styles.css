@@ -235,18 +235,18 @@ ul, ol {
 
 /* Hero Section */
 .hero {
+    color: var(--white);
+    background-image: url('../assets/hero-image.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
     position: relative;
     height: 100vh;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('../assets/hero-image.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
     margin-top: 0; /* S'assure qu'il n'y a pas de marge */
-    will-change: transform; /* Optimise les performances de rendu */
 }
 
 .hero-overlay {
@@ -265,7 +265,12 @@ ul, ol {
     color: var(--white);
     z-index: 1;
     max-width: 800px;
-    padding: var(--spacing-6);
+    padding: var(--spacing-8);
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(6px);
+    border-radius: var(--border-radius-xl);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .hero-logo {
@@ -283,20 +288,21 @@ ul, ol {
     font-size: var(--font-size-5xl);
     font-weight: 700;
     margin-bottom: var(--spacing-4);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7), 1px 1px 2px rgba(0, 0, 0, 0.9);
 }
 
 .hero-subtitle {
     font-size: var(--font-size-xl);
     margin-bottom: var(--spacing-6);
     line-height: 1.5;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6), 0px 0px 2px rgba(0, 0, 0, 0.8);
 }
 
 .hero-description {
     font-size: var(--font-size-lg);
     margin-bottom: var(--spacing-8);
-    opacity: 0.9;
+    opacity: 0.95;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .hero-buttons {
@@ -447,6 +453,45 @@ ul, ol {
         flex-direction: column;
         align-items: center;
         gap: var(--spacing-3);
+    }
+    
+    /* Responsive pour la section hero principale */
+    .hero-content {
+        max-width: 90%;
+        padding: var(--spacing-6);
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(8px);
+    }
+    
+    .hero-title {
+        font-size: var(--font-size-3xl);
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8), 1px 1px 2px rgba(0, 0, 0, 1);
+    }
+    
+    .hero-subtitle {
+        font-size: var(--font-size-lg);
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7), 0px 0px 2px rgba(0, 0, 0, 0.9);
+    }
+    
+    .hero-description {
+        font-size: var(--font-size-base);
+        margin-bottom: var(--spacing-6);
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: var(--spacing-3);
+        width: 100%;
+    }
+    
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .hero-logo img {
+        width: 100px;
     }
 }
 
@@ -2192,40 +2237,53 @@ ul, ol {
     flex-direction: column;
     align-items: center;
     gap: var(--spacing-3);
-    min-width: 200px;
+    min-width: 160px;
     padding: var(--spacing-4);
-    background: var(--white);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow);
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
+    background: transparent;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
 .sponsor-item:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--accent-color);
+}
+
+.sponsor-logo-container {
+    width: 120px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-2);
+    transition: all 0.3s ease;
 }
 
 .sponsor-logo {
-    width: 120px;
-    height: 80px;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
     filter: grayscale(100%);
-    transition: filter 0.3s ease;
+    transition: all 0.5s ease;
+    transform: scale(0.9);
 }
 
 .sponsor-item:hover .sponsor-logo {
     filter: grayscale(0%);
+    transform: scale(1.05);
 }
 
 .sponsor-name {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-base);
     font-weight: 600;
     color: var(--primary-color);
     text-align: center;
-    margin: 0;
-    line-height: 1.3;
+    margin-top: var(--spacing-2);
+    transition: color 0.3s ease;
+}
+
+.sponsor-item:hover .sponsor-name {
+    color: var(--dark-color);
 }
 
 @keyframes scroll-sponsors {
@@ -2251,7 +2309,7 @@ ul, ol {
     
     .sponsor-item {
         min-width: 150px;
-        padding: var(--spacing-3);
+        padding: var(--spacing-4);
     }
     
     .sponsor-logo {
@@ -2303,7 +2361,7 @@ ul, ol {
 
 .sponsor-card::before {
     content: '';
-    position: absolute;
+       position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -2603,5 +2661,72 @@ ul, ol {
     .avantages-grid {
         grid-template-columns: 1fr;
         gap: var(--spacing-4);
+    }
+}
+
+/* Styles responsive pour le menu mobile et navigation */
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: flex;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(15px);
+        flex-direction: column;
+        align-items: center;
+        padding: var(--spacing-6) 0;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+    }
+    
+    .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .nav-link {
+        padding: var(--spacing-3) var(--spacing-6);
+        margin: var(--spacing-1) 0;
+        border-radius: var(--border-radius);
+        transition: all 0.3s ease;
+        width: 90%;
+        text-align: center;
+    }
+    
+    .nav-link:hover,
+    .nav-link.active {
+        background: rgba(44, 85, 48, 0.1);
+        color: var(--primary-color);
+    }
+    
+    .nav-toggle.active .bar:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+    }
+    
+    .nav-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .nav-toggle.active .bar:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+    }
+    
+    /* Styles spéciaux pour la section hero avec menu mobile */
+    .hero {
+        height: 100vh;
+    }
+    
+    .hero-content {
+        margin-top: var(--spacing-12);
     }
 }

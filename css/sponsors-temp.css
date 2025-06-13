@@ -1,0 +1,115 @@
+/* Section Sponsors */
+.sponsors {
+    background: var(--light-color);
+    padding: var(--spacing-20) 0;
+}
+
+.sponsors-carousel-container {
+    position: relative;
+    overflow: hidden;
+    mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
+    -webkit-mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
+}
+
+.sponsors-carousel {
+    display: flex;
+    gap: var(--spacing-12);
+    animation: scroll-sponsors 30s linear infinite;
+    width: max-content;
+}
+
+.sponsor-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-3);
+    min-width: 160px;
+    padding: var(--spacing-4);
+    background: transparent;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.sponsor-item:hover {
+    transform: translateY(-5px);
+}
+
+.sponsor-logo-container {
+    width: 120px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-2);
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+}
+
+.sponsor-item:hover .sponsor-logo-container {
+    box-shadow: var(--shadow-md);
+}
+
+.sponsor-item .sponsor-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: grayscale(100%);
+    transition: all 0.5s ease;
+    transform: scale(0.9);
+}
+
+.sponsor-item:hover .sponsor-logo {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+}
+
+.sponsor-item .sponsor-name {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: var(--primary-color);
+    text-align: center;
+    margin-top: var(--spacing-2);
+    transition: color 0.3s ease;
+}
+
+.sponsor-item:hover .sponsor-name {
+    color: var(--dark-color);
+}
+
+@keyframes scroll-sponsors {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Pause l'animation au hover */
+.sponsors-carousel-container:hover .sponsors-carousel {
+    animation-play-state: paused;
+}
+
+/* Responsive pour les sponsors */
+@media (max-width: 768px) {
+    .sponsors-carousel {
+        gap: var(--spacing-8);
+        animation-duration: 20s;
+    }
+    
+    .sponsor-item {
+        min-width: 150px;
+        padding: var(--spacing-4);
+    }
+    
+    .sponsor-item .sponsor-logo {
+        width: 100px;
+        height: 60px;
+    }
+    
+    .sponsor-item .sponsor-name {
+        font-size: var(--font-size-xs);
+    }
+}

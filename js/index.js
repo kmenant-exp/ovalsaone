@@ -82,19 +82,22 @@ function renderSponsors(sponsors) {
         const sponsorItem = document.createElement('div');
         sponsorItem.className = 'sponsor-item';
         sponsorItem.innerHTML = `
-            <img src="${sponsor.logo}" alt="${sponsor.nom}" class="sponsor-logo">
+            <div class="sponsor-logo-container">
+                <img src="${sponsor.logo}" alt="${sponsor.nom}" class="sponsor-logo">
+            </div>
             <h4 class="sponsor-name">${sponsor.nom}</h4>
         `;
         container.appendChild(sponsorItem);
     });
-    
-    // Dupliquer les sponsors pour un défilement infini fluide
+      // Dupliquer les sponsors pour un défilement infini fluide
     // Cette duplication est nécessaire pour que l'animation CSS fonctionne correctement
     sponsorsToRender.forEach(sponsor => {
         const sponsorItem = document.createElement('div');
         sponsorItem.className = 'sponsor-item';
         sponsorItem.innerHTML = `
-            <img src="${sponsor.logo}" alt="${sponsor.nom}" class="sponsor-logo">
+            <div class="sponsor-logo-container">
+                <img src="${sponsor.logo}" alt="${sponsor.nom}" class="sponsor-logo">
+            </div>
             <h4 class="sponsor-name">${sponsor.nom}</h4>
         `;
         container.appendChild(sponsorItem);
