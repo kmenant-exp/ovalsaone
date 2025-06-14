@@ -14,20 +14,47 @@ class RugbyClubApp {
     }
 
     // Navigation sticky avec effet de réduction
+    // Effet de défilement smooth et indicateur de navigation amélioré
     setupNavigation() {
         const navbar = document.getElementById('navbar');
+        const sections = document.querySelectorAll('section[id]');
 
         window.addEventListener('scroll', () => {
             const currentScrollY = window.scrollY;
             
+            // Effet de réduction de la barre de navigation
             if (currentScrollY > 100) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
             }
+            
+            // Mise en évidence du lien actif basé sur la section visible
+            // (uniquement sur la page d'accueil où il y a plusieurs sections avec ID)
+            if (window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/')) {
+                let currentSection = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.offsetHeight;
+                    
+                    if (currentScrollY >= sectionTop && currentScrollY < sectionTop + sectionHeight) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+                
+                // Mettre à jour les liens de navigation
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(currentSection)) {
+                        link.classList.add('active');
+                    }
+                });
+            }
         });
 
-        // Active link management
+        // Active link management pour les autres pages
         const navLinks = document.querySelectorAll('.nav-link');
         const currentPage = window.location.pathname.split('/').pop() || 'index.html';
         
@@ -117,16 +144,24 @@ class RugbyClubApp {
         animatedElements.forEach(el => observer.observe(el));
     }
 
-    // Menu mobile
+    // Menu mobile avec animations améliorées
     setupMobileMenu() {
         const navToggle = document.getElementById('nav-toggle');
         const navMenu = document.getElementById('nav-menu');
+        const navLogo = document.querySelector('.nav-logo');
         
         if (!navToggle || !navMenu) return;
 
         navToggle.addEventListener('click', () => {
             navToggle.classList.toggle('active');
             navMenu.classList.toggle('active');
+            
+            // Désactiver le scroll quand le menu est ouvert
+            if (navMenu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
         });
 
         // Fermer le menu quand on clique sur un lien
@@ -135,6 +170,7 @@ class RugbyClubApp {
             link.addEventListener('click', () => {
                 navToggle.classList.remove('active');
                 navMenu.classList.remove('active');
+                document.body.style.overflow = '';
             });
         });
 
