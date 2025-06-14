@@ -2,63 +2,54 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Attach to .NET Functions",
-      "type": "coreclr",
-      "request": "attach",
-      "processId": "${command:pickProcess}",
-      "preLaunchTask": "func: host start"
-    },
-    {
-      "name": "Launch SWA CLI",
+      "name": "Start Static Web App",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceFolder}/node_modules/@azure/static-web-apps-cli/dist/cli/index.js",
+      "program": "${workspaceFolder}/node_modules/.bin/swa",
       "args": [
         "start",
-        ".",
+        "src",
         "--api-location",
-        "api"
-      ],
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "env": {
-        "NODE_ENV": "development"
-      },
-      "preLaunchTask": "Install SWA CLI"
-    },
-    {
-      "name": "Debug Static Web App (Full Stack)",
-      "type": "node",
-      "request": "launch",
-      "program": "${workspaceFolder}/node_modules/@azure/static-web-apps-cli/dist/cli/index.js",
-      "args": [
-        "start",
-        ".",
-        "--api-location",
-        "api",
+        "src/api",
+        "--host",
+        "127.0.0.1",
         "--port",
         "4280"
       ],
       "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
+      "internalConsoleOptions": "openOnSessionStart",
+      "cwd": "${workspaceFolder}",
       "env": {
         "NODE_ENV": "development"
       },
-      "preLaunchTask": "Build and Start Functions",
-      "serverReadyAction": {
-        "pattern": "Azure Static Web Apps emulator started at http://localhost:([0-9]+)",
-        "uriFormat": "http://localhost:%s",
-        "action": "openExternally"
+      "skipFiles": ["<node_internals>/**"],
+      "presentation": {
+        "hidden": false,
+        "group": "SWA",
+        "order": 1
+      }
+    },
+    {
+      "name": "Attach to .NET Functions",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}",
+      "presentation": {
+        "hidden": false,
+        "group": "API",
+        "order": 1
       }
     }
   ],
   "compounds": [
     {
-      "name": "Debug Full Stack (SWA + Functions)",
-      "configurations": [
-        "Debug Static Web App (Full Stack)"
-      ],
-      "stopAll": true
+      "name": "Debug Full Stack",
+      "configurations": ["Start Static Web App"],
+      "presentation": {
+        "hidden": false,
+        "group": "Full Stack",
+        "order": 1
+      }
     }
   ]
 }

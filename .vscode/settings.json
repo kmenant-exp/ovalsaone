@@ -32,5 +32,6 @@
   "html.suggest.html5": true,
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
-  }
+  },
+  "azureFunctions.projectSubpath": "src/api/bin/Debug/net8.0"
 }

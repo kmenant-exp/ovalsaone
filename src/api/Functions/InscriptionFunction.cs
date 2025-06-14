@@ -70,21 +70,6 @@ public class InscriptionFunction
                 return await CreateValidationErrorResponse(req, "Données invalides", errors);
             }
 
-            // Validation de l'âge
-            if (inscriptionForm.Age < 3 || inscriptionForm.Age > 50)
-            {
-                return await CreateErrorResponse(req, "L'âge doit être compris entre 3 et 50 ans", HttpStatusCode.BadRequest);
-            }
-
-            // Vérifier la cohérence de la catégorie
-            var categorieCalculee = GetAgeCategory(inscriptionForm.Age);
-            var categorieCorrecte = inscriptionForm.Categorie.Equals(categorieCalculee, StringComparison.OrdinalIgnoreCase);
-
-            if (!categorieCorrecte)
-            {
-                _logger.LogWarning($"Incohérence catégorie: choisie={inscriptionForm.Categorie}, calculée={categorieCalculee}");
-            }
-
             // Envoyer l'email
             await _emailService.SendInscriptionEmailAsync(
                 inscriptionForm.NomEnfant,
@@ -109,13 +94,7 @@ public class InscriptionFunction
             var successResponse = new ApiResponse<object>
             {
                 Success = true,
-                Message = "Votre inscription a été envoyée avec succès ! Nous vous contacterons bientôt pour finaliser l'inscription.",
-                Data = new
-                {
-                    Age = inscriptionForm.Age,
-                    CategorieCalculee = categorieCalculee,
-                    CategorieCorrecte = categorieCorrecte
-                }
+                Message = "Votre inscription a été envoyée avec succès ! Nous vous contacterons bientôt pour finaliser l'inscription."
             };
 
             await response.WriteStringAsync(JsonSerializer.Serialize(successResponse));

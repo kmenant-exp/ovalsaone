@@ -27,7 +27,7 @@
         "build"
       ],
       "options": {
-        "cwd": "${workspaceFolder}/api"
+        "cwd": "${workspaceFolder}/src/api"
       },
       "group": "build",
       "presentation": {
@@ -47,7 +47,7 @@
         "--verbose"
       ],
       "options": {
-        "cwd": "${workspaceFolder}/api"
+        "cwd": "${workspaceFolder}/src/api"
       },
       "isBackground": true,
       "presentation": {
@@ -94,9 +94,11 @@
       "args": [
         "swa",
         "start",
-        ".",
+        "src",
         "--api-location",
-        "api",
+        "src/api",
+        "--host",
+        "127.0.0.1",
         "--port",
         "4280"
       ],
@@ -144,7 +146,7 @@
         "clean"
       ],
       "options": {
-        "cwd": "${workspaceFolder}/api"
+        "cwd": "${workspaceFolder}/src/api"
       },
       "group": "build",
       "presentation": {

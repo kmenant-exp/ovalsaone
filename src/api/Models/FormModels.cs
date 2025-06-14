@@ -60,10 +60,6 @@ public class InscriptionFormModel
     [Phone(ErrorMessage = "Le numéro de téléphone n'est pas valide")]
     public string Telephone { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "Vous devez accepter les conditions")]
-    [Range(typeof(bool), "true", "true", ErrorMessage = "Vous devez accepter les conditions d'inscription")]
-    public bool AccepteConditions { get; set; }
-
     public string? Commentaires { get; set; }
 
     public int Age { get; set; }
