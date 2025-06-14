@@ -52,101 +52,145 @@
         </div>
     </section>
 
-    <!-- Section Tarifs -->
-    <section class="tarifs section">
+    <!-- Section principale d'inscription -->
+    <section class="inscription-main">
         <div class="container">
-            <div class="tarifs-card">
-                <h2>Tarifs Saison 2024-2025</h2>
-                <div class="tarifs-grid" id="tarifs-grid">
-                    <!-- Les tarifs seront chargés dynamiquement -->
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Formulaire d'inscription -->
-    <section class="inscription-form section">
-        <div class="container">
-            <div class="form-card">
-                <h2>Formulaire d'inscription</h2>
-                <form id="inscription-form" class="form">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="nom-enfant">Nom de l'enfant *</label>
-                            <input type="text" id="nom-enfant" name="nomEnfant" required>
+            <div class="inscription-layout">
+                <!-- Sidebar avec informations -->
+                <aside class="inscription-sidebar">
+                    <!-- Tarif -->
+                    <div class="info-card">
+                        <div class="info-header">
+                            <i class="fas fa-euro-sign"></i>
+                            <h3>Tarif unique</h3>
                         </div>
-                        <div class="form-group">
-                            <label for="prenom-enfant">Prénom de l'enfant *</label>
-                            <input type="text" id="prenom-enfant" name="prenomEnfant" required>
+                        <div class="info-content" id="tarifs-content">
+                            <!-- Chargé dynamiquement -->
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="date-naissance">Date de naissance *</label>
-                            <input type="date" id="date-naissance" name="dateNaissance" required>
+                    <!-- Documents essentiels -->
+                    <div class="info-card">
+                        <div class="info-header">
+                            <i class="fas fa-file-alt"></i>
+                            <h3>Documents requis</h3>
                         </div>
-                        <div class="form-group">
-                            <label for="categorie">Catégorie d'âge *</label>
-                            <select id="categorie" name="categorie" required>
-                                <option value="">Sélectionner une catégorie</option>
-                                <option value="U6">U6 (moins de 6 ans)</option>
-                                <option value="U8">U8 (moins de 8 ans)</option>
-                                <option value="U10">U10 (moins de 10 ans)</option>
-                                <option value="U12">U12 (moins de 12 ans)</option>
-                                <option value="U14">U14 (moins de 14 ans)</option>
-                            </select>
+                        <div class="info-content">
+                            <ul class="document-list" id="documents-list">
+                                <!-- Chargé dynamiquement -->
+                            </ul>
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="nom-responsable">Nom du responsable légal *</label>
-                            <input type="text" id="nom-responsable" name="nomResponsable" required>
+                    <!-- Contact -->
+                    <div class="info-card">
+                        <div class="info-header">
+                            <i class="fas fa-phone"></i>
+                            <h3>Besoin d'aide ?</h3>
                         </div>
-                        <div class="form-group">
-                            <label for="prenom-responsable">Prénom du responsable légal *</label>
-                            <input type="text" id="prenom-responsable" name="prenomResponsable" required>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="email">Email *</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="telephone">Téléphone *</label>
-                            <input type="tel" id="telephone" name="telephone" required>
+                        <div class="info-content">
+                            <p><i class="fas fa-envelope"></i> edr.ovalsaone@gmail.com</p>
+                            <p><i class="fas fa-phone"></i> 06 83 62 27 10</p>
                         </div>
                     </div>
+                </aside>
 
-                    <div class="form-group checkbox-group">
-                        <input type="checkbox" id="accepte-conditions" name="accepteConditions" required>
-                        <label for="accepte-conditions">J'accepte les conditions d'inscription et le règlement intérieur du club *</label>
+                <!-- Formulaire principal -->
+                <main class="inscription-form-main">
+                    <div class="form-container">
+                        <div class="form-header">
+                            <h2>Formulaire d'inscription</h2>
+                            <p>Complétez les informations ci-dessous pour inscrire votre enfant</p>
+                        </div>
+
+                        <form id="inscription-form" class="modern-form">
+                            <!-- Section Enfant -->
+                            <fieldset class="form-section">
+                                <legend>
+                                    <i class="fas fa-child"></i>
+                                    Informations de l'enfant
+                                </legend>
+                                
+                                <div class="form-grid">
+                                    <div class="form-field">
+                                        <label for="prenom-enfant">Prénom *</label>
+                                        <input type="text" id="prenom-enfant" name="prenomEnfant" required placeholder="Prénom de l'enfant">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="nom-enfant">Nom *</label>
+                                        <input type="text" id="nom-enfant" name="nomEnfant" required placeholder="Nom de famille">
+                                    </div>
+                                </div>
+
+                                <div class="form-grid">
+                                    <div class="form-field">
+                                        <label for="date-naissance">Date de naissance *</label>
+                                        <input type="date" id="date-naissance" name="dateNaissance" required>
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="categorie">Catégorie d'âge *</label>
+                                        <select id="categorie" name="categorie" required>
+                                            <option value="">Sélectionner une catégorie</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <!-- Section Responsable -->
+                            <fieldset class="form-section">
+                                <legend>
+                                    <i class="fas fa-user"></i>
+                                    Responsable légal
+                                </legend>
+                                
+                                <div class="form-grid">
+                                    <div class="form-field">
+                                        <label for="prenom-responsable">Prénom *</label>
+                                        <input type="text" id="prenom-responsable" name="prenomResponsable" required placeholder="Votre prénom">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="nom-responsable">Nom *</label>
+                                        <input type="text" id="nom-responsable" name="nomResponsable" required placeholder="Votre nom">
+                                    </div>
+                                </div>
+
+                                <div class="form-grid">
+                                    <div class="form-field">
+                                        <label for="email">Email *</label>
+                                        <input type="email" id="email" name="email" required placeholder="votre.email@exemple.com">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="telephone">Téléphone *</label>
+                                        <input type="tel" id="telephone" name="telephone" required placeholder="06 12 34 56 78">
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <!-- Section Validation -->
+                            <fieldset class="form-section">
+                                <legend>
+                                    <i class="fas fa-check-circle"></i>
+                                    Validation
+                                </legend>
+                                
+                                <div class="form-field checkbox-field">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="accepte-conditions" name="accepteConditions" required>
+                                        <span class="checkmark"></span>
+                                        J'accepte les conditions d'inscription et le règlement intérieur du club *
+                                    </label>
+                                </div>
+                            </fieldset>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn-submit">
+                                    <i class="fas fa-paper-plane"></i>
+                                    Envoyer l'inscription
+                                </button>
+                            </div>
+                        </form>
                     </div>
-
-                    <button type="submit" class="btn btn-primary btn-large">Envoyer l'inscription</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Documents -->
-    <section class="documents section bg-light">
-        <div class="container">
-            <h2>Documents nécessaires</h2>
-            <div class="documents-grid" id="documents-grid">
-                <!-- Les documents seront chargés dynamiquement -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Procédure -->
-    <section class="procedure section">
-        <div class="container">
-            <div id="procedure-info">
-                <!-- Les informations de procédure seront chargées dynamiquement -->
+                </main>
             </div>
         </div>
     </section>
@@ -189,6 +233,6 @@
 
     <script src="js/main.js"></script>
     <script src="js/data-loader.js"></script>
-    <script src="js/inscription.js"></script>
+    <script src="js/inscription-modern.js"></script>
 </body>
 </html>

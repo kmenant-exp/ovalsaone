@@ -1,204 +1,391 @@
-/* Styles spécifiques à la page Inscription */
+/* Page d'inscription moderne - Styles simplifiés et épurés */
 
-/* Section Inscription */
-.inscription-form {
-    background: var(--white);
+/* Layout principal */
+.inscription-main {
+    padding: 3rem 0;
+    background: linear-gradient(to bottom, #f8fafc 0%, #ffffff 100%);
+    min-height: 100vh;
 }
 
-/* Styles pour les tarifs */
-.tarifs-card {
-    background: var(--white);
-    border-radius: var(--border-radius-lg);
-    padding: var(--spacing-8);
-    box-shadow: var(--shadow-lg);
-    margin: var(--spacing-8) 0;
-}
-
-.tarifs-card h2 {
-    color: var(--primary-color);
-    font-size: var(--font-size-2xl);
-    font-weight: 700;
-    margin-bottom: var(--spacing-6);
-    text-align: center;
-}
-
-.tarifs-grid {
+.inscription-layout {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--spacing-6);
+    grid-template-columns: 300px 1fr;
+    gap: 3rem;
+    align-items: start;
 }
 
-.tarif-card {
-    background: linear-gradient(135deg, var(--white) 0%, #f8f9ff 100%);
-    border: 2px solid var(--gray-200);
-    border-radius: var(--border-radius-lg);
+/* Sidebar avec informations */
+.inscription-sidebar {
+    position: sticky;
+    top: 2rem;
+}
+
+.info-card {
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    margin-bottom: 1.5rem;
     overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
-    position: relative;
 }
 
-.tarif-card:hover {
-    border-color: var(--accent-color);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(44, 85, 48, 0.15);
+.info-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
-.tarif-header {
+.info-header {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: var(--white);
-    padding: var(--spacing-5);
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.info-header i {
+    font-size: 1.25rem;
+}
+
+.info-header h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.info-content {
+    padding: 1.25rem;
+}
+
+/* Tarif dans la sidebar */
+.price-display {
     text-align: center;
-    position: relative;
+    margin-bottom: 1rem;
 }
 
-.tarif-title {
-    font-size: var(--font-size-lg);
-    font-weight: 700;
-    margin: 0 0 var(--spacing-2) 0;
-}
-
-.tarif-prix {
-    display: block;
-    font-size: var(--font-size-3xl);
-    font-weight: 700;
-    margin: var(--spacing-2) 0;
-}
-
-.tarif-age {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.2);
-    padding: var(--spacing-1) var(--spacing-3);
-    border-radius: var(--border-radius-full);
-    font-size: var(--font-size-sm);
-    font-weight: 600;
-}
-
-.tarif-content {
-    padding: var(--spacing-5);
-}
-
-.tarif-description {
-    color: var(--gray-700);
-    line-height: 1.6;
-    margin-bottom: var(--spacing-4);
-}
-
-.tarif-reductions {
-    background: rgba(143, 188, 143, 0.1);
-    padding: var(--spacing-4);
-    border-radius: var(--border-radius);
-    border: 1px solid rgba(143, 188, 143, 0.2);
-}
-
-.tarif-reductions h5 {
+.price-amount {
+    font-size: 2.5rem;
+    font-weight: 800;
     color: var(--primary-color);
-    font-size: var(--font-size-sm);
-    font-weight: 600;
-    margin: 0 0 var(--spacing-2) 0;
+    line-height: 1;
 }
 
-.tarif-reductions ul {
+.price-description {
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+/* Liste de documents simplifiée */
+.document-list {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.tarif-reductions li {
+.document-list li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.875rem;
     color: var(--gray-700);
-    font-size: var(--font-size-sm);
-    padding: var(--spacing-1) 0;
-    border-bottom: 1px solid rgba(143, 188, 143, 0.1);
 }
 
-.tarif-reductions li:last-child {
+.document-list li:last-child {
     border-bottom: none;
 }
 
-/* Styles pour les formulaires */
-.form-card {
-    background: var(--white);
-    border-radius: var(--border-radius-lg);
-    padding: var(--spacing-8);
-    box-shadow: var(--shadow-lg);
-    margin: var(--spacing-8) 0;
-}
-
-.form-card h2 {
+.document-list li i {
     color: var(--primary-color);
-    font-size: var(--font-size-2xl);
-    font-weight: 700;
-    margin-bottom: var(--spacing-6);
-    text-align: center;
+    width: 16px;
 }
 
-.form {
+/* Contact dans sidebar */
+.info-content p {
     display: flex;
-    flex-direction: column;
-    gap: var(--spacing-5);
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0.75rem 0;
+    font-size: 0.875rem;
+    color: var(--gray-700);
 }
 
-.form-row {
+.info-content p i {
+    color: var(--primary-color);
+    width: 16px;
+}
+
+/* Formulaire principal moderne */
+.inscription-form-main {
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.form-container {
+    padding: 2.5rem;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.form-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+}
+
+.form-header p {
+    color: var(--gray-600);
+    font-size: 1.125rem;
+}
+
+/* Sections du formulaire */
+.form-section {
+    border: none;
+    margin: 0 0 2rem 0;
+    padding: 1.5rem;
+    background: rgba(248, 250, 252, 0.5);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.form-section legend {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--white);
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.form-section legend i {
+    font-size: 1rem;
+}
+
+/* Grille du formulaire */
+.form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-4);
+    gap: 1.5rem;
+    margin-top: 1.5rem;
 }
 
-.form-group {
+.form-field {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-2);
 }
 
-/* Style pour aligner correctement la case à cocher avec son texte */
-.checkbox-group {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: var(--spacing-3);
-}
-
-.checkbox-group input[type="checkbox"] {
-    margin-top: 0.25rem;
-}
-
-.checkbox-group label {
-    flex: 1;
-    line-height: 1.5;
-}
-
-.form-group label {
-    color: var(--gray-700);
+.form-field label {
     font-weight: 600;
-    font-size: var(--font-size-sm);
+    color: var(--gray-700);
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
-    padding: var(--spacing-3);
-    border: 2px solid var(--gray-200);
-    border-radius: var(--border-radius);
-    font-size: var(--font-size-base);
-    transition: all 0.3s ease;
+.form-field input,
+.form-field select {
+    padding: 0.875rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
     background: var(--white);
+    font-family: inherit;
 }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
+.form-field input:focus,
+.form-field select:focus {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(44, 85, 48, 0.1);
+    transform: translateY(-1px);
 }
 
-/* Styles d'erreur seulement après interaction */
-.form-group.touched input:not(:focus):not(:placeholder-shown):invalid,
-.form-group.touched select:not(:focus):invalid:not([value=""]),
-.form-group.touched textarea:not(:focus):not(:placeholder-shown):invalid {
-    border-color: var(--danger-color);
+.form-field input::placeholder {
+    color: #9ca3af;
+    font-style: italic;
 }
 
-/* Styles de succès après saisie valide */
+/* Validation states */
+.form-field input:valid:not(:placeholder-shown) {
+    border-color: #10b981;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2310b981'%3e%3cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clip-rule='evenodd'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+    padding-right: 2.5rem;
+}
+
+.form-field input:invalid:not(:placeholder-shown):not(:focus) {
+    border-color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.05);
+}
+
+/* Checkbox moderne */
+.checkbox-field {
+    margin-top: 1rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--gray-700);
+}
+
+.checkbox-label input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 4px;
+    background: var(--white);
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    margin-top: 2px;
+    position: relative;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Bouton d'envoi moderne */
+.form-actions {
+    margin-top: 2.5rem;
+    text-align: center;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 12px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.02em;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+/* Message de statut moderne */
+.form-status {
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    text-align: center;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.form-status.success {
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    color: #065f46;
+    border-color: #10b981;
+}
+
+.form-status.error {
+    background: linear-gradient(135deg, #fef2f2, #fecaca);
+    color: #991b1b;
+    border-color: #ef4444;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .inscription-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .inscription-sidebar {
+        position: static;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+    }
+    
+    .info-card {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .inscription-main {
+        padding: 2rem 0;
+    }
+    
+    .form-container {
+        padding: 1.5rem;
+    }
+    
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .form-section {
+        padding: 1rem;
+    }
+    
+    .inscription-sidebar {
+        grid-template-columns: 1fr;
+    }
+    
+    .btn-submit {
+        width: 100%;
+        justify-content: center;
+    }
+}
 .form-group.touched input:not(:focus):not(:placeholder-shown):valid,
 .form-group.touched select:not(:focus):valid:not([value=""]),
 .form-group.touched textarea:not(:focus):not(:placeholder-shown):valid {
