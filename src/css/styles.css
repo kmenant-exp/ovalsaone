@@ -2957,114 +2957,7 @@ ul, ol {
     }
 }
 
-/* Styles pour la page Contact */
-.contact-info {
-    background: var(--white);
-}
 
-.contact-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--spacing-6);
-}
-
-.contact-card {
-    background: linear-gradient(135deg, var(--white) 0%, #f8f9ff 100%);
-    padding: var(--spacing-8);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-md);
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-    position: relative;
-    overflow: hidden;
-}
-
-.contact-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--dark-color), var(--primary-color), var(--accent-color));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-}
-
-.contact-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(44, 85, 48, 0.15);
-    border-color: var(--accent-color);
-}
-
-.contact-card:hover::before {
-       transform: scaleX(1);
-}
-
-.contact-card i {
-    font-size: var(--font-size-3xl);
-    color: var(--primary-color);
-    margin-bottom: var(--spacing-4);
-    display: block;
-}
-
-.contact-card h3 {
-    color: var(--primary-color);
-    font-size: var(--font-size-xl);
-    font-weight: 700;
-    margin: 0 0 var(--spacing-4) 0;
-}
-
-.contact-card p {
-    color: var(--gray-700);
-    line-height: 1.6;
-    margin: 0;
-}
-
-.contact-card a {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-}
-
-.contact-card a:hover {
-    color: var(--dark-color);
-    text-decoration: underline;
-}
-
-/* Section Map */
-.map-section {
-    background: var(--gray-100);
-    padding: 0;
-    margin: 0;
-}
-
-.map-placeholder {
-    height: 400px;
-    background: var(--gray-200);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: var(--gray-600);
-    text-align: center;
-    padding: var(--spacing-8);
-}
-
-.map-placeholder p {
-    font-size: var(--font-size-lg);
-    font-weight: 600;
-    margin: 0 0 var(--spacing-2) 0;
-    color: var(--gray-700);
-}
-
-.map-placeholder small {
-    font-size: var(--font-size-sm);
-    color: var(--gray-500);
-    font-style: italic;
-}
 
 /* Styles pour les messages de statut des formulaires */
 .form-status {
@@ -3096,32 +2989,7 @@ ul, ol {
     border-color: rgba(226, 160, 63, 0.3);
 }
 
-/* Responsive pour la page contact */
-@media (max-width: 768px) {
-    .contact-grid {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-4);
-    }
-    
-    .contact-card {
-        padding: var(--spacing-6);
-    }
-    
-    .contact-card i {
-        font-size: var(--font-size-2xl);
-        margin-bottom: var(--spacing-3);
-    }
-    
-    .contact-card h3 {
-        font-size: var(--font-size-lg);
-        margin-bottom: var(--spacing-3);
-    }
-    
-    .map-placeholder {
-        height: 300px;
-        padding: var(--spacing-6);
-    }
-}
+
 
 /* Section Sponsors */
 .sponsors {
