@@ -21,9 +21,9 @@ function renderPartenariatData(data) {
         renderSponsors(data.sponsors);
     }
     
-    // Charger les niveaux de partenariat
-    if (data.sponsoring && data.sponsoring.niveaux) {
-        renderNiveauxPartenariat(data.sponsoring.niveaux);
+    // Charger le call-to-action partenariat
+    if (data.sponsoring && data.sponsoring.call_to_action) {
+        renderCallToActionPartenariat(data.sponsoring.call_to_action);
     }
     
     // Charger les avantages fiscaux
@@ -63,29 +63,36 @@ function renderSponsors(sponsors) {
     });
 }
 
-function renderNiveauxPartenariat(niveaux) {
-    const container = document.getElementById('niveaux-partenariat');
+function renderCallToActionPartenariat(ctaData) {
+    const container = document.getElementById('cta-partenariat');
     if (!container) return;
 
-    container.innerHTML = '';
-    
-    niveaux.forEach(niveau => {
-        const niveauCard = document.createElement('div');
-        niveauCard.className = `niveau-card ${getSponsorLevelClass(niveau.nom)}`;
-        niveauCard.innerHTML = `
-            <div class="niveau-header">
-                <h3 class="niveau-nom">${niveau.nom}</h3>
-                <span class="niveau-montant">${niveau.montant}</span>
-            </div>
-            <div class="niveau-avantages">
-                <h4>Avantages inclus :</h4>
-                <ul>
-                    ${niveau.avantages.map(avantage => `<li>✓ ${avantage}</li>`).join('')}
-                </ul>
-            </div>
-        `;
-        container.appendChild(niveauCard);
-    });
+    container.innerHTML = `
+        <div class="cta-header">
+            <h3>${ctaData.titre}</h3>
+            <h4 class="cta-sous-titre">${ctaData.sous_titre}</h4>
+            <p class="cta-description">${ctaData.description}</p>
+        </div>
+        
+        <div class="avantages-grid">
+            ${ctaData.avantages.map(avantage => `
+                <div class="avantage-item">
+                    <div class="avantage-icone">${avantage.icone}</div>
+                    <div class="avantage-content">
+                        <h5>${avantage.titre}</h5>
+                        <p>${avantage.description}</p>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+        
+        <div class="cta-action">
+            <a href="${ctaData.bouton_lien}" class="btn btn-primary btn-large">
+                <i class="fas fa-handshake"></i>
+                ${ctaData.bouton_texte}
+            </a>
+        </div>
+    `;
 }
 
 function renderAvantagesFiscaux(data) {

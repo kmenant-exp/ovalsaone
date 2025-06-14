@@ -57,38 +57,45 @@
   "sponsoring": {
     "description": "Notre club recherche des partenaires pour nous accompagner dans notre développement et le financement de nos activités. En devenant partenaire, vous soutenez le sport local et bénéficiez d'une visibilité auprès de notre communauté.",
     "contact": "Michel Dubois - Président (president@rugbyclub.fr - 06 12 34 56 78)",
-    "niveaux": [
-      {
-        "nom": "Partenaire Bronze",
-        "montant": "200€ - 500€",
-        "avantages": [
-          "Logo sur le site internet",
-          "Mention dans le bulletin du club",
-          "Invitation aux événements"
-        ]
-      },
-      {
-        "nom": "Sponsor Argent",
-        "montant": "500€ - 1500€",
-        "avantages": [
-          "Logo sur les maillots d'entraînement",
-          "Bannière au stade",
-          "Logo sur le site internet (taille moyenne)",
-          "Invitation VIP aux matchs"
-        ]
-      },
-      {
-        "nom": "Sponsor Or",
-        "montant": "1500€ et plus",
-        "avantages": [
-          "Logo sur les maillots de match",
-          "Bannière premium au stade",
-          "Logo sur le site internet (grande taille)",
-          "Naming d'événements",
-          "Hospitalité VIP complète"
-        ]
-      }
-    ],
+    "call_to_action": {
+      "titre": "Rejoignez l'aventure Oval Saône !",
+      "sous_titre": "Votre entreprise peut faire la différence",
+      "description": "En devenant partenaire d'Oval Saône, vous investissez dans l'avenir du rugby local et bénéficiez d'une visibilité unique auprès de notre communauté passionnée.",
+      "avantages": [
+        {
+          "icone": "🏟️",
+          "titre": "Visibilité au stade",
+          "description": "Votre logo affiché lors de nos matchs et événements"
+        },
+        {
+          "icone": "💼",
+          "titre": "Networking local",
+          "description": "Accès privilégié à notre réseau d'entreprises partenaires"
+        },
+        {
+          "icone": "🌟",
+          "titre": "Image de marque",
+          "description": "Association à des valeurs sportives et de dépassement"
+        },
+        {
+          "icone": "📱",
+          "titre": "Présence digitale",
+          "description": "Mise en avant sur notre site web et réseaux sociaux"
+        },
+        {
+          "icone": "🤝",
+          "titre": "Engagement local",
+          "description": "Soutien concret au développement du sport dans la région"
+        },
+        {
+          "icone": "💰",
+          "titre": "Avantages fiscaux",
+          "description": "Déduction fiscale selon la réglementation en vigueur"
+        }
+      ],
+      "bouton_texte": "Devenir Partenaire",
+      "bouton_lien": "contact.html?sujet=partenariat"
+    },
     "avantages_fiscaux": "Les entreprises peuvent déduire 60% de leur don de leur impôt sur les sociétés, dans la limite de 5‰ du chiffre d'affaires."
   },
   "dons": {
