@@ -217,16 +217,6 @@
     transition: transform 0.3s ease;
 }
 
-.actualite-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(44, 85, 48, 0.15);
-    border-color: rgba(44, 85, 48, 0.2);
-}
-
-.actualite-card:hover::before {
-    transform: scaleX(1);
-}
-
 .actualite-image {
     position: relative;
     overflow: hidden;

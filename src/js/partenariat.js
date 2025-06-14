@@ -1,140 +1,117 @@
-// Script pour la page Partenariat
-document.addEventListener('DOMContentLoaded', async function() {
+// JavaScript spécifique à la page partenariat
+document.addEventListener('DOMContentLoaded', async () => {
     const dataLoader = new DataLoader();
-    
-    try {
-        // Charger les données de partenariat
-        const partenariatData = await dataLoader.loadPartenariat();
-        
-        if (partenariatData) {
-            // Charger les sponsors détaillés
-            loadSponsorsDetail(partenariatData.sponsors);
-            
-            // Charger le contenu du sponsoring
-            loadSponsoringContent(partenariatData.sponsoring);
-            
-            // Charger le contenu des dons
-            loadDonsContent(partenariatData.dons);
-        } else {
-            console.error('Impossible de charger les données de partenariat');
-            showError('Erreur lors du chargement des données de partenariat');
-        }
-    } catch (error) {
-        console.error('Erreur:', error);
-        showError('Erreur lors du chargement de la page');
-    }
+    await loadPartenariatData(dataLoader);
 });
 
-function loadSponsorsDetail(sponsors) {
-    const sponsorsGrid = document.getElementById('sponsors-detail-grid');
-    
-    if (!sponsorsGrid) {
-        console.error('Élément sponsors-detail-grid non trouvé');
-        return;
+async function loadPartenariatData(dataLoader) {
+    try {
+        const partenariatData = await dataLoader.loadPartenariat();
+        if (partenariatData) {
+            renderPartenariatData(partenariatData);
+        }
+    } catch (error) {
+        console.error('Erreur lors du chargement des données de partenariat:', error);
+    }
+}
+
+function renderPartenariatData(data) {
+    // Charger les sponsors actuels
+    if (data.sponsors) {
+        renderSponsors(data.sponsors);
     }
     
-    sponsorsGrid.innerHTML = '';
+    // Charger le call-to-action partenariat
+    if (data.sponsoring && data.sponsoring.call_to_action) {
+        renderCallToActionPartenariat(data.sponsoring.call_to_action);
+    }
+    
+    // Charger les avantages fiscaux
+    if (data.sponsoring && data.sponsoring.avantages_fiscaux) {
+        renderAvantagesFiscaux(data);
+    }
+}
+
+function renderSponsors(sponsors) {
+    const container = document.getElementById('sponsors-list');
+    if (!container) return;
+
+    container.innerHTML = '';
     
     sponsors.forEach(sponsor => {
         const sponsorCard = document.createElement('div');
-        sponsorCard.className = 'sponsor-detail-card';
-        
+        sponsorCard.className = 'sponsor-card';
         sponsorCard.innerHTML = `
-            <div class="sponsor-header">
-                <img src="${sponsor.logo}" alt="${sponsor.nom}" class="sponsor-logo">
-                <div class="sponsor-info">
-                    <h3>${sponsor.nom}</h3>
-                    <span class="sponsor-niveau ${getSponsorLevelClass(sponsor.niveau)}">${sponsor.niveau}</span>
-                </div>
+            <div class="sponsor-logo">
+                <img src="${sponsor.logo}" alt="${sponsor.nom}" onerror="this.src='assets/logo.png'">
             </div>
-            <div class="sponsor-content">
+            <div class="sponsor-info">
+                <h3 class="sponsor-name">${sponsor.nom}</h3>
                 <p class="sponsor-description">${sponsor.description}</p>
                 <div class="sponsor-details">
-                    <div class="sponsor-contact">
-                        ${sponsor.website ? `<p><i class="fas fa-globe"></i> <a href="${sponsor.website}" target="_blank">Site web</a></p>` : ''}
-                        ${sponsor.telephone ? `<p><i class="fas fa-phone"></i> ${sponsor.telephone}</p>` : ''}
-                        ${sponsor.email ? `<p><i class="fas fa-envelope"></i> <a href="mailto:${sponsor.email}">${sponsor.email}</a></p>` : ''}
-                        ${sponsor.adresse ? `<p><i class="fas fa-map-marker-alt"></i> ${sponsor.adresse}</p>` : ''}
-                    </div>
-                    <div class="sponsor-partnership">
-                        <p><i class="fas fa-handshake"></i> Partenaire depuis ${sponsor.partenariat_depuis}</p>
-                    </div>
+                    ${sponsor.website ? `<a href="${sponsor.website}" target="_blank" class="sponsor-link">🌐 Site web</a>` : ''}
+                    ${sponsor.telephone ? `<span class="sponsor-phone">📞 ${sponsor.telephone}</span>` : ''}
+                    ${sponsor.email ? `<a href="mailto:${sponsor.email}" class="sponsor-email">✉️ Email</a>` : ''}
+                </div>
+                <div class="sponsor-partenariat">
+                    Partenaire depuis ${sponsor.partenariat_depuis}
                 </div>
             </div>
         `;
-        
-        sponsorsGrid.appendChild(sponsorCard);
+        container.appendChild(sponsorCard);
     });
 }
 
-function loadSponsoringContent(sponsoring) {
-    const sponsoringContent = document.getElementById('sponsoring-content');
-    
-    if (!sponsoringContent) {
-        console.error('Élément sponsoring-content non trouvé');
-        return;
-    }
-    
-    sponsoringContent.innerHTML = `
-        <div class="sponsoring-description">
-            <p>${sponsoring.description}</p>
+function renderCallToActionPartenariat(ctaData) {
+    const container = document.getElementById('cta-partenariat');
+    if (!container) return;
+
+    container.innerHTML = `
+        <div class="cta-header">
+            <h3>${ctaData.titre}</h3>
+            <h4 class="cta-sous-titre">${ctaData.sous_titre}</h4>
+            <p class="cta-description">${ctaData.description}</p>
         </div>
         
-        <div class="sponsoring-niveaux">
-            <h3>Niveaux de partenariat</h3>
-            <div class="niveaux-grid">
-                ${sponsoring.niveaux.map(niveau => `
-                    <div class="niveau-card ${getSponsorLevelClass(niveau.nom)}">
-                        <h4>${niveau.nom}</h4>
-                        <p class="niveau-montant">${niveau.montant}</p>
-                        <ul class="niveau-avantages">
-                            ${niveau.avantages.map(avantage => `<li>${avantage}</li>`).join('')}
-                        </ul>
+        <div class="avantages-grid">
+            ${ctaData.avantages.map(avantage => `
+                <div class="avantage-item">
+                    <div class="avantage-icone">${avantage.icone}</div>
+                    <div class="avantage-content">
+                        <h5>${avantage.titre}</h5>
+                        <p>${avantage.description}</p>
                     </div>
-                `).join('')}
-            </div>
+                </div>
+            `).join('')}
         </div>
         
-        <div class="sponsoring-fiscalite">
-            <h3>Avantages fiscaux</h3>
-            <p><i class="fas fa-calculator"></i> ${sponsoring.avantages_fiscaux}</p>
-        </div>
-        
-        <div class="sponsoring-contact">
-            <h3>Contact partenariat</h3>
-            <p><i class="fas fa-user"></i> ${sponsoring.contact}</p>
-        </div>
-        
-        <div class="sponsoring-actions">
-            <a href="contact.html" class="btn btn-primary">
+        <div class="cta-action">
+            <a href="${ctaData.bouton_lien}" class="btn btn-primary btn-large">
                 <i class="fas fa-handshake"></i>
-                Devenir partenaire
+                ${ctaData.bouton_texte}
             </a>
         </div>
     `;
 }
 
-function loadDonsContent(dons) {
-    const donsContent = document.getElementById('dons-content');
-    
-    if (!donsContent) {
-        console.error('Élément dons-content non trouvé');
-        return;
-    }
-    
-    donsContent.innerHTML = `
-        <div class="dons-description">
-            <p>${dons.description}</p>
-        </div>
-        
-        <div class="dons-utilisation">
-            <h3>À quoi servent vos dons ?</h3>
-            <p><i class="fas fa-info-circle"></i> ${dons.utilisation}</p>
-        </div>
-        
-        <div class="dons-fiscalite">
-            <h3>Avantages fiscaux</h3>
-            <p><i class="fas fa-calculator"></i> ${dons.avantages_fiscaux}</p>
+function renderAvantagesFiscaux(data) {
+    const container = document.getElementById('avantages-fiscaux');
+    if (!container) return;
+
+    container.innerHTML = `
+        <div class="avantages-fiscaux-content">
+            <h3>Avantages Fiscaux</h3>
+            <div class="avantages-grid">
+                <div class="avantage-fiscal">
+                    <h4>🏢 Pour les Entreprises</h4>
+                    <p>${data.sponsoring.avantages_fiscaux}</p>
+                </div>
+                ${data.dons && data.dons.avantages_fiscaux ? `
+                <div class="avantage-fiscal">
+                    <h4>👤 Pour les Particuliers</h4>
+                    <p>${data.dons.avantages_fiscaux}</p>
+                </div>` : ''}
+            </div>
         </div>
     `;
 }
@@ -150,21 +127,4 @@ function getSponsorLevelClass(niveau) {
         default:
             return 'niveau-bronze';
     }
-}
-
-function showError(message) {
-    const sponsorsGrid = document.getElementById('sponsors-detail-grid');
-    const sponsoringContent = document.getElementById('sponsoring-content');
-    const donsContent = document.getElementById('dons-content');
-    
-    const errorHTML = `
-        <div class="error-message">
-            <i class="fas fa-exclamation-triangle"></i>
-            <p>${message}</p>
-        </div>
-    `;
-    
-    if (sponsorsGrid) sponsorsGrid.innerHTML = errorHTML;
-    if (sponsoringContent) sponsoringContent.innerHTML = errorHTML;
-    if (donsContent) donsContent.innerHTML = errorHTML;
 }
