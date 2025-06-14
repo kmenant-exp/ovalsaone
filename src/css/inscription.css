@@ -1,0 +1,479 @@
+/* Styles spécifiques à la page Inscription */
+
+/* Section Inscription */
+.inscription-form {
+    background: var(--white);
+}
+
+/* Styles pour les tarifs */
+.tarifs-card {
+    background: var(--white);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-8);
+    box-shadow: var(--shadow-lg);
+    margin: var(--spacing-8) 0;
+}
+
+.tarifs-card h2 {
+    color: var(--primary-color);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-6);
+    text-align: center;
+}
+
+.tarifs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-6);
+}
+
+.tarif-card {
+    background: linear-gradient(135deg, var(--white) 0%, #f8f9ff 100%);
+    border: 2px solid var(--gray-200);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.tarif-card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(44, 85, 48, 0.15);
+}
+
+.tarif-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    padding: var(--spacing-5);
+    text-align: center;
+    position: relative;
+}
+
+.tarif-title {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    margin: 0 0 var(--spacing-2) 0;
+}
+
+.tarif-prix {
+    display: block;
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    margin: var(--spacing-2) 0;
+}
+
+.tarif-age {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    padding: var(--spacing-1) var(--spacing-3);
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+}
+
+.tarif-content {
+    padding: var(--spacing-5);
+}
+
+.tarif-description {
+    color: var(--gray-700);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-4);
+}
+
+.tarif-reductions {
+    background: rgba(143, 188, 143, 0.1);
+    padding: var(--spacing-4);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(143, 188, 143, 0.2);
+}
+
+.tarif-reductions h5 {
+    color: var(--primary-color);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    margin: 0 0 var(--spacing-2) 0;
+}
+
+.tarif-reductions ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tarif-reductions li {
+    color: var(--gray-700);
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-1) 0;
+    border-bottom: 1px solid rgba(143, 188, 143, 0.1);
+}
+
+.tarif-reductions li:last-child {
+    border-bottom: none;
+}
+
+/* Styles pour les formulaires */
+.form-card {
+    background: var(--white);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-8);
+    box-shadow: var(--shadow-lg);
+    margin: var(--spacing-8) 0;
+}
+
+.form-card h2 {
+    color: var(--primary-color);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-6);
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-5);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-4);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+/* Style pour aligner correctement la case à cocher avec son texte */
+.checkbox-group {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--spacing-3);
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-top: 0.25rem;
+}
+
+.checkbox-group label {
+    flex: 1;
+    line-height: 1.5;
+}
+
+.form-group label {
+    color: var(--gray-700);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: var(--spacing-3);
+    border: 2px solid var(--gray-200);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-base);
+    transition: all 0.3s ease;
+    background: var(--white);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(44, 85, 48, 0.1);
+}
+
+/* Styles d'erreur seulement après interaction */
+.form-group.touched input:not(:focus):not(:placeholder-shown):invalid,
+.form-group.touched select:not(:focus):invalid:not([value=""]),
+.form-group.touched textarea:not(:focus):not(:placeholder-shown):invalid {
+    border-color: var(--danger-color);
+}
+
+/* Styles de succès après saisie valide */
+.form-group.touched input:not(:focus):not(:placeholder-shown):valid,
+.form-group.touched select:not(:focus):valid:not([value=""]),
+.form-group.touched textarea:not(:focus):not(:placeholder-shown):valid {
+    border-color: var(--success-color);
+}
+
+/* Styles spéciaux pour les champs obligatoires */
+.form-group.touched input[required]:not(:focus):not(:placeholder-shown):invalid,
+.form-group.touched select[required]:not(:focus):invalid:not([value=""]),
+.form-group.touched textarea[required]:not(:focus):not(:placeholder-shown):invalid {
+    border-color: var(--danger-color);
+    background-color: rgba(239, 68, 68, 0.05);
+}
+
+/* Reset des styles pour les champs vides non touchés */
+.form-group input:placeholder-shown,
+.form-group select[value=""],
+.form-group textarea:placeholder-shown {
+    border-color: var(--gray-200);
+    background-color: var(--white);
+}
+
+/* Styles pour les documents */
+.documents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-5);
+    margin-top: var(--spacing-6);
+}
+
+.document-card {
+    background: var(--white);
+    border: 2px solid var(--gray-200);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.document-card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(44, 85, 48, 0.1);
+}
+
+.document-header {
+    padding: var(--spacing-4);
+    background: var(--light-color);
+    border-bottom: 1px solid var(--gray-200);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-2);
+}
+
+.document-nom {
+    color: var(--primary-color);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    margin: 0;
+    flex: 1;
+}
+
+.document-obligatoire {
+    background: var(--danger-color);
+    color: var(--white);
+    padding: var(--spacing-1) var(--spacing-2);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.document-optionnel {
+    background: var(--gray-400);
+    color: var(--white);
+    padding: var(--spacing-1) var(--spacing-2);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.document-content {
+    padding: var(--spacing-4);
+}
+
+.document-description {
+    color: var(--gray-700);
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+    margin: 0 0 var(--spacing-3) 0;
+}
+
+.document-download {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    color: var(--primary-color);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.document-download:hover {
+    color: var(--dark-color);
+    text-decoration: underline;
+}
+
+/* Styles pour la procédure d'inscription */
+.procedure-content {
+    background: var(--white);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-8);
+    box-shadow: var(--shadow-lg);
+    margin: var(--spacing-8) 0;
+}
+
+.procedure-content h3 {
+    color: var(--primary-color);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-6);
+    text-align: center;
+}
+
+.procedure-etapes,
+.procedure-dates,
+.procedure-contact {
+    background: rgba(143, 188, 143, 0.1);
+    padding: var(--spacing-5);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-5);
+    border: 1px solid rgba(143, 188, 143, 0.2);
+}
+
+.procedure-etapes:last-child,
+.procedure-dates:last-child,
+.procedure-contact:last-child {
+    margin-bottom: 0;
+}
+
+.procedure-etapes h4,
+.procedure-dates h4,
+.procedure-contact h4 {
+    color: var(--primary-color);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin: 0 0 var(--spacing-3) 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.procedure-etapes ol {
+    list-style: decimal;
+    padding-left: var(--spacing-6);
+    margin: 0;
+}
+
+.procedure-etapes li {
+    color: var(--gray-700);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-2);
+    padding-left: var(--spacing-2);
+}
+
+.procedure-dates ul,
+.procedure-contact ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.procedure-dates li,
+.procedure-contact p {
+    color: var(--gray-700);
+    font-size: var(--font-size-base);
+    line-height: 1.5;
+    margin-bottom: var(--spacing-2);
+}
+
+.procedure-dates li:last-child,
+.procedure-contact p:last-child {
+    margin-bottom: 0;
+}
+
+.procedure-contact strong {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Styles pour les messages de statut des formulaires */
+.form-status {
+    margin-top: var(--spacing-6);
+    padding: var(--spacing-4);
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    text-align: center;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.form-status.success {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+.form-status.error {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger-color);
+    border-color: rgba(239, 68, 68, 0.3);
+    white-space: pre-line;
+}
+
+.form-status.warning {
+    background: rgba(226, 160, 63, 0.1);
+    color: var(--warning-color);
+    border-color: rgba(226, 160, 63, 0.3);
+}
+
+/* Responsive pour la procédure */
+@media (max-width: 768px) {
+    .procedure-content {
+        padding: var(--spacing-6);
+        margin: var(--spacing-6) 0;
+    }
+    
+    .procedure-etapes,
+    .procedure-dates,
+    .procedure-contact {
+        padding: var(--spacing-4);
+        margin-bottom: var(--spacing-4);
+    }
+    
+    .procedure-etapes h4,
+    .procedure-dates h4,
+    .procedure-contact h4 {
+        font-size: var(--font-size-base);
+    }
+}
+
+/* Responsive pour les formulaires */
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-3);
+    }
+    
+    .form-card {
+        padding: var(--spacing-6);
+        margin: var(--spacing-6) 0;
+    }
+    
+    .tarifs-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-4);
+    }
+    
+    .documents-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-4);
+    }
+    
+    .checkbox-group {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    
+    .document-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
