@@ -78,65 +78,129 @@
 }
 
 /* Section Map */
+/* Section carte */
 .map-section {
-    background: var(--gray-100);
-    padding: 0;
-    margin: 0;
+    background: var(--gray-50);
+    padding: var(--spacing-12) 0;
 }
 
-.map-placeholder {
-    height: 400px;
-    background: var(--gray-200);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: var(--gray-600);
+.map-section h2 {
     text-align: center;
-    padding: var(--spacing-8);
+    color: var(--primary-color);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-8);
 }
 
-.map-placeholder p {
+.map-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-6);
+    align-items: start;
+}
+
+.map-wrapper {
+    position: relative;
+}
+
+.map-info {
+    background: var(--white);
+    padding: var(--spacing-6);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    height: fit-content;
+}
+
+.map-info h3 {
+    color: var(--primary-color);
     font-size: var(--font-size-lg);
     font-weight: 600;
-    margin: 0 0 var(--spacing-2) 0;
+    margin-bottom: var(--spacing-4);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.map-info h3 i {
+    color: var(--accent-color);
+}
+
+.map-info p {
+    margin-bottom: var(--spacing-4);
     color: var(--gray-700);
+    line-height: 1.6;
 }
 
-.map-placeholder small {
+.btn-small {
+    padding: var(--spacing-2) var(--spacing-4);
     font-size: var(--font-size-sm);
-    color: var(--gray-500);
-    font-style: italic;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    text-decoration: none;
 }
 
-/* Section formulaire de contact (utilise la classe bg-light) */
-.contact-form {
-    background: var(--light-color);
+/* Styles supplémentaires pour la carte */
+#stadium-map {
+    border: 2px solid var(--gray-200);
+    box-shadow: var(--shadow-lg);
+    transition: box-shadow 0.3s ease;
 }
 
-/* Responsive pour la page contact */
+#stadium-map:hover {
+    box-shadow: var(--shadow-xl);
+}
+
+.btn-small:hover {
+    background-color: var(--dark-color);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+/* Amélioration des popups Leaflet */
+.leaflet-popup-content-wrapper {
+    border-radius: 8px !important;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+}
+
+.leaflet-popup-tip {
+    background: white !important;
+}
+
+/* Animation d'apparition de la carte */
+.map-container {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.3s forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive pour la carte */
 @media (max-width: 768px) {
-    .contact-grid {
+    .map-container {
         grid-template-columns: 1fr;
         gap: var(--spacing-4);
     }
     
-    .contact-card {
-        padding: var(--spacing-6);
+    .map-info {
+        order: -1;
+        text-align: center;
     }
     
-    .contact-card i {
-        font-size: var(--font-size-2xl);
-        margin-bottom: var(--spacing-3);
+    #stadium-map {
+        height: 300px !important;
     }
     
-    .contact-card h3 {
-        font-size: var(--font-size-lg);
-        margin-bottom: var(--spacing-3);
-    }
-    
-    .map-placeholder {
-        height: 300px;
-        padding: var(--spacing-6);
+    .map-section {
+        padding: var(--spacing-8) 0;
     }
 }
