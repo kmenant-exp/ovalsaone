@@ -27,44 +27,11 @@ class RugbyClubApp {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
-            }
-            
-            // Mise en évidence du lien actif basé sur la section visible
-            // (uniquement sur la page d'accueil où il y a plusieurs sections avec ID)
-            if (window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/')) {
-                let currentSection = '';
-                
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop - 100;
-                    const sectionHeight = section.offsetHeight;
-                    
-                    if (currentScrollY >= sectionTop && currentScrollY < sectionTop + sectionHeight) {
-                        currentSection = section.getAttribute('id');
-                    }
-                });
-                
-                // Mettre à jour les liens de navigation
-                const navLinks = document.querySelectorAll('.nav-link');
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href').includes(currentSection)) {
-                        link.classList.add('active');
-                    }
-                });
-            }
+            }                
         });
 
-        // Active link management pour les autres pages
-        const navLinks = document.querySelectorAll('.nav-link');
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        
-        navLinks.forEach(link => {
-            if (link.getAttribute('href').includes(currentPage) || 
-                (currentPage === '' && link.getAttribute('href') === 'index.html')) {
-                link.classList.add('active');
-            }
-        });
-    }    // Effet parallax pour les sections
+    // Effet parallax pour les sections
+    }
     setupParallax() {
         // Pour un vrai effet parallax, nous n'avons pas besoin de manipuler les images
         // Les images sont positionnées avec background-attachment: fixed en CSS
@@ -181,6 +148,7 @@ class RugbyClubApp {
     setupMobileMenu() {
         const navToggle = document.getElementById('nav-toggle');
         const navMenu = document.getElementById('nav-menu');
+        const menuOverlay = document.getElementById('menu-overlay');
         const navLogo = document.querySelector('.nav-logo');
         
         if (!navToggle || !navMenu) return;
@@ -188,6 +156,7 @@ class RugbyClubApp {
         navToggle.addEventListener('click', () => {
             navToggle.classList.toggle('active');
             navMenu.classList.toggle('active');
+            if (menuOverlay) menuOverlay.classList.toggle('active');
             
             // Désactiver le scroll quand le menu est ouvert
             if (navMenu.classList.contains('active')) {
@@ -203,15 +172,28 @@ class RugbyClubApp {
             link.addEventListener('click', () => {
                 navToggle.classList.remove('active');
                 navMenu.classList.remove('active');
+                if (menuOverlay) menuOverlay.classList.remove('active');
                 document.body.style.overflow = '';
             });
         });
 
-        // Fermer le menu quand on clique en dehors
-        document.addEventListener('click', (e) => {
-            if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+        // Fermer le menu quand on clique sur l'overlay
+        if (menuOverlay) {
+            menuOverlay.addEventListener('click', () => {
                 navToggle.classList.remove('active');
                 navMenu.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        }
+
+        // Fermer le menu quand on clique en dehors
+        document.addEventListener('click', (e) => {
+            if (!navToggle.contains(e.target) && !navMenu.contains(e.target) && !navMenu.contains(e.target.parentElement)) {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                if (menuOverlay) menuOverlay.classList.remove('active');
+                document.body.style.overflow = '';
             }
         });
     }
