@@ -202,7 +202,7 @@ ul, ol {
 }
 
 .section {
-    padding: var(--spacing-20) 0;
+    padding: var(--spacing-5) 0;
 }
 
 .section-title {
@@ -1209,9 +1209,8 @@ ul, ol {
 }
 
 .histoire-section {
-    margin-bottom: var(--spacing-6);
-    padding: var(--spacing-4) 0;
-    border-bottom: 1px solid var(--gray-200);
+    margin-bottom: var(--spacing-2);
+    padding: var(--spacing-2) 0;
 }
 
 .histoire-section:last-child {

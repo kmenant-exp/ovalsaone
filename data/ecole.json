@@ -1,6 +1,6 @@
 {
   "histoire": {
-    "description": "Notre école de rugby a vu le jour en 2025, portée par une idée simple mais forte : offrir aux enfants un espace où le sport est synonyme de joie, de partage et de bienveillance.",
+    "description": "Notre école de rugby a vu le jour en 2025, portée par une idée simple mais forte : <b>offrir aux enfants un espace où le sport est synonyme de joie, de partage et de bienveillance.</b>",
     "annee_creation": 2025,
     "licencies": 180,
     "equipes": 8,
@@ -12,7 +12,7 @@
     "sections": [
       {
         "titre": "Un club ouvert à tous",
-        "contenu": "Ici, tout le monde est le bienvenu. Peu importe l'âge, le niveau ou l'expérience : chaque enfant a sa place sur le terrain. Pas de sélection, pas de pression — juste l'envie de jouer, de progresser et de s'amuser ensemble."
+        "contenu": "Ici, tout le monde est le bienvenu. Peu importe l'âge, le niveau ou l'expérience : <b>chaque enfant a sa place sur le terrain</b>. Pas de sélection, pas de pression — juste l'envie de jouer, de progresser et de s'amuser ensemble."
       },
       {
         "titre": "Le sport comme outil d'épanouissement",
