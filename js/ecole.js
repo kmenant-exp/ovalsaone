@@ -36,7 +36,8 @@ function renderHistoire(histoire) {
     const container = document.getElementById('histoire-content');
     if (!container) return;
 
-    container.innerHTML = `
+    // Render basic info
+    let html = `
         <p>${histoire.description}</p>
         <div class="histoire-stats">
             <div class="stat-item">
@@ -52,14 +53,26 @@ function renderHistoire(histoire) {
                 <span class="stat-label">Équipes</span>
             </div>
         </div>
-        ${histoire.titres && histoire.titres.length > 0 ? `
-        <div class="histoire-titres">
-            <h4>Nos Titres</h4>
-            <ul>
-                ${histoire.titres.map(titre => `<li>🏆 ${titre}</li>`).join('')}
-            </ul>
-        </div>` : ''}
     `;
+
+    // Render detailed sections if present
+    if (histoire.sections && histoire.sections.length > 0) {
+        html += `<div class="histoire-sections">`;
+        histoire.sections.forEach(section => {
+            html += `
+            <div class="histoire-section">
+                <h3>${section.titre}</h3>
+                <p>${section.contenu}</p>
+                ${section.liste && section.liste.length > 0 ? 
+                `<ul>
+                    ${section.liste.map(item => `<li>${item}</li>`).join('')}
+                </ul>` : ''}
+            </div>`;
+        });
+        html += `</div>`;
+    }
+
+    container.innerHTML = html;
 }
 
 function renderBureau(bureau) {
@@ -81,7 +94,6 @@ function renderBureau(bureau) {
                 <span class="bureau-poste">${membre.poste}</span>
                 <p class="bureau-description">${membre.description}</p>
                 ${membre.experience ? `<p class="bureau-experience"><strong>Expérience :</strong> ${membre.experience}</p>` : ''}
-                ${membre.email ? `<a href="mailto:${membre.email}" class="bureau-email">✉️ Contact</a>` : ''}
             </div>
         `;
         container.appendChild(membreCard);

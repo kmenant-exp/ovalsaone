@@ -1,23 +1,38 @@
 {
   "histoire": {
-    "description": "Fondé en 1972, notre club de rugby s'est développé autour des valeurs fondamentales de ce sport : le respect, l'intégrité et la solidarité. Depuis plus de 50 ans, nous formons des générations de rugbymen et rugbywomen dans un esprit familial et convivial.",
-    "annee_creation": 1972,
+    "description": "Notre école de rugby a vu le jour en 2025, portée par une idée simple mais forte : offrir aux enfants un espace où le sport est synonyme de joie, de partage et de bienveillance.",
+    "annee_creation": 2025,
     "licencies": 180,
     "equipes": 8,
     "titres": [
       "Champion départemental U12 (2019, 2023)",
       "Finaliste championnat régional U14 (2021)",
       "Vainqueur Coupe départementale Seniors (2018)"
+    ],
+    "sections": [
+      {
+        "titre": "Un club ouvert à tous",
+        "contenu": "Ici, tout le monde est le bienvenu. Peu importe l'âge, le niveau ou l'expérience : chaque enfant a sa place sur le terrain. Pas de sélection, pas de pression — juste l'envie de jouer, de progresser et de s'amuser ensemble."
+      },
+      {
+        "titre": "Le sport comme outil d'épanouissement",
+        "contenu": "Notre objectif n'est pas de former l'élite du rugby français, mais de faire grandir les enfants à travers les valeurs du sport collectif.",
+        "liste": ["le respect", "l'entraide", "la persévérance", "et surtout… le plaisir de jouer"]
+      },
+      {
+        "titre": "Une grande famille",
+        "contenu": "Chaque entraînement est une occasion de sourire, d'apprendre, de tomber et de se relever. Notre école, c'est une grande famille où l'on célèbre chaque petit progrès comme une grande victoire."
+      }
     ]
   },
   "bureau": [
     {
       "id": 1,
-      "nom": "Dubois",
-      "prenom": "Michel",
-      "poste": "Président",
-      "description": "Ancien joueur du club, Michel préside aux destinées du club depuis 2015. Passionné de rugby, il œuvre pour le développement de notre association.",
-      "photo": "assets/bureau/michel-dubois.jpg",
+      "nom": "GENTE",
+      "prenom": "Laëtitia",
+      "poste": "Présidente",
+      "description": "Laëtitia a brillé sur les parquets, elle brille aujourd’hui dans notre association. Ancienne championne de basket, passionnée et bienveillante, elle s’investit avec cœur pour transmettre aux enfants les valeurs du sport collectif. Sur le terrain, elle coache avec passion et bienveillance. En dehors, son café et son sourire réchauffent les cœurs comme un rayon de soleil en hiver. Une présence précieuse, toujours là pour motiver, apaiser et rassembler.",
+      "photo": "assets/bureau/GENTE_Laetitia.jpg",
       "email": "president@rugbyclub.fr",
       "experience": "8 ans au bureau"
     },
@@ -64,12 +79,12 @@
   "entraineurs": [
     {
       "id": 1,
-      "nom": "Durand",
-      "prenom": "Sophie",
-      "categories": ["U6"],
+      "nom": "MENANT",
+      "prenom": "Kevin",
+      "categories": ["U6", "U8"],
       "experience": "5 ans d'expérience en école de rugby",
       "diplomes": ["Éducateur Rugby", "BAFA"],
-      "photo": "assets/entraineurs/sophie-durand.jpg",
+      "photo": "assets/entraineurs/MENANT_Kevin.jpg",
       "specialites": ["Éveil rugby", "Motricité"],
       "formation_continue": "Formation FFR annuelle"
     },
