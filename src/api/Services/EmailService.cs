@@ -37,7 +37,7 @@ public class EmailService : IEmailService
         emailMessage.From.Add(new MailboxAddress("Oval Saône Website", _fromEmail));
         emailMessage.To.Add(new MailboxAddress("", _contactEmail));
         emailMessage.ReplyTo.Add(new MailboxAddress($"{prenom} {nom}", email));
-        emailMessage.Subject = $"[Site Web] {sujet}";
+        emailMessage.Subject = $"[Contact] {sujet}";
 
         var bodyBuilder = new BodyBuilder
         {
