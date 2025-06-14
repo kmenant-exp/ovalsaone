@@ -322,9 +322,21 @@
     padding-right: 2.5rem;
 }
 
-.form-field input:invalid:not(:placeholder-shown):not(:focus) {
+.form-field.touched input:invalid:not(:placeholder-shown):not(:focus) {
     border-color: #ef4444;
     background-color: rgba(239, 68, 68, 0.05);
+}
+
+/* Règle spécifique pour les champs date qui n'affiche l'erreur que s'ils sont touchés et vraiment invalides */
+.form-field.touched input[type="date"]:invalid:not(:focus) {
+    border-color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.05);
+}
+
+/* Pour les champs date vides non touchés, garder le style normal */
+.form-field:not(.touched) input[type="date"] {
+    border-color: var(--gray-200);
+    background-color: var(--white);
 }
 
 /* Checkbox moderne */

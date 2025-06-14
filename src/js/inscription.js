@@ -99,6 +99,13 @@ function setupModernInscriptionForm() {
             input.closest('.form-field').classList.add('touched');
         });
 
+        // Pour les champs date, ajouter touched dès qu'une valeur est saisie
+        if (input.type === 'date') {
+            input.addEventListener('change', () => {
+                input.closest('.form-field').classList.add('touched');
+            });
+        }
+
         // Validation en temps réel
         input.addEventListener('input', () => {
             validateField(input);
