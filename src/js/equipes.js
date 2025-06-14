@@ -36,11 +36,6 @@ function renderEquipes(categories) {
         const entraineurInfo = categorie.entraineur ? 
             `${categorie.entraineur.nom}` : 'À définir';
         
-        // Construire les horaires d'entraînement
-        const horaires = categorie.planning && categorie.planning.length > 0 ?
-            categorie.planning.map(p => `${p.jour} ${p.heure}`).join(', ') :
-            'À définir';
-        
         equipeCard.innerHTML = `
             <div class="equipe-header">
                 <h3 class="equipe-title">${categorie.nom}</h3>
@@ -52,7 +47,6 @@ function renderEquipes(categories) {
             <div class="equipe-content">
                 <div class="equipe-info">
                     <p><strong><i class="fas fa-user-tie"></i> Entraîneur :</strong> ${entraineurInfo}</p>
-                    <p><strong><i class="far fa-clock"></i> Entraînements :</strong> ${horaires}</p>
                     ${categorie.entraineur && categorie.entraineur.experience ? 
                         `<p><strong><i class="fas fa-medal"></i> Expérience :</strong> ${categorie.entraineur.experience}</p>` : ''}
                 </div>
@@ -66,7 +60,7 @@ function renderEquipes(categories) {
                         ${categorie.planning.map(seance => `
                             <li>
                                 <strong>${seance.jour}</strong>
-                                <span>${seance.heure} - ${seance.lieu}</span>
+                                <span>${seance.heure}</span>
                             </li>
                         `).join('')}
                     </ul>

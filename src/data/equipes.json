@@ -9,15 +9,14 @@
       "effectif": 15,
       "entraineur": {
         "nom": "Sophie Durand",
-        "experience": "5 ans d'expérience en école de rugby",
+        "experience": "5 ans d'expérience",
         "diplomes": ["Éducateur Rugby", "BAFA"],
         "photo": "assets/entraineurs/sophie-durand.jpg"
       },
       "planning": [
         {
           "jour": "Samedi",
-          "heure": "9h00-10h00",
-          "lieu": "Terrain synthétique"
+          "heure": "9h00-10h00"
         }
       ],
       "description_activites": "Découverte du rugby par le jeu, développement de la motricité et des valeurs du rugby."
@@ -38,8 +37,7 @@
       "planning": [
         {
           "jour": "Samedi",
-          "heure": "10h15-11h30",
-          "lieu": "Terrain synthétique"
+          "heure": "10h15-11h30"
         }
       ],
       "description_activites": "Apprentissage des gestes de base, jeux collectifs, initiation au rugby à 5."
@@ -60,13 +58,11 @@
       "planning": [
         {
           "jour": "Mercredi",
-          "heure": "14h00-15h30",
-          "lieu": "Terrain d'honneur"
+          "heure": "14h00-15h30"
         },
         {
           "jour": "Samedi",
-          "heure": "14h00-15h30",
-          "lieu": "Terrain d'honneur"
+          "heure": "14h00-15h30"
         }
       ],
       "description_activites": "Rugby à 7, apprentissage des phases de jeu, développement technique."
@@ -87,13 +83,11 @@
       "planning": [
         {
           "jour": "Mercredi",
-          "heure": "16h00-17h30",
-          "lieu": "Terrain d'honneur"
+          "heure": "16h00-17h30"
         },
         {
           "jour": "Samedi",
-          "heure": "15h45-17h15",
-          "lieu": "Terrain d'honneur"
+          "heure": "15h45-17h15"
         }
       ],
       "description_activites": "Rugby à 9, perfectionnement technique, préparation physique adaptée."
@@ -114,13 +108,11 @@
       "planning": [
         {
           "jour": "Mardi",
-          "heure": "18h00-19h30",
-          "lieu": "Terrain d'honneur"
+          "heure": "18h00-19h30"
         },
         {
           "jour": "Samedi",
-          "heure": "16h00-17h30",
-          "lieu": "Terrain d'honneur"
+          "heure": "16h00-17h30"
         }
       ],
       "description_activites": "Rugby à 12, tactique de base, préparation physique renforcée."
