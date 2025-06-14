@@ -58,8 +58,24 @@
     align-items: center;
     gap: var(--spacing-3);
     font-size: var(--font-size-xl);
-    font-weight: 700;
-    color: var(--white);
+    font-weight: 700 !important;
+    color: var(--white) !important;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.nav-logo:hover,
+.nav-logo:visited,
+.nav-logo:link,
+.nav-logo:active {
+    color: var(--white) !important;
+    font-weight: 700 !important;
+    text-decoration: none;
+}
+
+.nav-logo:hover {
+    opacity: 0.8;
+    transform: translateY(-1px);
 }
 
 .nav-logo img {
