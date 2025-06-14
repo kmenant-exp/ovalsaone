@@ -23,6 +23,7 @@ Chaque fichier CSS de ce dossier est inclus dans sa page HTML correspondante via
 ## Styles partagés
 
 Les styles communs à toutes les pages se trouvent dans :
-- `../styles.css` - Styles principaux (navigation, footer, formulaires, etc.)
+- `../styles.css` - Styles principaux (navigation, formulaires, boutons, etc.)
+- `../components/footer.css` - Styles pour le footer
 - `../cookie-banner.css` - Styles pour le bandeau cookies
 - `../sponsors.css` - Styles pour le carrousel de sponsors
