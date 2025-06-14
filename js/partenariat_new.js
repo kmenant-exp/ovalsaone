@@ -43,7 +43,7 @@ function renderSponsors(sponsors) {
         sponsorCard.className = 'sponsor-card';
         sponsorCard.innerHTML = `
             <div class="sponsor-logo">
-                <img src="${sponsor.logo}" alt="${sponsor.nom}" onerror="this.src='assets/logo.svg'">
+                <img src="${sponsor.logo}" alt="${sponsor.nom}" onerror="this.src='assets/logo.png'">
             </div>
             <div class="sponsor-info">
                 <h3 class="sponsor-name">${sponsor.nom}</h3>

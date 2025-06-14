@@ -194,7 +194,7 @@ Les couleurs principales sont définies dans `css/styles.css` via des custom pro
 ```
 
 ### Logo et images
-- Remplacer `assets/logo.svg` par votre logo
+- Remplacer `assets/logo.png` par votre logo
 - Remplacer `assets/hero-image.svg` par votre image hero
 - Ajouter vos images dans les dossiers correspondants
 

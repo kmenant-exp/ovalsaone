@@ -122,26 +122,59 @@ class RugbyClubApp {
         // Exemple : gtag('consent', 'update', {'analytics_storage': 'granted'});
     }
 
-    // Effets d'animation au scroll
+    // Gestion du défilement et effets visuels
     setupScrollEffects() {
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in-up');
+        // Éléments à animer lors du défilement
+        const animatedElements = document.querySelectorAll('.fade-in-up, .fade-in');
+        
+        // Indicateur de défilement (scroll-indicator)
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        
+        if (scrollIndicator) {
+            // Masquer l'indicateur de défilement au scroll
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 200) {
+                    scrollIndicator.style.opacity = '0';
+                    scrollIndicator.style.pointerEvents = 'none';
+                } else {
+                    scrollIndicator.style.opacity = '0.7';
+                    scrollIndicator.style.pointerEvents = 'auto';
                 }
             });
-        }, observerOptions);
-
-        // Observer les éléments à animer
-        const animatedElements = document.querySelectorAll(
-            '.actualite-card, .categorie-card, .contact-card, .form-card'
-        );
-        animatedElements.forEach(el => observer.observe(el));
+            
+            // Scroll vers le bas en cliquant sur l'indicateur
+            scrollIndicator.addEventListener('click', () => {
+                const actualitesSection = document.querySelector('.actualites');
+                if (actualitesSection) {
+                    actualitesSection.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    window.scrollTo({
+                        top: window.innerHeight,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        }
+        
+        if (animatedElements.length > 0) {
+            // Observer les éléments qui entrent dans le viewport
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // Une fois visible, on n'a plus besoin d'observer l'élément
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { 
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+        }
     }
 
     // Menu mobile avec animations améliorées

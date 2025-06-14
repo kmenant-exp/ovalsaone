@@ -87,7 +87,7 @@ function renderBureau(bureau) {
         membreCard.innerHTML = `
             <div class="bureau-photo">
                 <img src="${membre.photo}" alt="${membre.prenom} ${membre.nom}" 
-                     onerror="this.src='assets/logo.svg'">
+                     onerror="this.src='assets/logo.png'">
             </div>
             <div class="bureau-info">
                 <h3 class="bureau-nom">${membre.prenom} ${membre.nom}</h3>
@@ -112,7 +112,7 @@ function renderEntraineurs(entraineurs) {
         entraineurCard.innerHTML = `
             <div class="entraineur-photo">
                 <img src="${entraineur.photo}" alt="${entraineur.prenom} ${entraineur.nom}"
-                     onerror="this.src='assets/logo.svg'">
+                     onerror="this.src='assets/logo.png'">
             </div>
             <div class="entraineur-info">
                 <h3 class="entraineur-nom">${entraineur.prenom} ${entraineur.nom}</h3>

@@ -30,7 +30,7 @@ function renderProduitsFeatured(produits) {
     container.innerHTML = produitsFeatured.map(produit => `
         <div class="produit-featured-card">
             <div class="produit-image">
-                <img src="${produit.image}" alt="${produit.nom}" onerror="this.src='assets/logo.svg'">
+                <img src="${produit.image}" alt="${produit.nom}" onerror="this.src='assets/logo.png'">
                 <div class="produit-badge">Produit phare</div>
             </div>
             <div class="produit-info">
