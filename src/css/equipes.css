@@ -1,0 +1,265 @@
+/* Styles spécifiques à la page Équipes */
+
+/* Section Catégories */
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-8);
+}
+
+.equipe-card {
+    background: linear-gradient(135deg, var(--white) 0%, #f8f9ff 100%);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    transition: all 0.4s ease;
+    border: 1px solid transparent;
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.equipe-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--dark-color), var(--primary-color), var(--accent-color));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.equipe-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(44, 85, 48, 0.15);
+    border-color: rgba(44, 85, 48, 0.2);
+}
+
+.equipe-card:hover::before {
+    transform: scaleX(1);
+}
+
+.equipe-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    padding: var(--spacing-6);
+    text-align: center;
+    position: relative;
+}
+
+.equipe-title {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    margin: 0 0 var(--spacing-3) 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.equipe-badges {
+    display: flex;
+    gap: var(--spacing-3);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.equipe-age {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    padding: var(--spacing-1) var(--spacing-3);
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+}
+
+.equipe-effectif {
+    display: inline-block;
+    background: var(--accent-color);
+    color: var(--white);
+    padding: var(--spacing-1) var(--spacing-3);
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+}
+
+.equipe-content {
+    padding: var(--spacing-6);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+}
+
+.equipe-info {
+    background: rgba(143, 188, 143, 0.1);
+    padding: var(--spacing-4);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(143, 188, 143, 0.2);
+}
+
+.equipe-info p {
+    margin: 0 0 var(--spacing-2) 0;
+    font-size: var(--font-size-sm);
+    color: var(--gray-700);
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.equipe-info p:last-child {
+    margin-bottom: 0;
+}
+
+.equipe-info strong {
+    color: var(--primary-color);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    min-width: 120px;
+}
+
+.equipe-info i {
+    color: var(--accent-color);
+    width: 16px;
+    text-align: center;
+}
+
+.equipe-description {
+    color: var(--gray-700);
+    line-height: 1.6;
+    font-size: var(--font-size-sm);
+}
+
+.equipe-planning, .equipe-resultats {
+    background: var(--white);
+    border: 1px solid var(--light-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-4);
+    margin-top: var(--spacing-3);
+}
+
+.equipe-planning h4, .equipe-resultats h4 {
+    color: var(--primary-color);
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    margin: 0 0 var(--spacing-3) 0;
+    padding-bottom: var(--spacing-2);
+    border-bottom: 2px solid var(--accent-color);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.equipe-planning h4 i, .equipe-resultats h4 i {
+    color: var(--accent-color);
+    width: 16px;
+    text-align: center;
+}
+
+.equipe-planning ul, .equipe-resultats ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.equipe-planning li, .equipe-resultats li {
+    padding: var(--spacing-2) 0;
+    border-bottom: 1px solid var(--light-color);
+    font-size: var(--font-size-sm);
+    color: var(--gray-700);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.equipe-planning li:last-child, .equipe-resultats li:last-child {
+    border-bottom: none;
+}
+
+.equipe-planning li strong, .equipe-resultats li strong {
+    color: var(--primary-color);
+    font-weight: 600;
+    min-width: 80px;
+}
+
+.equipe-planning li span, .equipe-resultats li span {
+    color: var(--gray-600);
+    text-align: right;
+    flex: 1;
+}
+
+/* Animation fade-in-up pour les cartes d'équipes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animation pour les cartes d'équipes */
+.equipe-card.fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+/* Responsive pour les équipes */
+@media (max-width: 768px) {
+    .categories-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-6);
+    }
+    
+    .equipe-card {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    .equipe-header {
+        padding: var(--spacing-5);
+    }
+    
+    .equipe-title {
+        font-size: var(--font-size-xl);
+    }
+    
+    .equipe-badges {
+        flex-direction: column;
+        gap: var(--spacing-2);
+        align-items: center;
+    }
+    
+    .equipe-age, .equipe-effectif {
+        width: fit-content;
+    }
+    
+    .equipe-info p {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-1);
+    }
+    
+    .equipe-info strong {
+        min-width: auto;
+    }
+    
+    .equipe-planning li, .equipe-resultats li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-1);
+    }
+    
+    .equipe-planning li span, .equipe-resultats li span {
+        text-align: left;
+    }
+}
