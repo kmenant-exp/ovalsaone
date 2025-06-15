@@ -27,31 +27,88 @@ map:
     </div>
 </section>
 
-<!-- Contact Info -->
-<section class="contact-info section intro">
+<!-- Contact principal - Section compacte -->
+<section class="contact-main">
     <div class="container">
-        <div class="contact-grid">
-            <div class="contact-card">
-                <i class="fas fa-map-marker-alt"></i>
-                <h3>Adresse</h3>
-                <p>{{ contact.address }}</p>
+        <div class="contact-layout">
+            <!-- Informations de contact compactes -->
+            <div class="contact-info-compact">
+                <h2>Nos coordonnées</h2>
+                <div class="contact-items">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>Adresse</strong>
+                            <span>{{ contact.address }}</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>Téléphone</strong>
+                            <span>{{ contact.phone }}</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong>
+                            <span><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="contact-card">
-                <i class="fas fa-phone"></i>
-                <h3>Téléphone</h3>
-                <p>{{ contact.phone }}</p>
-            </div>
-            <div class="contact-card">
-                <i class="fas fa-envelope"></i>
-                <h3>Email</h3>
-                <p><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></p>
+
+            <!-- Formulaire de contact compact -->
+            <div class="contact-form-compact">
+                <h2>Envoyez-nous un message</h2>
+                <form id="contact-form" class="form-compact">
+                    <div class="form-row-compact">
+                        <div class="form-group-compact">
+                            <label for="nom">Nom *</label>
+                            <input type="text" id="nom" name="nom" required>
+                        </div>
+                        <div class="form-group-compact">
+                            <label for="prenom">Prénom *</label>
+                            <input type="text" id="prenom" name="prenom" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row-compact">
+                        <div class="form-group-compact">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group-compact">
+                            <label for="telephone">Téléphone</label>
+                            <input type="tel" id="telephone" name="telephone">
+                        </div>
+                    </div>
+
+                    <div class="form-group-compact">
+                        <label for="sujet">Sujet *</label>
+                        <input type="text" id="sujet" name="sujet" required>
+                    </div>
+
+                    <div class="form-group-compact">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" rows="4" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i>
+                        Envoyer
+                    </button>
+                </form>
+
+                <div id="form-status" class="form-status hidden"></div>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Formulaire de contact -->
-<section class="contact-form section bg-light">
+{% comment %} <section class="contact-form section bg-light">
     <div class="container">
         <div class="form-card">
             <h2>Envoyez-nous un message</h2>
@@ -97,35 +154,35 @@ map:
             <div id="form-status" class="form-status hidden"></div>
         </div>
     </div>
-</section>
+</section> {% endcomment %}
 
-<!-- Map Section -->
-<section class="map-section">
+<!-- Carte compacte -->
+<section class="section map-section-compact bg-light">
     <div class="container">
-       <div class="intro-content">
+        <div class="intro-content">
             <div class="intro-text">
                 <h2>{{ map.title }}</h2>
             </div>
         </div>
-        <div class="map-container">
-            <div class="map-wrapper">
-                <div id="map-loading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 10px;">
+        <div class="map-container-compact">
+            <div class="map-wrapper-compact">
+                <div id="map-loading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; background: white; padding: 15px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 8px; font-size: 14px;">
                     <i class="fas fa-spinner fa-spin" style="color: #8fbc8f;"></i>
-                    <span>Chargement de la carte...</span>
+                    <span>Chargement...</span>
                 </div>
-                <div id="stadium-map" style="height: 400px; width: 100%; border-radius: 8px;" aria-label="Carte de localisation du stade municipal"></div>
+                <div id="stadium-map" style="height: 400px; width: 100%; border-radius: 6px;" aria-label="Carte de localisation du stade municipal"></div>
             </div>
-            <div class="map-info">
-                <h3><i class="fas fa-map-marker-alt"></i> Stade Municipal</h3>
-                <p><strong>Adresse :</strong> {{ contact.address }}</p>
-                <p><strong>Activités :</strong> Entraînements et matchs de l'Oval Saône</p>
-                <a href="https://www.openstreetmap.org/search?query=420%20Route%20de%20Reyrieux,%2001600%20Sainte-Euphémie" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    class="btn btn-primary btn-small"
-                    aria-label="Ouvrir l'adresse dans OpenStreetMap">
-                    <i class="fas fa-external-link-alt"></i> Voir sur OpenStreetMap
-                </a>
+            <div class="map-info-compact">
+                <div class="map-details">
+                    <h3><i class="fas fa-map-marker-alt"></i> Stade Municipal</h3>
+                    <p>{{ contact.address }}</p>
+                    <a href="https://www.openstreetmap.org/search?query=420%20Route%20de%20Reyrieux,%2001600%20Sainte-Euphémie" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        class="btn btn-secondary btn-small">
+                        <i class="fas fa-external-link-alt"></i> Voir sur la carte
+                    </a>
+                </div>
             </div>
         </div>
     </div>

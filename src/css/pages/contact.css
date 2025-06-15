@@ -251,3 +251,289 @@
         height: 300px !important;
     }
 }
+
+/* === STYLES COMPACTS === */
+
+/* Contact principal compact */
+.contact-main {
+    padding: var(--spacing-12) 0;
+    background: var(--white);
+}
+
+.contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--spacing-10);
+    align-items: start;
+}
+
+/* Informations de contact compactes */
+.contact-info-compact {
+    background: var(--white);
+    padding: var(--spacing-8);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--gray-200);
+}
+
+.contact-info-compact h2 {
+    color: var(--primary-color);
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    margin: 0 0 var(--spacing-6) 0;
+}
+
+.contact-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-5);
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-3);
+}
+
+.contact-item i {
+    color: var(--primary-color);
+    font-size: var(--font-size-lg);
+    margin-top: 2px;
+    min-width: 20px;
+}
+
+.contact-item div {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+}
+
+.contact-item strong {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.contact-item span {
+    color: var(--gray-700);
+    font-size: var(--font-size-base);
+}
+
+.contact-item a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: var(--dark-color);
+    text-decoration: underline;
+}
+
+/* Formulaire compact */
+.contact-form-compact {
+    background: var(--white);
+    padding: var(--spacing-8);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--gray-200);
+}
+
+.contact-form-compact h2 {
+    color: var(--primary-color);
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    margin: 0 0 var(--spacing-6) 0;
+}
+
+.form-compact {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+}
+
+.form-row-compact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-4);
+}
+
+.form-group-compact {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.form-group-compact label {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+}
+
+.form-group-compact input,
+.form-group-compact textarea {
+    padding: var(--spacing-3);
+    border: 2px solid var(--gray-200);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-base);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: inherit;
+}
+
+.form-group-compact input:focus,
+.form-group-compact textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(90, 142, 64, 0.1);
+}
+
+.form-group-compact textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.contact-form-compact .btn {
+    align-self: flex-start;
+    padding: var(--spacing-3) var(--spacing-6);
+    font-size: var(--font-size-base);
+    gap: var(--spacing-2);
+}
+
+/* Carte compacte */
+.map-section-compact {
+    padding: var(--spacing-10) 0;
+}
+
+.map-section-compact h2 {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: var(--font-size-2xl);
+    font-weight: 600;
+    margin-bottom: var(--spacing-8);
+}
+
+.map-container-compact {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-6);
+    align-items: start;
+}
+
+.map-wrapper-compact {
+    position: relative;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    background-color: var(--white);
+}
+
+.map-info-compact {
+    background: var(--white);
+    padding: var(--spacing-6);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    height: fit-content;
+}
+
+.map-details h3 {
+    color: var(--primary-color);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin-bottom: var(--spacing-4);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.map-details h3 i {
+    color: var(--accent-color);
+}
+
+.map-details p {
+    margin-bottom: var(--spacing-4);
+    color: var(--gray-700);
+    line-height: 1.5;
+    font-size: var(--font-size-sm);
+}
+
+/* Responsive pour la version compacte */
+@media (max-width: 1024px) {
+    .contact-layout {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-8);
+    }
+    
+    .map-container-compact {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-4);
+    }
+    
+    .map-info-compact {
+        order: -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-compact {
+        padding: var(--spacing-8) 0 var(--spacing-6) 0;
+    }
+    
+    .hero-compact-content h1 {
+        font-size: var(--font-size-xl);
+    }
+    
+    .hero-compact-content p {
+        font-size: var(--font-size-base);
+    }
+    
+    .contact-main {
+        padding: var(--spacing-8) 0;
+    }
+    
+    .contact-info-compact,
+    .contact-form-compact {
+        padding: var(--spacing-6);
+    }
+    
+    .form-row-compact {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-3);
+    }
+    
+    .map-section-compact {
+        padding: var(--spacing-8) 0;
+    }
+    
+    .map-section-compact h2 {
+        font-size: var(--font-size-xl);
+        margin-bottom: var(--spacing-6);
+    }
+    
+    .map-container-compact {
+        grid-template-columns: 1fr;
+    }
+    
+    .map-info-compact {
+        order: -1;
+        text-align: center;
+        padding: var(--spacing-4);
+    }
+    
+    #stadium-map {
+        height: 220px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-2);
+    }
+    
+    .contact-item i {
+        margin-top: 0;
+    }
+}
