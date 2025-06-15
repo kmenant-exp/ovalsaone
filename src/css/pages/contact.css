@@ -341,13 +341,6 @@
     border: 1px solid var(--gray-200);
 }
 
-.contact-form-compact h2 {
-    color: var(--primary-color);
-    font-size: var(--font-size-xl);
-    font-weight: 600;
-    margin: 0 0 var(--spacing-6) 0;
-}
-
 .form-compact {
     display: flex;
     flex-direction: column;

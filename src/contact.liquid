@@ -6,6 +6,10 @@ hero:
   title: "Contactez-nous"
   subtitle: "Pour toute question, suggestion ou demande d'information, n'hésitez pas à nous contacter via le formulaire ci-dessous ou par téléphone."
 
+form:
+  title: "Formulaire de Contact"
+  subtitle: "Remplissez le formulaire ci-dessous et nous vous répondrons dans les plus brefs délais."
+
 map:
   title: "Localisation du Stade Municipal"
 ---
@@ -35,7 +39,11 @@ map:
 
             <!-- Formulaire de contact compact -->
             <div class="contact-form-compact">
-                <h2>Envoyez-nous un message</h2>
+                <div class="form-header">
+                    <h2>{{ form.title }}</h2>    
+                    <p>{{ form.subtitle }}</p>
+                </div>
+                
                 <form id="contact-form" class="form-compact">
                     <div class="form-row-compact">
                         <div class="form-group-compact">
@@ -77,7 +85,7 @@ map:
 
                 <div id="form-status" class="form-status hidden"></div>
             </div>
-            
+
             <!-- Informations de contact compactes -->
             <div class="contact-info-compact">
                 <h2>Nos coordonnées</h2>
