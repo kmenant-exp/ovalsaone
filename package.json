@@ -2,12 +2,14 @@
   "name": "vanilla-basic",
   "version": "1.0.0",
   "scripts": {
-    "start": "sirv ./src public --cors --single --no-clear --port 8000",
+    "start": "npx @11ty/eleventy --input=./src --serve --port 8002",
+    "start:swa": "npx swa start http://localhost:8002  --api-location src/api --host 127.0.0.1 --port 4280",
     "dev": "swa start src --api-location src/api --host 127.0.0.1 --port 4280",
     "build:api": "cd /src/api && dotnet build",
-    "clean:api": "cd /src/api && dotnet clean"
+    "clean:api": "cd /src/api && dotnet clean",
+    "build": "npx @11ty/eleventy --input=./src"
   },
-  "devDependencies": {
+  "dependencies": {
     "@11ty/eleventy": "^3.1.1",
     "@azure/static-web-apps-cli": "^2.0.6"
   }
