@@ -186,3 +186,5 @@ StyleCopReport.xml
 
 # SWA CLI
 swa-db.json
+
+_site/
