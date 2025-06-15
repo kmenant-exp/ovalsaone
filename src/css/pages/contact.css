@@ -131,15 +131,6 @@
     line-height: 1.6;
 }
 
-.btn-small {
-    padding: var(--spacing-2) var(--spacing-4);
-    font-size: var(--font-size-sm);
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-2);
-    text-decoration: none;
-}
-
 /* Styles supplémentaires pour la carte */
 #stadium-map {
     border: 2px solid var(--gray-200);
@@ -149,12 +140,6 @@
 
 #stadium-map:hover {
     box-shadow: var(--shadow-xl);
-}
-
-.btn-small:hover {
-    background-color: var(--dark-color);
-    transform: translateY(-2px);
-    transition: all 0.3s ease;
 }
 
 /* Amélioration des popups Leaflet */

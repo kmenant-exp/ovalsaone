@@ -34,7 +34,7 @@ function renderProduitsFeatured(produits) {
                     ${produit.tailles ? `<span class="produit-tailles">Tailles: ${produit.tailles.join(', ')}</span>` : ''}
                 </div>
                 <div class="produit-stock">Stock: ${produit.stock}</div>
-                <a href="${produit.url}" class="btn btn-primary btn-donation" data-produit="${produit.nom}">
+                <a href="${produit.url}" class="btn btn-primary" data-produit="${produit.nom}">
                     <i class="fas fa-eye"></i>
                     Voir sur HelloAsso
                 </a>

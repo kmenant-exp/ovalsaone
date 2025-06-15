@@ -18,7 +18,6 @@ Ce fichier CSS centralise tous les styles de boutons utilisés dans l'applicatio
 
 ### Styles spéciaux
 - `.btn-gradient` : Bouton avec gradient (style partenariat)
-- `.btn-donation` : Bouton pour les dons avec animation cœur
 - `.btn-submit` : Bouton de soumission de formulaire
 
 ### États
@@ -37,12 +36,6 @@ Ce fichier CSS centralise tous les styles de boutons utilisés dans l'applicatio
 <a href="#" class="btn btn-primary btn-large btn-gradient">
     <i class="fas fa-handshake"></i>
     Devenir Partenaire
-</a>
-
-<!-- Bouton de don avec animation -->
-<a href="#" class="btn btn-primary btn-large btn-donation">
-    <i class="fas fa-heart"></i>
-    Faire un don
 </a>
 
 <!-- Bouton de formulaire -->
