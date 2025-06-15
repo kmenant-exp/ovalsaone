@@ -5,7 +5,7 @@
         "description": "École de rugby pour les moins de 6 ans",
         "min_age": 3,
         "max_age": 5,
-        "head_count": 15,
+        "players_count": 15,
         "coach": {
             "name": "Sophie Durand",
             "experience": "5 ans d'expérience"
@@ -23,7 +23,7 @@
         "description": "École de rugby pour les moins de 8 ans",
         "min_age": 6,
         "max_age": 7,
-        "head_count": 18,
+        "players_count": 18,
         "coach": {
             "name": "Marc Leblanc",
             "experience": "8 ans d'expérience"
@@ -41,7 +41,7 @@
         "description": "École de rugby pour les moins de 10 ans",
         "min_age": 8,
         "max_age": 9,
-        "head_count": 22,
+        "players_count": 22,
         "coach": {
             "name": "Pierre Moreau",
             "experience": "12 ans d'expérience"
@@ -63,7 +63,7 @@
         "description": "École de rugby pour les moins de 12 ans",
         "min_age": 10,
         "max_age": 11,
-        "head_count": 25,
+        "players_count": 25,
         "coach": {
             "name": "Jean-Claude Martin",
             "experience": "15 ans d'expérience"
@@ -85,7 +85,7 @@
         "description": "École de rugby pour les moins de 14 ans",
         "min_age": 12,
         "max_age": 13,
-        "head_count": 20,
+        "players_count": 20,
         "coach": {
             "name": "David Rousseau",
             "experience": "10 ans d'expérience"
