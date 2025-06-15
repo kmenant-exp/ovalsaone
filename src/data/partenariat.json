@@ -99,5 +99,67 @@
     "avantages_fiscaux": "Les dons ouvrent droit à une réduction d'impôt de 66% du montant versé, dans la limite de 20% du revenu imposable pour les particuliers.",
     "utilisation": "Vos dons nous permettent de financer l'achat d'équipements, l'entretien des terrains, la formation des entraîneurs et l'organisation d'événements.",
     "helloasso_link": "https://www.helloasso.com/associations/rugby-club"
+  },
+  "particuliers": {
+    "call_to_action": {
+      "sous_titre": "Soutenez Oval Saône en tant que particulier !",
+      "description": "En tant que particulier passionné de rugby, vous pouvez nous accompagner dans notre aventure et contribuer au développement du rugby local.",
+      "avantages": [
+        {
+          "icone": "❤️",
+          "titre": "Soutien au sport local",
+          "description": "Contribuez directement au développement du rugby dans votre région"
+        },
+        {
+          "icone": "🎫",
+          "titre": "Invitations privilégiées",
+          "description": "Accès à des événements exclusifs et matchs spéciaux"
+        },
+        {
+          "icone": "👕",
+          "titre": "Goodies exclusifs",
+          "description": "Recevez des produits dérivés selon le montant de votre soutien"
+        },
+        {
+          "icone": "📧",
+          "titre": "Newsletter privilège",
+          "description": "Informations exclusives sur la vie du club et les coulisses"
+        },
+        {
+          "icone": "🏆",
+          "titre": "Reconnaissance",
+          "description": "Votre nom affiché sur notre mur des donateurs (si souhaité)"
+        },
+        {
+          "icone": "💰",
+          "titre": "Avantage fiscal",
+          "description": "Réduction d'impôt de 66% sur votre don"
+        }
+      ],
+      "bouton_texte": "Faire un don",
+      "bouton_lien": "https://www.helloasso.com"
+    },
+    "paliers": [
+      {
+        "montant": "20€",
+        "titre": "Supporter",
+        "avantages": ["Remerciement personnalisé", "Newsletter privilège"]
+      },
+      {
+        "montant": "50€",
+        "titre": "Fan",
+        "avantages": ["Tous les avantages Supporter", "Autocollant du club", "Carte de remerciement"]
+      },
+      {
+        "montant": "100€",
+        "titre": "Ambassadeur",
+        "avantages": ["Tous les avantages Fan", "T-shirt du club", "Invitation à un événement"]
+      },
+      {
+        "montant": "200€+",
+        "titre": "Mécène",
+        "avantages": ["Tous les avantages Ambassadeur", "Nom sur le mur des donateurs", "Rencontre avec l'équipe"]
+      }
+    ]
   }
 }

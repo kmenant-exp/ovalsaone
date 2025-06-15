@@ -201,7 +201,7 @@
     overflow: hidden;
 }
 
-.entraineur-card::before {
+/* .entraineur-card::before {
     content: '';
     position: absolute;
     top: 0;
@@ -209,7 +209,7 @@
     right: 0;
     height: 4px;
     background: linear-gradient(90deg, var(--dark-color), var(--primary-color), var(--accent-color));
-}
+} */
 
 .entraineur-card:hover {
     transform: translateY(-8px);
