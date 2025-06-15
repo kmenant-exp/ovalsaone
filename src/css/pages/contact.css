@@ -81,31 +81,50 @@
 /* Section carte */
 .map-section {
     background: var(--gray-50);
-    padding: var(--spacing-12) 0;
+    padding: var(--spacing-16) 0;
 }
 
 .map-section h2 {
     text-align: center;
     color: var(--primary-color);
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-3xl);
     font-weight: 700;
-    margin-bottom: var(--spacing-8);
+    margin-bottom: var(--spacing-12);
 }
 
 .map-container {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: var(--spacing-6);
+    gap: var(--spacing-8);
     align-items: start;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.3s forwards;
 }
 
 .map-wrapper {
     position: relative;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    background-color: var(--white);
+}
+
+#stadium-map {
+    height: 400px;
+    width: 100%;
+    border-radius: var(--border-radius);
+    border: 2px solid var(--gray-200);
+    box-shadow: var(--shadow-lg);
+    transition: box-shadow 0.3s ease;
+}
+
+#stadium-map:hover {
+    box-shadow: var(--shadow-xl);
 }
 
 .map-info {
     background: var(--white);
-    padding: var(--spacing-6);
+    padding: var(--spacing-8);
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-md);
     height: fit-content;
@@ -113,9 +132,9 @@
 
 .map-info h3 {
     color: var(--primary-color);
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-xl);
     font-weight: 600;
-    margin-bottom: var(--spacing-4);
+    margin-bottom: var(--spacing-6);
     display: flex;
     align-items: center;
     gap: var(--spacing-2);
@@ -131,18 +150,11 @@
     line-height: 1.6;
 }
 
-/* Styles supplémentaires pour la carte */
-#stadium-map {
-    border: 2px solid var(--gray-200);
-    box-shadow: var(--shadow-lg);
-    transition: box-shadow 0.3s ease;
+.map-info p strong {
+    color: var(--primary-color);
 }
 
-#stadium-map:hover {
-    box-shadow: var(--shadow-xl);
-}
-
-/* Amélioration des popups Leaflet */
+/* Styles pour le popup de la carte */
 .leaflet-popup-content-wrapper {
     border-radius: 8px !important;
     box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
@@ -152,10 +164,43 @@
     background: white !important;
 }
 
-/* Animation d'apparition de la carte */
-.map-container {
-    opacity: 0;
-    animation: fadeInUp 0.8s ease-out 0.3s forwards;
+.leaflet-popup-content {
+    font-family: var(--font-family);
+    line-height: 1.5;
+}
+
+.leaflet-popup-content h3 {
+    color: var(--primary-color);
+    margin: 0 0 var(--spacing-2) 0;
+    font-size: var(--font-size-lg);
+}
+
+.leaflet-popup-content p {
+    margin: 0 0 var(--spacing-3) 0;
+    color: var(--gray-600);
+}
+
+/* Animation de chargement de la carte */
+#map-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background: var(--white);
+    padding: var(--spacing-5);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    font-family: var(--font-family);
+    color: var(--gray-600);
+}
+
+#map-loading i {
+    color: var(--accent-color);
+    font-size: var(--font-size-lg);
 }
 
 @keyframes fadeInUp {
@@ -170,22 +215,39 @@
 }
 
 /* Responsive pour la carte */
+@media (max-width: 1024px) {
+    .map-container {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-6);
+    }
+    
+    .map-info {
+        order: -1;
+    }
+}
+
 @media (max-width: 768px) {
     .map-container {
         grid-template-columns: 1fr;
         gap: var(--spacing-4);
     }
     
+    .map-section {
+        padding: var(--spacing-12) 0;
+    }
+    
+    .map-section h2 {
+        font-size: var(--font-size-2xl);
+        margin-bottom: var(--spacing-8);
+    }
+    
     .map-info {
         order: -1;
         text-align: center;
+        padding: var(--spacing-6);
     }
     
     #stadium-map {
         height: 300px !important;
-    }
-    
-    .map-section {
-        padding: var(--spacing-8) 0;
     }
 }
