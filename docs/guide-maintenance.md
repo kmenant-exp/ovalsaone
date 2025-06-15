@@ -1,33 +1,178 @@
-# Guide de Maintenance et Mise à Jour
+# Guide de Maintenance et Mise à Jour (Site Eleventy)
 
 ## Sommaire
 1. [Introduction](#introduction)
-2. [Maintenance Régulière](#maintenance-régulière)
-3. [Mise à Jour du Contenu](#mise-à-jour-du-contenu)
-4. [Modification du Design](#modification-du-design)
-5. [Mise à Jour Technique](#mise-à-jour-technique)
-6. [Surveillance et Diagnostics](#surveillance-et-diagnostics)
-7. [Sauvegarde et Récupération](#sauvegarde-et-récupération)
+2. [Maintenance du Contenu Eleventy](#maintenance-du-contenu-eleventy)
+3. [Maintenance Technique](#maintenance-technique)
+4. [Mise à Jour du Design](#mise-à-jour-du-design)
+5. [Surveillance et Diagnostics](#surveillance-et-diagnostics)
+6. [Sauvegarde et Récupération](#sauvegarde-et-récupération)
+7. [Mise à Jour des Dépendances](#mise-à-jour-des-dépendances)
 8. [Bonnes Pratiques](#bonnes-pratiques)
 
 ## Introduction
 
-Ce guide explique comment maintenir et mettre à jour le site web Oval Saône après son déploiement initial. Il couvre la maintenance régulière, la mise à jour du contenu, les modifications du design, et les mises à jour techniques.
+Ce guide explique comment maintenir et mettre à jour le site web Oval Saône développé avec Eleventy (11ty) et Azure Static Web Apps. Il couvre la maintenance du contenu via les templates et données JSON, les mises à jour techniques, et la surveillance du système.
 
-## Maintenance Régulière
+## Maintenance du Contenu Eleventy
 
-### Vérifications Mensuelles
+L'un des principaux avantages d'Eleventy est la facilité de maintenance du contenu via les fichiers JSON et le front matter des templates.
 
-Effectuez ces vérifications au moins une fois par mois :
+### Mise à Jour des Données JSON
 
-1. **Test de tous les formulaires** :
-   - Formulaire de contact
-   - Formulaire d'inscription
-   - Vérifier que les emails sont bien reçus
+#### Actualités (_data/actualites.json)
 
-2. **Vérification des liens** :
-   - Tester tous les liens internes et externes
-   - S'assurer qu'aucun lien n'est cassé
+Pour ajouter une nouvelle actualité :
+
+```json
+{
+  "actualites": [
+    {
+      "id": 4,
+      "title": "Nouvelle actualité",
+      "excerpt": "Description courte de l'actualité...",
+      "date": "2025-06-15",
+      "image": "assets/actualites/nouvelle-actu.jpg",
+      "content": "Contenu complet de l'actualité..."
+    }
+    // Autres actualités existantes...
+  ]
+}
+```
+
+**Workflow de mise à jour** :
+1. Éditer le fichier `src/_data/actualites.json`
+2. Ajouter l'image dans `src/assets/actualites/`
+3. Commit et push vers GitHub
+4. Le site se reconstruit automatiquement
+
+#### Équipes (_data/teams.json)
+
+Pour mettre à jour les informations d'une équipe :
+
+```json
+{
+  "teams": [
+    {
+      "category": "U10-U12",
+      "name": "École de Rugby",
+      "description": "Description mise à jour...",
+      "training_days": ["Mercredi 17h", "Samedi 14h"],
+      "coach": "Nouveau Coach",
+      "contact_email": "coach@example.com"
+    }
+  ]
+}
+```
+
+#### Sponsors (_data/sponsors.json)
+
+Pour ajouter ou modifier un sponsor :
+
+```json
+{
+  "sponsors": [
+    {
+      "name": "Nouveau Sponsor",
+      "logo": "assets/sponsors/nouveau-logo.png",
+      "url": "https://nouveau-sponsor.com",
+      "category": "partenaire-principal",
+      "description": "Description du partenariat"
+    }
+  ]
+}
+```
+
+### Mise à Jour du Contenu des Pages
+
+#### Modification du Front Matter
+
+Pour changer le contenu d'une page, éditez le front matter du fichier .liquid :
+
+```liquid
+---
+layout: layout.njk
+title: "Nouveau titre de page"
+hero_title: "Nouveau titre hero"
+hero_subtitle: "Nouveau sous-titre"
+meta_description: "Nouvelle description SEO"
+# Nouvelles données spécifiques
+custom_section_title: "Section personnalisée"
+custom_content: "Contenu personnalisé"
+---
+
+<!-- Le contenu HTML peut aussi être modifié -->
+<section class="new-section">
+    <h2>{{ custom_section_title }}</h2>
+    <p>{{ custom_content }}</p>
+</section>
+```
+
+#### Ajout de Nouvelles Pages
+
+Pour créer une nouvelle page :
+
+1. **Créer le fichier template** :
+   ```liquid
+   ---
+   layout: layout.njk
+   title: "Nouvelle Page"
+   permalink: /nouvelle-page/
+   ---
+   
+   <section class="page-content">
+       <h1>{{ title }}</h1>
+       <p>Contenu de la nouvelle page...</p>
+   </section>
+   ```
+
+2. **Ajouter les styles spécifiques** :
+   ```css
+   /* Dans src/css/pages/nouvelle-page.css */
+   .page-content {
+       padding: 2rem;
+   }
+   ```
+
+3. **Inclure les styles dans le bundle** :
+   ```njk
+   <!-- Dans src/css-bundle.njk -->
+   {% include "./css/pages/nouvelle-page.css" %}
+   ```
+
+4. **Mettre à jour la navigation** :
+   Modifier le layout principal pour inclure le lien dans le menu.
+
+### Workflow de Publication
+
+```
+1. Éditer les fichiers (JSON, .liquid, CSS)
+   ↓
+2. Test local avec `npx @11ty/eleventy --serve`
+   ↓
+3. Commit et push vers GitHub
+   ↓
+4. GitHub Actions build automatique
+   ↓
+5. Déploiement automatique sur Azure SWA
+   ↓
+6. Vérification du site en production
+```
+
+### Vérifications après Mise à Jour
+
+1. **Test local** :
+   ```bash
+   # Build et test du site
+   npx @11ty/eleventy --config=src/eleventy.config.js --input=src --output=src/_site
+   npx swa start src --api-location src/api
+   ```
+
+2. **Vérifications** :
+   - Toutes les pages se chargent correctement
+   - Les nouveaux contenus s'affichent
+   - Les images sont accessibles
+   - Pas d'erreurs JavaScript dans la console
 
 3. **Compatibilité des navigateurs** :
    - Tester le site sur les navigateurs principaux

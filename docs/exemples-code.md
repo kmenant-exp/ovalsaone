@@ -1,22 +1,29 @@
-# Exemples de Code et Snippets
+# Exemples de Code - Site Eleventy Oval Saône
 
-Ce document fournit des exemples de code et des snippets utiles pour le développement et la maintenance du site web Oval Saône.
+Ce document fournit des exemples de code spécifiques au développement avec Eleventy et des snippets utiles pour la maintenance du site web Oval Saône.
 
 ## Sommaire
-1. [Frontend](#frontend)
-   - [HTML](#html)
+1. [Templates Eleventy](#templates-eleventy)
+   - [Templates Liquid](#templates-liquid)
+   - [Layouts Nunjucks](#layouts-nunjucks)
+   - [Système de Bundling](#système-de-bundling)
+2. [Gestion des Données](#gestion-des-données)
+   - [Fichiers JSON](#fichiers-json)
+   - [Front Matter](#front-matter)
+3. [Frontend Complémentaire](#frontend-complémentaire)
    - [CSS](#css)
    - [JavaScript](#javascript)
-2. [Backend](#backend)
+4. [Backend](#backend)
    - [C# Azure Functions](#c-azure-functions)
    - [Modèles de Données](#modèles-de-données)
-3. [Configurations](#configurations)
+5. [Configurations](#configurations)
+   - [Configuration Eleventy](#configuration-eleventy)
    - [Azure Static Web Apps](#azure-static-web-apps)
    - [GitHub Actions](#github-actions)
 
-## Frontend
+## Templates Eleventy
 
-### HTML
+### Templates Liquid
 
 #### Structure de Base d'une Page
 

@@ -1,6 +1,72 @@
-# Guide de Déploiement sur Azure Static Web Apps
+# Guide de Déploiement sur Azure Static Web App### Configurer les détails de build
 
-## Sommaire
+4. **Configurer les détails de build** :
+   - Type de build : Custom
+   - Emplacement de l'application : /src (dossier contenant les templates Eleventy)
+   - Emplacement de l'API : src/api
+   - Emplacement de sortie : _site (dossier de sortie d'Eleventy)
+
+5. **Finaliser la création** :
+   - Cliquer sur "Vérifier + créer"
+   - Cliquer sur "Créer"
+
+### Configuration Eleventy pour le Déploiement
+
+Azure Static Web Apps doit être configuré pour utiliser Eleventy correctement.
+
+#### Workflow GitHub Actions Personnalisé
+
+Le workflow généré automatiquement doit être modifié pour intégrer Eleventy :
+
+```yaml
+name: Azure Static Web Apps CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
+
+jobs:
+  build_and_deploy_job:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    runs-on: ubuntu-latest
+    name: Build and Deploy Job
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      
+      # Setup Node.js pour Eleventy
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      # Installer les dépendances
+      - name: Install dependencies
+        run: npm ci
+      
+      # Build Eleventy
+      - name: Build Eleventy site
+        run: npx @11ty/eleventy --config=src/eleventy.config.js --input=src --output=src/_site
+      
+      # Déployer sur Azure Static Web Apps
+      - name: Build And Deploy
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "src/_site" # Dossier du site généré par Eleventy
+          api_location: "src/api"
+          output_location: "" # Pas besoin de build supplémentaire
+```maire
 1. [Introduction](#introduction)
 2. [Prérequis](#prérequis)
 3. [Configuration Azure](#configuration-azure)

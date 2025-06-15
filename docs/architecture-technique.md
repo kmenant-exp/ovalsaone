@@ -2,7 +2,7 @@
 
 ## Sommaire
 1. [Vue d'Ensemble](#vue-densemble)
-2. [Architecture Frontend](#architecture-frontend)
+2. [Architecture Frontend avec Eleventy](#architecture-frontend-avec-eleventy)
 3. [Architecture Backend](#architecture-backend)
 4. [Intégration Frontend-Backend](#intégration-frontend-backend)
 5. [Sécurité](#sécurité)
@@ -11,7 +11,7 @@
 
 ## Vue d'Ensemble
 
-Le site web Oval Saône est construit sur l'architecture Azure Static Web Apps, qui combine un frontend statique avec un backend serverless basé sur Azure Functions.
+Le site web Oval Saône est construit sur l'architecture Azure Static Web Apps, qui combine un générateur de site statique moderne (Eleventy) avec un backend serverless basé sur Azure Functions.
 
 ### Diagramme d'Architecture
 
@@ -21,9 +21,9 @@ Le site web Oval Saône est construit sur l'architecture Azure Static Web Apps, 
 │                                                           │
 │  ┌───────────────────┐         ┌───────────────────┐      │
 │  │                   │         │                   │      │
-│  │  Frontend Statique│         │ Backend Serverless│      │
-│  │  (HTML/CSS/JS)    │◄───────►│ (Azure Functions) │      │
-│  │                   │   API   │                   │      │
+│  │  Frontend Eleventy│         │ Backend Serverless│      │
+│  │  (Générateur de   │◄───────►│ (Azure Functions) │      │
+│  │   site statique)  │   API   │                   │      │
 │  └───────────────────┘         └───────────────────┘      │
 │            │                            │                 │
 └────────────┼────────────────────────────┼─────────────────┘
@@ -38,9 +38,11 @@ Le site web Oval Saône est construit sur l'architecture Azure Static Web Apps, 
 
 ### Composants Principaux
 
-1. **Frontend Statique** :
-   - HTML5, CSS3, JavaScript ES6+
-   - Chargement de données depuis des fichiers JSON
+1. **Frontend Eleventy** :
+   - Générateur de site statique moderne (11ty)
+   - Templates Liquid et Nunjucks
+   - Bundling CSS/JS automatique
+   - Données JSON intégrées via _data et front matter
    - Validation des formulaires côté client
 
 2. **Backend Serverless** :
@@ -49,55 +51,234 @@ Le site web Oval Saône est construit sur l'architecture Azure Static Web Apps, 
    - Validation des données et envoi d'emails
 
 3. **Azure Static Web Apps** :
-   - Hébergement du frontend et du backend
+   - Hébergement du site généré et du backend
    - Routage et redirection
    - CDN intégré
    - Déploiement continu via GitHub Actions
 
-## Architecture Frontend
+## Architecture Frontend avec Eleventy
 
-### Structure de Fichiers
+### Vue d'ensemble d'Eleventy
+
+Eleventy (11ty) est un générateur de site statique moderne qui transforme les templates et données en HTML statique optimisé. Il offre plusieurs avantages :
+
+- **Performance** : Sites ultra-rapides générés statiquement
+- **Flexibilité** : Support de multiples moteurs de templates
+- **Simplicité** : Configuration minimale requise
+- **Évolutivité** : Facilite la maintenance et l'ajout de contenu
+
+### Flux de Build Eleventy
+
+```
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   Templates     │    │    Eleventy      │    │   Site Statique │
+│   (.liquid)     │───▶│    Process       │───▶│   (_site/)      │
+│                 │    │                  │    │                 │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+         │                       │                       │
+         ▼                       ▼                       ▼
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   Données JSON  │    │   CSS/JS Bundle  │    │   Assets Copiés │
+│   (_data/)      │    │   (.njk)         │    │   (images, etc) │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+```
+
+### Structure de Fichiers Eleventy
 
 ```
 src/
-├── index.html, equipes.html, etc.  # Pages HTML
-├── css/
-│   ├── styles.css                  # Styles principaux
-│   ├── cookie-banner.css           # Styles du bandeau RGPD
-│   └── sponsors.css                # Styles des sponsors
-├── js/
-│   ├── main.js                     # Code JS principal
-│   ├── data-loader.js              # Module de chargement JSON
-│   └── [page].js                   # Scripts spécifiques
-├── data/
-│   ├── actualites.json             # Données JSON
-│   └── ...
-└── assets/
-    ├── logo.png, favicon.svg       # Images
-    └── ...
+├── _includes/                  # Templates partagés
+│   └── layout.njk             # Layout principal Nunjucks
+├── _data/                     # Données globales JSON
+│   ├── actualites.json
+│   ├── sponsors.json
+│   └── teams.json
+├── _site/                     # Site généré (output)
+├── *.liquid                   # Pages template Liquid
+├── css-bundle.njk             # Bundle CSS
+├── js-bundle.njk              # Bundle JavaScript
+├── css/                       # Sources CSS
+│   ├── styles.css
+│   ├── components/            # Styles par composant
+│   └── pages/                 # Styles par page
+├── js/                        # Sources JavaScript
+├── assets/                    # Ressources statiques
+└── eleventy.config.js         # Configuration Eleventy
 ```
 
-### Chargement de Données
+### Système de Templates
 
-Le site utilise un modèle de chargement asynchrone pour les données :
+#### Templates Liquid (.liquid)
+Pages principales avec front matter YAML :
+
+```liquid
+---
+layout: layout.njk
+title: "Titre de la page"
+hero_title: "Titre hero personnalisé"
+meta_description: "Description SEO"
+---
+
+<!-- Contenu de la page -->
+<section class="hero">
+    <h1>{{ hero_title }}</h1>
+    <p>{{ meta_description }}</p>
+</section>
+
+<!-- Utilisation des données globales -->
+{% for equipe in teams.teams %}
+    <div class="team-card">
+        <h3>{{ equipe.name }}</h3>
+        <p>{{ equipe.description }}</p>
+    </div>
+{% endfor %}
+```
+
+#### Layout Principal (layout.njk)
+Template Nunjucks pour la structure commune :
+
+```html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/css-bundle.css">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+</head>
+<body>
+    <!-- Bandeau cookies RGPD -->
+    <div id="cookie-banner" class="cookie-banner hidden">...</div>
+    
+    <!-- Navigation commune -->
+    <nav class="navbar" id="navbar">...</nav>
+    
+    <!-- Contenu de la page injecté ici -->
+    {{ content | safe }}
+    
+    <!-- Footer commun -->
+    <footer class="footer">...</footer>
+    
+    <!-- Scripts -->
+    <script src="/bundle.js"></script>
+</body>
+</html>
+```
+
+### Système de Bundling
+
+#### CSS Bundle (css-bundle.njk)
+Concatène automatiquement tous les styles :
+
+```njk
+---
+permalink: /css-bundle.css
+---
+{% include "./css/styles.css" %}
+{% include "./css/components/button.css" %}
+{% include "./css/components/footer.css" %}
+{% include "./css/components/nav.css" %}
+{% include "./css/components/page-hero.css" %}
+{% include "./css/components/cookie-banner.css" %}
+{% include "./css/pages/index.css" %}
+{% include "./css/pages/equipes.css" %}
+{% include "./css/pages/ecole.css" %}
+{% include "./css/pages/partenariat.css" %}
+{% include "./css/pages/boutique.css" %}
+{% include "./css/pages/inscription.css" %}
+{% include "./css/pages/contact.css" %}
+```
+
+#### JavaScript Bundle (js-bundle.njk)
+Concatène les scripts JavaScript :
+
+```njk
+---
+permalink: /bundle.js
+---
+{% include "./js/main.js" %}
+{% include "./js/data-loader.js" %}
+{% include "./js/contact.js" %}
+{% include "./js/inscription.js" %}
+{% include "./js/boutique.js" %}
+```
+
+### Gestion des Données
+
+#### Données Globales (_data/)
+Fichiers JSON automatiquement disponibles dans tous les templates :
+
+```json
+// _data/sponsors.json
+{
+  "sponsors": [
+    {
+      "name": "Sponsor 1",
+      "logo": "assets/sponsors/logo1.png",
+      "url": "https://sponsor1.com",
+      "category": "partenaire-principal"
+    }
+  ]
+}
+```
+
+Utilisation dans les templates :
+```liquid
+<div class="sponsors-grid">
+{% for sponsor in sponsors.sponsors %}
+    <a href="{{ sponsor.url }}" class="sponsor-card">
+        <img src="{{ sponsor.logo }}" alt="{{ sponsor.name }}">
+    </a>
+{% endfor %}
+</div>
+```
+
+#### Front Matter dans les Pages
+Données spécifiques à chaque page :
+
+```liquid
+---
+layout: layout.njk
+title: "École de Rugby - Oval'Saône"
+hero_title: "École de Rugby"
+hero_subtitle: "Formation aux valeurs du rugby"
+categories:
+  - name: "U6-U8"
+    description: "Éveil rugby"
+  - name: "U10-U12"
+    description: "Apprentissage technique"
+---
+```
+
+### Configuration Eleventy
+
+Le fichier `eleventy.config.js` définit le comportement d'Eleventy :
 
 ```javascript
-// Module data-loader.js
-export async function loadData(jsonFile) {
-    const response = await fetch(`data/${jsonFile}`);
-    return await response.json();
-}
-
-// Utilisation dans une page
-import { loadData } from './data-loader.js';
-
-document.addEventListener('DOMContentLoaded', async () => {
-    try {
-        const data = await loadData('exemple.json');
-        renderContent(data);
-    } catch (error) {
-        console.error('Erreur de chargement:', error);
-        showErrorMessage();
+export default function(eleventyConfig) {
+    console.log("Configuring Eleventy...");
+    
+    // Copie des assets statiques
+    eleventyConfig.addPassthroughCopy("./assets");
+    
+    // Configuration des répertoires
+    return {
+        dir: {
+            input: "src",        // Dossier source
+            output: "_site",     // Dossier de sortie
+            includes: "_includes", // Templates partagés
+            data: "_data"        // Données globales
+        },
+        // Formats de templates supportés
+        templateFormats: ["liquid", "njk", "html", "md"],
+        
+        // Moteur de template par défaut
+        markdownTemplateEngine: "liquid",
+        htmlTemplateEngine: "liquid"
+    };
+};
+```
     }
 });
 ```

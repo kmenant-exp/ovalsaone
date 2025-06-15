@@ -4,7 +4,7 @@
 1. [Introduction](#introduction)
 2. [Architecture Technique](#architecture-technique)
 3. [Structure du Projet](#structure-du-projet)
-4. [Frontend](#frontend)
+4. [Frontend Eleventy](#frontend-eleventy)
 5. [Backend (Azure Functions)](#backend-azure-functions)
 6. [Configuration Azure Static Web Apps](#configuration-azure-static-web-apps)
 7. [Installation et Développement Local](#installation-et-développement-local)
@@ -13,7 +13,7 @@
 
 ## Introduction
 
-Le site web Oval Saône est une application web moderne pour un club de rugby, développée avec Azure Static Web Apps. Il combine un frontend statique (HTML, CSS, JavaScript) avec un backend serverless basé sur Azure Functions en C#.
+Le site web Oval Saône est une application web moderne pour un club de rugby, développée avec **Eleventy** (11ty) et Azure Static Web Apps. Il combine un générateur de site statique moderne (Eleventy) avec un backend serverless basé sur Azure Functions en C#.
 
 ### Objectif du Site
 
@@ -27,10 +27,12 @@ Le site a pour objectif de :
 
 ### Fonctionnalités Principales
 
-- **Pages informatives** : Accueil, Équipes, École de rugby, Partenariat
-- **Pages interactives** : Boutique, Inscription, Contact
-- **Fonctions API serverless** : Traitement des formulaires et envoi d'emails
-- **Chargement dynamique** : Contenu géré via fichiers JSON
+- **Pages générées avec Eleventy** : Utilisation de templates Liquid et Nunjucks pour la génération des pages
+- **Système de templating moderne** : Layouts partagés et composants réutilisables
+- **Bundling CSS automatique** : Concaténation automatique des feuilles de style
+- **Pages interactives** : Boutique, Inscription, Contact avec JavaScript côté client
+- **Fonctions API serverless** : Traitement des formulaires et envoi d'emails avec Azure Functions
+- **Chargement dynamique** : Contenu géré via fichiers JSON et front matter
 - **Design responsive** : Adaptation à tous les appareils
 
 ## Architecture Technique
@@ -43,6 +45,7 @@ Le site utilise une architecture moderne combinant un frontend statique et un ba
 ┌─────────────────────┐     ┌───────────────────┐
 │   Azure Static      │     │  Azure Functions  │
 │   Web App Frontend  │────▶│  Backend (C#)     │
+│   (Eleventy Build)  │     │                   │
 └─────────────────────┘     └───────────────────┘
           │                          │
           │                          │
@@ -55,10 +58,12 @@ Le site utilise une architecture moderne combinant un frontend statique et un ba
 
 ### Composants Clés
 
-1. **Frontend Statique** : 
-   - HTML5, CSS3, JavaScript ES6+
-   - Hébergé sur Azure Static Web Apps
-   - Utilise des fichiers de données JSON pour le contenu dynamique
+1. **Frontend Eleventy** : 
+   - Générateur de site statique avec Eleventy (11ty)
+   - Templates Liquid (.liquid) et Nunjucks (.njk)
+   - Bundling CSS automatique avec concaténation
+   - Données JSON intégrées via front matter et fichiers _data
+   - Build automatique vers le dossier _site
 
 2. **Backend Serverless** :
    - Azure Functions v4 (.NET 8)
@@ -78,24 +83,39 @@ La structure du projet est organisée de manière logique pour séparer les diff
 
 ```
 kme-rugby-aswapp/
-├── index.html, equipes.html, etc...  # Pages HTML principales
-├── staticwebapp.config.json          # Configuration Azure SWA
-├── css/                              # Styles CSS
-├── js/                               # Scripts JavaScript
-├── data/                             # Données JSON
-├── assets/                           # Images et ressources statiques
-└── api/                              # Azure Functions (Backend)
+├── src/                              # Code source Eleventy
+│   ├── *.liquid                      # Pages templates Liquid
+│   ├── _includes/                    # Templates partagés (layouts)
+│   │   └── layout.njk                # Layout principal Nunjucks
+│   ├── _data/                        # Données JSON globales
+│   │   ├── actualites.json
+│   │   ├── sponsors.json
+│   │   └── teams.json
+│   ├── _site/                        # Site généré (output Eleventy)
+│   ├── css-bundle.njk                # Bundle CSS automatique
+│   ├── js-bundle.njk                 # Bundle JavaScript automatique
+│   ├── css/                          # Styles CSS sources
+│   ├── js/                           # Scripts JavaScript
+│   ├── assets/                       # Images et ressources statiques
+│   ├── api/                          # Azure Functions (Backend)
+│   ├── staticwebapp.config.json      # Configuration Azure SWA
+│   └── eleventy.config.js            # Configuration Eleventy
+├── package.json                      # Dépendances Node.js et scripts
+└── docs/                             # Documentation
 ```
 
 ### Détail des Répertoires
 
-#### Frontend
+#### Frontend Eleventy
 
-- **Pages HTML** : Pages principales du site
-- **CSS** : Styles pour le design responsive
-- **JavaScript** : Scripts pour l'interactivité et le chargement des données
-- **Data** : Fichiers JSON contenant les données dynamiques
+- **Templates Liquid (*.liquid)** : Pages principales du site avec front matter YAML
+- **Layouts (_includes/)** : Templates Nunjucks partagés pour la structure commune
+- **Données (_data/)** : Fichiers JSON contenant les données dynamiques accessibles globalement
+- **CSS Bundle (css-bundle.njk)** : Fichier de concaténation automatique des styles CSS
+- **Styles CSS (css/)** : Feuilles de style organisées par composants et pages
+- **Scripts JavaScript (js/)** : Scripts pour l'interactivité côté client
 - **Assets** : Images, logos et autres ressources statiques
+- **Site généré (_site/)** : Dossier de sortie d'Eleventy contenant le site compilé
 
 #### Backend (API)
 
@@ -103,31 +123,141 @@ kme-rugby-aswapp/
 - **Models** : Modèles de données avec validation
 - **Services** : Services (email, etc.)
 
-## Frontend
+## Frontend Eleventy
 
-Le frontend est construit avec des technologies web standard, organisées de manière modulaire.
+Le site utilise **Eleventy (11ty)** comme générateur de site statique moderne. Cette approche offre de nombreux avantages par rapport à du HTML statique traditionnel.
 
-### Pages HTML
+### Avantages d'Eleventy
 
-1. **index.html** : Page d'accueil avec actualités et présentation
-2. **equipes.html** : Présentation des différentes catégories
-3. **ecole.html** : Histoire du club, bureau et entraîneurs
-4. **partenariat.html** : Sponsors et informations de partenariat
-5. **boutique.html** : Produits et équipements du club
-6. **inscription.html** : Formulaire d'inscription
-7. **contact.html** : Formulaire de contact avec carte
+- **Templates réutilisables** : Évite la duplication de code avec des layouts partagés
+- **Données centralisées** : Gestion des données via JSON et front matter
+- **Bundling automatique** : Concaténation des CSS et JS
+- **Performance optimale** : Génération de pages statiques ultra-rapides
+- **Développement moderne** : Hot reload et outils de développement intégrés
 
-### CSS
+### Structure des Templates
 
-- **styles.css** : Styles principaux (responsive, mobile-first)
-- **cookie-banner.css** : Styles pour le bandeau RGPD
-- **sponsors.css** : Styles pour l'affichage des sponsors
+#### Pages Liquid (.liquid)
+Les pages principales utilisent le format Liquid avec front matter YAML :
 
-### JavaScript
+```liquid
+---
+layout: layout.njk
+title: Page Title
+custom_data: "valeur"
+---
 
-- **main.js** : Fonctionnalités communes (navigation, menu mobile)
-- **data-loader.js** : Module pour charger les données JSON
-- **[page].js** : Scripts spécifiques par page (ex: inscription.js, contact.js)
+<section class="content">
+    <h1>{{ title }}</h1>
+    <p>{{ custom_data }}</p>
+</section>
+```
+
+#### Layout Principal (layout.njk)
+Le layout Nunjucks définit la structure HTML commune :
+
+```html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/css-bundle.css">
+</head>
+<body>
+    <!-- Navigation commune -->
+    <nav class="navbar">...</nav>
+    
+    <!-- Contenu de la page -->
+    {{ content | safe }}
+    
+    <!-- Footer commun -->
+    <footer>...</footer>
+</body>
+</html>
+```
+
+### Système de Bundling
+
+#### CSS Bundle (css-bundle.njk)
+Concaténation automatique de tous les styles :
+
+```njk
+---
+permalink: /css-bundle.css
+---
+{% include "./css/styles.css" %}
+{% include "./css/components/button.css" %}
+{% include "./css/components/nav.css" %}
+{% include "./css/pages/index.css" %}
+<!-- Autres fichiers CSS -->
+```
+
+#### JavaScript Bundle (js-bundle.njk)
+Concaténation des scripts JavaScript :
+
+```njk
+---
+permalink: /bundle.js
+---
+{% include "./js/main.js" %}
+{% include "./js/data-loader.js" %}
+{% include "./js/contact.js" %}
+<!-- Autres fichiers JS -->
+```
+
+### Données Globales
+
+Les fichiers dans `_data/` sont automatiquement disponibles dans tous les templates :
+
+```json
+// _data/sponsors.json
+{
+  "sponsors": [
+    {
+      "name": "Sponsor 1",
+      "logo": "assets/sponsors/logo1.png",
+      "url": "https://sponsor1.com"
+    }
+  ]
+}
+```
+
+Utilisation dans les templates :
+```liquid
+{% for sponsor in sponsors.sponsors %}
+    <img src="{{ sponsor.logo }}" alt="{{ sponsor.name }}">
+{% endfor %}
+```
+
+### Configuration Eleventy
+
+Le fichier `eleventy.config.js` configure le comportement d'Eleventy :
+
+```javascript
+export default function(eleventyConfig) {
+    // Copie des assets statiques
+    eleventyConfig.addPassthroughCopy("./assets");
+    
+    // Autres configurations
+    return {
+        dir: {
+            input: "src",
+            output: "_site"
+        }
+    };
+};
+```
+
+### Pages du Site
+
+1. **index.liquid** : Page d'accueil avec données du front matter
+2. **equipes.liquid** : Présentation des différentes catégories
+3. **ecole.liquid** : Histoire du club, bureau et entraîneurs
+4. **partenariat.liquid** : Sponsors et informations de partenariat
+5. **boutique.liquid** : Produits et équipements du club
+6. **inscription.liquid** : Formulaire d'inscription
+7. **contact.liquid** : Formulaire de contact avec carte
 
 ### Données JSON
 
@@ -232,10 +362,11 @@ Cette configuration est utilisée par le CLI SWA pour le développement local.
 
 ### Prérequis
 
-- Node.js 18+
-- .NET 8 SDK
-- Azure Functions Core Tools
-- Azure Static Web Apps CLI
+- **Node.js 18+** (pour Eleventy et SWA CLI)
+- **.NET 8 SDK** (pour Azure Functions)
+- **Azure Functions Core Tools v4**
+- **Azure Static Web Apps CLI**
+- **Eleventy (11ty)** (inclus dans les dépendances)
 
 ### Installation
 
@@ -245,21 +376,26 @@ Cette configuration est utilisée par le CLI SWA pour le développement local.
    cd kme-rugby-aswapp
    ```
 
-2. **Installer les dépendances** :
+2. **Installer les dépendances Node.js** :
    ```bash
-   # Installer SWA CLI
-   npm install -g @azure/static-web-apps-cli
+   # Installer les dépendances du projet (Eleventy et SWA CLI)
+   npm install
    
-   # Installer Azure Functions Core Tools (si nécessaire)
+   # Installer globalement les outils Azure (optionnel)
    npm install -g azure-functions-core-tools@4
-   
-   # Installer les dépendances du projet API
-   cd api
-   dotnet restore
+   npm install -g @azure/static-web-apps-cli
    ```
 
-3. **Configurer les variables d'environnement** :
-   - Créer/modifier le fichier `api/local.settings.json` :
+3. **Installer les dépendances .NET** :
+   ```bash
+   # Installer les dépendances du projet API
+   cd src/api
+   dotnet restore
+   cd ../..
+   ```
+
+4. **Configurer les variables d'environnement** :
+   - Créer/modifier le fichier `src/api/local.settings.json` :
    ```json
    {
      "IsEncrypted": false,
@@ -276,18 +412,70 @@ Cette configuration est utilisée par le CLI SWA pour le développement local.
    }
    ```
 
-### Exécution Locale
+### Développement Local
 
-1. **Compiler les fonctions Azure** :
+#### Option 1 : Développement avec Eleventy + SWA CLI (Recommandé)
+
+1. **Construire le site avec Eleventy** :
    ```bash
-   cd api
+   # Générer le site statique dans src/_site
+   npx @11ty/eleventy --config=src/eleventy.config.js --input=src --output=src/_site
+   ```
+
+2. **Compiler les fonctions Azure** :
+   ```bash
+   cd src/api
    dotnet build
+   cd ../..
    ```
 
-2. **Lancer le site avec SWA CLI** :
+3. **Lancer le site avec SWA CLI** :
    ```bash
-   npx swa start . --api-location api
+   # Utilise la configuration dans swa-cli.config.json
+   npm run dev
+   
+   # Ou manuellement :
+   npx swa start src --api-location src/api --host 127.0.0.1 --port 4280
    ```
+
+#### Option 2 : Utiliser les tâches VS Code
+
+Le projet inclut des tâches VS Code préconfigurées :
+
+- **Build Functions** : Compile le projet Azure Functions
+- **Start SWA CLI** : Démarre le site complet en mode développement
+- **Stop SWA CLI** : Arrête le serveur de développement
+
+Pour utiliser ces tâches :
+1. Ouvrir VS Code dans le répertoire du projet
+2. Appuyer sur `Ctrl+Shift+P` (ou `Cmd+Shift+P` sur Mac)
+3. Taper "Tasks: Run Task" et sélectionner la tâche souhaitée
+
+#### Développement en mode Watch
+
+Pour le développement avec rechargement automatique :
+
+```bash
+# Terminal 1 : Watch Eleventy (reconstruction automatique)
+npx @11ty/eleventy --config=src/eleventy.config.js --input=src --output=src/_site --watch
+
+# Terminal 2 : SWA CLI en mode développement
+npx swa start src --api-location src/api
+```
+
+### Accès Local
+
+Une fois le développement démarré :
+- **Frontend** : http://localhost:4280
+- **API Backend** : http://localhost:4280/api
+- **Site Eleventy compilé** : Disponible dans `src/_site/`
+
+### Structure de Développement
+
+```
+Navigateur ──→ SWA CLI (localhost:4280) ──→ Site Eleventy (src/_site/)
+                      │
+                      └──→ Azure Functions (src/api/)
    
    Ou utiliser les tâches VS Code fournies :
    - `Build Functions` : Compile le projet API
