@@ -42,36 +42,6 @@ function renderPartenariatData(data) {
     }
 }
 
-function renderSponsors(sponsors) {
-    const container = document.getElementById('sponsors-list');
-    if (!container) return;
-
-    container.innerHTML = '';
-    
-    sponsors.forEach(sponsor => {
-        const sponsorCard = document.createElement('div');
-        sponsorCard.className = 'sponsor-card';
-        sponsorCard.innerHTML = `
-            <div class="sponsor-logo">
-                <img src="${sponsor.logo}" alt="${sponsor.nom}" onerror="this.src='assets/logo.png'">
-            </div>
-            <div class="sponsor-info">
-                <h3 class="sponsor-name">${sponsor.nom}</h3>
-                <p class="sponsor-description">${sponsor.description}</p>
-                <div class="sponsor-details">
-                    ${sponsor.website ? `<a href="${sponsor.website}" target="_blank" class="sponsor-link">🌐 Site web</a>` : ''}
-                    ${sponsor.telephone ? `<span class="sponsor-phone">📞 ${sponsor.telephone}</span>` : ''}
-                    ${sponsor.email ? `<a href="mailto:${sponsor.email}" class="sponsor-email">✉️ Email</a>` : ''}
-                </div>
-                <div class="sponsor-partenariat">
-                    Partenaire depuis ${sponsor.partenariat_depuis}
-                </div>
-            </div>
-        `;
-        container.appendChild(sponsorCard);
-    });
-}
-
 function renderCallToActionPartenariat(ctaData) {
     const container = document.getElementById('cta-partenariat');
     if (!container) return;

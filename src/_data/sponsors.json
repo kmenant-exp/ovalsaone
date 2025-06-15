@@ -2,7 +2,7 @@
   {
     "id": 1,
     "nom": "Expertime",
-    "logo": "assets/sponsors/logo_expertime.png",
+    "logo": "/assets/sponsors/logo_expertime.png",
     "description": "Services informatiques et solutions digitales pour les entreprises.",
     "website": "https://expertime.com",
     "telephone": "01 23 45 67 94",
@@ -14,7 +14,7 @@
   {
     "id": 2,
     "nom": "Orange Business",
-    "logo": "assets/sponsors/logo_orange.jpg",
+    "logo": "/assets/sponsors/logo_orange.jpg",
     "description": "Solutions de télécommunication et services digitaux pour les professionnels.",
     "website": "https://business.orange.fr",
     "telephone": "01 23 45 67 95",
@@ -26,7 +26,7 @@
   {
     "id": 3,
     "nom": "Pharmacie de la Place",
-    "logo": "assets/sponsors/logo_pharmacie.jpg",
+    "logo": "/assets/sponsors/logo_pharmacie.jpg",
     "description": "Pharmacie de proximité proposant conseils santé et produits adaptés aux sportifs.",
     "website": "https://pharmaciedelaplace.fr",
     "telephone": "01 23 45 67 96",
@@ -34,17 +34,5 @@
     "adresse": "5 Place Centrale, 12345 Ville",
     "partenariat_depuis": 2019,
     "type": "partenaire"
-  },
-  {
-    "id": 4,
-    "nom": "Décathlon Saint-Germain",
-    "logo": "assets/sponsors/logo_decathlon.webp",
-    "description": "Magasin d'articles de sport proposant un large choix d'équipements pour tous les sports.",
-    "website": "https://decathlon.fr",
-    "telephone": "01 23 45 67 97",
-    "email": "magasin.saintgermain@decathlon.fr",
-    "adresse": "Zone Commerciale, 12345 Ville",
-    "partenariat_depuis": 2022,
-    "type": "sponsor_argent"
   }
 ]
