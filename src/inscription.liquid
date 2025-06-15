@@ -99,11 +99,12 @@ form:
     icon: "fas fa-paper-plane"
     text: "Envoyer l'inscription"
 ---
-<!-- Hero Section -->
-<section class="page-hero">
-    <div class="container">
-        <h1>{{ hero.title }}</h1>
-        <p>{{ hero.subtitle }}</p>
+<!-- Hero Section avec effet parallax -->
+<section class="hero parallax-section subpage-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1 class="hero-title">{{ hero.title }}</h1>
+        <p class="hero-subtitle">{{ hero.subtitle }}</p>
     </div>
 </section>
 
