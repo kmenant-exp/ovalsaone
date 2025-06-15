@@ -240,7 +240,7 @@ Données spécifiques à chaque page :
 ```liquid
 ---
 layout: layout.njk
-title: "École de Rugby - Oval'Saône"
+title: "École de Rugby - Oval Saône"
 hero_title: "École de Rugby"
 hero_subtitle: "Formation aux valeurs du rugby"
 categories:

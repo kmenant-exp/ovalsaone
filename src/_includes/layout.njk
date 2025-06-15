@@ -6,12 +6,67 @@ title: "default"
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{{ title }}</title>
-        <link
-        rel="stylesheet" href="/css-bundle.css">
+        
+        <!-- SEO Meta Tags -->
+        <title>{{ title | default("École de Rugby Oval Saône - Trévoux") }}</title>
+        <meta name="description" content="{{ description | default("École de rugby pour enfants de 4 à 14 ans à Trévoux. Apprentissage du rugby dans un cadre convivial et familial. Inscription ouverte toute l'année.") }}">
+        <meta name="keywords" content="rugby, école rugby, enfants, Trévoux, Sainte-Euphémie, sport, formation, U4, U6, U8, U10, U12, U14">
+        
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+        <meta property="og:title" content="{{ title | default("École de Rugby Oval Saône") }}">
+        <meta property="og:description" content="{{ description | default("École de rugby pour enfants de 4 à 14 ans à Trévoux") }}">
+        <meta property="og:image" content="{{ site.url }}/assets/logo.png">
+        <meta property="og:locale" content="fr_FR">
+        
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="{{ site.url }}{{ page.url }}">
+        <meta property="twitter:title" content="{{ title | default("École de Rugby Oval Saône") }}">
+        <meta property="twitter:description" content="{{ description | default("École de rugby pour enfants de 4 à 14 ans à Trévoux") }}">
+        <meta property="twitter:image" content="{{ site.url }}/assets/logo.png">
+        
+        <!-- Canonical URL -->
+        <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+        
+        <!-- Favicon -->
+        <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+        <link rel="apple-touch-icon" href="/assets/logo.png">
+        
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="/css-bundle.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
         
-        <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+        <!-- Schema.org JSON-LD -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "SportsClub",
+            "name": "École de Rugby Oval Saône",
+            "description": "École de rugby pour enfants de 4 à 14 ans dans un cadre convivial et familial",
+            "url": "{{ site.url }}",
+            "logo": "{{ site.url }}/assets/logo.png",
+            "sport": "Rugby",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "420 Route de Reyrieux",
+                "addressLocality": "Sainte-Euphémie",
+                "postalCode": "01600",
+                "addressCountry": "FR"
+            },
+            "telephone": "06 83 62 27 10",
+            "email": "edr.ovalsaone@gmail.com",
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": "45.9417",
+                "longitude": "4.7833"
+            },
+            "sameAs": [
+                "https://www.instagram.com/k.menant/"
+            ]
+        }
+        </script>
     </head>
     <body>
         <!-- Bandeau cookies RGPD -->

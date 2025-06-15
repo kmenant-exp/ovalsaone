@@ -94,7 +94,7 @@ kme-rugby-aswapp/
 <!-- index.liquid -->
 ---
 layout: layout.njk
-title: "Accueil - École de Rugby Oval'Saône"
+title: "Accueil - École de Rugby Oval Saône"
 hero_title: "Bienvenue à l'École de Rugby"
 ---
 
