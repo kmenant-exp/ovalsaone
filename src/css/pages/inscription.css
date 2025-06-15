@@ -343,6 +343,8 @@
 .form-actions {
     margin-top: 2.5rem;
     text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Message de statut moderne */
