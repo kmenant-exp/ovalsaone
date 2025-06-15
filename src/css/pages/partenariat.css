@@ -587,7 +587,7 @@
     transition: all 0.3s ease;
 }
 
-.dons-actions .btn::before {
+/* .dons-actions .btn::before {
     content: '';
     position: absolute;
     top: 0;
@@ -597,11 +597,11 @@
     background: linear-gradient(135deg, var(--danger-color), #c53030);
     transition: width 0.3s ease;
     z-index: 0;
-}
+} 
 
 .dons-actions .btn:hover::before {
     width: 100%;
-}
+} */
 
 .dons-actions .btn i,
 .dons-actions .btn span {

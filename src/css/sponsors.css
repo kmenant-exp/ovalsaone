@@ -4,6 +4,34 @@
     padding: var(--spacing-20) 0;
 }
 
+.sponsors-intro {
+    text-align: center;
+    margin-bottom: var(--spacing-12);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sponsors-intro p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-bottom: var(--spacing-6);
+    line-height: 1.6;
+}
+
+.sponsors-intro .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.sponsors-intro .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 120, 50, 0.3);
+}
+
 .sponsors-carousel-container {
     position: relative;
     overflow: hidden;

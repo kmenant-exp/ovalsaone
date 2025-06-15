@@ -68,7 +68,6 @@ function renderCallToActionPartenariat(ctaData) {
 
     container.innerHTML = `
         <div class="cta-header">
-            <h3>${ctaData.titre}</h3>
             <h4 class="cta-sous-titre">${ctaData.sous_titre}</h4>
             <p class="cta-description">${ctaData.description}</p>
         </div>
@@ -83,13 +82,6 @@ function renderCallToActionPartenariat(ctaData) {
                     </div>
                 </div>
             `).join('')}
-        </div>
-        
-        <div class="cta-action">
-            <a href="${ctaData.bouton_lien}" class="btn btn-primary btn-large">
-                <i class="fas fa-handshake"></i>
-                ${ctaData.bouton_texte}
-            </a>
         </div>
     `;
 }
