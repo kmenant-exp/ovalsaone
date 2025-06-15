@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nos Équipes - Oval Saône</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/components/button.css">
-    <link rel="stylesheet" href="css/pages/equipes.css">
+    <title>Association de Rugby - Accueil</title>
+    <link rel="stylesheet" href="/css-bundle.css">
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 </head>
 <body>
     <!-- Bandeau cookies RGPD -->
@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <!-- Navigation -->
+    <!-- Navigation fixe -->
     <div class="menu-overlay" id="menu-overlay"></div>
     <nav class="navbar" id="navbar">
         <div class="nav-container">            <a href="index.html" class="nav-logo">
@@ -29,39 +29,206 @@
                 <span>Oval Saône</span>
             </a>
             <div class="nav-menu" id="nav-menu">
-                <a href="index.html" class="nav-link">Accueil</a>
-                <a href="equipes.html" class="nav-link active">Équipes</a>
-                <a href="ecole.html" class="nav-link">L'École</a>
-                <a href="partenariat.html" class="nav-link">Partenariat & Dons</a>
-                <a href="boutique.html" class="nav-link">Boutique</a>
-                <a href="inscription.html" class="nav-link">Inscription</a>
-                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="#accueil" class="nav-link active">Accueil</a>
+                <a href="/equipes" class="nav-link">Équipes</a>
+                <a href="/ecole" class="nav-link">L'École</a>
+                <a href="/partenariat" class="nav-link">Partenariat & Dons</a>
+                <a href="/boutique" class="nav-link">Boutique</a>
+                <a href="/inscription" class="nav-link">Inscription</a>
+                <a href="/contact" class="nav-link">Contact</a>
             </div>
             <div class="nav-toggle" id="nav-toggle">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
             </div>
-        </div>
+        </div>    
     </nav>
 
-    <!-- Hero Section -->
-    <section class="page-hero">
-        <div class="container">
-            <h1>Nos Équipes</h1>
-            <p>Découvrez nos différentes catégories et leurs entraîneurs</p>
-        </div>
-    </section>
+    
+<!-- Hero Section -->
+<section class="page-hero">
+    <div class="container">
+        <h1>Nos Équipes</h1>
+        <p>Découvrez nos différentes catégories et leurs entraîneurs</p>
+    </div>
+</section>
 
-    <!-- Section Catégories -->
-    <section class="categories section intro">
-        <div class="container">
-            <div class="categories-grid" id="categories-grid">
-                <!-- Les catégories seront chargées dynamiquement depuis JSON -->
-            </div>
+<!-- Section Catégories -->
+<section class="categories section intro">
+    <div class="container">
+        <div class="categories-grid" id="categories-grid">
+            <!-- Les catégories seront chargées dynamiquement depuis JSON -->
+            
+                <div class="equipe-card fade-in-up">
+                    <div class="equipe-header">
+                        <h3 class="equipe-title">U6</h3>
+                        <div class="equipe-badges">
+                            <span class="equipe-age">3-5 ans</span>
+                            <span class="equipe-effectif">15 joueurs</span>
+                        </div>
+                    </div>
+                    <div class="equipe-content">
+                        <div class="equipe-info">
+                            <p><strong><i class="fas fa-user-tie"></i> Entraîneur :</strong>Sophie Durand</p>
+                            <p><strong><i class="fas fa-medal"></i> Expérience :</strong>5 ans d'expérience</p>
+                        </div>
+                        <div class="equipe-description">
+                            <p>École de rugby pour les moins de 6 ans</p>
+                        </div>
+                        <div class="equipe-planning">
+                            <h4><i class="fas fa-calendar-alt"></i> Planning d'entraînement</h4>
+                            <ul>
+                                
+                                    <li>
+                                        <strong>Samedi</strong>
+                                        <span>9h00-10h00</span>
+                                    </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>  
+            
+                <div class="equipe-card fade-in-up">
+                    <div class="equipe-header">
+                        <h3 class="equipe-title">U8</h3>
+                        <div class="equipe-badges">
+                            <span class="equipe-age">6-7 ans</span>
+                            <span class="equipe-effectif">18 joueurs</span>
+                        </div>
+                    </div>
+                    <div class="equipe-content">
+                        <div class="equipe-info">
+                            <p><strong><i class="fas fa-user-tie"></i> Entraîneur :</strong>Marc Leblanc</p>
+                            <p><strong><i class="fas fa-medal"></i> Expérience :</strong>8 ans d'expérience</p>
+                        </div>
+                        <div class="equipe-description">
+                            <p>École de rugby pour les moins de 8 ans</p>
+                        </div>
+                        <div class="equipe-planning">
+                            <h4><i class="fas fa-calendar-alt"></i> Planning d'entraînement</h4>
+                            <ul>
+                                
+                                    <li>
+                                        <strong>Samedi</strong>
+                                        <span>10h15-11h30</span>
+                                    </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>  
+            
+                <div class="equipe-card fade-in-up">
+                    <div class="equipe-header">
+                        <h3 class="equipe-title">U10</h3>
+                        <div class="equipe-badges">
+                            <span class="equipe-age">8-9 ans</span>
+                            <span class="equipe-effectif">22 joueurs</span>
+                        </div>
+                    </div>
+                    <div class="equipe-content">
+                        <div class="equipe-info">
+                            <p><strong><i class="fas fa-user-tie"></i> Entraîneur :</strong>Pierre Moreau</p>
+                            <p><strong><i class="fas fa-medal"></i> Expérience :</strong>12 ans d'expérience</p>
+                        </div>
+                        <div class="equipe-description">
+                            <p>École de rugby pour les moins de 10 ans</p>
+                        </div>
+                        <div class="equipe-planning">
+                            <h4><i class="fas fa-calendar-alt"></i> Planning d'entraînement</h4>
+                            <ul>
+                                
+                                    <li>
+                                        <strong>Mercredi</strong>
+                                        <span>14h00-15h30</span>
+                                    </li>
+                                
+                                    <li>
+                                        <strong>Samedi</strong>
+                                        <span>14h00-15h30</span>
+                                    </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>  
+            
+                <div class="equipe-card fade-in-up">
+                    <div class="equipe-header">
+                        <h3 class="equipe-title">U12</h3>
+                        <div class="equipe-badges">
+                            <span class="equipe-age">10-11 ans</span>
+                            <span class="equipe-effectif">25 joueurs</span>
+                        </div>
+                    </div>
+                    <div class="equipe-content">
+                        <div class="equipe-info">
+                            <p><strong><i class="fas fa-user-tie"></i> Entraîneur :</strong>Jean-Claude Martin</p>
+                            <p><strong><i class="fas fa-medal"></i> Expérience :</strong>15 ans d'expérience</p>
+                        </div>
+                        <div class="equipe-description">
+                            <p>École de rugby pour les moins de 12 ans</p>
+                        </div>
+                        <div class="equipe-planning">
+                            <h4><i class="fas fa-calendar-alt"></i> Planning d'entraînement</h4>
+                            <ul>
+                                
+                                    <li>
+                                        <strong>Mercredi</strong>
+                                        <span>16h00-17h30</span>
+                                    </li>
+                                
+                                    <li>
+                                        <strong>Samedi</strong>
+                                        <span>15h45-17h15</span>
+                                    </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>  
+            
+                <div class="equipe-card fade-in-up">
+                    <div class="equipe-header">
+                        <h3 class="equipe-title">U14</h3>
+                        <div class="equipe-badges">
+                            <span class="equipe-age">12-13 ans</span>
+                            <span class="equipe-effectif">20 joueurs</span>
+                        </div>
+                    </div>
+                    <div class="equipe-content">
+                        <div class="equipe-info">
+                            <p><strong><i class="fas fa-user-tie"></i> Entraîneur :</strong>David Rousseau</p>
+                            <p><strong><i class="fas fa-medal"></i> Expérience :</strong>10 ans d'expérience</p>
+                        </div>
+                        <div class="equipe-description">
+                            <p>École de rugby pour les moins de 14 ans</p>
+                        </div>
+                        <div class="equipe-planning">
+                            <h4><i class="fas fa-calendar-alt"></i> Planning d'entraînement</h4>
+                            <ul>
+                                
+                                    <li>
+                                        <strong>Mardi</strong>
+                                        <span>18h00-19h30</span>
+                                    </li>
+                                
+                                    <li>
+                                        <strong>Samedi</strong>
+                                        <span>16h00-17h30</span>
+                                    </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>  
+            
         </div>
-    </section>
-
+    </div>
+</section>
+    
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -81,25 +248,25 @@
                     </ul>
                 </div>                <div class="footer-section">
                     <h3>Suivez-nous</h3>
+                    
                     <div class="instagram-embed">
                         <iframe src="https://www.instagram.com/k.menant/embed" 
                                 width="400" 
                                 height="480" 
-                                frameborder="0" 
-                                scrolling="no" 
-                                allowtransparency="true"
+                                title="Instagram Feed"
                                 style="border: none; overflow: hidden; width: 100%; max-width: 300px; height: 350px;">
                         </iframe>
                     </div>
                 </div>
-            </div>            <div class="footer-bottom">
-                <p>&copy; 2025 Oval Saône. Tous droits réservés.</p>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Rugby Club. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
 
     <script src="js/main.js"></script>
     <script src="js/data-loader.js"></script>
-    <script src="js/equipes.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>
