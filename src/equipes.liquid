@@ -1,0 +1,57 @@
+---
+layout: layout.njk
+title: "Nos Équipes"
+description: "Découvrez nos différentes catégories et leurs entraîneurs"
+
+hero:
+  title: "Nos Équipes"
+  subtitle: "Découvrez nos différentes catégories et leurs entraîneurs"
+---
+
+<!-- Hero Section -->
+<section class="page-hero">
+    <div class="container">
+        <h1>{{ hero.title }}</h1>
+        <p>{{ hero.subtitle }}</p>
+    </div>
+</section>
+
+<!-- Section Catégories -->
+<section class="categories section intro">
+    <div class="container">
+        <div class="categories-grid" id="categories-grid">
+            <!-- Les catégories seront chargées dynamiquement depuis JSON -->
+            {% for categorie in teams %}
+                <div class="equipe-card fade-in-up">
+                    <div class="equipe-header">
+                        <h3 class="equipe-title">{{ categorie.name }}</h3>
+                        <div class="equipe-badges">
+                            <span class="equipe-age">{{ categorie.min_age }}-{{ categorie.max_age }} ans</span>
+                            <span class="equipe-effectif">{{ categorie.players_count }} joueurs</span>
+                        </div>
+                    </div>
+                    <div class="equipe-content">
+                        <div class="equipe-info">
+                            <p><strong><i class="fas fa-user-tie"></i> Entraîneur :</strong>{{ categorie.coach.name }}</p>
+                            <p><strong><i class="fas fa-medal"></i> Expérience :</strong>{{ categorie.coach.experience }}</p>
+                        </div>
+                        <div class="equipe-description">
+                            <p>{{ categorie.description }}</p>
+                        </div>
+                        <div class="equipe-planning">
+                            <h4><i class="fas fa-calendar-alt"></i> Planning d'entraînement</h4>
+                            <ul>
+                                {% for seance in categorie.schedule %}
+                                    <li>
+                                        <strong>{{ seance.day }}</strong>
+                                        <span>{{ seance.time }}</span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>  
+            {% endfor %}
+        </div>
+    </div>
+</section>

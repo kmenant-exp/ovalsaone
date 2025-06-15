@@ -1,0 +1,195 @@
+---
+layout: layout.njk
+
+histoire:
+    description: "Notre école de rugby a vu le jour en 2025, portée par une idée simple mais forte : <b>offrir aux enfants un espace où le sport est synonyme de joie, de partage et de bienveillance.</b>"
+    annee_creation: 2025
+    licencies: 180
+    equipes: 8
+    sections:
+      - titre: "Un club ouvert à tous"
+        contenu: "Ici, tout le monde est le bienvenu. Peu importe l'âge, le niveau ou l'expérience : <b>chaque enfant a sa place sur le terrain</b>. Pas de sélection, pas de pression — juste l'envie de jouer, de progresser et de s'amuser ensemble."
+      - titre: "Le sport comme outil d'épanouissement"
+        contenu: "Notre objectif n'est pas de former l'élite du rugby français, mais de faire grandir les enfants à travers les valeurs du sport collectif."
+        liste:
+          - "le respect"
+          - "l'entraide"
+          - "la persévérance"
+          - "et surtout… le plaisir de jouer"
+      - titre: "Une grande famille"
+        contenu: "Chaque entraînement est une occasion de sourire, d'apprendre, de tomber et de se relever. Notre école, c'est une grande famille où l'on célèbre chaque petit progrès comme une grande victoire."
+
+bureau:
+  - id: 1
+    nom: "GENTE"
+    prenom: "Laëtitia"
+    poste: "Présidente"
+    description: "Laëtitia a brillé sur les parquets, elle brille aujourd'hui dans notre association. Ancienne championne de basket, passionnée et bienveillante, elle s'investit avec cœur pour transmettre aux enfants les valeurs du sport collectif. Sur le terrain, elle coache avec passion et bienveillance. En dehors, son café et son sourire réchauffent les cœurs comme un rayon de soleil en hiver. Une présence précieuse, toujours là pour motiver, apaiser et rassembler."
+    photo: "/assets/bureau/GENTE_Laetitia.jpg"
+  - id: 2
+    nom: "Petit"
+    prenom: "Anne"
+    poste: "Vice-Présidente"
+    description: "Responsable de l'école de rugby, Anne coordonne les activités jeunes et veille au bon déroulement des entraînements."
+    photo: "/assets/bureau/anne-petit.jpg"
+  - id: 3
+    nom: "Bernard"
+    prenom: "François"
+    poste: "Secrétaire"
+    description: "François gère les aspects administratifs du club et assure la communication avec la fédération."
+    photo: "/assets/bureau/francois-bernard.jpg"
+  - id: 4
+    nom: "Leroy"
+    prenom: "Christine"
+    poste: "Trésorière"
+    description: "Christine veille à la bonne gestion financière du club et supervise les budgets des différentes sections."
+    photo: "/assets/bureau/christine-leroy.jpg"
+  - id: 5
+    nom: "Garcia"
+    prenom: "Julien"
+    poste: "Responsable Équipement"
+    description: "Julien s'occupe de l'entretien du matériel et de l'équipement des joueurs."
+
+entraineurs:
+  - id: 1
+    nom: "MENANT"
+    prenom: "Kevin"
+    categories: 
+        - "U6"
+        - "U8"
+    experience: "5 ans d'expérience en école de rugby"
+    diplomes: 
+        - "Éducateur Rugby"
+        - "BAFA"
+    photo: "/assets/entraineurs/MENANT_Kevin.jpg"
+    specialites: 
+        - "Éveil rugby"
+        - "Motricité"
+    formation_continue: "Formation FFR annuelle"
+  - id: 2
+    nom: "Leblanc"
+    prenom: "Marc"
+    categories: 
+        - "U8"
+    experience: "8 ans d'expérience"
+    diplomes: 
+        - "Éducateur Rugby"
+        - "CQP Rugby"
+    photo: "/assets/entraineurs/marc-leblanc.jpg"
+    specialites: 
+        - "Rugby à 5"
+        - "Apprentissage ludique"
+    formation_continue: "Stage national FFR 2023"
+---
+
+<!-- Hero Section -->
+<section class="page-hero">
+    <div class="container">
+        <h1>L'École de Rugby</h1>
+        <p>Un terrain, une famille, des valeurs.</p>
+    </div>
+</section>
+
+<!-- Histoire de l'école -->
+<section class="histoire-ecole section intro">
+    <div class="container">
+        <div class="intro-content">
+            <div class="intro-text">
+                <h2>Notre Histoire</h2>
+            </div>
+        </div>
+        <div id="histoire-content">
+            <p>{{ histoire.description }}</p>
+            <div class="histoire-stats">
+                <div class="stat-item">
+                    <span class="stat-number">{{ histoire.annee_creation }}</span>
+                    <span class="stat-label">Année de création</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">{{ histoire.licencies }}</span>
+                    <span class="stat-label">Licenciés</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">{{histoire.equipes}}</span>
+                    <span class="stat-label">Équipes</span>
+                </div>
+            </div>
+        </div>
+        <div class="histoire-sections">
+            {% for section in histoire.sections %}
+                <div class="histoire-section">
+                    <h3>{{ section.titre }}</h3>
+                    <p>{{ section.contenu }}</p>
+                    <ul>
+                        {% for item in section.liste %}
+                            <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Le Bureau -->
+<section class="bureau section bg-light">
+    <div class="container">
+        <div class="intro-content">
+            <div class="intro-text">
+                <h2>Le Bureau</h2>
+            </div>
+        </div>
+        <div class="bureau-grid" id="bureau-grid">
+            {% for membre in bureau %}
+                <div class="bureau-card">
+                    <div class="bureau-photo">
+                        <img src="{{ membre.photo }}" alt="{{ membre.prenom }} {{ membre.nom }}" 
+                            onerror="this.src='/assets/logo.png'">
+                    </div>
+                    <div class="bureau-info">
+                        <h3 class="bureau-nom">{{ membre.prenom }} {{ membre.nom }}</h3>
+                        <span class="bureau-poste">{{ membre.poste }}</span>
+                        <p class="bureau-description">{{ membre.description }}</p>
+                    </div>
+                </div>  
+            {% endfor %}
+            <!-- Les membres du bureau seront chargés dynamiquement -->
+        </div>
+    </div>
+</section>
+
+<!-- Les Entraîneurs -->
+<section class="entraineurs section">
+    <div class="container">
+        <div class="intro-content">
+            <div class="intro-text">
+                <h2>Nos Entraineurs</h2>
+            </div>
+        </div>
+        <div class="entraineurs-grid" id="entraineurs-grid">
+            {% for entraineur in entraineurs %}
+                <div class="entraineur-card">
+                    <div class="entraineur-photo">
+                        <img src="{{ entraineur.photo }}" alt="{{ entraineur.prenom }} {{ entraineur.nom }}"
+                            onerror="this.src='/assets/logo.png'">
+                    </div>
+                    <div class="entraineur-info">
+                        <h3 class="entraineur-nom">{{ entraineur.prenom }} {{ entraineur.nom }}</h3>
+                        <span class="entraineur-categories">{{ entraineur.categories | join: ', ' }}</span>
+                        <p class="entraineur-experience">{{ entraineur.experience }}</p>
+                        {% if entraineur.diplomes %}
+                            <div class="entraineur-diplomes">
+                                <strong>Diplômes :</strong> {{ entraineur.diplomes | join: ', ' }}
+                            </div>
+                        {% endif %}
+                        {% if entraineur.specialites %}
+                            <div class="entraineur-specialites">
+                                <strong>Spécialités :</strong> {{ entraineur.specialites | join: ', ' }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
