@@ -499,14 +499,6 @@ ul, ol {
     background-color: var(--white);
 }
 
-
-
-
-
-
-
-
-
 /* Responsive pour les formulaires généraux */
 @media (max-width: 768px) {
     .form-row {
@@ -537,3 +529,62 @@ ul, ol {
     }
 }
 
+section.intro {
+    padding-top: 4rem;
+}
+
+.intro-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.intro-text {
+    text-align: center;
+    /* margin-bottom: 3rem; */
+}
+
+.intro-text h2 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+    position: relative;
+}
+
+.intro-text h2 {
+    padding-bottom: var(--spacing-4);
+}
+
+.intro-text h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 2px;
+}
+
+.intro-text h2.white {
+    color: var(--white);
+}
+
+.intro-text h2.white::after {
+    background: linear-gradient(90deg, var(--white), rgba(255, 255, 255, 0.7));
+}
+
+.intro-text p {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--gray-700);
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .intro-text h2 {
+        font-size: 1.75rem;
+    }
+}

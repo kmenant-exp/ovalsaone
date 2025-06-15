@@ -7,30 +7,7 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.intro-content {
-    max-width: 1000px;
-    margin: 0 auto;
-}
 
-.intro-text {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.intro-text h2 {
-    font-size: 2.25rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.01em;
-}
-
-.intro-text p {
-    font-size: 1.125rem;
-    line-height: 1.7;
-    color: var(--gray-700);
-    margin: 0 auto;
-}
 
 /* Features grid */
 .intro-features {
@@ -415,11 +392,7 @@
     .inscription-intro {
         padding: 3rem 0;
     }
-    
-    .intro-text h2 {
-        font-size: 1.75rem;
-    }
-    
+
     .intro-features {
         grid-template-columns: 1fr;
         gap: 1.5rem;
