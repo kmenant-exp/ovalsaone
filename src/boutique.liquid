@@ -1,0 +1,118 @@
+---
+layout: layout.njk
+title: Boutique - Oval Saône
+hero_title: Notre Boutique
+hero_description: Équipements et produits dérivés du club
+products_title: Nos Produits Phares
+products_description: Découvrez notre sélection de produits officiels du club. Pour voir l'intégralité de notre boutique et passer commande, visitez notre boutique en ligne.
+
+products:
+  - id: 1
+    name: "Maillot de match domicile"
+    description: "Maillot officiel du club avec logo brodé, technologie anti-transpiration"
+    price: 65
+    image: "assets/boutique/maillot-domicile.jpg"
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"]
+    categories: ["Maillots", "Officiel"]
+    stock: 25
+    available: true
+    url: "https://www.rugbyclub.fr/boutique/maillot-domicile"
+  - id: 2
+    name: "Sweat-shirt à capuche"
+    description: "Sweat confortable avec logo du club, parfait pour l'échauffement"
+    price: 45
+    image: "assets/boutique/sweat-capuche.jpg"
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"]
+    categories: ["Sweats", "Casual"]
+    stock: 22
+    available: true
+    url: "https://www.rugbyclub.fr/boutique/sweat-capuche"
+  - id: 3
+    name: "Casquette Oval Saône"
+    description: "Casquette ajustable aux couleurs du club"
+    price: 18
+    image: "assets/boutique/casquette.jpg"
+    sizes: ["Unique"]
+    categories: ["Accessoires", "Casual"]
+    stock: 35
+    available: true
+    url: "https://www.rugbyclub.fr/boutique/casquette"
+
+shop_title: Envie de découvrir tous nos produits ?
+shop_description: Retrouvez l'intégralité de notre boutique officielle avec tous nos équipements, produits dérivés et goodies du club.
+---
+
+<!-- Hero Section -->
+<section class="page-hero">
+    <div class="container">
+        <h1>{{ hero_title }}</h1>
+        <p>{{ hero_description }}</p>
+    </div>
+</section>
+
+<!-- Boutique -->
+<section class="boutique section intro">
+    <div class="container">
+        <!-- Introduction -->
+        <div class="intro-content">
+            <div class="intro-text">
+                <h2>{{ products_title }}</h2>
+                <p>{{ products_description }}</p>
+            </div>
+        </div>
+        
+        <!-- Produits phares -->
+        <div class="produits-featured" id="produits-featured">
+            {% for product in products %}
+                <div class="produit-featured-card">
+                    <div class="produit-image">
+                        <img src="{{ product.image }}" alt="{{ product.name }}" onerror="this.src='/assets/logo.png'">
+                        <div class="produit-badge">Produit phare</div>
+                    </div>
+                    <div class="produit-info">
+                        <h3 class="produit-nom">{{ product.name }}</h3>
+                        <p class="produit-description">{{ product.description }}</p>
+                        <div class="produit-details">
+                            <span class="produit-prix">{{ product.price }}€</span>
+                            {% if product.sizes %}
+                                <span class="produit-tailles">Tailles: {{ product.sizes | join: ', ' }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="produit-stock">Stock: {{ product.stock }}</div>
+                        <a href="{{ product.url }}" class="btn btn-primary" data-produit="{{ product.name }}">
+                            <i class="fas fa-eye"></i>
+                            Voir sur HelloAsso
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Call to Action -->
+        <div class="boutique-cta">
+            <h3>{{ shop_title }}</h3>
+            <p>{{ shop_description }}</p>
+            <a href="https://helloasso.com/associations/rugby-club" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="btn btn-primary btn-large boutique-cta-btn">
+                <i class="fas fa-shopping-cart"></i>
+                Visiter notre boutique HelloAsso
+            </a>
+            <div class="boutique-avantages">
+                <div class="avantage-item">
+                    <i class="fas fa-shipping-fast"></i>
+                    <span>Livraison gratuite dès 50€</span>
+                </div>
+                <div class="avantage-item">
+                    <i class="fas fa-undo"></i>
+                    <span>Retour gratuit sous 14 jours</span>
+                </div>
+                <div class="avantage-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Paiement 100% sécurisé</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
