@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Association de Rugby - Accueil</title>
+    <link rel="stylesheet" href="css-bundle.css">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+</head>
+<body>
+    <!-- Bandeau cookies RGPD -->
+    <div id="cookie-banner" class="cookie-banner hidden">
+        <div class="cookie-content">
+            <p>Ce site utilise des cookies pour améliorer votre expérience. En continuant à naviguer, vous acceptez notre utilisation des cookies.</p>
+            <div class="cookie-buttons">
+                <button id="accept-cookies" class="btn btn-primary">Accepter</button>
+                <button id="decline-cookies" class="btn btn-secondary">Refuser</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation fixe -->
+    <div class="menu-overlay" id="menu-overlay"></div>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">            <a href="index.html" class="nav-logo">
+                <img src="assets/logo.png" alt="Logo Association Rugby" id="nav-logo-img">
+                <span>Oval Saône</span>
+            </a>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#accueil" class="nav-link active">Accueil</a>
+                <a href="equipes.html" class="nav-link">Équipes</a>
+                <a href="ecole.html" class="nav-link">L'École</a>
+                <a href="partenariat.html" class="nav-link">Partenariat & Dons</a>
+                <a href="boutique.html" class="nav-link">Boutique</a>
+                <a href="inscription.html" class="nav-link">Inscription</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>    
+    </nav>
+
+    
+<!-- Section Hero avec effet parallax -->
+<section id="accueil" class="hero parallax-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-logo">
+            <img src="assets/logo.png" alt="Logo École de Rugby">
+        </div>
+        <h1 class="hero-title">Bienvenue à l'École de Rugby</h1>
+        <p class="hero-subtitle">Formez-vous aux valeurs du rugby : respect, esprit d'équipe et dépassement de soi</p>
+        <p class="hero-description">Notre école accueille des enfants et adolescents de 4 à 14 ans dans un cadre
+            convivial et professionnel.</p>
+        <div class="hero-buttons">
+            <a href="inscription.html" class="btn btn-primary btn-large">Nous rejoindre</a>
+            <a href="ecole.html" class="btn btn-outline-white btn-large">En savoir plus</a>
+        </div>
+    </div>
+    <!-- Indicateur de défilement -->
+    <div class="scroll-indicator">
+        <span class="scroll-indicator-text">Découvrir</span>
+        <div class="scroll-indicator-icon"></div>
+    </div>
+</section>
+
+<!-- Section Actualités -->
+<section class="actualites section">
+    <div class="container">
+        <div class="intro-content">
+            <div class="intro-text">
+                <h2>Actualités</h2>
+            </div>
+        </div>
+        <div class="actualites-grid" id="actualites-grid">
+            <!-- Les actualités seront chargées dynamiquement depuis JSON -->
+        </div>
+    </div>
+</section>
+
+<!-- Section Histoire du club avec parallax -->
+<section class="histoire parallax-section">
+    <div class="parallax-overlay"></div>
+    <div class="container">
+        <div class="histoire-content">
+            <div class="intro-content">
+                <div class="intro-text">
+                    <h2 class="white">Notre histoire</h2>
+                </div>
+            </div>
+            <p class="histoire-text">L’Ecole de Rugby Oval’Saône est née de la volonté des entraîneurs et de certains
+                parents de créer un club convivial et familial, au sein duquel les enfants découvrent le rugby et
+                prennent plaisir à jouer. Implanté sur la commune de Trévoux, les jeunes s'entraînent au stade de
+                Chamalan (Quincieux)</p>
+            <a href="ecole.html" class="btn btn-outline-white">En savoir plus</a>
+        </div>
+    </div>
+</section>
+
+<!-- Section Sponsors -->
+<section class="sponsors">
+    <div class="container">
+        <div class="intro-content">
+            <div class="intro-text">
+                <h2>Ils nous soutiennent</h2>
+            </div>
+        </div>
+        <div class="sponsors-intro">
+            <p>Nos partenaires sont essentiels au développement de notre club. Particuliers ou entreprises, vous aussi
+                pouvez nous soutenir !</p>
+            <a href="partenariat.html" class="btn btn-primary">
+                <i class="fas fa-handshake"></i>
+                Devenir partenaire
+            </a>
+        </div>
+        <div class="sponsors-carousel-container">
+            <div class="sponsors-carousel" id="sponsors-carousel">
+                <!-- Les sponsors seront chargés dynamiquement depuis JSON -->
+            </div>
+        </div>
+    </div>
+</section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> edr.ovalsaone@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> 06 83 62 27 10</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 420 Route de Reyrieux, 01600 Sainte-Euphémie</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Liens rapides</h3>
+                    <ul>
+                        <li><a href="inscription.html">Inscription</a></li>
+                        <li><a href="equipes.html">Nos équipes</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>                <div class="footer-section">
+                    <h3>Suivez-nous</h3>
+                    
+                    <div class="instagram-embed">
+                        <iframe src="https://www.instagram.com/k.menant/embed" 
+                                width="400" 
+                                height="480" 
+                                title="Instagram Feed"
+                                style="border: none; overflow: hidden; width: 100%; max-width: 300px; height: 350px;">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Rugby Club. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/data-loader.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>

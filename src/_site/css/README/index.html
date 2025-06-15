@@ -1,0 +1,72 @@
+<h1>Architecture CSS du Site</h1>
+<p>Ce dossier contient l'ensemble des styles CSS du site de rugby, organisés selon une architecture modulaire.</p>
+<h2>Structure générale</h2>
+<pre><code>css/
+├── README.md              # Ce fichier
+├── styles.css            # Styles globaux et variables CSS
+├── cookie-banner.css     # Styles pour le bandeau de cookies
+├── sponsors.css          # Styles pour la section sponsors
+├── components/           # Composants réutilisables
+│   ├── README.md
+│   ├── footer.css       # Footer du site
+│   └── nav.css          # Navigation principale
+└── pages/               # Styles spécifiques aux pages
+    ├── README.md
+    ├── index.css        # Page d'accueil
+    ├── contact.css      # Page de contact
+    ├── ecole.css        # Page école de rugby
+    ├── equipes.css      # Page équipes
+    ├── inscription.css  # Page inscription
+    ├── boutique.css     # Page boutique
+    └── partenariat.css  # Page partenariat
+</code></pre>
+<h2>Ordre d'inclusion dans les pages HTML</h2>
+<p>Pour une page type, les CSS doivent être inclus dans cet ordre :</p>
+<pre><code class="language-html">&lt;head&gt;
+    &lt;!-- 1. Styles globaux et variables --&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/styles.css&quot;&gt;
+    
+    &lt;!-- 2. Composants réutilisables --&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/components/nav.css&quot;&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/components/footer.css&quot;&gt;
+    
+    &lt;!-- 3. Styles spécifiques à la page --&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/pages/[page-name].css&quot;&gt;
+    
+    &lt;!-- 4. Styles utilitaires --&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/cookie-banner.css&quot;&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/sponsors.css&quot;&gt;
+&lt;/head&gt;
+</code></pre>
+<h2>Variables CSS globales</h2>
+<p>Le fichier <code>styles.css</code> définit les variables CSS utilisées dans tout le projet :</p>
+<ul>
+<li><strong>Couleurs</strong> : <code>--primary-color</code>, <code>--secondary-color</code>, <code>--accent-color</code>, etc.</li>
+<li><strong>Espacements</strong> : <code>--spacing-1</code> à <code>--spacing-24</code></li>
+<li><strong>Tailles de police</strong> : <code>--font-size-xs</code> à <code>--font-size-4xl</code></li>
+<li><strong>Autres</strong> : <code>--border-radius</code>, <code>--box-shadow</code>, etc.</li>
+</ul>
+<h2>Composants modulaires</h2>
+<h3>Navigation (<code>components/nav.css</code>)</h3>
+<ul>
+<li>Barre de navigation fixe responsive</li>
+<li>Menu mobile avec animation hamburger</li>
+<li>Effets de survol et états actifs</li>
+</ul>
+<h3>Footer (<code>components/footer.css</code>)</h3>
+<ul>
+<li>Footer responsive avec grille</li>
+<li>Sections contact, liens, réseaux sociaux</li>
+<li>Intégration Instagram</li>
+</ul>
+<h2>Pages spécialisées</h2>
+<p>Chaque page a son propre fichier CSS dans <code>pages/</code> contenant uniquement les styles spécifiques à cette page.</p>
+<h2>Maintenance</h2>
+<p>Lors de l'ajout de nouveaux styles :</p>
+<ol>
+<li><strong>Styles globaux</strong> → <code>styles.css</code></li>
+<li><strong>Nouveau composant réutilisable</strong> → <code>components/[nom].css</code></li>
+<li><strong>Styles spécifiques à une page</strong> → <code>pages/[page].css</code></li>
+</ol>
+<h2>Responsive Design</h2>
+<p>Tous les composants et pages sont conçus avec une approche mobile-first et utilisent des media queries pour s'adapter aux différentes tailles d'écran.</p>

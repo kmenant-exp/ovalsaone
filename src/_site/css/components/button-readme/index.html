@@ -1,0 +1,54 @@
+<h1>Composant Boutons - Documentation</h1>
+<p>Ce fichier CSS centralise tous les styles de boutons utilisés dans l'application Oval Saône.</p>
+<h2>Classes disponibles</h2>
+<h3>Classes de base</h3>
+<ul>
+<li><code>.btn</code> : Style de base pour tous les boutons</li>
+</ul>
+<h3>Types de boutons</h3>
+<ul>
+<li><code>.btn-primary</code> : Bouton principal (vert club)</li>
+<li><code>.btn-secondary</code> : Bouton secondaire (bordure verte, fond clair)</li>
+<li><code>.btn-outline-white</code> : Bouton avec bordure blanche (pour fonds sombres)</li>
+</ul>
+<h3>Tailles</h3>
+<ul>
+<li><code>.btn-large</code> : Bouton large avec style majuscule</li>
+<li><code>.btn-small</code> : Bouton petit</li>
+</ul>
+<h3>Styles spéciaux</h3>
+<ul>
+<li><code>.btn-gradient</code> : Bouton avec gradient (style partenariat)</li>
+<li><code>.btn-submit</code> : Bouton de soumission de formulaire</li>
+</ul>
+<h3>États</h3>
+<ul>
+<li><code>.btn:disabled</code> ou <code>.btn.loading</code> : État désactivé</li>
+</ul>
+<h2>Exemples d'utilisation</h2>
+<pre><code class="language-html">&lt;!-- Bouton principal standard --&gt;
+&lt;a href=&quot;#&quot; class=&quot;btn btn-primary&quot;&gt;Mon bouton&lt;/a&gt;
+
+&lt;!-- Bouton large pour call-to-action --&gt;
+&lt;a href=&quot;#&quot; class=&quot;btn btn-primary btn-large&quot;&gt;Nous rejoindre&lt;/a&gt;
+
+&lt;!-- Bouton avec gradient (partenariat) --&gt;
+&lt;a href=&quot;#&quot; class=&quot;btn btn-primary btn-large btn-gradient&quot;&gt;
+    &lt;i class=&quot;fas fa-handshake&quot;&gt;&lt;/i&gt;
+    Devenir Partenaire
+&lt;/a&gt;
+
+&lt;!-- Bouton de formulaire --&gt;
+&lt;button type=&quot;submit&quot; class=&quot;btn-submit&quot;&gt;Envoyer&lt;/button&gt;
+</code></pre>
+<h2>Notes importantes</h2>
+<ul>
+<li>Tous les boutons héritent des transitions et animations de base</li>
+<li>Les icônes dans les boutons sont automatiquement stylées</li>
+<li>Le composant est entièrement responsive</li>
+<li>Les variables CSS du projet sont utilisées pour la cohérence</li>
+</ul>
+<h2>Integration</h2>
+<p>Pour utiliser ce composant, ajoutez l'import CSS dans vos pages HTML :</p>
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;css/components/button.css&quot;&gt;
+</code></pre>

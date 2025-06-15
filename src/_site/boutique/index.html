@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutique - Oval Saône</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components/button.css">
+    <link rel="stylesheet" href="css/pages/boutique.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Bandeau cookies RGPD -->
+    <div id="cookie-banner" class="cookie-banner hidden">
+        <div class="cookie-content">
+            <p>Ce site utilise des cookies pour améliorer votre expérience. En continuant à naviguer, vous acceptez notre utilisation des cookies.</p>
+            <div class="cookie-buttons">
+                <button id="accept-cookies" class="btn btn-primary">Accepter</button>
+                <button id="decline-cookies" class="btn btn-secondary">Refuser</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="menu-overlay" id="menu-overlay"></div>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">            <a href="index.html" class="nav-logo">
+                <img src="assets/logo.png" alt="Logo Association Rugby" id="nav-logo-img">
+                <span>Oval Saône</span>
+            </a>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="equipes.html" class="nav-link">Équipes</a>
+                <a href="ecole.html" class="nav-link">L'École</a>
+                <a href="partenariat.html" class="nav-link">Partenariat & Dons</a>
+                <a href="boutique.html" class="nav-link active">Boutique</a>
+                <a href="inscription.html" class="nav-link">Inscription</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Notre Boutique</h1>
+            <p>Équipements et produits dérivés du club</p>
+        </div>
+    </section>
+
+    <!-- Boutique -->
+    <section class="boutique section intro">
+        <div class="container">
+            <!-- Introduction -->
+            <div class="intro-content">
+                <div class="intro-text">
+                    <h2>Nos Produits Phares</h2>
+                    <p>Découvrez notre sélection de produits officiels du club. Pour voir l'intégralité de notre boutique et passer commande, visitez notre boutique en ligne.</p>
+                </div>
+            </div>
+            
+            <!-- Produits phares -->
+            <div class="produits-featured" id="produits-featured">
+                <!-- Les 3 produits seront chargés dynamiquement -->
+            </div>
+            
+            <!-- Call to Action -->
+            <div class="boutique-cta">
+                <h3>Envie de découvrir tous nos produits ?</h3>
+                <p>Retrouvez l'intégralité de notre boutique officielle avec tous nos équipements, produits dérivés et goodies du club.</p>
+                <a href="https://helloasso.com/associations/rugby-club" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="btn btn-primary btn-large boutique-cta-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                    Visiter notre boutique HelloAsso
+                </a>
+                <div class="boutique-avantages">
+                    <div class="avantage-item">
+                        <i class="fas fa-shipping-fast"></i>
+                        <span>Livraison gratuite dès 50€</span>
+                    </div>
+                    <div class="avantage-item">
+                        <i class="fas fa-undo"></i>
+                        <span>Retour gratuit sous 14 jours</span>
+                    </div>
+                    <div class="avantage-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Paiement 100% sécurisé</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> edr.ovalsaone@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> 06 83 62 27 10</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 420 Route de Reyrieux, 01600 Sainte-Euphémie</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Liens rapides</h3>
+                    <ul>
+                        <li><a href="inscription.html">Inscription</a></li>
+                        <li><a href="equipes.html">Nos équipes</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>                <div class="footer-section">
+                    <h3>Suivez-nous</h3>
+                    <div class="instagram-embed">
+                        <iframe src="https://www.instagram.com/k.menant/embed" 
+                                width="400" 
+                                height="480" 
+                                frameborder="0" 
+                                scrolling="no" 
+                                allowtransparency="true"
+                                style="border: none; overflow: hidden; width: 100%; max-width: 300px; height: 350px;">
+                        </iframe>
+                    </div>
+                </div>
+            </div>            <div class="footer-bottom">
+                <p>&copy; 2025 Oval Saône. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/data-loader.js"></script>
+    <script src="js/boutique.js"></script>
+</body>
+</html>
