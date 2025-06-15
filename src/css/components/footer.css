@@ -30,6 +30,11 @@
     transition: color 0.3s ease;
 }
 
+/* Liens rapides en blanc */
+.footer-section:nth-child(2) ul li a {
+    color: var(--white) !important;
+}
+
 .footer-section a:hover {
     color: var(--white);
 }

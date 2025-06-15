@@ -8,17 +8,24 @@ hero:
   subtitle: "Découvrez nos différentes catégories et leurs entraîneurs"
 ---
 
-<!-- Hero Section -->
-<section class="page-hero">
-    <div class="container">
-        <h1>{{ hero.title }}</h1>
-        <p>{{ hero.subtitle }}</p>
+<!-- Hero Section avec effet parallax -->
+<section class="hero parallax-section equipes-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1 class="hero-title">{{ hero.title }}</h1>
+        <p class="hero-subtitle">{{ hero.subtitle }}</p>
     </div>
 </section>
 
 <!-- Section Catégories -->
 <section class="categories section intro">
     <div class="container">
+        <div class="intro-content">
+            <div class="intro-text">
+                <h2>Nos équipes, notre fierté</h2>
+                <p>Plaisir, respect et camaraderie : nos équipes de jeunes de U4 à U14 grandissent ensemble autour des vraies valeurs du rugby.</p>
+            </div>
+        </div>
         <div class="categories-grid" id="categories-grid">
             <!-- Les catégories seront chargées dynamiquement depuis JSON -->
             {% for categorie in teams %}
