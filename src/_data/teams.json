@@ -1,0 +1,104 @@
+[
+    {
+        "id": 1,
+        "name": "U6",
+        "description": "École de rugby pour les moins de 6 ans",
+        "min_age": 3,
+        "max_age": 5,
+        "head_count": 15,
+        "coach": {
+            "name": "Sophie Durand",
+            "experience": "5 ans d'expérience"
+        },
+        "schedule": [
+            {
+                "day": "Samedi",
+                "time": "9h00-10h00"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "U8",
+        "description": "École de rugby pour les moins de 8 ans",
+        "min_age": 6,
+        "max_age": 7,
+        "head_count": 18,
+        "coach": {
+            "name": "Marc Leblanc",
+            "experience": "8 ans d'expérience"
+        },
+        "schedule": [
+            {
+                "day": "Samedi",
+                "time": "10h15-11h30"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "U10",
+        "description": "École de rugby pour les moins de 10 ans",
+        "min_age": 8,
+        "max_age": 9,
+        "head_count": 22,
+        "coach": {
+            "name": "Pierre Moreau",
+            "experience": "12 ans d'expérience"
+        },
+        "schedule": [
+            {
+                "day": "Mercredi",
+                "time": "14h00-15h30"
+            },
+            {
+                "day": "Samedi",
+                "time": "14h00-15h30"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "U12",
+        "description": "École de rugby pour les moins de 12 ans",
+        "min_age": 10,
+        "max_age": 11,
+        "head_count": 25,
+        "coach": {
+            "name": "Jean-Claude Martin",
+            "experience": "15 ans d'expérience"
+        },
+        "schedule": [
+            {
+                "day": "Mercredi",
+                "time": "16h00-17h30"
+            },
+            {
+                "day": "Samedi",
+                "time": "15h45-17h15"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "name": "U14",
+        "description": "École de rugby pour les moins de 14 ans",
+        "min_age": 12,
+        "max_age": 13,
+        "head_count": 20,
+        "coach": {
+            "name": "David Rousseau",
+            "experience": "10 ans d'expérience"
+        },
+        "schedule": [
+            {
+                "day": "Mardi",
+                "time": "18h00-19h30"
+            },
+            {
+                "day": "Samedi",
+                "time": "16h00-17h30"
+            }
+        ]
+    }
+]

@@ -2,106 +2,17 @@
 layout: layout.njk
 title: "Nos Équipes"
 description: "Découvrez nos différentes catégories et leurs entraîneurs"
-categories:
-  - id: 1
-    nom: "U6"
-    description: "École de rugby pour les moins de 6 ans"
-    age_min: 3
-    age_max: 5
-    effectif: 15
-    entraineur:
-        nom: "Sophie Durand"
-        experience: "5 ans d'expérience"
-        diplomes: 
-            - "Éducateur Rugby"
-            - "BAFA"
-        photo: "assets/entraineurs/sophie-durand.jpg"
-    planning:
-      - jour: "Samedi"
-        heure: "9h00-10h00"
-    description_activites: "Découverte du rugby par le jeu, développement de la motricité et des valeurs du rugby."
-  - id: 2
-    nom: "U8"
-    description: "École de rugby pour les moins de 8 ans"
-    age_min: 6
-    age_max: 7
-    effectif: 18
-    entraineur:
-        nom: "Marc Leblanc"
-        experience: "8 ans d'expérience"
-        diplomes:
-            - "Éducateur Rugby"
-            - "CQP Rugby"
-        photo: "assets/entraineurs/marc-leblanc.jpg"
-    planning:
-      - jour: "Samedi"
-        heure: "10h15-11h30"
-    description_activites: "Apprentissage des gestes de base, jeux collectifs, initiation au rugby à 5."
-  - id: 3
-    nom: "U10"
-    description: "École de rugby pour les moins de 10 ans"
-    age_min: 8
-    age_max: 9
-    effectif: 22
-    entraineur:
-        nom: "Pierre Moreau"
-        experience: "12 ans d'expérience"
-        diplomes:
-            - "Éducateur Rugby"
-            - "Initiateur FFR"
-        photo: "assets/entraineurs/pierre-moreau.jpg"
-    planning:
-      - jour: "Mercredi"
-        heure: "14h00-15h30"
-      - jour: "Samedi"
-        heure: "14h00-15h30"
-    description_activites: "Rugby à 7, apprentissage des phases de jeu, développement technique."
-  - id: 4
-    nom: "U12"
-    description: "École de rugby pour les moins de 12 ans"
-    age_min: 10
-    age_max: 11
-    effectif: 25
-    entraineur:
-        nom: "Jean-Claude Martin"
-        experience: "15 ans d'expérience"
-        diplomes:
-            - "Entraîneur FFR"
-            - "BEES 1"
-        photo: "assets/entraineurs/jc-martin.jpg"
-    planning:
-      - jour: "Mercredi"
-        heure: "16h00-17h30"
-      - jour: "Samedi"
-        heure: "15h45-17h15"
-    description_activites: "Rugby à 9, perfectionnement technique, préparation physique adaptée."
-  - id: 5
-    nom: "U14"
-    description: "École de rugby pour les moins de 14 ans"
-    age_min: 12
-    age_max: 13
-    effectif: 20
-    entraineur:
-        nom: "David Rousseau"
-        experience: "10 ans d'expérience"
-        diplomes:
-            - "Entraîneur FFR"
-            - "DEJEPS"
-        photo: "assets/entraineurs/david-rousseau.jpg"
-    planning:
-      - jour: "Mardi"
-        heure: "18h00-19h30"
-      - jour: "Samedi"
-        heure: "16h00-17h30"
-    description_activites: "Rugby à 12, tactique de base, préparation physique renforcée."
 
+hero:
+  title: "Nos Équipes"
+  subtitle: "Découvrez nos différentes catégories et leurs entraîneurs"
 ---
 
 <!-- Hero Section -->
 <section class="page-hero">
     <div class="container">
-        <h1>Nos Équipes</h1>
-        <p>Découvrez nos différentes catégories et leurs entraîneurs</p>
+        <h1>{{ hero.title }}</h1>
+        <p>{{ hero.subtitle }}</p>
     </div>
 </section>
 
@@ -110,30 +21,30 @@ categories:
     <div class="container">
         <div class="categories-grid" id="categories-grid">
             <!-- Les catégories seront chargées dynamiquement depuis JSON -->
-            {% for categorie in categories %}
+            {% for categorie in teams %}
                 <div class="equipe-card fade-in-up">
                     <div class="equipe-header">
-                        <h3 class="equipe-title">{{ categorie.nom  }}</h3>
+                        <h3 class="equipe-title">{{ categorie.name }}</h3>
                         <div class="equipe-badges">
-                            <span class="equipe-age">{{ categorie.age_min }}-{{ categorie.age_max }} ans</span>
-                            <span class="equipe-effectif">{{ categorie.effectif }} joueurs</span>
+                            <span class="equipe-age">{{ categorie.min_age }}-{{ categorie.max_age }} ans</span>
+                            <span class="equipe-effectif">{{ categorie.players_count }} joueurs</span>
                         </div>
                     </div>
                     <div class="equipe-content">
                         <div class="equipe-info">
-                            <p><strong><i class="fas fa-user-tie"></i> Entraîneur :</strong>{{ categorie.entraineur.nom }}</p>
-                            <p><strong><i class="fas fa-medal"></i> Expérience :</strong>{{ categorie.entraineur.experience }}</p>
+                            <p><strong><i class="fas fa-user-tie"></i> Entraîneur :</strong>{{ categorie.coach.name }}</p>
+                            <p><strong><i class="fas fa-medal"></i> Expérience :</strong>{{ categorie.coach.experience }}</p>
                         </div>
                         <div class="equipe-description">
-                            <p>{{ categorie.description  }}</p>
+                            <p>{{ categorie.description }}</p>
                         </div>
                         <div class="equipe-planning">
                             <h4><i class="fas fa-calendar-alt"></i> Planning d'entraînement</h4>
                             <ul>
-                                {% for seance in categorie.planning %}
+                                {% for seance in categorie.schedule %}
                                     <li>
-                                        <strong>{{ seance.jour }}</strong>
-                                        <span>{{ seance.heure }}</span>
+                                        <strong>{{ seance.day }}</strong>
+                                        <span>{{ seance.time }}</span>
                                     </li>
                                 {% endfor %}
                             </ul>

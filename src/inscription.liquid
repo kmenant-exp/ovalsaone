@@ -1,0 +1,275 @@
+---
+layout: layout.njk
+title: Inscription - Oval Saône
+
+# Configuration des textes
+hero:
+  title: "Inscription"
+  subtitle: "Rejoignez notre club et vivez la passion du rugby"
+
+intro:
+  title: "Votre enfant rêve de jouer au rugby ?"
+  description: "Chers parents, nous comprenons que l'envie de découvrir le rugby peut naître chez votre enfant à tout moment de l'année. À l'École de Rugby Oval Saône, nous accueillons avec plaisir les nouveaux jeunes joueurs tout au long de la saison sportive. Notre objectif est d'offrir à votre enfant un environnement bienveillant où il pourra développer ses compétences sportives, apprendre les valeurs du rugby et se faire de nouveaux amis dans une ambiance conviviale et familiale."
+  features:
+    - icon: "fas fa-play-circle"
+      title: "Séance d'essai gratuite"
+      description: "Offrez à votre enfant la possibilité de découvrir le rugby lors d'une séance d'essai gratuite et sans engagement pour vous."
+    - icon: "fas fa-clock"
+      title: "Inscription en cours d'année"
+      description: "Votre enfant peut rejoindre notre école de rugby à tout moment de l'année, selon vos contraintes familiales."
+    - icon: "fas fa-users"
+      title: "Encadrement bienveillant"
+      description: "Nos éducateurs diplômés accompagnent chaque enfant individuellement pour garantir son épanouissement et sa progression."
+
+sidebar:
+  tarif:
+    icon: "fas fa-euro-sign"
+    title: "Tarif unique"
+    price: 120
+    description: "Comprend : licence FFR, assurance, maillot d'entraînement"
+  documents:
+    icon: "fas fa-file-alt"
+    title: "Documents requis"
+    list:
+      - name: "Certificat médical d'aptitude au rugby"
+        required: true
+        description: "Certificat médical datant de moins de 6 mois"
+        template: "assets/documents/certificat-medical-modele.pdf"
+      - name: "Fiche d'inscription complétée"
+        required: true
+        description: "Fiche d'inscription du club dûment remplie et signée"
+        template: "assets/documents/fiche-inscription.pdf"
+      - name: "Copie de la carte d'identité du licencié"
+        required: true
+        description: "Pièce d'identité en cours de validité (recto-verso)"
+      - name: "Autorisation parentale (mineurs)"
+        required: true
+        description: "Pour les mineurs : autorisation signée des deux parents"
+        template: "assets/documents/autorisation-parentale.pdf"
+  contact:
+    icon: "fas fa-phone"
+    title: "Besoin d'aide ?"
+    email: "edr.ovalsaone@gmail.com"
+    phone: "06 83 62 27 10"
+
+form:
+  title: "Formulaire d'inscription"
+  subtitle: "Complétez les informations ci-dessous pour inscrire votre enfant"
+  sections:
+    enfant:
+      icon: "fas fa-child"
+      title: "Informations de l'enfant"
+      fields:
+        prenom:
+          label: "Prénom"
+          placeholder: "Prénom de l'enfant"
+          required: true
+        nom:
+          label: "Nom"
+          placeholder: "Nom de famille"
+          required: true
+        date_naissance:
+          label: "Date de naissance"
+          required: true
+        categorie:
+          label: "Catégorie d'âge"
+          placeholder: "Sélectionner une catégorie"
+          required: true
+    responsable:
+      icon: "fas fa-user"
+      title: "Responsable légal"
+      fields:
+        prenom:
+          label: "Prénom"
+          placeholder: "Votre prénom"
+          required: true
+        nom:
+          label: "Nom"
+          placeholder: "Votre nom"
+          required: true
+        email:
+          label: "Email"
+          placeholder: "votre.email@exemple.com"
+          required: true
+        telephone:
+          label: "Téléphone"
+          placeholder: "06 12 34 56 78"
+          required: true
+  submit:
+    icon: "fas fa-paper-plane"
+    text: "Envoyer l'inscription"
+---
+<!-- Hero Section -->
+<section class="page-hero">
+    <div class="container">
+        <h1>{{ hero.title }}</h1>
+        <p>{{ hero.subtitle }}</p>
+    </div>
+</section>
+
+<!-- Section d'introduction -->
+<section class="inscription-intro section intro">
+    <div class="container">
+        <div class="intro-content">
+            <div class="intro-text">
+                <h2>{{ intro.title }}</h2>
+                <p>{{ intro.description }}</p>
+            </div>
+            
+            <div class="intro-features">
+                {% for feature in intro.features %}
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="{{ feature.icon }}"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>{{ feature.title }}</h3>
+                        <p>{{ feature.description }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section principale d'inscription -->
+<section class="inscription-main">
+    <div class="container">
+        <div class="inscription-layout">
+            <!-- Sidebar avec informations -->
+            <aside class="inscription-sidebar">
+                <!-- Tarif -->
+                <div class="info-card">
+                    <div class="info-header">
+                        <i class="{{ sidebar.tarif.icon }}"></i>
+                        <h3>{{ sidebar.tarif.title }}</h3>
+                    </div>
+                    <div class="info-content" id="tarifs-content">
+                        <div class="price-display">
+                            <div class="price-amount">{{ sidebar.tarif.price }} €</div>
+                            <div class="price-description">Pour toutes les catégories</div>
+                        </div>
+                        <p style="color: var(--gray-600); font-size: 0.875rem; text-align: center; line-height: 1.5;">
+                            {{ sidebar.tarif.description }}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Documents essentiels -->
+                <div class="info-card">
+                    <div class="info-header">
+                        <i class="{{ sidebar.documents.icon }}"></i>
+                        <h3>{{ sidebar.documents.title }}</h3>
+                    </div>
+                    <div class="info-content">
+                        <ul class="document-list" id="documents-list">
+                            {% for document in sidebar.documents.list %}
+                                <li>
+                                    <i class="fas fa-file-alt"></i>
+                                    {{ document.name }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div class="info-card">
+                    <div class="info-header">
+                        <i class="{{ sidebar.contact.icon }}"></i>
+                        <h3>{{ sidebar.contact.title }}</h3>
+                    </div>
+                    <div class="info-content">
+                        <p><i class="fas fa-envelope"></i> {{ sidebar.contact.email }}</p>
+                        <p><i class="fas fa-phone"></i> {{ sidebar.contact.phone }}</p>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Formulaire principal -->
+            <main class="inscription-form-main">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h2>{{ form.title }}</h2>
+                        <p>{{ form.subtitle }}</p>
+                    </div>
+
+                    <form id="inscription-form" class="modern-form">
+                        <!-- Section Enfant -->
+                        <fieldset class="form-section">
+                            <legend>
+                                <i class="{{ form.sections.enfant.icon }}"></i>
+                                {{ form.sections.enfant.title }}
+                            </legend>
+                            
+                            <div class="form-grid">
+                                <div class="form-field">
+                                    <label for="prenom-enfant">{{ form.sections.enfant.fields.prenom.label }}{% if form.sections.enfant.fields.prenom.required %} *{% endif %}</label>
+                                    <input type="text" id="prenom-enfant" name="prenomEnfant" {% if form.sections.enfant.fields.prenom.required %}required{% endif %} placeholder="{{ form.sections.enfant.fields.prenom.placeholder }}">
+                                </div>
+                                <div class="form-field">
+                                    <label for="nom-enfant">{{ form.sections.enfant.fields.nom.label }}{% if form.sections.enfant.fields.nom.required %} *{% endif %}</label>
+                                    <input type="text" id="nom-enfant" name="nomEnfant" {% if form.sections.enfant.fields.nom.required %}required{% endif %} placeholder="{{ form.sections.enfant.fields.nom.placeholder }}">
+                                </div>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-field">
+                                    <label for="date-naissance">{{ form.sections.enfant.fields.date_naissance.label }}{% if form.sections.enfant.fields.date_naissance.required %} *{% endif %}</label>
+                                    <input type="date" id="date-naissance" name="dateNaissance" {% if form.sections.enfant.fields.date_naissance.required %}required{% endif %}>
+                                </div>
+                                <div class="form-field">
+                                    <label for="categorie">{{ form.sections.enfant.fields.categorie.label }}{% if form.sections.enfant.fields.categorie.required %} *{% endif %}</label>
+                                    <select id="categorie" name="categorie" {% if form.sections.enfant.fields.categorie.required %}required{% endif %}>
+                                        <option value="">{{ form.sections.enfant.fields.categorie.placeholder }}</option>
+                                        {% for team in teams %}
+                                            <option value="{{ team.name }}">{{ team.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- Section Responsable -->
+                        <fieldset class="form-section">
+                            <legend>
+                                <i class="{{ form.sections.responsable.icon }}"></i>
+                                {{ form.sections.responsable.title }}
+                            </legend>
+                            
+                            <div class="form-grid">
+                                <div class="form-field">
+                                    <label for="prenom-responsable">{{ form.sections.responsable.fields.prenom.label }}{% if form.sections.responsable.fields.prenom.required %} *{% endif %}</label>
+                                    <input type="text" id="prenom-responsable" name="prenomResponsable" {% if form.sections.responsable.fields.prenom.required %}required{% endif %} placeholder="{{ form.sections.responsable.fields.prenom.placeholder }}">
+                                </div>
+                                <div class="form-field">
+                                    <label for="nom-responsable">{{ form.sections.responsable.fields.nom.label }}{% if form.sections.responsable.fields.nom.required %} *{% endif %}</label>
+                                    <input type="text" id="nom-responsable" name="nomResponsable" {% if form.sections.responsable.fields.nom.required %}required{% endif %} placeholder="{{ form.sections.responsable.fields.nom.placeholder }}">
+                                </div>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-field">
+                                    <label for="email">{{ form.sections.responsable.fields.email.label }}{% if form.sections.responsable.fields.email.required %} *{% endif %}</label>
+                                    <input type="email" id="email" name="email" {% if form.sections.responsable.fields.email.required %}required{% endif %} placeholder="{{ form.sections.responsable.fields.email.placeholder }}">
+                                </div>
+                                <div class="form-field">
+                                    <label for="telephone">{{ form.sections.responsable.fields.telephone.label }}{% if form.sections.responsable.fields.telephone.required %} *{% endif %}</label>
+                                    <input type="tel" id="telephone" name="telephone" {% if form.sections.responsable.fields.telephone.required %}required{% endif %} placeholder="{{ form.sections.responsable.fields.telephone.placeholder }}">
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn-submit">
+                                <i class="{{ form.submit.icon }}"></i>
+                                {{ form.submit.text }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+</section>
