@@ -45,7 +45,7 @@ function renderActualites(actualites) {
                 <h3 class="actualite-title">${actualite.titre}</h3>
                 <p class="actualite-date"><i class="far fa-calendar-alt"></i> ${formatDate(actualite.date)}</p>
                 <p class="actualite-excerpt">${actualite.extrait}</p>
-                <a href="#" class="btn btn-secondary">Lire la suite</a>
+                <a href="#" class="btn btn-primary btn-donation">Lire la suite</a>
             </div>
         `;
         container.appendChild(article);

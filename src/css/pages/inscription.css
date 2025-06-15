@@ -345,32 +345,6 @@
     text-align: center;
 }
 
-.btn-submit {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: var(--white);
-    border: none;
-    padding: 1rem 2.5rem;
-    border-radius: 12px;
-    font-size: 1.125rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    letter-spacing: 0.02em;
-}
-
-.btn-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15);
-}
-
-.btn-submit:active {
-    transform: translateY(0);
-}
-
 /* Message de statut moderne */
 .form-status {
     margin-top: 1.5rem;
@@ -433,11 +407,6 @@
     
     .inscription-sidebar {
         grid-template-columns: 1fr;
-    }
-    
-    .btn-submit {
-        width: 100%;
-        justify-content: center;
     }
     
     /* Responsive pour la section d'introduction */

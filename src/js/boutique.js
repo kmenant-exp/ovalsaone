@@ -20,14 +20,7 @@ function renderProduitsFeatured(produits) {
     const container = document.getElementById('produits-featured');
     if (!container) return;
 
-    // Sélectionner 3 produits phares (maillot domicile, sweat, ballon)
-    const produitsFeatured = [
-        produits.find(p => p.id === 1), // Maillot domicile
-        produits.find(p => p.id === 5), // Sweat-shirt à capuche
-        produits.find(p => p.id === 9)  // Ballon de rugby
-    ].filter(p => p); // Filtrer les produits non trouvés
-
-    container.innerHTML = produitsFeatured.map(produit => `
+    container.innerHTML = produits.map(produit => `
         <div class="produit-featured-card">
             <div class="produit-image">
                 <img src="${produit.image}" alt="${produit.nom}" onerror="this.src='assets/logo.png'">
@@ -41,10 +34,10 @@ function renderProduitsFeatured(produits) {
                     ${produit.tailles ? `<span class="produit-tailles">Tailles: ${produit.tailles.join(', ')}</span>` : ''}
                 </div>
                 <div class="produit-stock">Stock: ${produit.stock}</div>
-                <button class="btn btn-secondary produit-voir-plus" data-produit="${produit.nom}">
+                <a href="${produit.url}" class="btn btn-primary btn-donation" data-produit="${produit.nom}">
                     <i class="fas fa-eye"></i>
                     Voir sur HelloAsso
-                </button>
+                </a>
             </div>
         </div>
     `).join('');

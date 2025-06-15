@@ -402,44 +402,6 @@
     margin-top: var(--spacing-6);
 }
 
-.cta-action .btn {
-    position: relative;
-    overflow: hidden;
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-2);
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    border: none;
-    box-shadow: 0 4px 15px rgba(44, 85, 48, 0.3);
-}
-
-.cta-action .btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background: linear-gradient(135deg, var(--dark-color), var(--primary-color));
-    transition: width 0.3s ease;
-    z-index: 0;
-}
-
-.cta-action .btn:hover::before {
-    width: 100%;
-}
-
-.cta-action .btn span,
-.cta-action .btn i {
-    position: relative;
-    z-index: 1;
-}
-
-.cta-action .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(44, 85, 48, 0.4);
-}
-
 /* Niveaux de partenariat */
 .niveaux-partenariat {
     display: grid;
@@ -565,67 +527,6 @@
 .dons-actions {
     text-align: center;
     margin-top: var(--spacing-6);
-}
-
-.dons-actions .btn {
-    position: relative;
-    overflow: hidden;
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-3);
-    padding: var(--spacing-4) var(--spacing-8);
-    font-size: var(--font-size-lg);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: var(--white);
-    text-decoration: none;
-    border: none;
-    border-radius: var(--border-radius-lg);
-    box-shadow: 0 8px 20px rgba(44, 85, 48, 0.3);
-    transition: all 0.3s ease;
-}
-
-/* .dons-actions .btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background: linear-gradient(135deg, var(--danger-color), #c53030);
-    transition: width 0.3s ease;
-    z-index: 0;
-} 
-
-.dons-actions .btn:hover::before {
-    width: 100%;
-} */
-
-.dons-actions .btn i,
-.dons-actions .btn span {
-    position: relative;
-    z-index: 1;
-}
-
-.dons-actions .btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(44, 85, 48, 0.4);
-}
-
-.dons-actions .btn i {
-    font-size: var(--font-size-xl);
-    animation: heartbeat 2s infinite;
-}
-
-@keyframes heartbeat {
-    0%, 50%, 100% {
-        transform: scale(1);
-    }
-    25%, 75% {
-        transform: scale(1.1);
-    }
 }
 
 /* =============================================================================

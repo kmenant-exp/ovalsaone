@@ -498,45 +498,6 @@ ul, ol {
     border-color: var(--gray-200);
     background-color: var(--white);
 }
-/* Boutons */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-2);
-    padding: var(--spacing-3) var(--spacing-6);
-    border: none;
-    border-radius: var(--border-radius);
-    font-weight: 600;
-    font-size: var(--font-size-base);
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: none;
-}
-
-.btn-primary {
-    background: var(--primary-color);
-    color: var(--white);
-}
-
-.btn-primary:hover {
-    background: var(--dark-color);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(44, 85, 48, 0.3);
-}
-
-.btn-large {
-    padding: var(--spacing-4) var(--spacing-8);
-    font-size: var(--font-size-lg);
-}
-
-.btn:disabled,
-.btn.loading {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-}
 
 
 

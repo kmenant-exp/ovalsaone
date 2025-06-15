@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Oval Saône</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components/button.css">
     <link rel="stylesheet" href="css/pages/contact.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <!-- Leaflet CSS -->
@@ -117,7 +118,10 @@
                         <textarea id="message" name="message" rows="5" required></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-large">Envoyer le message</button>
+                    <button type="submit" class="btn btn-primary btn-large btn-donation">
+                        <i class="fas fa-paper-plane"></i>
+                        Envoyer le message
+                    </button>
                 </form>
 
                 <div id="form-status" class="form-status hidden"></div>
@@ -144,7 +148,7 @@
                     <a href="https://www.openstreetmap.org/search?query=420%20Route%20de%20Reyrieux,%2001600%20Sainte-Euphémie" 
                        target="_blank" 
                        rel="noopener noreferrer"
-                       class="btn btn-primary btn-small"
+                       class="btn btn-primary btn-small btn-donation"
                        aria-label="Ouvrir l'adresse dans OpenStreetMap">
                         <i class="fas fa-external-link-alt"></i> Voir sur OpenStreetMap
                     </a>
