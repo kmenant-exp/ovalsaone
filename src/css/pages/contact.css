@@ -394,13 +394,6 @@
     min-height: 80px;
 }
 
-.contact-form-compact .btn {
-    align-self: flex-start;
-    padding: var(--spacing-3) var(--spacing-6);
-    font-size: var(--font-size-base);
-    gap: var(--spacing-2);
-}
-
 /* Carte compacte */
 .map-section-compact {
     padding: var(--spacing-10) 0;
