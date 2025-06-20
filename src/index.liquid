@@ -51,8 +51,15 @@ sponsors_description: "Nos partenaires sont essentiels au développement de notr
                     <div class="actualite-content">
                         <h3 class="actualite-title">{{ actualite.titre }}</h3>
                         <p class="actualite-date"><i class="far fa-calendar-alt"></i> {{ actualite.date | date: "%d/%m/%Y" }}</p>
-                        <p class="actualite-excerpt">{{ actualite.extrait }}</p>
-                        <a href="#" class="btn btn-primary">Lire la suite</a>
+                        <p class="actualite-extrait">{{ actualite.extrait }}</p>
+                        <button class="btn btn-primary btn-lire-suite" 
+                                data-actualite-id="{{ actualite.id }}"
+                                data-actualite-titre="{{ actualite.titre }}"
+                                data-actualite-date="{{ actualite.date | date: '%d/%m/%Y' }}"
+                                data-actualite-image="{{ actualite.image }}"
+                                data-actualite-contenu="{{ actualite.contenu }}">
+                            Lire la suite
+                        </button>
                     </div>
                 </article>
             {% endfor %}
@@ -68,8 +75,15 @@ sponsors_description: "Nos partenaires sont essentiels au développement de notr
                         <div class="actualite-content">
                             <h3 class="actualite-title">{{ actualite.titre }}</h3>
                             <p class="actualite-date"><i class="far fa-calendar-alt"></i> {{ actualite.date | date: "%d/%m/%Y" }}</p>
-                            <p class="actualite-excerpt">{{ actualite.extrait }}</p>
-                            <a href="#" class="btn btn-primary">Lire la suite</a>
+                            <p class="actualite-extrait">{{ actualite.extrait }}</p>
+                            <button class="btn btn-primary btn-lire-suite" 
+                                    data-actualite-id="{{ actualite.id }}"
+                                    data-actualite-titre="{{ actualite.titre }}"
+                                    data-actualite-date="{{ actualite.date | date: '%d/%m/%Y' }}"
+                                    data-actualite-image="{{ actualite.image }}"
+                                    data-actualite-contenu="{{ actualite.contenu }}">
+                                Lire la suite
+                            </button>
                         </div>
                     </article>
                 {% endfor %}
@@ -143,3 +157,28 @@ sponsors_description: "Nos partenaires sont essentiels au développement de notr
         </div>
     </div>
 </section>
+
+<!-- Modal pour afficher le détail des actualités -->
+<div id="actualite-modal" class="modal-overlay">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h2 id="modal-titre" class="modal-title"></h2>
+            <button id="modal-close" class="modal-close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-content">
+            <div class="modal-image-container">
+                <img id="modal-image" class="modal-image" src="" alt="">
+                <div id="modal-date-badge" class="modal-date-badge"></div>
+            </div>
+            <div class="modal-body">
+                <p id="modal-date" class="modal-date">
+                    <i class="far fa-calendar-alt"></i>
+                    <span></span>
+                </p>
+                <div id="modal-contenu" class="modal-text"></div>
+            </div>
+        </div>
+    </div>
+</div>

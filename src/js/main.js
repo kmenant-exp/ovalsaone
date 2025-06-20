@@ -12,6 +12,7 @@ class RugbyClubApp {
         this.setupScrollEffects();
         this.setupMobileMenu();
         this.setupActualitesToggle(); // Ajouter la gestion du bouton "Voir plus"
+        this.setupActualiteModal(); // Ajouter la gestion de la modal des actualités
     }
 
     // Navigation sticky avec effet de réduction
@@ -249,6 +250,75 @@ class RugbyClubApp {
                         block: 'start'
                     });
                 }
+            }
+        });
+    }
+
+    // Gestion de la modal des actualités
+    setupActualiteModal() {
+        const modal = document.getElementById('actualite-modal');
+        const modalTitre = document.getElementById('modal-titre');
+        const modalImage = document.getElementById('modal-image');
+        const modalDateBadge = document.getElementById('modal-date-badge');
+        const modalDate = document.querySelector('#modal-date span');
+        const modalContenu = document.getElementById('modal-contenu');
+        const modalClose = document.getElementById('modal-close');
+        
+        if (!modal) return;
+        
+        // Fonction pour ouvrir la modal
+        const openModal = (actualiteData) => {
+            modalTitre.textContent = actualiteData.titre;
+            modalImage.src = actualiteData.image;
+            modalImage.alt = actualiteData.titre;
+            modalDateBadge.textContent = actualiteData.date;
+            modalDate.textContent = actualiteData.date;
+            modalContenu.textContent = actualiteData.contenu;
+            
+            // Afficher la modal avec animation
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden'; // Empêcher le scroll en arrière-plan
+        };
+        
+        // Fonction pour fermer la modal
+        const closeModal = () => {
+            modal.classList.remove('show');
+            document.body.style.overflow = ''; // Restaurer le scroll
+        };
+        
+        // Gestionnaires d'événements pour les boutons "Lire la suite"
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('btn-lire-suite')) {
+                e.preventDefault();
+                
+                const actualiteData = {
+                    id: e.target.dataset.actualiteId,
+                    titre: e.target.dataset.actualiteTitre,
+                    date: e.target.dataset.actualiteDate,
+                    image: e.target.dataset.actualiteImage,
+                    contenu: e.target.dataset.actualiteContenu
+                };
+                
+                openModal(actualiteData);
+            }
+        });
+        
+        // Fermeture par le bouton X
+        if (modalClose) {
+            modalClose.addEventListener('click', closeModal);
+        }
+        
+        // Fermeture par clic sur l'overlay
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // Fermeture par la touche Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('show')) {
+                closeModal();
             }
         });
     }
