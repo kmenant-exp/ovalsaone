@@ -494,24 +494,68 @@
     animation-play-state: paused;
 }
 
-/* Responsive pour les sponsors */
+/* ===================================
+   SECTION ACTUALITÉS - BOUTON VOIR PLUS
+   =================================== */
+
+.actualites-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--spacing-8);
+}
+
+#btn-voir-plus .btn-icon {
+    transition: transform 0.3s ease;
+    font-size: var(--font-size-sm);
+}
+
+#btn-voir-plus.expanded .btn-icon {
+    transform: rotate(180deg);
+}
+
+.actualites-supplementaires {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-8);
+    margin-top: var(--spacing-8);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.actualites-supplementaires.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.actualites-supplementaires .actualite-card {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.actualites-supplementaires .actualite-card:nth-child(1) { animation-delay: 0.1s; }
+.actualites-supplementaires .actualite-card:nth-child(2) { animation-delay: 0.2s; }
+.actualites-supplementaires .actualite-card:nth-child(3) { animation-delay: 0.3s; }
+.actualites-supplementaires .actualite-card:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive pour les actualités supplémentaires */
 @media (max-width: 768px) {
-    .sponsors-carousel {
-        gap: var(--spacing-8);
-        animation-duration: 20s;
+    .actualites-supplementaires {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-6);
     }
     
-    .sponsor-item {
-        min-width: 150px;
-        padding: var(--spacing-4);
-    }
-    
-    .sponsor-logo {
-        width: 100px;
-        height: 60px;
-    }
-    
-    .sponsor-name {
-        font-size: var(--font-size-xs);
+    .actualites-actions {
+        margin-top: var(--spacing-6);
     }
 }

@@ -11,6 +11,7 @@ class RugbyClubApp {
         this.setupCookieBanner();
         this.setupScrollEffects();
         this.setupMobileMenu();
+        this.setupActualitesToggle(); // Ajouter la gestion du bouton "Voir plus"
     }
 
     // Navigation sticky avec effet de réduction
@@ -194,6 +195,60 @@ class RugbyClubApp {
                 navMenu.classList.remove('active');
                 if (menuOverlay) menuOverlay.classList.remove('active');
                 document.body.style.overflow = '';
+            }
+        });
+    }
+
+    // Gestion du bouton "Voir plus" pour les actualités
+    setupActualitesToggle() {
+        const btnVoirPlus = document.getElementById('btn-voir-plus');
+        const actualitesSupplementaires = document.getElementById('actualites-supplementaires');
+        
+        if (!btnVoirPlus || !actualitesSupplementaires) return;
+        
+        let isExpanded = false;
+        
+        btnVoirPlus.addEventListener('click', () => {
+            isExpanded = !isExpanded;
+            
+            if (isExpanded) {
+                // Afficher les actualités supplémentaires
+                actualitesSupplementaires.style.display = 'grid';
+                setTimeout(() => {
+                    actualitesSupplementaires.classList.add('show');
+                }, 10);
+                
+                // Mettre à jour le bouton
+                btnVoirPlus.classList.add('expanded');
+                btnVoirPlus.querySelector('.btn-text').textContent = 'Voir moins d\'actualités';
+                
+                // Scroll smooth vers les nouvelles actualités
+                setTimeout(() => {
+                    actualitesSupplementaires.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'nearest'
+                    });
+                }, 300);
+                
+            } else {
+                // Masquer les actualités supplémentaires
+                actualitesSupplementaires.classList.remove('show');
+                setTimeout(() => {
+                    actualitesSupplementaires.style.display = 'none';
+                }, 500);
+                
+                // Mettre à jour le bouton
+                btnVoirPlus.classList.remove('expanded');
+                btnVoirPlus.querySelector('.btn-text').textContent = 'Voir plus d\'actualités';
+                
+                // Scroll vers le début de la section actualités
+                const actualitesSection = document.querySelector('.actualites');
+                if (actualitesSection) {
+                    actualitesSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             }
         });
     }
