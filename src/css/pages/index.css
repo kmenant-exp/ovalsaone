@@ -328,15 +328,27 @@
     .actualite-image {
         height: 180px;
     }
+    
+    /* Ajustements pour la section histoire en responsive */
+    .histoire {
+        background-attachment: scroll; /* Désactiver parallax sur mobile pour les performances */
+    }
 }
 
 /* Responsive pour la section hero principale */
 @media (max-width: 768px) {
+    .hero {
+        height: 100vh;
+        background-attachment: scroll; /* Désactiver parallax sur mobile pour les performances */
+    }
+    
     .hero-content {
         max-width: 90%;
         padding: var(--spacing-6);
         background: rgba(0, 0, 0, 0.5);
         backdrop-filter: blur(8px);
+        margin-top: var(--spacing-12);
+        width: 90%;
     }
     
     .hero-title {
@@ -382,16 +394,6 @@
     
     .scroll-indicator-text {
         font-size: 9px;
-    }
-    
-    /* Styles spéciaux pour la section hero avec menu mobile */
-    .hero {
-        height: 100vh;
-    }
-    
-    .hero-content {
-        margin-top: var(--spacing-12);
-        width: 90%;
     }
 }
 

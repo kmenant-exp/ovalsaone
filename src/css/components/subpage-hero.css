@@ -81,6 +81,7 @@
         height: 35vh;
         min-height: 280px;
         background-attachment: scroll; /* Désactiver parallax sur mobile pour les performances */
+        background-position: center center; /* Corriger la position de l'image en mode responsive */
     }
     
     .subpage-hero .hero-title {
@@ -101,5 +102,6 @@
     .subpage-hero {
         height: 38vh;
         min-height: 320px;
+        background-position: center center; /* Corriger la position de l'image en mode responsive */
     }
 }
