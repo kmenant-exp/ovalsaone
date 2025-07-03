@@ -11,6 +11,8 @@ class RugbyClubApp {
         this.setupCookieBanner();
         this.setupScrollEffects();
         this.setupMobileMenu();
+        this.setupActualitesToggle(); // Ajouter la gestion du bouton "Voir plus"
+        this.setupActualiteModal(); // Ajouter la gestion de la modal des actualités
     }
 
     // Navigation sticky avec effet de réduction
@@ -194,6 +196,129 @@ class RugbyClubApp {
                 navMenu.classList.remove('active');
                 if (menuOverlay) menuOverlay.classList.remove('active');
                 document.body.style.overflow = '';
+            }
+        });
+    }
+
+    // Gestion du bouton "Voir plus" pour les actualités
+    setupActualitesToggle() {
+        const btnVoirPlus = document.getElementById('btn-voir-plus');
+        const actualitesSupplementaires = document.getElementById('actualites-supplementaires');
+        
+        if (!btnVoirPlus || !actualitesSupplementaires) return;
+        
+        let isExpanded = false;
+        
+        btnVoirPlus.addEventListener('click', () => {
+            isExpanded = !isExpanded;
+            
+            if (isExpanded) {
+                // Afficher les actualités supplémentaires
+                actualitesSupplementaires.style.display = 'grid';
+                setTimeout(() => {
+                    actualitesSupplementaires.classList.add('show');
+                }, 10);
+                
+                // Mettre à jour le bouton
+                btnVoirPlus.classList.add('expanded');
+                btnVoirPlus.querySelector('.btn-text').textContent = 'Voir moins d\'actualités';
+                
+                // Scroll smooth vers les nouvelles actualités
+                setTimeout(() => {
+                    actualitesSupplementaires.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'nearest'
+                    });
+                }, 300);
+                
+            } else {
+                // Masquer les actualités supplémentaires
+                actualitesSupplementaires.classList.remove('show');
+                setTimeout(() => {
+                    actualitesSupplementaires.style.display = 'none';
+                }, 500);
+                
+                // Mettre à jour le bouton
+                btnVoirPlus.classList.remove('expanded');
+                btnVoirPlus.querySelector('.btn-text').textContent = 'Voir plus d\'actualités';
+                
+                // Scroll vers le début de la section actualités
+                const actualitesSection = document.querySelector('.actualites');
+                if (actualitesSection) {
+                    actualitesSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
+    }
+
+    // Gestion de la modal des actualités
+    setupActualiteModal() {
+        const modal = document.getElementById('actualite-modal');
+        const modalTitre = document.getElementById('modal-titre');
+        const modalImage = document.getElementById('modal-image');
+        const modalDateBadge = document.getElementById('modal-date-badge');
+        const modalDate = document.querySelector('#modal-date span');
+        const modalContenu = document.getElementById('modal-contenu');
+        const modalClose = document.getElementById('modal-close');
+        
+        if (!modal) return;
+        
+        // Fonction pour ouvrir la modal
+        const openModal = (actualiteData) => {
+            modalTitre.textContent = actualiteData.titre;
+            modalImage.src = actualiteData.image;
+            modalImage.alt = actualiteData.titre;
+            modalDateBadge.textContent = actualiteData.date;
+            modalDate.textContent = actualiteData.date;
+            modalContenu.textContent = actualiteData.contenu;
+            
+            // Afficher la modal avec animation
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden'; // Empêcher le scroll en arrière-plan
+        };
+        
+        // Fonction pour fermer la modal
+        const closeModal = () => {
+            modal.classList.remove('show');
+            document.body.style.overflow = ''; // Restaurer le scroll
+        };
+        
+        // Gestionnaires d'événements pour les boutons "Lire la suite"
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('btn-lire-suite')) {
+                e.preventDefault();
+                
+                const actualiteData = {
+                    id: e.target.dataset.actualiteId,
+                    titre: e.target.dataset.actualiteTitre,
+                    date: e.target.dataset.actualiteDate,
+                    image: e.target.dataset.actualiteImage,
+                    contenu: e.target.dataset.actualiteContenu
+                };
+                
+                openModal(actualiteData);
+            }
+        });
+        
+        // Fermeture par le bouton X
+        if (modalClose) {
+            modalClose.addEventListener('click', closeModal);
+        }
+        
+        // Fermeture par clic sur l'overlay
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // Fermeture par la touche Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('show')) {
+                closeModal();
             }
         });
     }
