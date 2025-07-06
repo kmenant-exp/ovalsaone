@@ -1,9 +1,11 @@
 /* Styles pour le footer */
 
 .footer {
-    background: var(--dark-color);
+    background: linear-gradient(180deg, var(--navy-color), var(--primary-color));
     color: var(--white);
     padding: var(--spacing-16) 0 var(--spacing-8) 0;
+    border-top: 4px solid var(--accent-color);
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .footer-grid {
@@ -48,23 +50,42 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: var(--gray-700);
+    width: 42px;
+    height: 42px;
+    background: var(--primary-color);
+    border: 2px solid var(--secondary-color);
     border-radius: 50%;
     transition: all 0.3s ease;
+    color: var(--white);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .social-link:hover {
-    background: var(--primary-color);
-    transform: translateY(-2px);
+    background: var(--accent-color);
+    border-color: var(--white);
+    color: var(--navy-color);
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
 }
 
 .footer-bottom {
-    border-top: 1px solid var(--gray-700);
+    border-top: 1px solid rgba(7, 191, 239, 0.3);
     padding-top: var(--spacing-8);
     text-align: center;
-    color: var(--gray-400);
+    color: var(--gray-300);
+    position: relative;
+}
+
+.footer-bottom::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 5px;
+    background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
+    border-radius: 2px;
 }
 
 /* Styles spécifiques pour l'embed Instagram dans le footer */
