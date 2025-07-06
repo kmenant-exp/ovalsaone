@@ -129,7 +129,7 @@
 
 .sponsor-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(44, 85, 48, 0.15);
+    box-shadow: 0 15px 30px rgba(15, 23, 42, 0.2);
     border-color: var(--accent-color);
 }
 
@@ -357,7 +357,7 @@
 
 .avantage-item:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(44, 85, 48, 0.1);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.15);
     border-color: var(--accent-color);
 }
 
@@ -420,7 +420,7 @@
 
 .niveau-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(44, 85, 48, 0.15);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.2);
 }
 
 .niveau-card.niveau-or {

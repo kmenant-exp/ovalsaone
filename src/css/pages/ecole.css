@@ -113,7 +113,7 @@
 
 .bureau-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(44, 85, 48, 0.15);
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.2);
     border-color: var(--accent-color);
 }
 
@@ -213,7 +213,7 @@
 
 .entraineur-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 30px rgba(44, 85, 48, 0.2);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.25);
     border-color: var(--accent-color);
 }
 

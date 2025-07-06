@@ -37,7 +37,7 @@
 
 .contact-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(44, 85, 48, 0.15);
+    box-shadow: 0 15px 30px rgba(15, 23, 42, 0.2);
     border-color: var(--accent-color);
 }
 
