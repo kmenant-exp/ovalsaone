@@ -9,7 +9,7 @@
 
 /* Section principale du page hero */
 .page-hero {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+    background: linear-gradient(135deg, var(--navy-color), var(--primary-color), var(--secondary-color));
     background-size: 200% 200%;
     animation: gradientShift 15s ease infinite;
     color: var(--white);
@@ -19,7 +19,8 @@
     overflow: hidden;
     text-align: center;
     clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border-bottom: 4px solid var(--accent-color); /* Bordure dorée en bas */
 }
 
 /* Décoration en bas du hero */
@@ -30,8 +31,8 @@
     left: 0;
     width: 100%;
     height: 6px;
-    background: linear-gradient(90deg, transparent, var(--white), transparent);
-    opacity: 0.3;
+    background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+    opacity: 0.8;
 }
 
 /* Contenu du page hero */

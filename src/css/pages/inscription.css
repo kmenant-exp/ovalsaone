@@ -280,7 +280,7 @@
 .form-field select:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(44, 85, 48, 0.1);
+    box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.15);
     transform: translateY(-1px);
 }
 
@@ -447,7 +447,7 @@
 .document-card:hover {
     border-color: var(--accent-color);
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(44, 85, 48, 0.1);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.15);
 }
 
 .document-header {

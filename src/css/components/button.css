@@ -23,19 +23,21 @@
 
 /* Bouton primaire */
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: var(--primary-color);
     color: var(--white);
     text-decoration: none;
-    border: none;
+    border: 2px solid var(--accent-color); /* Bordure dorée comme le lion du logo */
     border-radius: var(--border-radius-lg);
-    box-shadow: 0 8px 20px rgba(44, 85, 48, 0.3);
+    box-shadow: 0 8px 20px rgba(14, 49, 96, 0.3);
     position: relative;
     overflow: hidden;
 }
 
 .btn-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(44, 85, 48, 0.4);
+    background: linear-gradient(135deg, var(--primary-color), var(--navy-color));
+    box-shadow: 0 12px 30px rgba(14, 49, 96, 0.4);
+    border-color: var(--accent-color); /* Bordure dorée au survol */
 }
 
 .btn-primary i,
@@ -62,15 +64,17 @@
 /* Bouton secondaire */
 .btn-secondary {
     background: var(--light-color);
-    color: var(--dark-color);
-    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 4px 12px rgba(243, 167, 18, 0.2);
 }
 
 .btn-secondary:hover {
-    background: var(--primary-color);
-    color: var(--white);
+    background: var(--accent-color);
+    color: var(--navy-color);
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(44, 85, 48, 0.3);
+    box-shadow: 0 8px 20px rgba(243, 167, 18, 0.4);
+    border-color: var(--primary-color);
 }
 
 /* Bouton large */
@@ -106,21 +110,43 @@
 .btn-outline-primary {
     background: transparent;
     color: var(--primary-color);
-    border: 2px solid var(--primary-color);
+    border: 2px solid var(--accent-color);
+    position: relative;
+    z-index: 1;
 }
 
 .btn-outline-primary:hover {
-    background: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color), var(--navy-color));
     color: var(--white);
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(44, 85, 48, 0.3);
+    box-shadow: 0 8px 20px rgba(14, 49, 96, 0.4);
+    border-color: var(--accent-color);
+}
+
+/* Bouton doré spécial pour call-to-action */
+.btn-gold {
+    background: linear-gradient(135deg, var(--accent-color), var(--gold-color));
+    color: var(--navy-color);
+    border: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 8px 20px rgba(243, 167, 18, 0.4);
+}
+
+.btn-gold:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 30px rgba(243, 167, 18, 0.6);
+    color: var(--navy-color);
+    background: linear-gradient(135deg, var(--gold-color), var(--accent-color));
 }
 
 /* Boutons avec gradient (style partenariat) */
 .btn-gradient {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: var(--white);
-    box-shadow: 0 4px 15px rgba(44, 85, 48, 0.3);
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 4px 15px rgba(14, 49, 96, 0.3);
 }
 
 /* .btn-gradient::before {
@@ -130,7 +156,7 @@
     left: 0;
     width: 0;
     height: 100%;
-    background: linear-gradient(135deg, var(--dark-color), var(--primary-color));
+    background: var(--primary-color);
     transition: width 0.3s ease;
     z-index: 0;
 }
@@ -141,7 +167,7 @@
 
 .btn-gradient:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(44, 85, 48, 0.4);
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.5);
 }
 
 .btn-gradient span,
@@ -175,7 +201,7 @@
 
 /* Bouton de soumission de formulaire */
 .btn-submit {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: var(--primary-color);
     color: var(--white);
     border: none;
     padding: 1rem 2.5rem;
