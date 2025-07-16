@@ -276,10 +276,11 @@
     color: var(--primary-color);
 }
 
-.actualite-excerpt {
+/* Style pour la classe actualite-extrait utilisée dans le HTML */
+.actualite-extrait {
     color: var(--gray-700);
     line-height: 1.6;
-    margin-bottom: var(--spacing-5);
+    margin-bottom: var(--spacing-8);
 }
 
 /* ===================================
