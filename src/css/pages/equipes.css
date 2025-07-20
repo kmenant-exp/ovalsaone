@@ -1,5 +1,12 @@
 /* Styles spécifiques à la page Équipes */
 
+/* Animation pour le dégradé de fond */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 /* ===================================
    SECTION CATÉGORIES
    =================================== */
@@ -31,16 +38,18 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, var(--dark-color), var(--primary-color), var(--accent-color));
+    background: linear-gradient(90deg, var(--accent-color), var(--primary-color), var(--secondary-color), var(--accent-color));
+    background-size: 200% auto;
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s ease;
+    animation: gradientShift 3s ease infinite;
 }
 
 .equipe-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(15, 23, 42, 0.2);
-    border-color: rgba(15, 23, 42, 0.3);
+    box-shadow: 0 15px 30px rgba(15, 23, 42, 0.25);
+    border-color: var(--accent-color);
 }
 
 .equipe-card:hover::before {
@@ -48,11 +57,12 @@
 }
 
 .equipe-header {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: var(--primary-color);
     color: var(--white);
     padding: var(--spacing-6);
     text-align: center;
     position: relative;
+    box-shadow: 0 4px 15px rgba(14, 49, 96, 0.3);
 }
 
 .equipe-title {
@@ -71,13 +81,15 @@
 
 .equipe-age {
     display: inline-block;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.25);
     color: var(--white);
     padding: var(--spacing-1) var(--spacing-3);
     border-radius: var(--border-radius-full);
     font-size: var(--font-size-sm);
     font-weight: 600;
     backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .equipe-effectif {
