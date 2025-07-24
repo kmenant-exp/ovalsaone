@@ -1,5 +1,4 @@
 // Main JavaScript file pour fonctionnalités communes
-
 class RugbyClubApp {
     constructor() {
         this.init();
@@ -93,14 +92,7 @@ class RugbyClubApp {
         console.log('Tracking enabled');
 
         // Activer Microsoft Clarity
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "sk1wnmwiec");
-
-        // Exemple pour Google Analytics si utilisé dans le futur
-        // gtag('consent', 'update', {'analytics_storage': 'granted'});
+        window.clarity('consent');
     }
 
     // Gestion du défilement et effets visuels
