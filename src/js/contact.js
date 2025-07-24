@@ -1,7 +1,11 @@
 // JavaScript spécifique à la page contact
 document.addEventListener('DOMContentLoaded', () => {
     setupContactForm();
-    initializeMap();
+    
+    // Vérifier si nous sommes sur la page de contact avant d'initialiser la carte
+    if (document.getElementById('stadium-map')) {
+        initializeMap();
+    }
 });
 
 function setupContactForm() {
@@ -62,17 +66,20 @@ function setupContactForm() {
 }
 
 function initializeMap() {
-    // Vérifier si Leaflet est disponible
-    if (typeof L === 'undefined') {
-        console.error('Leaflet n\'est pas chargé');
-        return;
-    }
-
     const mapElement = document.getElementById('stadium-map');
     const loadingElement = document.getElementById('map-loading');
     
     if (!mapElement) {
         console.error('Élément de carte non trouvé');
+        return;
+    }
+    
+    // Vérifier si Leaflet est disponible
+    if (typeof L === 'undefined') {
+        if (loadingElement) {
+            loadingElement.innerHTML = '<i class="fas fa-exclamation-triangle" style="color: #e74c3c;"></i> Erreur: La bibliothèque de carte n\'est pas disponible';
+        }
+        console.error('Leaflet n\'est pas chargé');
         return;
     }
 

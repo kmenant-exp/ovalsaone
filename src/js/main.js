@@ -88,9 +88,6 @@ class RugbyClubApp {
     }
 
     enableTracking() {
-        // Activer les outils de tracking
-        console.log('Tracking enabled');
-
         // Activer Microsoft Clarity
         window.clarity('consent');
     }
