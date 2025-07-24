@@ -71,6 +71,9 @@ class RugbyClubApp {
                 // Nous forçons un reflow pour que la transition s'active correctement
                 void cookieBanner.offsetWidth;
             }, 2000);
+        } else if (cookieConsent === 'accepted') {
+            // Activer le tracking si l'utilisateur a déjà accepté
+            this.enableTracking();
         }
 
         acceptBtn?.addEventListener('click', () => {
@@ -86,9 +89,18 @@ class RugbyClubApp {
     }
 
     enableTracking() {
-        // Activer Google Analytics ou autres outils de tracking
+        // Activer les outils de tracking
         console.log('Tracking enabled');
-        // Exemple : gtag('consent', 'update', {'analytics_storage': 'granted'});
+
+        // Activer Microsoft Clarity
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "sk1wnmwiec");
+
+        // Exemple pour Google Analytics si utilisé dans le futur
+        // gtag('consent', 'update', {'analytics_storage': 'granted'});
     }
 
     // Gestion du défilement et effets visuels
