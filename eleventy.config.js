@@ -5,6 +5,9 @@ export default function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy("./src/assets");
     eleventyConfig.addPassthroughCopy("./src/robots.txt");
     
+    // Watch CSS files for changes
+    eleventyConfig.addWatchTarget("./src/css/**/*.css");
+    
     // Configuration globale du site pour le SEO
     eleventyConfig.addGlobalData("site", {
         url: "https://ovalsaone.fr", // Remplacer par votre vraie URL

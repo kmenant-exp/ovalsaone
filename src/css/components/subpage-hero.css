@@ -6,7 +6,7 @@
 
 /* Section Hero général pour toutes les sous-pages avec effet parallax */
 .subpage-hero {
-    background-image: url('../../assets/subpage-hero-image.jpg');;
+    background-image: url('../../assets/subpage-hero-image.jpg');
     background-size: cover;
     background-position: center -170px;
     background-attachment: fixed;
@@ -28,7 +28,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    /*background: linear-gradient(135deg, rgba(14, 49, 96, 0.7), rgba(10, 37, 72, 0.8));*/
+    background: linear-gradient(135deg, rgb(59, 63, 69, 0.3), rgba(10, 37, 72, 0.8));
     z-index: 0;
     border-bottom: 4px solid var(--accent-color); /* Bordure dorée pour correspondre au logo */
 }
