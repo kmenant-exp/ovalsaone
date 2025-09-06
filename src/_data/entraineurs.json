@@ -1,0 +1,214 @@
+[
+  {
+    "id": 1,
+    "nom": "Cattier",
+    "prenom": "Lionel",
+    "categories": [
+      "U12"
+    ],
+    "experience": "Formation éducateur",
+    "diplomes": [
+      "Éducateur Rugby"
+    ],
+    "photo": "/assets/entraineurs/default.jpg",
+    "specialites": [
+      "Stratégie de jeu",
+      "Analyse technique"
+    ],
+    "formation_continue": "Formation FFR"
+  },
+  {
+    "id": 2,
+    "nom": "Charignon",
+    "prenom": "Mathieu",
+    "categories": [
+      "U8"
+    ],
+    "experience": "Formation éducateur",
+    "diplomes": [
+      "Éducateur Rugby"
+    ],
+    "photo": "/assets/entraineurs/default.jpg",
+    "specialites": [
+      "Apprentissage ludique"
+    ],
+    "formation_continue": "Formation FFR"
+  },
+  {
+    "id": 3,
+    "nom": "Degarat",
+    "prenom": "Flore",
+    "categories": [
+      "U6"
+    ],
+    "experience": "Formation éducateur",
+    "diplomes": [
+      "Éducateur Rugby"
+    ],
+    "photo": "/assets/entraineurs/default.jpg",
+    "specialites": [
+      "Éveil rugby",
+      "Motricité"
+    ],
+    "formation_continue": "Formation FFR"
+  },
+  {
+    "id": 4,
+    "nom": "Degarat",
+    "prenom": "Rémy",
+    "categories": [
+      "U10"
+    ],
+    "experience": "Formation éducateur",
+    "diplomes": [
+      "Éducateur Rugby"
+    ],
+    "photo": "/assets/entraineurs/default.jpg",
+    "specialites": [
+      "Développement technique"
+    ],
+    "formation_continue": "Formation FFR"
+  },
+  {
+    "id": 5,
+    "nom": "Deniau",
+    "prenom": "Alexandre",
+    "categories": [
+      "U10"
+    ],
+    "experience": "Formation éducateur",
+    "diplomes": [
+      "Éducateur Rugby"
+    ],
+    "photo": "/assets/entraineurs/default.jpg",
+    "specialites": [
+      "Développement technique"
+    ],
+    "formation_continue": "Formation FFR"
+  },
+  {
+    "id": 6,
+    "nom": "Gomez",
+    "prenom": "Angélique",
+    "categories": [
+      "U6"
+    ],
+    "experience": "Formation éducateur",
+    "diplomes": [
+      "Éducateur Rugby"
+    ],
+    "photo": "/assets/entraineurs/default.jpg",
+    "specialites": [
+      "Éveil rugby",
+      "Motricité"
+    ],
+    "formation_continue": "Formation FFR"
+  },
+  {
+    "id": 7,
+    "nom": "Gomez",
+    "prenom": "Franck",
+    "categories": [
+      "U12"
+    ],
+    "experience": "Formation éducateur",
+    "diplomes": [
+      "Éducateur Rugby"
+    ],
+    "photo": "/assets/entraineurs/default.jpg",
+    "specialites": [
+      "Stratégie de jeu",
+      "Analyse technique"
+    ],
+    "formation_continue": "Formation FFR"
+  },
+  {
+    "id": 8,
+    "nom": "Hayart",
+    "prenom": "Nicolas",
+    "categories": [
+      "U14"
+    ],
+    "experience": "Formation éducateur",
+    "diplomes": [
+      "Éducateur Rugby"
+    ],
+    "photo": "/assets/entraineurs/default.jpg",
+    "specialites": [
+      "Préparation physique",
+      "Technique avancée"
+    ],
+    "formation_continue": "Formation FFR"
+  },
+  {
+    "id": 9,
+    "nom": "Johannes",
+    "prenom": "Kevyn",
+    "categories": [
+      "U12"
+    ],
+    "experience": "Formation éducateur",
+    "diplomes": [
+      "Éducateur Rugby"
+    ],
+    "photo": "/assets/entraineurs/default.jpg",
+    "specialites": [
+      "Stratégie de jeu",
+      "Analyse technique"
+    ],
+    "formation_continue": "Formation FFR"
+  },
+  {
+    "id": 10,
+    "nom": "Rondepierre",
+    "prenom": "Elioth",
+    "categories": [
+      "U8",
+      "U14"
+    ],
+    "experience": "Formation éducateur",
+    "diplomes": [
+      "Éducateur Rugby"
+    ],
+    "photo": "/assets/entraineurs/default.jpg",
+    "specialites": [
+      "Apprentissage ludique",
+      "Préparation physique"
+    ],
+    "formation_continue": "Formation FFR"
+  },
+  {
+    "id": 11,
+    "nom": "Sirolli",
+    "prenom": "Guillaume",
+    "categories": [
+      "U10"
+    ],
+    "experience": "Formation éducateur",
+    "diplomes": [
+      "Éducateur Rugby"
+    ],
+    "photo": "/assets/entraineurs/default.jpg",
+    "specialites": [
+      "Développement technique"
+    ],
+    "formation_continue": "Formation FFR"
+  },
+  {
+    "id": 12,
+    "nom": "Spica",
+    "prenom": "Anaïs",
+    "categories": [
+      "U10"
+    ],
+    "experience": "Formation éducateur",
+    "diplomes": [
+      "Éducateur Rugby"
+    ],
+    "photo": "/assets/entraineurs/default.jpg",
+    "specialites": [
+      "Développement technique"
+    ],
+    "formation_continue": "Formation FFR"
+  }
+]

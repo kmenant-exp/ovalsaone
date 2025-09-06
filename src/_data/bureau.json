@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "nom": "GENTE",
+    "prenom": "Laëtitia",
+    "poste": "Présidente",
+    "description": "Laëtitia a brillé sur les parquets, elle brille aujourd'hui dans notre association. Ancienne championne de basket, passionnée et bienveillante, elle s'investit avec cœur pour transmettre aux enfants les valeurs du sport collectif. Sur le terrain, elle coache avec passion et bienveillance. En dehors, son café et son sourire réchauffent les cœurs comme un rayon de soleil en hiver. Une présence précieuse, toujours là pour motiver, apaiser et rassembler.",
+    "photo": "/assets/bureau/GENTE_Laetitia.jpg"
+  },
+  {
+    "id": 2,
+    "nom": "Petit",
+    "prenom": "Anne",
+    "poste": "Vice-Présidente",
+    "description": "Responsable de l'école de rugby, Anne coordonne les activités jeunes et veille au bon déroulement des entraînements.",
+    "photo": "/assets/bureau/anne-petit.jpg"
+  },
+  {
+    "id": 3,
+    "nom": "Bernard",
+    "prenom": "François",
+    "poste": "Secrétaire",
+    "description": "François gère les aspects administratifs du club et assure la communication avec la fédération.",
+    "photo": "/assets/bureau/francois-bernard.jpg"
+  },
+  {
+    "id": 4,
+    "nom": "Leroy",
+    "prenom": "Christines",
+    "poste": "Trésorière",
+    "description": "Christine veille à la bonne gestion financière du club et supervise les budgets des différentes sections.",
+    "photo": "/assets/bureau/christine-leroy.jpg"
+  },
+  {
+    "id": 5,
+    "nom": "Garcia",
+    "prenom": "Julien",
+    "poste": "Responsable Équipement",
+    "description": "Julien s'occupe de l'entretien du matériel et de l'équipement des joueurs."
+  }
+]
