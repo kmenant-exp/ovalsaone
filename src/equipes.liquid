@@ -1,11 +1,15 @@
 ---
 layout: layout.njk
-title: "Nos Équipes Rugby - U4 à U14 | École Rugby Oval Saône Trévoux"
-description: "Découvrez nos équipes de rugby pour enfants : U4, U6, U8, U10, U12, U14. Entraîneurs qualifiés, apprentissage progressif dans un esprit familial à Trévoux."
+title: "Nos Équipes Rugby - U6 à U14 | École Rugby Oval Saône Trévoux"
+description: "Découvrez nos équipes de rugby pour enfants : U6, U8, U10, U12, U14. Entraîneurs qualifiés, apprentissage progressif dans un esprit familial à Trévoux."
 
 hero:
   title: "Nos Équipes"
   subtitle: "Découvrez nos différentes catégories et leurs entraîneurs"
+  
+intro:
+  title: "Nos équipes, notre fierté"
+  text: "Plaisir, respect et camaraderie : nos équipes de jeunes de U6 à U14 grandissent ensemble autour des vraies valeurs du rugby."
 ---
 
 <!-- Hero Section avec effet parallax -->
@@ -22,8 +26,8 @@ hero:
     <div class="container">
         <div class="intro-content">
             <div class="intro-text">
-                <h2>Nos équipes, notre fierté</h2>
-                <p>Plaisir, respect et camaraderie : nos équipes de jeunes de U4 à U14 grandissent ensemble autour des vraies valeurs du rugby.</p>
+                <h2>{{ intro.title }}</h2>
+                <p>{{ intro.text }}</p>
             </div>
         </div>
         <div class="categories-grid" id="categories-grid">
@@ -38,16 +42,21 @@ hero:
                         </div>
                     </div>
                     <div class="equipe-content">
-                        <div class="equipe-info">
-                            <p><strong><i class="fas fa-user-tie"></i> Entraîneur :</strong>{{ categorie.coach.name }}</p>
-                            <p><strong><i class="fas fa-medal"></i> Expérience :</strong>{{ categorie.coach.experience }}</p>
+                        <div class="equipe-top-content">
+                            <div class="equipe-info">
+                                <p><strong><i class="fas fa-user-tie"></i> Entraîneur{% if categorie.coaches.size > 1 %}s{% endif %} :</strong>
+                                    {% for coach in categorie.coaches %}
+                                        {{ coach.name }}{% unless forloop.last %}, {% endunless %}
+                                    {% endfor %}
+                                </p>
+                            </div>
+                            <div class="equipe-description">
+                                <p>{{ categorie.description }}</p>
+                            </div>
                         </div>
-                        <div class="equipe-description">
-                            <p>{{ categorie.description }}</p>
-                        </div>
-                        <div class="equipe-planning">
+                        <div class="equipe-planning planning-container">
                             <h4><i class="fas fa-calendar-alt"></i> Planning d'entraînement</h4>
-                            <ul>
+                            <ul class="planning-list">
                                 {% for seance in categorie.schedule %}
                                     <li>
                                         <strong>{{ seance.day }}</strong>

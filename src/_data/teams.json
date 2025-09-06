@@ -6,14 +6,18 @@
         "min_age": 3,
         "max_age": 5,
         "players_count": 15,
-        "coach": {
-            "name": "Sophie Durand",
-            "experience": "5 ans d'expérience"
-        },
+        "coaches": [
+            {
+                "name": "Angélique Gomez"
+            },
+            {
+                "name": "Flore Degarat"
+            }
+        ],
         "schedule": [
             {
                 "day": "Samedi",
-                "time": "9h00-10h00"
+                "time": "10h00-11h00"
             }
         ]
     },
@@ -24,14 +28,18 @@
         "min_age": 6,
         "max_age": 7,
         "players_count": 18,
-        "coach": {
-            "name": "Marc Leblanc",
-            "experience": "8 ans d'expérience"
-        },
+        "coaches": [
+            {
+                "name": "Mathieu Charignon"
+            },
+            {
+                "name": "Elioth Rondepierre"
+            }
+        ],
         "schedule": [
             {
                 "day": "Samedi",
-                "time": "10h15-11h30"
+                "time": "10h00-11h00"
             }
         ]
     },
@@ -42,18 +50,28 @@
         "min_age": 8,
         "max_age": 9,
         "players_count": 22,
-        "coach": {
-            "name": "Pierre Moreau",
-            "experience": "12 ans d'expérience"
-        },
+        "coaches": [
+            {
+                "name": "Alexandre Deniau"
+            },
+            {
+                "name": "Anaïs Spica"
+            },
+            {
+                "name": "Rémy Degarat"
+            },
+            {
+                "name": "Guillaume Sirolli"
+            }
+        ],
         "schedule": [
             {
                 "day": "Mercredi",
-                "time": "14h00-15h30"
+                "time": "18h00-19h00"
             },
             {
                 "day": "Samedi",
-                "time": "14h00-15h30"
+                "time": "10h00-11h30"
             }
         ]
     },
@@ -64,18 +82,29 @@
         "min_age": 10,
         "max_age": 11,
         "players_count": 25,
-        "coach": {
-            "name": "Jean-Claude Martin",
-            "experience": "15 ans d'expérience"
-        },
+        "coaches": [
+            {
+                "name": "Kevyn Johannes"
+            },
+            {
+                "name": "Franck Gomez"
+            },
+            {
+                "name": "Lionel Cattier"
+            }
+        ],
         "schedule": [
             {
+                "day": "Lundi",
+                "time": "18h00-19h00"
+            },
+            {
                 "day": "Mercredi",
-                "time": "16h00-17h30"
+                "time": "18h00-19h30"
             },
             {
                 "day": "Samedi",
-                "time": "15h45-17h15"
+                "time": "10h00-12h00"
             }
         ]
     },
@@ -86,18 +115,22 @@
         "min_age": 12,
         "max_age": 13,
         "players_count": 20,
-        "coach": {
-            "name": "David Rousseau",
-            "experience": "10 ans d'expérience"
-        },
+        "coaches": [
+            {
+                "name": "Nicolas Hayart"
+            },
+            {
+                "name": "Elioth Rondepierre"
+            }
+        ],
         "schedule": [
             {
-                "day": "Mardi",
+                "day": "Mercredi",
                 "time": "18h00-19h30"
             },
             {
-                "day": "Samedi",
-                "time": "16h00-17h30"
+                "day": "Vendredi",
+                "time": "18h00-19h30"
             }
         ]
     }

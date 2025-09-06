@@ -104,10 +104,13 @@
 
 .equipe-content {
     padding: var(--spacing-6);
+    padding-bottom: var(--spacing-4);
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: var(--spacing-4);
+    justify-content: space-between;
+    min-height: calc(100% - 100px); /* Ajustez selon la hauteur de l'en-tête */
 }
 
 .equipe-info {
@@ -146,6 +149,14 @@
     text-align: center;
 }
 
+.equipe-top-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+    flex: 1;
+    margin-bottom: var(--spacing-3);
+}
+
 .equipe-description {
     color: var(--gray-700);
     line-height: 1.6;
@@ -158,6 +169,17 @@
     border-radius: var(--border-radius);
     padding: var(--spacing-4);
     margin-top: var(--spacing-3);
+    display: flex;
+    flex-direction: column;
+}
+
+.planning-container {
+    min-height: 220px; /* Augmenté pour permettre 3 entrainements */
+    height: auto; /* Passage en auto pour s'adapter au contenu */
+    max-height: 280px; /* Maximum pour garder une cohérence visuelle */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
 .equipe-planning h4, .equipe-resultats h4 {
@@ -182,6 +204,16 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.planning-list {
+    padding-right: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .equipe-planning li, .equipe-resultats li {
