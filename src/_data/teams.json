@@ -1,6 +1,6 @@
 [
     {
-        "id": 1,
+        
         "name": "U6",
         "description": "École de rugby pour les moins de 6 ans",
         "min_age": 3,
@@ -22,7 +22,7 @@
         ]
     },
     {
-        "id": 2,
+        
         "name": "U8",
         "description": "École de rugby pour les moins de 8 ans",
         "min_age": 6,
@@ -44,7 +44,7 @@
         ]
     },
     {
-        "id": 3,
+        
         "name": "U10",
         "description": "École de rugby pour les moins de 10 ans",
         "min_age": 8,
@@ -76,7 +76,7 @@
         ]
     },
     {
-        "id": 4,
+        
         "name": "U12",
         "description": "École de rugby pour les moins de 12 ans",
         "min_age": 10,
@@ -109,7 +109,7 @@
         ]
     },
     {
-        "id": 5,
+        
         "name": "U14",
         "description": "École de rugby pour les moins de 14 ans",
         "min_age": 12,

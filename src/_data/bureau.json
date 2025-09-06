@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    
     "nom": "GENTE",
     "prenom": "Laëtitia",
     "poste": "Présidente",
@@ -8,7 +8,7 @@
     "photo": "/assets/bureau/GENTE_Laetitia.jpg"
   },
   {
-    "id": 2,
+    
     "nom": "Petit",
     "prenom": "Anne",
     "poste": "Vice-Présidente",
@@ -16,7 +16,7 @@
     "photo": "/assets/bureau/anne-petit.jpg"
   },
   {
-    "id": 3,
+    
     "nom": "Bernard",
     "prenom": "François",
     "poste": "Secrétaire",
@@ -24,7 +24,7 @@
     "photo": "/assets/bureau/francois-bernard.jpg"
   },
   {
-    "id": 4,
+    
     "nom": "Leroy",
     "prenom": "Christines",
     "poste": "Trésorière",
@@ -32,7 +32,7 @@
     "photo": "/assets/bureau/christine-leroy.jpg"
   },
   {
-    "id": 5,
+    
     "nom": "Garcia",
     "prenom": "Julien",
     "poste": "Responsable Équipement",

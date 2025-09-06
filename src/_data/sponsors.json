@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    
     "nom": "Expertime",
     "logo": "/assets/sponsors/logo_expertime.png",
     "description": "Services informatiques et solutions digitales pour les entreprises.",
@@ -12,7 +12,7 @@
     "type": "partenaire"
   },
   {
-    "id": 2,
+    
     "nom": "Orange Business",
     "logo": "/assets/sponsors/logo_orange.jpg",
     "description": "Solutions de télécommunication et services digitaux pour les professionnels.",
@@ -24,7 +24,7 @@
     "type": "sponsor_or"
   },
   {
-    "id": 3,
+    
     "nom": "Pharmacie de la Place",
     "logo": "/assets/sponsors/logo_pharmacie.jpg",
     "description": "Pharmacie de proximité proposant conseils santé et produits adaptés aux sportifs.",
