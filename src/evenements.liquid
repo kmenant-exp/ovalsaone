@@ -1,0 +1,75 @@
+---
+layout: layout.njk
+title: Événements - Oval Saône Rugby
+description: Calendrier des événements et matchs à venir pour toutes les équipes d'Oval Saône Rugby.
+
+hero:
+  title: "Calendrier des événements"
+  subtitle: "Retrouvez ici tous les matchs, entraînements et événements à venir pour nos équipes."
+---
+
+<!-- Hero Section avec effet parallax -->
+<section class="hero parallax-section subpage-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1 class="hero-title">{{ hero.title }}</h1>
+        <p class="hero-subtitle">{{ hero.subtitle }}</p>
+    </div>
+</section>
+
+<section class="calendar-section">
+    <div class="container">
+        <div class="section-intro">
+            <p>Consultez les prochains événements ci-dessous ou utilisez les onglets pour filtrer par catégorie d'âge.</p>
+            <div class="calendar-links">
+                <p>Vous pouvez également ajouter les calendriers directement à votre Google Calendar :</p>
+                <div class="calendar-links-grid">
+                    {% for team in calendars.teams %}
+                    <a href="{{ team.calendarUrl }}" target="_blank" class="calendar-link">
+                        <span class="team-name">{{ team.name }}</span>
+                        <span class="link-text">Ajouter à Google Calendar</span>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="calendar-tabs">
+            <ul class="tab-buttons">
+                <li class="active" data-team="all">Tous les événements</li>
+                {% for team in calendars.teams %}
+                <li data-team="{{ team.name }}">{{ team.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="calendar-container">
+            <div class="calendar-loading">
+                <p>Chargement des événements...</p>
+            </div>
+            <div class="calendar-error" style="display:none;">
+                <p>Impossible de charger les événements. Veuillez réessayer plus tard.</p>
+            </div>
+            <div class="calendar-events" style="display:none;">
+                <!-- Les événements du calendrier seront chargés ici via JavaScript -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Nous exposons les données des calendriers pour que le JS puisse y accéder
+    window.calendarConfig = {
+        apiKey: "{{ calendars.apiKey }}",
+        teams: [
+            {% for team in calendars.teams %}
+            {
+                name: "{{ team.name }}",
+                calendarId: "{{ team.calendarId }}"
+            }{% if forloop.last == false %},{% endif %}
+            {% endfor %}
+        ]
+    };
+</script>
+
+<script src="/js/evenements.js" defer></script>
