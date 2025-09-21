@@ -41,8 +41,12 @@ sponsors_description: "Nos partenaires sont essentiels au développement de notr
             </div>
         </div>
         <div class="actualites-grid" id="actualites-grid">
-            <!-- Les 3 premières actualités (visibles par défaut) -->
-            {% for actualite in actualites limit:3 %}
+            <!-- Les 3 premières actualités futures (visibles par défaut) -->
+            {% assign currentDate = 'now' | date: '%Y-%m-%d' %}
+            {% assign futureActualites = actualites | where_exp: "item", "item.date >= currentDate" %}
+            
+            {% if futureActualites.size > 0 %}
+            {% for actualite in futureActualites limit:3 %}
                 <article class="actualite-card fade-in-up">
                     <div class="actualite-image">
                         <img src="{{ actualite.image }}" alt="{{ actualite.titre }}">
@@ -66,7 +70,7 @@ sponsors_description: "Nos partenaires sont essentiels au développement de notr
             
             <!-- Les actualités supplémentaires (masquées par défaut) -->
             <div id="actualites-supplementaires" class="actualites-supplementaires" style="display: none;">
-                {% for actualite in actualites offset:3 %}
+                {% for actualite in futureActualites offset:3 %}
                     <article class="actualite-card fade-in-up">
                         <div class="actualite-image">
                             <img src="{{ actualite.image }}" alt="{{ actualite.titre }}">
@@ -88,10 +92,15 @@ sponsors_description: "Nos partenaires sont essentiels au développement de notr
                     </article>
                 {% endfor %}
             </div>
+            {% else %}
+            <div class="no-actualites">
+                <p>Aucun événement à venir pour le moment. Revenez bientôt pour découvrir nos prochaines actualités !</p>
+            </div>
+            {% endif %}
         </div>
         
         <!-- Bouton Voir plus / Voir moins -->
-        {% if actualites.size > 3 %}
+        {% if futureActualites.size > 3 %}
         <div class="actualites-actions">
             <button id="btn-voir-plus" class="btn btn-outline-primary btn-large">
                 <span class="btn-text">Voir plus d'actualités</span>
