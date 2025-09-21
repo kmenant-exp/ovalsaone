@@ -25,79 +25,50 @@ sidebar:
   tarif:
     icon: "fas fa-euro-sign"
     title: "Tarif unique"
-    price: 120
-    description: "Comprend : licence FFR, assurance, maillot d'entraînement"
+    price: 190
+    description: "Comprend : licence FFR, assurance, dotation annuelle (tenue d'entraînement : short, tee-shirt, chaussettes)"
   documents:
     icon: "fas fa-file-alt"
     title: "Documents requis"
     list:
-      - name: "Certificat médical d'aptitude au rugby"
+      - name: "Autorisation de soins (obligatoire)"
         required: true
-        description: "Certificat médical datant de moins de 6 mois"
-        template: "assets/documents/certificat-medical-modele.pdf"
-      - name: "Fiche d'inscription complétée"
+        description: "Autorisation de soins dûment complétée"
+      - name: "Pièce d'identité"
         required: true
-        description: "Fiche d'inscription du club dûment remplie et signée"
-        template: "assets/documents/fiche-inscription.pdf"
-      - name: "Copie de la carte d'identité du licencié"
+        description: "Carte d'identité (scannée recto et verso ET sur la même page) ou passeport en cours de validité ; livret de famille (page des parents et de l'enfant sur une même page)"
+      - name: "Photo d'identité"
         required: true
-        description: "Pièce d'identité en cours de validité (recto-verso)"
-      - name: "Autorisation parentale (mineurs)"
-        required: true
-        description: "Pour les mineurs : autorisation signée des deux parents"
-        template: "assets/documents/autorisation-parentale.pdf"
+        description: "Une photo d'identité au format jpeg"
   contact:
     icon: "fas fa-phone"
     title: "Besoin d'aide ?"
     email: "{{ contact.email }}"
     phone: "{{ contact.phone }}"
 
-form:
-  title: "Formulaire d'inscription"
-  subtitle: "Complétez les informations ci-dessous pour inscrire votre enfant"
-  sections:
-    enfant:
-      icon: "fas fa-child"
-      title: "Informations de l'enfant"
-      fields:
-        prenom:
-          label: "Prénom"
-          placeholder: "Prénom de l'enfant"
-          required: true
-        nom:
-          label: "Nom"
-          placeholder: "Nom de famille"
-          required: true
-        date_naissance:
-          label: "Date de naissance"
-          required: true
-        categorie:
-          label: "Catégorie d'âge"
-          placeholder: "Sélectionner une catégorie"
-          required: true
-    responsable:
-      icon: "fas fa-user"
-      title: "Responsable légal"
-      fields:
-        prenom:
-          label: "Prénom"
-          placeholder: "Votre prénom"
-          required: true
-        nom:
-          label: "Nom"
-          placeholder: "Votre nom"
-          required: true
-        email:
-          label: "Email"
-          placeholder: "votre.email@exemple.com"
-          required: true
-        telephone:
-          label: "Téléphone"
-          placeholder: "06 12 34 56 78"
-          required: true
-  submit:
-    icon: "fas fa-paper-plane"
-    text: "Envoyer l'inscription"
+inscription_process:
+  title: "Processus d'inscription 2025-2026"
+  description: "L'inscription se fait en 2 temps :"
+  hello_asso_url: "https://www.helloasso.com/associations/oval-saone/adhesions/licence-2025-2026"
+  steps:
+    - title: "1/- L'inscription sur le site Hello Asso :"
+      description: "Pour accéder à l'inscription, cliquez sur le bouton ci-dessous :"
+    - title: "2/- L'inscription à la Fédération Française de Rugby :"
+      description: "Suite à votre inscription sur Hello Asso, vous allez recevoir un mail de la FFR s'intitulant: ne_pas_repondre@ffr.fr<br>Il n'y a aucun lien entre Hello Asso et la FFR, la création du licencié sur le site de la FFR se fait par une intervention humaine, donc ne désespérez pas si vous ne recevez pas ce lien dans le ¼ d'heure qui suit !!!<br>Dans cet email, vous aurez vos codes d'activation pour accéder au site OVAL-e.<br>(ATTENTION NE JAMAIS SUPPRIMER CE MESSAGE, même si vous modifiez votre mot de passe, conservez ce 1er mail)."
+  ffr_steps:
+    title: "Procédure d'inscription à la FFR"
+    description: "Une fois tous les champs renseignés, vous devez scanner les éléments demandés et les télécharger sur le site de la FFR :"
+    items:
+      - "l'autorisation de soins (obligatoire),"
+      - "la pièce d'identité : carte d'identité (scannée recto et verso ET sur la même page) ou passeport en cours de validité ; livret de famille (page des parents et de l'enfant sur une même page),"
+      - "une photo d'identité au format jpeg (ou une photo de votre enfant que vous avez dans vos téléphones)."
+  validation:
+    title: "Validation de la licence"
+    description: "Dès que vous avez terminé la procédure, il revient au club de vérifier et de valider votre licence auprès de la FFR.<br>Afin que le club soit en mesure de valider votre licence, il faut nous remettre les éléments téléchargés sur le site de la FFR, ainsi que le règlement de la cotisation."
+    warning: "AUCUNE LICENCE NE SERA VALIDÉE SANS CES ÉLÉMENTS"
+  cotisation:
+    title: "COTISATION"
+    description: "Tarif pour la saison 2025 - 2026 : 190 € des catégories M6 à M14 et 130 € pour le baby rugby (enfants nés en année 2021).<br>Le prix de la licence comprend :<br>- la licence auprès de la FFR<br>- l'assurance obligatoire<br>- la dotation annuelle (tenue d'entraînement : short, tee-shirt, chaussettes)<br>A partir de 3 licences, vous pouvez bénéficier d'une réduction de 25 € sur la 3ème licence.<br>La licence est payable directement sur Hello Asso ou au club par chèque (payable en 3 fois), espèces, chèques vacances, chéquier jeunes Ain, virement."
 ---
 <!-- Hero Section avec effet parallax -->
 <section class="hero parallax-section subpage-hero">
@@ -188,87 +159,51 @@ form:
                 </div>
             </aside>
 
-            <!-- Formulaire principal -->
-            <main class="inscription-form-main">
-                <div class="form-container">
-                    <div class="form-header">
-                        <h2>{{ form.title }}</h2>
-                        <p>{{ form.subtitle }}</p>
+            <!-- Processus d'inscription -->
+            <main class="inscription-process-main">
+                <div class="process-container">
+                    <div class="process-header">
+                        <h2>{{ inscription_process.title }}</h2>
+                        <p>{{ inscription_process.description }}</p>
                     </div>
 
-                    <form id="inscription-form" class="modern-form">
-                        <!-- Section Enfant -->
-                        <fieldset class="form-section">
-                            <legend>
-                                <i class="{{ form.sections.enfant.icon }}"></i>
-                                {{ form.sections.enfant.title }}
-                            </legend>
-                            
-                            <div class="form-grid">
-                                <div class="form-field">
-                                    <label for="prenom-enfant">{{ form.sections.enfant.fields.prenom.label }}{% if form.sections.enfant.fields.prenom.required %} *{% endif %}</label>
-                                    <input type="text" id="prenom-enfant" name="prenomEnfant" {% if form.sections.enfant.fields.prenom.required %}required{% endif %} placeholder="{{ form.sections.enfant.fields.prenom.placeholder }}">
-                                </div>
-                                <div class="form-field">
-                                    <label for="nom-enfant">{{ form.sections.enfant.fields.nom.label }}{% if form.sections.enfant.fields.nom.required %} *{% endif %}</label>
-                                    <input type="text" id="nom-enfant" name="nomEnfant" {% if form.sections.enfant.fields.nom.required %}required{% endif %} placeholder="{{ form.sections.enfant.fields.nom.placeholder }}">
-                                </div>
+                    <div class="process-steps">
+                        {% for step in inscription_process.steps %}
+                        <div class="process-step">
+                            <h3>{{ step.title }}</h3>
+                            <p>{{ step.description }}</p>
+                            {% if forloop.first %}
+                            <div class="button-container">
+                                <a href="{{ inscription_process.hello_asso_url }}" target="_blank" class="btn btn-primary" style="color: white; font-weight: bold; font-size: 1.1rem;">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    <span>S'inscrire sur Hello Asso</span>
+                                </a>
                             </div>
-
-                            <div class="form-grid">
-                                <div class="form-field">
-                                    <label for="date-naissance">{{ form.sections.enfant.fields.date_naissance.label }}{% if form.sections.enfant.fields.date_naissance.required %} *{% endif %}</label>
-                                    <input type="date" id="date-naissance" name="dateNaissance" {% if form.sections.enfant.fields.date_naissance.required %}required{% endif %}>
-                                </div>
-                                <div class="form-field">
-                                    <label for="categorie">{{ form.sections.enfant.fields.categorie.label }}{% if form.sections.enfant.fields.categorie.required %} *{% endif %}</label>
-                                    <select id="categorie" name="categorie" {% if form.sections.enfant.fields.categorie.required %}required{% endif %}>
-                                        <option value="">{{ form.sections.enfant.fields.categorie.placeholder }}</option>
-                                        {% for team in teams %}
-                                            <option value="{{ team.name }}">{{ team.name }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                            </div>
-                        </fieldset>
-
-                        <!-- Section Responsable -->
-                        <fieldset class="form-section">
-                            <legend>
-                                <i class="{{ form.sections.responsable.icon }}"></i>
-                                {{ form.sections.responsable.title }}
-                            </legend>
-                            
-                            <div class="form-grid">
-                                <div class="form-field">
-                                    <label for="prenom-responsable">{{ form.sections.responsable.fields.prenom.label }}{% if form.sections.responsable.fields.prenom.required %} *{% endif %}</label>
-                                    <input type="text" id="prenom-responsable" name="prenomResponsable" {% if form.sections.responsable.fields.prenom.required %}required{% endif %} placeholder="{{ form.sections.responsable.fields.prenom.placeholder }}">
-                                </div>
-                                <div class="form-field">
-                                    <label for="nom-responsable">{{ form.sections.responsable.fields.nom.label }}{% if form.sections.responsable.fields.nom.required %} *{% endif %}</label>
-                                    <input type="text" id="nom-responsable" name="nomResponsable" {% if form.sections.responsable.fields.nom.required %}required{% endif %} placeholder="{{ form.sections.responsable.fields.nom.placeholder }}">
-                                </div>
-                            </div>
-
-                            <div class="form-grid">
-                                <div class="form-field">
-                                    <label for="email">{{ form.sections.responsable.fields.email.label }}{% if form.sections.responsable.fields.email.required %} *{% endif %}</label>
-                                    <input type="email" id="email" name="email" {% if form.sections.responsable.fields.email.required %}required{% endif %} placeholder="{{ form.sections.responsable.fields.email.placeholder }}">
-                                </div>
-                                <div class="form-field">
-                                    <label for="telephone">{{ form.sections.responsable.fields.telephone.label }}{% if form.sections.responsable.fields.telephone.required %} *{% endif %}</label>
-                                    <input type="tel" id="telephone" name="telephone" {% if form.sections.responsable.fields.telephone.required %}required{% endif %} placeholder="{{ form.sections.responsable.fields.telephone.placeholder }}">
-                                </div>
-                            </div>
-                        </fieldset>
-
-                        <div class="form-actions">
-                            <button type="submit" class="btn btn-primary btn-submit">
-                                <i class="{{ form.submit.icon }}"></i>
-                                {{ form.submit.text }}
-                            </button>
+                            {% endif %}
                         </div>
-                    </form>
+                        {% endfor %}
+                    </div>
+
+                    <div class="ffr-steps">
+                        <h3>{{ inscription_process.ffr_steps.title }}</h3>
+                        <p>{{ inscription_process.ffr_steps.description }}</p>
+                        <ul>
+                            {% for item in inscription_process.ffr_steps.items %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="validation-info">
+                        <h3>{{ inscription_process.validation.title }}</h3>
+                        <p>{{ inscription_process.validation.description }}</p>
+                        <div class="warning-message">{{ inscription_process.validation.warning }}</div>
+                    </div>
+
+                    <div class="cotisation-info">
+                        <h3>{{ inscription_process.cotisation.title }}</h3>
+                        <p>{{ inscription_process.cotisation.description }}</p>
+                    </div>
                 </div>
             </main>
         </div>

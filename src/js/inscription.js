@@ -1,66 +1,20 @@
 // JavaScript moderne pour la page inscription
 document.addEventListener('DOMContentLoaded', async () => {
-    setupModernInscriptionForm();
+    // Code simple pour la page d'inscription
+    setupInscriptionPage();
 });
 
-function setupModernInscriptionForm() {
-    const form = document.getElementById('inscription-form');
-    if (!form) return;
-
-    // Gestion de la validation en temps réel
-    const inputs = form.querySelectorAll('input, select');
-    inputs.forEach(input => {
-        // Ajouter la classe touched après la première interaction
-        input.addEventListener('blur', () => {
-            input.closest('.form-field').classList.add('touched');
-        });
-
-        // Pour les champs date, ajouter touched dès qu'une valeur est saisie
-        if (input.type === 'date') {
-            input.addEventListener('change', () => {
-                input.closest('.form-field').classList.add('touched');
-            });
-        }
-
-        // Validation en temps réel
-        input.addEventListener('input', () => {
-            validateField(input);
-        });
+function setupInscriptionPage() {
+    // Code pour mettre en évidence les liens Hello Asso
+    const links = document.querySelectorAll('a[href*="helloasso.com"]');
+    links.forEach(link => {
+        link.classList.add('highlight-link');
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener noreferrer');
     });
-
-    // Auto-sélection de catégorie basée sur la date de naissance
-    const dateNaissance = document.getElementById('date-naissance');
-    const categorieSelect = document.getElementById('categorie');
-    
-    if (dateNaissance && categorieSelect) {
-        dateNaissance.addEventListener('change', () => {
-            const age = calculateAge(new Date(dateNaissance.value));
-            const categorieAuto = getCategoryFromAge(age);
-            if (categorieAuto) {
-                categorieSelect.value = categorieAuto;
-                categorieSelect.dispatchEvent(new Event('change'));
-            }
-        });
-    }
-
-    // Soumission du formulaire
-    form.addEventListener('submit', handleFormSubmission);
 }
 
-function validateField(field) {
-    const fieldContainer = field.closest('.form-field');
-    if (!fieldContainer) return;
-
-    // Retirer les anciennes classes de validation
-    fieldContainer.classList.remove('valid', 'invalid');
-
-    // Vérifier la validité
-    if (field.checkValidity() && field.value.trim() !== '') {
-        fieldContainer.classList.add('valid');
-    } else if (fieldContainer.classList.contains('touched') && !field.checkValidity()) {
-        fieldContainer.classList.add('invalid');
-    }
-}
+// Aucun code supplémentaire n'est nécessaire pour la page d'inscription
 
 function calculateAge(birthDate) {
     const today = new Date();

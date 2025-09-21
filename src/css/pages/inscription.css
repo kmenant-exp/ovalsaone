@@ -198,6 +198,128 @@
     padding: 2.5rem;
 }
 
+/* Processus d'inscription */
+.inscription-process-main {
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.process-container {
+    padding: 2.5rem;
+}
+
+.process-header {
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.process-header h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.process-header p {
+    color: var(--gray-600);
+    font-size: 1.1rem;
+}
+
+.process-steps {
+    margin-bottom: 2rem;
+}
+
+.process-step {
+    padding: 1.5rem;
+    background-color: #f9fafb;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.process-step h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+}
+
+.process-step p {
+    color: var(--gray-700);
+    line-height: 1.6;
+}
+
+.button-container {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+/* Style spécifique pour assurer la visibilité du bouton d'inscription */
+.process-step .btn-primary {
+    color: white !important;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.process-step .btn-primary span {
+    color: white !important;
+}
+
+.process-step .btn-primary i {
+    color: var(--accent-color);
+}
+
+.process-step a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.process-step a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+.ffr-steps, .validation-info, .cotisation-info {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #f9fafb;
+    border-radius: 12px;
+}
+
+.ffr-steps h3, .validation-info h3, .cotisation-info h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.ffr-steps ul {
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+}
+
+.ffr-steps li {
+    margin-bottom: 0.75rem;
+    color: var(--gray-700);
+    line-height: 1.5;
+}
+
+.warning-message {
+    background-color: #fef2f2;
+    color: #b91c1c;
+    font-weight: 600;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+    text-align: center;
+    border: 1px solid #fecaca;
+}
+
 .form-header {
     text-align: center;
     margin-bottom: 2.5rem;
