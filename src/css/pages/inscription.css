@@ -3,7 +3,7 @@
 /* Section d'introduction */
 .inscription-intro {
     background: var(--white);
-    padding: 4rem 0;
+    padding: 1rem 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
@@ -69,7 +69,7 @@
 
 /* Layout principal */
 .inscription-main {
-    padding: 3rem 0;
+    padding: 2rem 0;
     background: linear-gradient(to bottom, #f8fafc 0%, #ffffff 100%);
     min-height: 100vh;
 }
