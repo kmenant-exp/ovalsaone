@@ -16,10 +16,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const calendarLoading = document.querySelector('.calendar-loading');
     const calendarError = document.querySelector('.calendar-error');
     const calendarEvents = document.querySelector('.calendar-events');
+    const calendarPastEvents = document.querySelector('.calendar-past-events');
+    const pastEventsButton = document.querySelector('.past-events-button');
 
     let activeTeam = 'all';
     let allEvents = [];
+    let upcomingEvents = [];
+    let pastEvents = [];
     let loadedCalendars = 0;
+    let showPastEvents = false;
     
     // Initialise les onglets
     tabButtons.forEach(button => {
@@ -53,8 +58,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const today = new Date();
         const nextThreeMonths = new Date(today);
         nextThreeMonths.setMonth(today.getMonth() + 3);
+        const sixMonthsAgo = new Date(today);
+        sixMonthsAgo.setMonth(today.getMonth() - 6);
 
-        const timeMin = today.toISOString();
+        // On charge les 6 derniers mois et les 3 prochains mois
+        const timeMin = sixMonthsAgo.toISOString();
         const timeMax = nextThreeMonths.toISOString();
 
         // Construit l'URL de l'API Google Calendar
@@ -91,7 +99,27 @@ document.addEventListener('DOMContentLoaded', () => {
                         return dateA - dateB;
                     });
                     
+                    // Sépare les événements à venir et passés
+                    const now = new Date();
+                    upcomingEvents = allEvents.filter(event => {
+                        const eventDate = new Date(event.start.dateTime || event.start.date);
+                        return eventDate >= now;
+                    });
+                    
+                    pastEvents = allEvents.filter(event => {
+                        const eventDate = new Date(event.start.dateTime || event.start.date);
+                        return eventDate < now;
+                    });
+                    
+                    // On affiche les événements
                     renderEvents();
+                    
+                    // On affiche ou masque le bouton "Voir les événements passés" selon qu'il y a des événements passés ou non
+                    if (pastEvents.length > 0) {
+                        pastEventsButton.style.display = 'block';
+                    } else {
+                        pastEventsButton.style.display = 'none';
+                    }
                 }
             })
             .catch(error => {
@@ -148,45 +176,73 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function renderEvents() {
         // Filtre les événements selon l'équipe sélectionnée
-        let filteredEvents = allEvents;
+        let filteredUpcomingEvents = upcomingEvents;
+        let filteredPastEvents = pastEvents;
+        
         if (activeTeam !== 'all') {
-            filteredEvents = allEvents.filter(event => event.team === activeTeam);
+            filteredUpcomingEvents = upcomingEvents.filter(event => event.team === activeTeam);
+            filteredPastEvents = pastEvents.filter(event => event.team === activeTeam);
         } else {
             // Pour l'onglet "Tous les événements", fusionner les événements identiques
-            filteredEvents = mergeIdenticalEvents(allEvents);
+            filteredUpcomingEvents = mergeIdenticalEvents(upcomingEvents);
+            filteredPastEvents = mergeIdenticalEvents(pastEvents);
         }
         
         // Efface le contenu précédent
         calendarEvents.innerHTML = '';
+        calendarPastEvents.innerHTML = '';
         
-        // Si aucun événement n'est disponible
-        if (filteredEvents.length === 0) {
+        // Si aucun événement à venir n'est disponible
+        if (filteredUpcomingEvents.length === 0) {
             calendarEvents.innerHTML = `<div class="no-events"><p>Aucun événement à venir pour ${activeTeam === 'all' ? 'les équipes' : `l'équipe ${activeTeam}`}.</p></div>`;
-            hideLoading();
-            calendarEvents.style.display = 'block';
-            return;
+        } else {
+            // Regroupe les événements à venir par mois
+            const upcomingEventsByMonth = groupEventsByMonth(filteredUpcomingEvents);
+            
+            // Crée l'élément HTML pour chaque mois d'événements à venir
+            for (const [month, events] of Object.entries(upcomingEventsByMonth)) {
+                const monthElement = document.createElement('div');
+                monthElement.className = 'calendar-month';
+                monthElement.innerHTML = `<h2>${month}</h2>`;
+                
+                // Crée l'élément HTML pour chaque événement
+                events.forEach(event => {
+                    const eventElement = createEventElement(event);
+                    monthElement.appendChild(eventElement);
+                });
+                
+                calendarEvents.appendChild(monthElement);
+            }
         }
         
-        // Regroupe les événements par mois
-        const eventsByMonth = groupEventsByMonth(filteredEvents);
-        
-        // Crée l'élément HTML pour chaque mois
-        for (const [month, events] of Object.entries(eventsByMonth)) {
-            const monthElement = document.createElement('div');
-            monthElement.className = 'calendar-month';
-            monthElement.innerHTML = `<h2>${month}</h2>`;
+        // Si des événements passés sont disponibles
+        if (filteredPastEvents.length > 0) {
+            // Regroupe les événements passés par mois
+            const pastEventsByMonth = groupEventsByMonth(filteredPastEvents);
             
-            // Crée l'élément HTML pour chaque événement
-            events.forEach(event => {
-                const eventElement = createEventElement(event);
-                monthElement.appendChild(eventElement);
-            });
-            
-            calendarEvents.appendChild(monthElement);
+            // Crée l'élément HTML pour chaque mois d'événements passés
+            for (const [month, events] of Object.entries(pastEventsByMonth)) {
+                const monthElement = document.createElement('div');
+                monthElement.className = 'calendar-month';
+                monthElement.innerHTML = `<h2>${month}</h2>`;
+                
+                // Crée l'élément HTML pour chaque événement passé
+                events.forEach(event => {
+                    const eventElement = createEventElement(event);
+                    monthElement.appendChild(eventElement);
+                });
+                
+                calendarPastEvents.appendChild(monthElement);
+            }
+        } else {
+            calendarPastEvents.innerHTML = `<div class="no-events"><p>Aucun événement passé pour ${activeTeam === 'all' ? 'les équipes' : `l'équipe ${activeTeam}`}.</p></div>`;
         }
         
         hideLoading();
         calendarEvents.style.display = 'block';
+        
+        // Affiche ou masque les événements passés selon l'état
+        calendarPastEvents.style.display = showPastEvents ? 'block' : 'none';
     }
 
     /**
@@ -283,6 +339,15 @@ document.addEventListener('DOMContentLoaded', () => {
         calendarLoading.style.display = 'none';
         calendarError.style.display = 'block';
         calendarEvents.style.display = 'none';
+    }
+
+    // Gestion du bouton des événements passés
+    if (pastEventsButton) {
+        pastEventsButton.addEventListener('click', function() {
+            showPastEvents = !showPastEvents;
+            calendarPastEvents.style.display = showPastEvents ? 'block' : 'none';
+            pastEventsButton.textContent = showPastEvents ? 'Masquer les événements passés' : 'Voir les événements passés';
+        });
     }
 
     // Charge tous les calendriers au chargement de la page

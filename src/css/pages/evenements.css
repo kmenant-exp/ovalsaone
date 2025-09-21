@@ -4,7 +4,6 @@
 
 .calendar-section {
     padding-top: 0;
-    padding-bottom: 2rem;
 }
 
 .section-intro {
@@ -345,3 +344,17 @@
         font-size: 0.7rem;
     }
 }
+
+/* Section événements passés */
+.past-events-button {
+    margin-bottom: 1.5rem;
+}
+
+.section-title {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+/* Pas de style spécifique pour les événements passés */
