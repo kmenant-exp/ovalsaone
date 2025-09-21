@@ -182,6 +182,12 @@
     gap: 1rem;
 }
 
+.event-teams {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
 .event-team {
     font-weight: 600;
     background-color: #f0f0f0;

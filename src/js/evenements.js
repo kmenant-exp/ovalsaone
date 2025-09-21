@@ -110,6 +110,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
+     * Regroupe les événements qui ont le même nom et la même date
+     * @param {Array} events - Liste des événements à regrouper
+     * @return {Array} Liste des événements regroupés
+     */
+    function mergeIdenticalEvents(events) {
+        // Map pour stocker les événements uniques par clé
+        const mergedEventsMap = new Map();
+        
+        events.forEach(event => {
+            const startDate = new Date(event.start.dateTime || event.start.date);
+            // Crée une clé unique basée sur le nom de l'événement et sa date de début
+            const key = `${event.summary}_${startDate.toDateString()}`;
+            
+            if (mergedEventsMap.has(key)) {
+                // Si cet événement existe déjà, ajoutez l'équipe à la liste
+                const existingEvent = mergedEventsMap.get(key);
+                // Vérifiez si l'équipe existe déjà dans la liste des équipes
+                if (!existingEvent.teams.includes(event.team)) {
+                    existingEvent.teams.push(event.team);
+                }
+            } else {
+                // Si c'est un nouvel événement, créez une entrée avec un tableau d'équipes
+                mergedEventsMap.set(key, {
+                    ...event,
+                    teams: [event.team]
+                });
+            }
+        });
+        
+        // Convertir la Map en tableau
+        return Array.from(mergedEventsMap.values());
+    }
+
+    /**
      * Affiche les événements filtrés par équipe
      */
     function renderEvents() {
@@ -117,6 +151,9 @@ document.addEventListener('DOMContentLoaded', () => {
         let filteredEvents = allEvents;
         if (activeTeam !== 'all') {
             filteredEvents = allEvents.filter(event => event.team === activeTeam);
+        } else {
+            // Pour l'onglet "Tous les événements", fusionner les événements identiques
+            filteredEvents = mergeIdenticalEvents(allEvents);
         }
         
         // Efface le contenu précédent
@@ -198,6 +235,18 @@ document.addEventListener('DOMContentLoaded', () => {
             timeStr = `${startTime}${endTime ? ' - ' + endTime : ''}`;
         }
         
+        // Gestion de l'affichage des équipes
+        let teamDisplay = '';
+        
+        // Vérifiez si l'événement a été fusionné (possède un tableau d'équipes)
+        if (event.teams && event.teams.length > 0) {
+            // Pour les événements fusionnés, afficher toutes les équipes concernées
+            teamDisplay = event.teams.map(team => `<span class="event-team">${team}</span>`).join('');
+        } else {
+            // Pour les événements non fusionnés (vue par équipe), afficher l'équipe unique
+            teamDisplay = `<span class="event-team">${event.team}</span>`;
+        }
+        
         // Crée l'élément HTML
         const eventElement = document.createElement('div');
         eventElement.className = 'calendar-event';
@@ -209,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="event-details">
                 <h3 class="event-title">${event.summary || 'Sans titre'}</h3>
                 <div class="event-meta">
-                    <span class="event-team">${event.team}</span>
+                    <div class="event-teams">${teamDisplay}</div>
                     <span class="event-time">${isAllDay ? 'Toute la journée' : timeStr}</span>
                     ${event.location ? `<span class="event-location">${event.location}</span>` : ''}
                 </div>
