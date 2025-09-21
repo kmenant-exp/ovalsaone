@@ -90,7 +90,10 @@ histoire:
                     <div class="bureau-info">
                         <h3 class="bureau-nom">{{ membre.prenom }} {{ membre.nom }}</h3>
                         <span class="bureau-poste">{{ membre.poste }}</span>
-                        <p class="bureau-description">{{ membre.description }}</p>
+                        <div class="bureau-description-container">
+                            <p class="bureau-description truncated">{{ membre.description }}</p>
+                            <button class="btn-voir-plus">Voir plus</button>
+                        </div>
                     </div>
                 </div>  
             {% endfor %}
