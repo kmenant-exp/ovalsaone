@@ -24,8 +24,15 @@ intro:
 sidebar:
   tarif:
     icon: "fas fa-euro-sign"
-    title: "Tarif unique"
-    price: 190
+    title: "Tarifs"
+    normal:
+      price: 190
+      title: "Tarif normal"
+      description: "Pour toutes les catégories M6 à M14"
+    baby:
+      price: 130
+      title: "Baby Rugby"
+      description: "Pour les enfants nés en 2021"
     description: "Comprend : licence FFR, assurance, dotation annuelle (tenue d'entraînement : short, tee-shirt, chaussettes)"
   documents:
     icon: "fas fa-file-alt"
@@ -118,11 +125,21 @@ inscription_process:
                         <h3>{{ sidebar.tarif.title }}</h3>
                     </div>
                     <div class="info-content" id="tarifs-content">
+                        <!-- Tarif normal -->
                         <div class="price-display">
-                            <div class="price-amount">{{ sidebar.tarif.price }} €</div>
-                            <div class="price-description">Pour toutes les catégories</div>
+                            <div class="price-amount">{{ sidebar.tarif.normal.price }} €</div>
+                            <div class="price-description">{{ sidebar.tarif.normal.title }}</div>
+                            <div class="price-category">{{ sidebar.tarif.normal.description }}</div>
                         </div>
-                        <p style="color: var(--gray-600); font-size: 0.875rem; text-align: center; line-height: 1.5;">
+                        
+                        <!-- Tarif Baby Rugby -->
+                        <div class="price-display" style="margin-top: 1.5rem;">
+                            <div class="price-amount">{{ sidebar.tarif.baby.price }} €</div>
+                            <div class="price-description">{{ sidebar.tarif.baby.title }}</div>
+                            <div class="price-category">{{ sidebar.tarif.baby.description }}</div>
+                        </div>
+                        
+                        <p style="color: var(--gray-600); font-size: 0.875rem; text-align: center; line-height: 1.5; margin-top: 1rem;">
                             {{ sidebar.tarif.description }}
                         </p>
                     </div>
@@ -153,8 +170,8 @@ inscription_process:
                         <h3>{{ sidebar.contact.title }}</h3>
                     </div>
                     <div class="info-content">
-                        <p><i class="fas fa-envelope"></i> {{ sidebar.contact.email }}</p>
-                        <p><i class="fas fa-phone"></i> {{ sidebar.contact.phone }}</p>
+                        <p><i class="fas fa-envelope"></i> {{ contact.email }}</p>
+                        <p><i class="fas fa-phone"></i> {{ contact.phone }}</p>
                     </div>
                 </div>
             </aside>
