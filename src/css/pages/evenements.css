@@ -19,6 +19,7 @@
 /* Styles des liens vers les calendriers */
 .calendar-links {
     margin-top: 0.5rem;
+    margin-bottom: 1rem;
     padding: 1.5rem 2rem;
     background-color: #f7f7f7;
     border-radius: 8px;
