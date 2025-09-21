@@ -6,6 +6,10 @@ description: Calendrier des événements et matchs à venir pour toutes les équ
 hero:
   title: "Calendrier des événements"
   subtitle: "Retrouvez ici tous les matchs, entraînements et événements à venir pour nos équipes."
+
+intro:
+  title: "Ne manquez aucun rendez-vous"
+  text: "Consultez notre calendrier régulièrement mis à jour pour connaître les entraînements, matchs et événements spéciaux. Vous pouvez également synchroniser le calendrier de votre équipe avec votre application préférée."
 ---
 
 <!-- Hero Section avec effet parallax -->
@@ -17,10 +21,20 @@ hero:
     </div>
 </section>
 
+<section class="intro section">
+    <div class="container">
+        <div class="intro-content">
+            <div class="intro-text">
+                <h2>{{ intro.title }}</h2>
+                <p>{{ intro.text }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="calendar-section">
     <div class="container">
         <div class="section-intro">
-            <p>Consultez les prochains événements ci-dessous ou utilisez les onglets pour filtrer par catégorie d'âge.</p>
             <div class="calendar-links">
                 <p>Vous pouvez également ajouter les calendriers à votre application préférée :</p>
                 <div class="calendar-links-grid">

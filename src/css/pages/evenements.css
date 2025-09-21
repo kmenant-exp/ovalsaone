@@ -3,17 +3,22 @@
  */
 
 .calendar-section {
-    padding: 2rem 0;
+    padding-top: 0;
+    padding-bottom: 2rem;
 }
 
 .section-intro {
-    margin-bottom: 1.5rem;
     text-align: center;
+}
+
+/* Réduire l'espacement entre l'intro et le calendrier */
+.intro.section {
+    padding-bottom: 1rem;
 }
 
 /* Styles des liens vers les calendriers */
 .calendar-links {
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
     padding: 1.5rem 2rem;
     background-color: #f7f7f7;
     border-radius: 8px;
