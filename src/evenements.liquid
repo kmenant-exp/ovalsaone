@@ -22,13 +22,22 @@ hero:
         <div class="section-intro">
             <p>Consultez les prochains événements ci-dessous ou utilisez les onglets pour filtrer par catégorie d'âge.</p>
             <div class="calendar-links">
-                <p>Vous pouvez également ajouter les calendriers directement à votre Google Calendar :</p>
+                <p>Vous pouvez également ajouter les calendriers à votre application préférée :</p>
                 <div class="calendar-links-grid">
                     {% for team in calendars.teams %}
-                    <a href="{{ team.calendarUrl }}" target="_blank" class="calendar-link">
-                        <span class="team-name">{{ team.name }}</span>
-                        <span class="link-text">Ajouter à Google Calendar</span>
-                    </a>
+                    <div class="calendar-links-team">
+                        <h3 class="team-name">{{ team.name }}</h3>
+                        <div class="calendar-links-buttons">
+                            <a href="{{ team.calendarUrl }}" target="_blank" class="calendar-link google">
+                                <span class="calendar-icon google-icon"></span>
+                                <span class="link-text">Google Calendar</span>
+                            </a>
+                            <a href="{{ team.icsUrl }}" download class="calendar-link ics">
+                                <span class="calendar-icon ics-icon"></span>
+                                <span class="link-text">Format ICS</span>
+                            </a>
+                        </div>
+                    </div>
                     {% endfor %}
                 </div>
             </div>

@@ -4,27 +4,32 @@
     {
       "name": "U6",
       "calendarId": "0746e3a0384eec71f24bfde5de57820e0784edeba1055b789bd2e0088d5ff927@group.calendar.google.com",
-      "calendarUrl": "https://calendar.google.com/calendar/u/0?cid=MDc0NmUzYTAzODRlZWM3MWYyNGJmZGU1ZGU1NzgyMGUwNzg0ZWRlYmExMDU1Yjc4OWJkMmUwMDg4ZDVmZjkyN0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
+      "calendarUrl": "https://calendar.google.com/calendar/u/0?cid=MDc0NmUzYTAzODRlZWM3MWYyNGJmZGU1ZGU1NzgyMGUwNzg0ZWRlYmExMDU1Yjc4OWJkMmUwMDg4ZDVmZjkyN0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t",
+      "icsUrl": "https://calendar.google.com/calendar/ical/0746e3a0384eec71f24bfde5de57820e0784edeba1055b789bd2e0088d5ff927%40group.calendar.google.com/public/basic.ics"
     },
     {
       "name": "U8",
       "calendarId": "ad7de91739d9253fc5c034ff0e45d209903c8938ddfa60c02746d2c64e4ebe29@group.calendar.google.com",
-      "calendarUrl": "https://calendar.google.com/calendar/u/0?cid=YWQ3ZGU5MTczOWQ5MjUzZmM1YzAzNGZmMGU0NWQyMDk5MDNjODkzOGRkZmE2MGMwMjc0NmQyYzY0ZTRlYmUyOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
+      "calendarUrl": "https://calendar.google.com/calendar/u/0?cid=YWQ3ZGU5MTczOWQ5MjUzZmM1YzAzNGZmMGU0NWQyMDk5MDNjODkzOGRkZmE2MGMwMjc0NmQyYzY0ZTRlYmUyOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t",
+      "icsUrl": "https://calendar.google.com/calendar/ical/ad7de91739d9253fc5c034ff0e45d209903c8938ddfa60c02746d2c64e4ebe29%40group.calendar.google.com/public/basic.ics"
     },
     {
       "name": "U10",
       "calendarId": "ae60e83d49b55c80ad7c71217d51504b9c961894e645ccdbfc01099c00c4a459@group.calendar.google.com",
-      "calendarUrl": "https://calendar.google.com/calendar/u/0?cid=YWU2MGU4M2Q0OWI1NWM4MGFkN2M3MTIxN2Q1MTUwNGI5Yzk2MTg5NGU2NDVjY2RiZmMwMTA5OWMwMGM0YTQ1OUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
+      "calendarUrl": "https://calendar.google.com/calendar/u/0?cid=YWU2MGU4M2Q0OWI1NWM4MGFkN2M3MTIxN2Q1MTUwNGI5Yzk2MTg5NGU2NDVjY2RiZmMwMTA5OWMwMGM0YTQ1OUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t",
+      "icsUrl": "https://calendar.google.com/calendar/ical/ae60e83d49b55c80ad7c71217d51504b9c961894e645ccdbfc01099c00c4a459%40group.calendar.google.com/public/basic.ics"
     },
     {
       "name": "U12",
       "calendarId": "4be16773ba4c2d20fe183211e787d75a13ae54f82e4496f946d7e8019ae6f454@group.calendar.google.com",
-      "calendarUrl": "https://calendar.google.com/calendar/u/0?cid=NGJlMTY3NzNiYTRjMmQyMGZlMTgzMjExZTc4N2Q3NWExM2FlNTRmODJlNDQ5NmY5NDZkN2U4MDE5YWU2ZjQ1NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
+      "calendarUrl": "https://calendar.google.com/calendar/u/0?cid=NGJlMTY3NzNiYTRjMmQyMGZlMTgzMjExZTc4N2Q3NWExM2FlNTRmODJlNDQ5NmY5NDZkN2U4MDE5YWU2ZjQ1NEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t",
+      "icsUrl": "https://calendar.google.com/calendar/ical/4be16773ba4c2d20fe183211e787d75a13ae54f82e4496f946d7e8019ae6f454%40group.calendar.google.com/public/basic.ics"
     },
     {
       "name": "U14",
       "calendarId": "eb55ef011e0f31d44686bad5118effc288a1bea94a79ad71e8c2e9aa03b64d6d@group.calendar.google.com",
-      "calendarUrl": "https://calendar.google.com/calendar/u/0?cid=ZWI1NWVmMDExZTBmMzFkNDQ2ODZiYWQ1MTE4ZWZmYzI4OGExYmVhOTRhNzlhZDcxZThjMmU5YWEwM2I2NGQ2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
+      "calendarUrl": "https://calendar.google.com/calendar/u/0?cid=ZWI1NWVmMDExZTBmMzFkNDQ2ODZiYWQ1MTE4ZWZmYzI4OGExYmVhOTRhNzlhZDcxZThjMmU5YWEwM2I2NGQ2ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t",
+      "icsUrl": "https://calendar.google.com/calendar/ical/eb55ef011e0f31d44686bad5118effc288a1bea94a79ad71e8c2e9aa03b64d6d%40group.calendar.google.com/public/basic.ics"
     }
   ]
 }
