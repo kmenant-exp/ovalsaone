@@ -6,7 +6,7 @@
 
 /* Section Hero général pour toutes les sous-pages avec effet parallax */
 .subpage-hero {
-    background-image: url('../../assets/subpage-hero-image.jpg');
+    background-image: url('../../assets/hero-image2.png');
     background-size: cover;
     background-position: center -170px;
     background-attachment: fixed;

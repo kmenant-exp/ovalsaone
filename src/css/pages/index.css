@@ -7,7 +7,7 @@
 /* Section Hero avec effet parallax */
 .hero {
     color: var(--white);
-    background-image: url('../../assets/hero-image.jpg');
+    background-image: url('../../assets/hero-image2.png');
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
@@ -289,7 +289,7 @@
 
 .histoire {
     color: var(--white);
-    background-image: url('../../assets/histoire-bg.jpg');
+    background-image: url('../../assets/histoire-bg-2.jpg');
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
