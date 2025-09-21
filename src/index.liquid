@@ -99,15 +99,19 @@ sponsors_description: "Nos partenaires sont essentiels au développement de notr
             {% endif %}
         </div>
         
-        <!-- Bouton Voir plus / Voir moins -->
-        {% if futureActualites.size > 3 %}
+        <!-- Boutons d'actions -->
         <div class="actualites-actions">
+            {% if futureActualites.size > 3 %}
             <button id="btn-voir-plus" class="btn btn-outline-primary btn-large">
                 <span class="btn-text">Voir plus d'actualités</span>
                 <i class="fas fa-chevron-down btn-icon"></i>
             </button>
+            {% endif %}
+            <a href="/evenements" class="btn btn-outline-primary btn-large">
+                <span class="btn-text">Voir le calendrier</span>
+                <i class="fas fa-calendar-alt btn-icon"></i>
+            </a>
         </div>
-        {% endif %}
     </div>
 </section>
 
