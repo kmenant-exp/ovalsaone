@@ -9,6 +9,12 @@ let currentPhotoIndex = 0;
 let currentFilter = 'all';
 let currentAlbumImages = []; // Images du dossier Azure Storage actuel
 let currentAlbumIndex = 0;
+let carouselTrack = null;
+let carouselContainer = null;
+let carouselAnimationTimeout = null;
+let isCarouselAnimating = false;
+
+const CAROUSEL_TRANSITION_MS = 450;
 
 // Initialisation au chargement du DOM
 document.addEventListener('DOMContentLoaded', function() {
@@ -108,6 +114,8 @@ function setupLightbox() {
     const closeBtn = document.getElementById('gallery-modal-close');
     const prevBtn = document.getElementById('gallery-modal-prev');
     const nextBtn = document.getElementById('gallery-modal-next');
+    carouselTrack = document.getElementById('gallery-carousel-track');
+    carouselContainer = modal ? modal.querySelector('.gallery-carousel') : null;
     
     // Ouvre le lightbox au clic sur une photo
     document.querySelectorAll('.gallery-view-btn').forEach((btn, index) => {
@@ -183,96 +191,82 @@ function setupLightbox() {
 function setupTouchGestures(modal) {
     if (!modal) return;
     
+    const carousel = modal.querySelector('.gallery-carousel');
+    if (!carousel || !carouselTrack) return;
+    
     let touchStartX = 0;
     let touchStartY = 0;
-    let touchEndX = 0;
+    let deltaX = 0;
     let touchEndY = 0;
     let isDragging = false;
+    let basePercent = 0;
     
-    const minSwipeDistance = 50; // Distance minimale pour déclencher un swipe (en pixels)
-    const maxVerticalDistance = 100; // Distance verticale max pour considérer comme un swipe horizontal
+    const minSwipeDistance = 50;
+    const maxVerticalDistance = 100;
+
+    const resetPosition = () => {
+        updateCarouselPosition({ animate: false });
+    };
     
-    const modalContent = modal.querySelector('.gallery-modal-content');
-    const modalImage = document.getElementById('gallery-modal-image');
-    
-    if (!modalContent || !modalImage) return;
-    
-    // Début du toucher
-    modalImage.addEventListener('touchstart', function(e) {
-        // Ne pas interférer si on touche les boutons de navigation
+    carousel.addEventListener('touchstart', (e) => {
         if (e.target.closest('.gallery-modal-nav')) {
             return;
         }
-        
-        touchStartX = e.changedTouches[0].screenX;
-        touchStartY = e.changedTouches[0].screenY;
+        if (isCarouselAnimating) return;
+
+        touchStartX = e.changedTouches[0].clientX;
+        touchStartY = e.changedTouches[0].clientY;
+        touchEndY = touchStartY;
+        deltaX = 0;
         isDragging = true;
-        
-        console.log('Touch start:', touchStartX, touchStartY);
-        
-        // Désactive la transition pendant le drag
-        modalImage.style.transition = 'none';
+        basePercent = -currentAlbumIndex * 100;
+        carouselTrack.style.transition = 'none';
     }, { passive: true });
     
-    // Déplacement du doigt
-    modalImage.addEventListener('touchmove', function(e) {
+    carousel.addEventListener('touchmove', (e) => {
         if (!isDragging) return;
         
-        touchEndX = e.changedTouches[0].screenX;
-        touchEndY = e.changedTouches[0].screenY;
+        const currentX = e.changedTouches[0].clientX;
+        const currentY = e.changedTouches[0].clientY;
+        deltaX = currentX - touchStartX;
+        touchEndY = currentY;
+        const deltaY = Math.abs(currentY - touchStartY);
         
-        const deltaX = touchEndX - touchStartX;
-        const deltaY = Math.abs(touchEndY - touchStartY);
-        
-        // Si le mouvement est principalement horizontal
         if (Math.abs(deltaX) > deltaY) {
-            // Empêche le scroll de la page pendant le swipe horizontal
             e.preventDefault();
-            
-            // Applique un effet de déplacement visuel (optionnel)
-            const translateX = deltaX * 0.3; // Réduit l'amplitude pour un effet subtil
-            modalImage.style.transform = `translateX(${translateX}px)`;
+            const containerWidth = carousel.offsetWidth || 1;
+            const offsetPercent = (deltaX / containerWidth) * 100;
+            const clampedOffset = Math.max(Math.min(offsetPercent, 30), -30);
+            carouselTrack.style.transform = `translateX(${basePercent + clampedOffset}%)`;
         }
     }, { passive: false });
     
-    // Fin du toucher
-    modalImage.addEventListener('touchend', function(e) {
-        if (!isDragging) return;
-        
-        touchEndX = e.changedTouches[0].screenX;
-        touchEndY = e.changedTouches[0].screenY;
-        
-        // Réactive la transition
-        modalImage.style.transition = '';
-        modalImage.style.transform = '';
-        
-        const deltaX = touchEndX - touchStartX;
+    const completeSwipe = () => {
         const deltaY = Math.abs(touchEndY - touchStartY);
-        
-        console.log('Touch end - deltaX:', deltaX, 'deltaY:', deltaY);
-        
-        // Vérifie si c'est un swipe horizontal valide
+        carouselTrack.style.transition = '';
+
         if (Math.abs(deltaX) > minSwipeDistance && deltaY < maxVerticalDistance) {
-            console.log('Swipe détecté!', deltaX > 0 ? 'Droite (prev)' : 'Gauche (next)');
             if (deltaX > 0) {
-                // Swipe vers la droite -> photo précédente
                 showPrevAlbumPhoto();
             } else {
-                // Swipe vers la gauche -> photo suivante
                 showNextAlbumPhoto();
             }
         } else {
-            console.log('Swipe non valide - distance trop courte ou trop vertical');
+            updateCarouselPosition({ animate: true });
         }
-        
+    };
+    
+    carousel.addEventListener('touchend', () => {
+        if (!isDragging) return;
         isDragging = false;
+        completeSwipe();
     }, { passive: true });
     
-    // Annulation du toucher
-    modalImage.addEventListener('touchcancel', function() {
+    carousel.addEventListener('touchcancel', () => {
+        if (!isDragging) return;
         isDragging = false;
-        modalImage.style.transition = '';
-        modalImage.style.transform = '';
+        carouselTrack.style.transition = '';
+        resetPosition();
     }, { passive: true });
 }
 
@@ -362,11 +356,11 @@ async function openLightboxWithAlbum(index) {
     document.getElementById('gallery-modal-titre').textContent = photo.titre;
     document.getElementById('gallery-modal-description').textContent = photo.description;
     document.getElementById('gallery-modal-date').querySelector('span').textContent = photo.date;
-    
-    // Affiche d'abord l'image principale
-    const modalImage = document.getElementById('gallery-modal-image');
-    modalImage.src = photo.mainImage;
-    modalImage.alt = photo.alt;
+    if (carouselTrack) {
+        carouselTrack.innerHTML = '';
+        carouselTrack.style.transition = 'none';
+        carouselTrack.style.transform = 'translateX(0%)';
+    }
     
     // Récupère toutes les images du dossier Azure Storage
     currentAlbumImages = await fetchBlobsFromStorage(photo.storageUrl);
@@ -374,42 +368,139 @@ async function openLightboxWithAlbum(index) {
     // Si aucune image n'a été trouvée, utilise l'image principale
     if (currentAlbumImages.length === 0) {
         currentAlbumImages = [photo.mainImage];
+    } else if (!currentAlbumImages.includes(photo.mainImage)) {
+        currentAlbumImages.unshift(photo.mainImage);
     }
     
     // Trouve l'index de l'image principale dans l'album
     const mainImageIndex = currentAlbumImages.findIndex(url => url === photo.mainImage);
     currentAlbumIndex = mainImageIndex >= 0 ? mainImageIndex : 0;
     
-    // Affiche l'image courante
-    showAlbumImage(currentAlbumIndex);
+    buildCarouselSlides(photo);
+    updateActiveSlide();
+    updateCarouselPosition({ animate: false });
+    await waitForActiveSlideImage();
     
-    // Cache le loader
-    loading.classList.add('hidden');
+    if (loading) {
+        loading.classList.add('hidden');
+    }
+    
+    // Assure que les transitions sont réactivées après initialisation
+    if (carouselTrack) {
+        requestAnimationFrame(() => {
+            carouselTrack.style.transition = '';
+        });
+    }
     
     // Met à jour le compteur
     updateImageCounter();
 }
 
+function buildCarouselSlides(photo) {
+    if (!carouselTrack) return;
+    
+    carouselTrack.innerHTML = '';
+    const baseAlt = photo.alt || photo.titre || 'Photo de la galerie';
+    
+    currentAlbumImages.forEach((imageUrl, idx) => {
+        const slide = document.createElement('div');
+        slide.className = 'gallery-carousel-slide';
+        slide.dataset.index = idx;
+        slide.setAttribute('role', 'option');
+        slide.setAttribute('aria-selected', idx === currentAlbumIndex ? 'true' : 'false');
+        slide.setAttribute('tabindex', idx === currentAlbumIndex ? '0' : '-1');
+        
+        const img = document.createElement('img');
+        img.src = imageUrl;
+        img.alt = baseAlt;
+        img.loading = idx === currentAlbumIndex ? 'eager' : 'lazy';
+        
+        slide.appendChild(img);
+        carouselTrack.appendChild(slide);
+    });
+}
+
+function waitForActiveSlideImage() {
+    return new Promise(resolve => {
+        if (!carouselTrack) {
+            resolve();
+            return;
+        }
+        const activeSlide = carouselTrack.querySelector(`.gallery-carousel-slide[data-index="${currentAlbumIndex}"] img`);
+        if (!activeSlide) {
+            resolve();
+            return;
+        }
+        if (activeSlide.complete) {
+            resolve();
+        } else {
+            activeSlide.addEventListener('load', () => resolve(), { once: true });
+            activeSlide.addEventListener('error', () => resolve(), { once: true });
+        }
+    });
+}
+
+function updateCarouselPosition({ animate = true } = {}) {
+    if (!carouselTrack) return;
+    const translateValue = `translateX(-${currentAlbumIndex * 100}%)`;
+    
+    if (!animate) {
+        carouselTrack.style.transition = 'none';
+        carouselTrack.style.transform = translateValue;
+        requestAnimationFrame(() => {
+            carouselTrack.style.transition = '';
+        });
+        return;
+    }
+    
+    carouselTrack.style.transform = translateValue;
+}
+
+function updateActiveSlide() {
+    if (!carouselTrack) return;
+    const slides = carouselTrack.querySelectorAll('.gallery-carousel-slide');
+    slides.forEach((slide, idx) => {
+        const isActive = idx === currentAlbumIndex;
+        slide.classList.toggle('is-active', isActive);
+        slide.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        slide.setAttribute('tabindex', isActive ? '0' : '-1');
+        const img = slide.querySelector('img');
+        if (img) {
+            img.loading = isActive ? 'eager' : 'lazy';
+        }
+    });
+}
+
+function setCarouselAnimating(animate) {
+    if (carouselAnimationTimeout) {
+        clearTimeout(carouselAnimationTimeout);
+        carouselAnimationTimeout = null;
+    }
+    
+    if (animate) {
+        isCarouselAnimating = true;
+        carouselAnimationTimeout = setTimeout(() => {
+            isCarouselAnimating = false;
+            carouselAnimationTimeout = null;
+        }, CAROUSEL_TRANSITION_MS);
+    } else {
+        isCarouselAnimating = false;
+    }
+}
+
 /**
  * Affiche une image spécifique de l'album
  */
-function showAlbumImage(index) {
-    if (currentAlbumImages.length === 0) return;
+function showAlbumImage(index, { animate = true } = {}) {
+    if (currentAlbumImages.length === 0 || !carouselTrack) return;
     
-    const modalImage = document.getElementById('gallery-modal-image');
-    const imageUrl = currentAlbumImages[index];
+    const total = currentAlbumImages.length;
+    const normalizedIndex = ((index % total) + total) % total;
+    currentAlbumIndex = normalizedIndex;
     
-    // Effet de transition
-    modalImage.style.opacity = '0';
-    
-    setTimeout(() => {
-        modalImage.src = imageUrl;
-        modalImage.onload = () => {
-            modalImage.style.opacity = '1';
-        };
-    }, 150);
-    
-    currentAlbumIndex = index;
+    setCarouselAnimating(animate);
+    updateCarouselPosition({ animate });
+    updateActiveSlide();
     updateImageCounter();
 }
 
@@ -430,20 +521,20 @@ function updateImageCounter() {
  * Affiche la photo précédente de l'album
  */
 function showPrevAlbumPhoto() {
-    if (currentAlbumImages.length === 0) return;
+    if (currentAlbumImages.length === 0 || isCarouselAnimating) return;
     
     const newIndex = (currentAlbumIndex - 1 + currentAlbumImages.length) % currentAlbumImages.length;
-    showAlbumImage(newIndex);
+    showAlbumImage(newIndex, { animate: true });
 }
 
 /**
  * Affiche la photo suivante de l'album
  */
 function showNextAlbumPhoto() {
-    if (currentAlbumImages.length === 0) return;
+    if (currentAlbumImages.length === 0 || isCarouselAnimating) return;
     
     const newIndex = (currentAlbumIndex + 1) % currentAlbumImages.length;
-    showAlbumImage(newIndex);
+    showAlbumImage(newIndex, { animate: true });
 }
 
 /**
@@ -451,8 +542,27 @@ function showNextAlbumPhoto() {
  */
 function closeLightbox() {
     const modal = document.getElementById('gallery-modal');
+    if (!modal) return;
+    
     modal.classList.remove('active');
     document.body.style.overflow = '';
+    
+    if (carouselTrack) {
+        carouselTrack.innerHTML = '';
+        carouselTrack.style.transition = 'none';
+        carouselTrack.style.transform = 'translateX(0%)';
+        requestAnimationFrame(() => {
+            if (carouselTrack) {
+                carouselTrack.style.transition = '';
+            }
+        });
+    }
+    
+    if (carouselAnimationTimeout) {
+        clearTimeout(carouselAnimationTimeout);
+        carouselAnimationTimeout = null;
+    }
+    isCarouselAnimating = false;
     
     // Réinitialise l'album
     currentAlbumImages = [];
