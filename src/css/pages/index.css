@@ -40,8 +40,8 @@
     max-width: 800px;
     padding: var(--spacing-8);
     background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     border-radius: var(--border-radius-xl);
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -294,6 +294,17 @@
     background-position: center center;
     background-attachment: fixed;
     position: relative;
+    isolation: isolate;
+}
+
+.histoire .parallax-overlay {
+    /* background: linear-gradient(
+        180deg,
+        rgba(5, 16, 54, 0.75) 0%,
+        rgba(11, 32, 86, 0.7) 45%,
+        rgba(11, 32, 86, 0.65) 100%
+    );
+    mix-blend-mode: normal; */
 }
 
 .histoire-content {
@@ -302,12 +313,39 @@
     margin: 0 auto;
     position: relative;
     z-index: 1;
+    padding: var(--spacing-10) var(--spacing-8);
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: var(--border-radius-xl);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 1s ease-out, floatUp 1s ease-out;
+}
+
+.histoire .intro-text h2 {
+    color: var(--white);
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.55);
+    letter-spacing: 0.02em;
 }
 
 .histoire-text {
     font-size: var(--font-size-lg);
     margin-bottom: var(--spacing-8);
     line-height: 1.8;
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+}
+
+.histoire .btn-outline-white {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.histoire .btn-outline-white:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.85);
 }
 
 /* ===================================
@@ -333,6 +371,15 @@
     /* Ajustements pour la section histoire en responsive */
     .histoire {
         background-attachment: scroll; /* Désactiver parallax sur mobile pour les performances */
+    }
+
+    .histoire-content {
+        padding: var(--spacing-8) var(--spacing-6);
+        background: rgba(9, 21, 63, 0.65);
+    }
+
+    .histoire-text {
+        font-size: var(--font-size-base);
     }
 }
 
