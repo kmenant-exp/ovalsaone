@@ -5,7 +5,9 @@ hero_title: "Bienvenue à l'École de Rugby"
 hero_subtitle: "Formez-vous aux valeurs du rugby : respect, esprit d'équipe et dépassement de soi"
 hero_description: "Notre école accueille des enfants et adolescents de 4 à 14 ans dans un cadre convivial et professionnel."
 histoire_title: "Notre histoire"
-histoire_description: "L’Ecole de Rugby Oval’Saône est née de la volonté des entraîneurs et de certains parents de créer un club convivial et familial, au sein duquel les enfants découvrent le rugby et prennent plaisir à jouer. Implanté sur la commune de Trévoux, les jeunes s'entraînent au stade de Chamalan (Quincieux)."
+histoire_description: "L'Ecole de Rugby Oval'Saône est née de la volonté des entraîneurs et de certains parents de créer un club convivial et familial, au sein duquel les enfants découvrent le rugby et prennent plaisir à jouer. Implanté sur la commune de Trévoux, les jeunes s'entraînent au stade de Chamalan (Quincieux)."
+gallery_title: "Nos Moments en Images"
+gallery_subtitle: "Revivez les meilleurs moments du club"
 sponsors_title: "Ils nous soutiennent"
 sponsors_description: "Nos partenaires sont essentiels au développement de notre club. Particuliers ou entreprises, vous aussi pouvez nous soutenir !"
 ---
@@ -130,6 +132,112 @@ sponsors_description: "Nos partenaires sont essentiels au développement de notr
         </div>
     </div>
 </section>
+
+<!-- Section Galerie Photos -->
+<section class="gallery section">
+    <div class="container">
+        <div class="intro-content">
+            <div class="intro-text">
+                <h2>{{ gallery_title }}</h2>
+                <p class="section-subtitle">{{ gallery_subtitle }}</p>
+            </div>
+        </div>
+        
+        <!-- Filtres de catégories -->
+        <div class="gallery-filters">
+            <button class="gallery-filter-btn active" data-filter="all">
+                <i class="fas fa-th"></i> Toutes
+            </button>
+            <button class="gallery-filter-btn" data-filter="matches">
+                <i class="fas fa-trophy"></i> Matchs
+            </button>
+            <button class="gallery-filter-btn" data-filter="entrainements">
+                <i class="fas fa-running"></i> Entraînements
+            </button>
+            <button class="gallery-filter-btn" data-filter="evenements">
+                <i class="fas fa-calendar-alt"></i> Événements
+            </button>
+            <button class="gallery-filter-btn" data-filter="equipes">
+                <i class="fas fa-users"></i> Équipes
+            </button>
+        </div>
+        
+        <!-- Grille de photos -->
+        <div class="gallery-grid" id="gallery-grid">
+            {% assign sortedGallery = gallery | sort: 'date' | reverse %}
+            {% for photo in sortedGallery limit:6 %}
+                <article class="gallery-item fade-in-up" data-category="{{ photo.categorie }}">
+                    <div class="gallery-image-container">
+                        <img src="{{ photo.mainImage }}" alt="{{ photo.alt }}" class="gallery-image" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-overlay-content">
+                                <h3 class="gallery-title">{{ photo.titre }}</h3>
+                                <p class="gallery-date">{{ photo.date | date: '%d/%m/%Y' }}</p>
+                                <button class="btn btn-primary btn-small gallery-view-btn" 
+                                        data-photo-titre="{{ photo.titre }}"
+                                        data-photo-description="{{ photo.description }}"
+                                        data-photo-date="{{ photo.date | date: '%d/%m/%Y' }}"
+                                        data-photo-main-image="{{ photo.mainImage }}"
+                                        data-photo-storage-url="{{ photo.storageUrl }}"
+                                        data-photo-alt="{{ photo.alt }}">
+                                    <span class="btn-text">Voir les photos</span>
+                                    <i class="fas fa-images btn-icon"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+        
+        <!-- Bouton voir plus -->
+        {% if gallery.size > 6 %}
+        <div class="gallery-actions">
+            <button id="btn-gallery-load-more" class="btn btn-outline-primary btn-large">
+                <span class="btn-text">Voir plus de photos</span>
+                <i class="fas fa-chevron-down btn-icon"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Modal Lightbox pour la galerie -->
+<div id="gallery-modal" class="modal-overlay gallery-modal">
+    <div class="gallery-modal-container">
+        <button id="gallery-modal-close" class="modal-close-btn">
+            <i class="fas fa-times"></i>
+        </button>
+        <button id="gallery-modal-prev" class="gallery-nav-btn gallery-nav-prev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button id="gallery-modal-next" class="gallery-nav-btn gallery-nav-next">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="gallery-modal-content">
+            <!-- Loading indicator -->
+            <div id="gallery-modal-loading" class="gallery-modal-loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Chargement des photos...</p>
+            </div>
+            <!-- Main image display -->
+            <img id="gallery-modal-image" src="" alt="" class="gallery-modal-image">
+            <!-- Image counter -->
+            <div id="gallery-modal-counter" class="gallery-modal-counter">
+                <span id="gallery-modal-current">1</span> / <span id="gallery-modal-total">1</span>
+            </div>
+            <!-- Info section -->
+            <div class="gallery-modal-info">
+                <h3 id="gallery-modal-titre" class="gallery-modal-title"></h3>
+                <p id="gallery-modal-description" class="gallery-modal-description"></p>
+                <p id="gallery-modal-date" class="gallery-modal-date">
+                    <i class="far fa-calendar-alt"></i>
+                    <span></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Section Sponsors -->
 <section class="sponsors">
