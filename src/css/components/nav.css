@@ -259,3 +259,46 @@
         transform: rotate(-45deg) translate(5px, -5px);
     }
 }
+
+/* Paysage mobile très basse hauteur : réduire l'encombrement et activer défilement naturel
+   - Les liens se "chevauchent" car la hauteur disponible est trop faible pour le centrage vertical.
+   - On aligne en haut, réduit padding & taille de police, et garantit un scroll fluide.
+*/
+@media (max-width: 1180px) and (orientation: landscape) and (max-height: 500px) {
+    .nav-menu {
+        justify-content: flex-start; /* ne pas centrer verticalement quand la hauteur est limitée */
+        padding-top: var(--spacing-4);
+        padding-bottom: env(safe-area-inset-bottom, var(--spacing-4));
+        height: 100dvh; /* utiliser la hauteur dynamique pour éviter le bug adresse bar */
+        max-height: 100dvh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        gap: 0; /* pas nécessaire en colonne */
+    }
+    .nav-link {
+        font-size: 0.75rem; /* plus compacte */
+        padding: var(--spacing-2) var(--spacing-4);
+        margin: 2px 0; /* réduire l'espace vertical */
+        transform: none; /* éviter effets cumulés si animations interrompues */
+        opacity: 1; /* forcer visibilité immédiate */
+        animation: none; /* désactiver animation pour limiter décalages visuels */
+    }
+    .nav-logo img {
+        width: 40px;
+        height: 40px; /* léger ajustement pour gagner de la place */
+    }
+    .navbar {
+        padding: var(--spacing-2) 0; /* réduire hauteur nav */
+    }
+}
+
+/* Ultra petite hauteur (ex : split‑screen) : fallback encore plus compact */
+@media (max-width: 1180px) and (orientation: landscape) and (max-height: 400px) {
+    .nav-link {
+        font-size: 0.70rem;
+        padding: var(--spacing-1) var(--spacing-3);
+    }
+    .nav-menu {
+        padding-top: var(--spacing-3);
+    }
+}
