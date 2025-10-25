@@ -184,7 +184,7 @@
 }
 
 /* Styles responsive pour le menu mobile et navigation */
-@media (max-width: 768px) {
+@media (max-width: 1180px) {
     .nav-toggle {
         display: flex;
     }
