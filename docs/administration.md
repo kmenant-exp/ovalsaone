@@ -1,0 +1,651 @@
+# Guide d'administration du site Oval Saône
+
+Ce guide explique comment mettre à jour le contenu du site web sans connaissances techniques avancées. Toutes les modifications se font en éditant des fichiers texte simples.
+
+## Table des matières
+
+1. [Prérequis](#prérequis)
+2. [Modifier les pages du site](#modifier-les-pages-du-site)
+3. [Mettre à jour les données](#mettre-à-jour-les-données)
+4. [Gérer les événements (Google Calendar)](#gérer-les-événements-google-calendar)
+5. [Gérer la galerie photos](#gérer-la-galerie-photos)
+6. [Ajouter ou modifier des images](#ajouter-ou-modifier-des-images)
+7. [Publier les modifications](#publier-les-modifications)
+
+---
+
+## Prérequis
+
+Pour mettre à jour le site, vous aurez besoin de :
+- Un éditeur de texte (Visual Studio Code recommandé)
+- Accès au code source du site (dossier du projet)
+- Droits d'accès au portail Azure (pour la galerie photos uniquement)
+
+---
+
+## Modifier les pages du site
+
+### Qu'est-ce que le Frontmatter ?
+
+Chaque page du site commence par une section appelée **Frontmatter**, délimitée par trois tirets (`---`). Cette section contient les informations de base de la page.
+
+**Exemple de Frontmatter :**
+
+```yaml
+---
+layout: layout.njk
+title: Nous contacter
+description: Contactez l'Oval Saône Rugby Club
+---
+```
+
+### Comment modifier le Frontmatter
+
+1. **Ouvrez le fichier de la page** à modifier (fichiers `.liquid` dans le dossier `src/`)
+   - Page d'accueil : `src/index.liquid`
+   - Page contact : `src/contact.liquid`
+   - Page équipes : `src/equipes.liquid`
+   - Page école de rugby : `src/ecole.liquid`
+   - Page boutique : `src/boutique.liquid`
+   - Page événements : `src/evenements.liquid`
+   - Page inscription : `src/inscription.liquid`
+   - Page partenariat : `src/partenariat.liquid`
+
+2. **Modifiez les valeurs** entre les tirets (`---`)
+
+   - `title` : Le titre de la page (affiché dans l'onglet du navigateur)
+   - `description` : La description pour les moteurs de recherche
+   - `layout` : **Ne pas modifier** (toujours `layout.njk`)
+
+3. **Enregistrez le fichier**
+
+**⚠️ Important :** Ne supprimez pas les lignes `---` et ne modifiez pas la ligne `layout: layout.njk`.
+
+---
+
+## Mettre à jour les données
+
+Les données du site (équipes, sponsors, bureau, etc.) sont stockées dans des fichiers JSON situés dans le dossier `src/_data/`.
+
+### Format JSON
+
+Les fichiers JSON utilisent une structure simple avec des accolades `{}`, des crochets `[]`, et des virgules `,`.
+
+**Règles importantes :**
+- Chaque propriété est entre guillemets : `"nom": "valeur"`
+- Les valeurs textuelles sont entre guillemets : `"Jean Dupont"`
+- Les nombres n'ont pas de guillemets : `42`
+- Les listes utilisent des crochets : `[item1, item2]`
+- Chaque élément est séparé par une virgule `,`
+- **Pas de virgule après le dernier élément**
+
+### Fichiers de données disponibles
+
+#### 1. `actualites.json` - Les actualités
+
+```json
+[
+  {
+    "titre": "Titre de l'actualité",
+    "extrait": "Court résumé de l'actualité",
+    "date": "2025-10-20",
+    "image": "assets/actualites/image.jpg",
+    "contenu": "Texte complet de l'actualité..."
+  }
+]
+```
+
+**Pour ajouter une actualité :**
+1. Ouvrez `src/_data/actualites.json`
+2. Ajoutez un nouvel objet en haut de la liste
+3. Remplissez les champs :
+   - `titre` : Le titre de l'actualité
+   - `extrait` : Un court résumé (affiché dans la liste)
+   - `date` : La date au format `AAAA-MM-JJ`
+   - `image` : Chemin de l'image (commence par `assets/`)
+   - `contenu` : Le texte complet de l'actualité
+4. Enregistrez
+
+#### 2. `teams.json` - Les équipes
+
+```json
+[
+  {
+    "name": "U6",
+    "description": "École de rugby pour les moins de 6 ans",
+    "min_age": 3,
+    "max_age": 5,
+    "players_count": 15,
+    "coaches": [
+      {
+        "name": "Prénom Nom"
+      }
+    ],
+    "schedule": [
+      {
+        "day": "Samedi",
+        "time": "10h00-11h00"
+      }
+    ]
+  }
+]
+```
+
+**Pour modifier une équipe :**
+1. Ouvrez `src/_data/teams.json`
+2. Trouvez l'équipe à modifier
+3. Changez les valeurs souhaitées :
+   - `name` : Nom de la catégorie (U6, U8, U10, etc.)
+   - `description` : Description de l'équipe
+   - `min_age` / `max_age` : Tranche d'âge
+   - `players_count` : Nombre de joueurs
+   - `coaches` : Liste des entraîneurs (tableau d'objets avec `name`)
+   - `schedule` : Horaires d'entraînement (tableau avec `day` et `time`)
+4. Enregistrez
+
+#### 3. `sponsors.json` - Les sponsors
+
+```json
+[
+  {
+    "nom": "Nom du sponsor",
+    "logo": "/assets/sponsors/logo.png",
+    "description": "Description de l'entreprise",
+    "website": "https://www.exemple.com",
+    "telephone": "01 23 45 67 89",
+    "email": "contact@exemple.com",
+    "adresse": "Adresse complète",
+    "partenariat_depuis": 2021,
+    "type": "partenaire"
+  }
+]
+```
+
+**Types disponibles :** `"sponsor_or"` (sponsor or), `"partenaire"` (partenaire)
+
+**Pour ajouter un sponsor :**
+1. Ouvrez `src/_data/sponsors.json`
+2. Ajoutez un nouvel objet dans la liste
+3. Remplissez les champs :
+   - `nom` : Nom de l'entreprise
+   - `logo` : Chemin du logo (commence par `/assets/`)
+   - `description` : Présentation de l'entreprise
+   - `website` : Site web
+   - `telephone` : Numéro de téléphone (optionnel)
+   - `email` : Email de contact (optionnel)
+   - `adresse` : Adresse (optionnel)
+   - `partenariat_depuis` : Année de début du partenariat
+   - `type` : `"sponsor_or"` ou `"partenaire"`
+4. Enregistrez
+
+#### 4. `bureau.json` - Les membres du bureau
+
+```json
+[
+  {
+    "nom": "DUPONT",
+    "prenom": "Jean",
+    "poste": "Président",
+    "description": "Biographie et rôle du membre...",
+    "photo": "/assets/bureau/default.jpg"
+  }
+]
+```
+
+**Pour modifier un membre du bureau :**
+1. Ouvrez `src/_data/bureau.json`
+2. Trouvez le membre à modifier
+3. Changez les valeurs :
+   - `nom` : Nom de famille (en majuscules)
+   - `prenom` : Prénom
+   - `poste` : Fonction au bureau
+   - `description` : Biographie et présentation du rôle
+   - `photo` : Chemin de la photo (commence par `/assets/`)
+4. Enregistrez
+
+#### 5. `entraineurs.json` - Les entraîneurs
+
+```json
+[
+  {
+    "nom": "Martin",
+    "prenom": "Marie",
+    "categories": ["U12", "U14"],
+    "experience": "Formation éducateur",
+    "diplomes": [
+      "Éducateur Rugby",
+      "CQP Technicien Rugby"
+    ],
+    "photo": "/assets/entraineurs/default.jpg",
+    "specialites": [
+      "Stratégie de jeu",
+      "Analyse technique"
+    ]
+  }
+]
+```
+
+**Pour modifier un entraîneur :**
+1. Ouvrez `src/_data/entraineurs.json`
+2. Trouvez l'entraîneur à modifier
+3. Changez les valeurs :
+   - `nom` : Nom de famille
+   - `prenom` : Prénom
+   - `categories` : Liste des catégories entraînées (ex: `["U8"]`)
+   - `experience` : Description de l'expérience
+   - `diplomes` : Liste des diplômes (tableau)
+   - `photo` : Chemin de la photo
+   - `specialites` : Liste des spécialités (tableau)
+4. Enregistrez
+
+#### 6. `calendars.json` - Les calendriers des équipes
+
+```json
+{
+  "apiKey": "AIzaSyDDpMWcrT2VQlsLBc3O8QaPksTjSRo9tBQ",
+  "teams": [
+    {
+      "name": "U6",
+      "calendarId": "identifiant_calendrier@group.calendar.google.com",
+      "calendarUrl": "https://calendar.google.com/calendar/u/0?cid=...",
+      "icsUrl": "https://calendar.google.com/calendar/ical/...ics"
+    }
+  ]
+}
+```
+
+**Pour ajouter un calendrier d'équipe :**
+1. Ouvrez `src/_data/calendars.json`
+2. Dans la liste `teams`, ajoutez un nouvel objet
+3. Remplissez les champs :
+   - `name` : Nom de l'équipe (doit correspondre à `teams.json`)
+   - `calendarId` : ID du calendrier Google
+   - `calendarUrl` : URL publique du calendrier
+   - `icsUrl` : URL du fichier ICS pour l'export
+4. Enregistrez
+
+**⚠️ Note :** Les URL proviennent de Google Calendar. Ne modifiez pas l'`apiKey` sans consulter l'équipe technique.
+
+---
+
+## Gérer les événements (Google Calendar)
+
+Les événements du site sont synchronisés automatiquement depuis des calendriers publics Google Calendar. Chaque équipe possède son propre calendrier.
+
+### Principe de fonctionnement
+
+1. Vous créez ou modifiez des événements dans **Google Calendar**
+2. Les événements sont automatiquement affichés sur la page **Événements** du site
+3. Les visiteurs peuvent voir tous les événements ou filtrer par équipe
+4. Les visiteurs peuvent également s'abonner aux calendriers
+
+### Accéder aux calendriers Google
+
+#### Méthode 1 : Via les liens dans le code
+
+1. Ouvrez `src/_data/calendars.json`
+2. Trouvez l'équipe concernée
+3. Copiez l'URL dans le champ `calendarUrl`
+4. Ouvrez cette URL dans votre navigateur
+
+#### Méthode 2 : Depuis Google Calendar directement
+
+1. Connectez-vous à Google Calendar : https://calendar.google.com
+2. Dans la liste de gauche, cherchez les calendriers du club
+3. Cliquez sur le calendrier de l'équipe souhaitée
+
+### Ajouter un événement
+
+1. **Ouvrez le calendrier** de l'équipe concernée dans Google Calendar
+2. **Cliquez sur le jour** où aura lieu l'événement
+3. **Remplissez les informations :**
+   - **Titre** : Nom de l'événement (ex: "Match U10 vs Lyon")
+   - **Date et heure** : Début et fin de l'événement
+   - **Lieu** : Adresse du lieu (ex: "Stade Municipal, Trévoux")
+   - **Description** : Détails supplémentaires (optionnel)
+4. **Enregistrez**
+
+**L'événement apparaîtra automatiquement sur le site dans les 5-10 minutes.**
+
+### Modifier un événement
+
+1. Ouvrez le calendrier dans Google Calendar
+2. Cliquez sur l'événement à modifier
+3. Cliquez sur l'icône **crayon** (éditer)
+4. Modifiez les informations souhaitées
+5. Enregistrez
+
+### Supprimer un événement
+
+1. Ouvrez le calendrier dans Google Calendar
+2. Cliquez sur l'événement à supprimer
+3. Cliquez sur l'icône **corbeille** (supprimer)
+4. Confirmez la suppression
+
+### Bonnes pratiques pour les événements
+
+#### Nommage des événements
+
+Utilisez un format cohérent pour les titres :
+- **Matchs** : `Match [Équipe] vs [Adversaire]` (ex: "Match U12 vs Villefranche")
+- **Entraînements** : `Entraînement [Équipe]` (ex: "Entraînement U8")
+- **Tournois** : `Tournoi [Lieu]` (ex: "Tournoi de Trévoux")
+- **Événements spéciaux** : `[Type] - [Description]` (ex: "Assemblée Générale", "Barbecue du club")
+
+#### Informations obligatoires
+
+Pour une bonne lisibilité sur le site, renseignez toujours :
+- ✅ **Titre clair et descriptif**
+- ✅ **Date et heure de début**
+- ✅ **Date et heure de fin**
+- ✅ **Lieu** (si applicable)
+
+#### Informations optionnelles mais recommandées
+
+- **Description** : Ajoutez des détails importants (équipement nécessaire, consignes, etc.)
+- **Couleur** : Utilisez des couleurs pour différencier les types d'événements :
+  - 🔵 Bleu : Matchs à domicile
+  - 🔴 Rouge : Matchs à l'extérieur
+  - 🟢 Vert : Entraînements
+  - 🟡 Jaune : Événements spéciaux
+
+### Créer un calendrier pour une nouvelle équipe
+
+Si vous ajoutez une nouvelle équipe au club, suivez ces étapes :
+
+#### Étape 1 : Créer le calendrier dans Google
+
+1. Allez sur https://calendar.google.com
+2. Dans le menu de gauche, cliquez sur **+** à côté de "Autres agendas"
+3. Sélectionnez **Créer un agenda**
+4. Remplissez les informations :
+   - **Nom** : `Oval Saône - [Équipe]` (ex: "Oval Saône - U16")
+   - **Description** : "Calendrier des matchs et entraînements [Équipe]"
+5. Cliquez sur **Créer un agenda**
+
+#### Étape 2 : Rendre le calendrier public
+
+1. Dans la liste des calendriers, trouvez le nouveau calendrier
+2. Cliquez sur les **3 points** à droite du nom
+3. Sélectionnez **Paramètres et partage**
+4. Faites défiler jusqu'à **Autorisations d'accès**
+5. Cochez **Rendre disponible publiquement**
+6. ⚠️ Assurez-vous que les visiteurs peuvent voir **tous les détails**
+
+#### Étape 3 : Récupérer les informations du calendrier
+
+1. Dans les **Paramètres et partage** du calendrier
+2. Faites défiler jusqu'à **Intégrer l'agenda**
+3. Copiez l'**ID de l'agenda** (format : `xxxxx@group.calendar.google.com`)
+4. Notez également :
+   - L'URL publique du calendrier
+   - L'adresse iCal (URL se terminant par `.ics`)
+
+#### Étape 4 : Ajouter le calendrier au site
+
+1. Ouvrez `src/_data/calendars.json`
+2. Dans la liste `teams`, ajoutez un nouvel objet :
+
+```json
+{
+  "name": "U16",
+  "calendarId": "xxxxx@group.calendar.google.com",
+  "calendarUrl": "https://calendar.google.com/calendar/u/0?cid=xxxxx",
+  "icsUrl": "https://calendar.google.com/calendar/ical/xxxxx@group.calendar.google.com/public/basic.ics"
+}
+```
+
+3. Enregistrez et publiez (voir section [Publier les modifications](#publier-les-modifications))
+
+### Résolution de problèmes
+
+#### Les événements n'apparaissent pas sur le site
+
+**Causes possibles :**
+- Le calendrier n'est pas public → Vérifiez les paramètres de partage
+- L'API Key est incorrecte → Contactez l'équipe technique
+- Le `calendarId` est incorrect → Vérifiez dans `calendars.json`
+
+**Solution :**
+1. Vérifiez que le calendrier est bien public dans Google Calendar
+2. Attendez 5-10 minutes après la création d'un événement
+3. Videz le cache du navigateur (`Ctrl+F5` ou `Cmd+Shift+R`)
+
+#### Les événements s'affichent dans le mauvais ordre
+
+**Cause :** L'heure de début n'est pas correctement définie
+
+**Solution :**
+1. Ouvrez l'événement dans Google Calendar
+2. Vérifiez que l'heure de début est correcte
+3. Enregistrez les modifications
+
+#### Un événement apparaît pour plusieurs équipes
+
+**Cause :** L'événement a été ajouté au mauvais calendrier
+
+**Solution :**
+1. Supprimez l'événement du calendrier incorrect
+2. Recréez-le dans le bon calendrier
+
+#### 7. `contact.json` - Informations de contact
+
+```json
+{
+  "address": "Stade CHAMALAN, Chemin de la passerelle, 69650 QUINCIEUX",
+  "phone": "06 24 63 58 42",
+  "email": "edr.ovalsaone@gmail.com"
+}
+```
+
+**Pour modifier les informations de contact :**
+1. Ouvrez `src/_data/contact.json`
+2. Modifiez directement les valeurs :
+   - `address` : Adresse complète du club
+   - `phone` : Numéro de téléphone
+   - `email` : Email de contact
+3. Enregistrez
+
+#### 8. `gallery.json` - Configuration de la galerie
+
+```json
+[
+  {
+    "titre": "Tournoi de Trévoux",
+    "description": "Nos jeunes en action",
+    "date": "2025-10-10",
+    "mainImage": "https://stovalsaoneprd.blob.core.windows.net/medias/tournoi-trevoux-20251010/Image1.jpeg",
+    "storageUrl": "https://stovalsaoneprd.blob.core.windows.net/medias/tournoi-trevoux-20251010",
+    "categorie": "matches",
+    "alt": "Tournoi de Trévoux - 10 octobre 2025"
+  }
+]
+```
+
+**Pour ajouter un album :**
+1. Ouvrez `src/_data/gallery.json`
+2. Ajoutez un nouvel objet dans la liste
+3. Remplissez les champs :
+   - `titre` : Titre de l'album
+   - `description` : Description courte
+   - `date` : Date au format `AAAA-MM-JJ`
+   - `mainImage` : URL complète de l'image de couverture dans Azure
+   - `storageUrl` : URL du dossier Azure (sans trailing slash)
+   - `categorie` : Catégorie de l'album (ex: `"matches"`, `"entrainements"`, `"evenements"`, `"equipes"`)
+   - `alt` : Texte alternatif pour l'accessibilité
+4. Enregistrez
+
+**⚠️ Note :** La modification de la galerie nécessite également l'accès au portail Azure (voir section suivante).
+
+**Convention de nommage des dossiers Azure :**
+- Format : `evenement-lieu-AAAAMMJJ`
+- Exemple : `tournoi-trevoux-20251010`
+- Tout en minuscules, sans espaces ni accents
+
+---
+
+## Gérer la galerie photos
+
+La galerie utilise Azure Blob Storage pour stocker les photos. Les albums sont organisés en dossiers.
+
+### Ajouter un nouvel album
+
+#### Étape 1 : Créer le dossier dans Azure
+
+1. **Connectez-vous au portail Azure** : https://portal.azure.com
+2. Naviguez vers le compte de stockage `stovalsaoneprd`
+3. Cliquez sur "Conteneurs" puis sur `medias`
+4. Créez un nouveau dossier virtuel (ex : `tournoi-nom-AAAAMMJJ`)
+5. Téléchargez vos photos dans ce dossier
+
+**Convention de nommage des albums :**
+- Format : `evenement-lieu-AAAAMMJJ`
+- Exemple : `tournoi-trevoux-20251010`
+- Tout en minuscules, sans espaces ni accents
+
+#### Étape 2 : Déclarer l'album dans le code
+
+1. Ouvrez `src/_data/gallery.json`
+2. Ajoutez un nouvel objet dans la liste (voir structure dans la section précédente)
+3. **Important** : L'URL `storageUrl` doit correspondre exactement au nom du dossier créé dans Azure
+4. Enregistrez le fichier
+
+### Supprimer un album
+
+1. Ouvrez `src/_data/gallery.json`
+2. Supprimez l'objet correspondant à l'album
+3. Enregistrez le fichier
+4. *Optionnel* : Supprimez le dossier dans Azure pour libérer de l'espace
+
+### Modifier un album existant
+
+1. Ouvrez `src/_data/gallery.json`
+2. Trouvez l'album à modifier
+3. Changez les valeurs souhaitées (`titre`, `description`, etc.)
+4. Enregistrez
+
+**⚠️ Ne modifiez pas le `storageUrl`** sauf si vous renommez aussi le dossier dans Azure.
+
+---
+
+## Ajouter ou modifier des images
+
+### Images des pages (logos, photos d'équipe, etc.)
+
+1. **Placez l'image** dans le dossier approprié :
+   - Photos d'équipes : `src/assets/equipes/`
+   - Logos de sponsors : `src/assets/sponsors/`
+   - Photos du bureau : `src/assets/bureau/`
+   - Photos d'entraîneurs : `src/assets/entraineurs/`
+   - Actualités : `src/assets/actualites/`
+   - Autres images : `src/assets/`
+
+2. **Référencez l'image** dans le fichier JSON ou la page :
+   ```json
+   "image": "/assets/equipes/seniors-masculins.jpg"
+   ```
+
+**Formats recommandés :** JPG, PNG, WebP
+
+**Taille recommandée :** Max 2 Mo par image
+
+### Images de la galerie
+
+Les images de la galerie se gèrent uniquement via le portail Azure (voir section [Gérer la galerie photos](#gérer-la-galerie-photos)).
+
+---
+
+## Publier les modifications
+
+Une fois vos modifications effectuées, vous devez les publier pour qu'elles apparaissent sur le site.
+
+### Méthode 1 : Via GitHub (recommandé)
+
+1. **Enregistrez tous vos fichiers**
+2. **Ouvrez un terminal** (ou l'invite de commande dans VS Code)
+3. **Tapez les commandes suivantes :**
+
+```bash
+# Ajouter tous les fichiers modifiés
+git add .
+
+# Créer un commit avec un message descriptif
+git commit -m "Mise à jour des sponsors et actualités"
+
+# Envoyer les modifications sur GitHub
+git push
+```
+
+4. **Attendez quelques minutes** : Azure Static Web Apps détecte automatiquement les modifications et met à jour le site.
+
+### Méthode 2 : Via Visual Studio Code (interface graphique)
+
+1. **Enregistrez tous vos fichiers**
+2. Cliquez sur l'icône **Source Control** (branches) dans la barre latérale gauche
+3. Ajoutez un message décrivant vos modifications
+4. Cliquez sur **✓ Commit**
+5. Cliquez sur **Sync Changes** (ou **Push**)
+6. Attendez la mise à jour automatique
+
+### Vérifier la publication
+
+1. Attendez 2-5 minutes après le push
+2. Visitez le site : https://www.ovalsaone.fr
+3. Vérifiez que vos modifications sont visibles
+4. Si besoin, rafraîchissez la page avec `Ctrl+F5` (Windows) ou `Cmd+Shift+R` (Mac)
+
+---
+
+## Résolution de problèmes courants
+
+### Erreur de syntaxe JSON
+
+**Symptôme :** Le site ne se construit pas ou affiche une erreur.
+
+**Solution :**
+- Vérifiez qu'il n'y a pas de virgule après le dernier élément d'une liste
+- Vérifiez que toutes les accolades `{}` et crochets `[]` sont fermés
+- Utilisez un validateur JSON en ligne : https://jsonlint.com
+
+### Les images ne s'affichent pas
+
+**Symptôme :** Images cassées ou non visibles.
+
+**Solution :**
+- Vérifiez que le chemin est correct (commence par `/assets/`)
+- Vérifiez que le nom du fichier correspond exactement (majuscules/minuscules)
+- Vérifiez que l'image existe bien dans le dossier spécifié
+
+### La galerie ne charge pas les photos
+
+**Symptôme :** Album vide ou erreur de chargement.
+
+**Solution :**
+- Vérifiez que l'`id` dans `gallery.json` correspond au nom du dossier Azure
+- Vérifiez que le dossier Azure contient bien des images
+- Vérifiez que les permissions CORS sont correctes (voir `docs/azure-storage-gallery.md`)
+
+### Les modifications ne sont pas visibles sur le site
+
+**Symptôme :** Le site n'a pas changé après publication.
+
+**Solution :**
+- Attendez 5-10 minutes (le déploiement peut prendre du temps)
+- Videz le cache du navigateur (`Ctrl+F5` ou `Cmd+Shift+R`)
+- Vérifiez que le commit a bien été poussé sur GitHub
+- Consultez les logs de déploiement dans Azure Static Web Apps
+
+---
+
+## Aide supplémentaire
+
+Pour plus d'informations techniques :
+- **Guide de développement :** `docs/guide-developpement.md`
+- **Guide de maintenance :** `docs/guide-maintenance.md`
+- **Architecture de la galerie :** `docs/gallery-architecture.md`
+
+**Contact technique :** Si vous rencontrez des problèmes, contactez l'équipe technique du club.
+
+---
+
+*Dernière mise à jour : 25 octobre 2025*
