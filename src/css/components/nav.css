@@ -191,10 +191,11 @@
     
     .nav-menu {
         position: fixed;
-        top: 0;
+        top: var(--nav-offset, 0);
         right: 0;
         width: 80%;
-        height: 100vh;
+        height: calc(100vh - var(--nav-offset, 0));
+        max-height: calc(100vh - var(--nav-offset, 0));
         background: rgba(30, 58, 138, 0.85);
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
@@ -209,6 +210,8 @@
         box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
         z-index: 999;
         overflow-y: auto; /* Allow scrolling if menu is tall */
+        overscroll-behavior: contain;
+        padding-top: var(--nav-offset-inner, var(--spacing-6));
     }
     
     .nav-menu.active {

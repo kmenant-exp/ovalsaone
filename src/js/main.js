@@ -152,14 +152,34 @@ class RugbyClubApp {
         const navToggle = document.getElementById('nav-toggle');
         const navMenu = document.getElementById('nav-menu');
         const menuOverlay = document.getElementById('menu-overlay');
-        const navLogo = document.querySelector('.nav-logo');
+        const navbar = document.getElementById('navbar');
+        const root = document.documentElement;
         
         if (!navToggle || !navMenu) return;
+
+        const getSpacingFallback = () => {
+            const spacing = getComputedStyle(root).getPropertyValue('--spacing-6');
+            return spacing && spacing.trim().length > 0 ? spacing.trim() : '24px';
+        };
+
+        const updateNavOffset = () => {
+            if (!navMenu.classList.contains('active')) {
+                root.style.setProperty('--nav-offset', '0px');
+                root.style.setProperty('--nav-offset-inner', '0px');
+                return;
+            }
+
+            const offsetBottom = navbar ? navbar.getBoundingClientRect().bottom : 0;
+            const safeOffset = Math.max(offsetBottom, 0);
+            root.style.setProperty('--nav-offset', `${safeOffset}px`);
+            root.style.setProperty('--nav-offset-inner', getSpacingFallback());
+        };
 
         navToggle.addEventListener('click', () => {
             navToggle.classList.toggle('active');
             navMenu.classList.toggle('active');
             if (menuOverlay) menuOverlay.classList.toggle('active');
+            updateNavOffset();
             
             // Désactiver le scroll quand le menu est ouvert
             if (navMenu.classList.contains('active')) {
@@ -177,6 +197,7 @@ class RugbyClubApp {
                 navMenu.classList.remove('active');
                 if (menuOverlay) menuOverlay.classList.remove('active');
                 document.body.style.overflow = '';
+                updateNavOffset();
             });
         });
 
@@ -187,6 +208,7 @@ class RugbyClubApp {
                 navMenu.classList.remove('active');
                 menuOverlay.classList.remove('active');
                 document.body.style.overflow = '';
+                updateNavOffset();
             });
         }
 
@@ -197,6 +219,19 @@ class RugbyClubApp {
                 navMenu.classList.remove('active');
                 if (menuOverlay) menuOverlay.classList.remove('active');
                 document.body.style.overflow = '';
+                updateNavOffset();
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (navMenu.classList.contains('active')) {
+                updateNavOffset();
+            }
+        });
+
+        window.addEventListener('scroll', () => {
+            if (navMenu.classList.contains('active')) {
+                updateNavOffset();
             }
         });
     }
