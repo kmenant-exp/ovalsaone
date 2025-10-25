@@ -13,6 +13,10 @@ let carouselTrack = null;
 let carouselContainer = null;
 let carouselAnimationTimeout = null;
 let isCarouselAnimating = false;
+let galleryModalElement = null;
+let galleryModalContainer = null;
+let fullscreenButton = null;
+let isFullscreenEventsBound = false;
 
 const CAROUSEL_TRANSITION_MS = 450;
 
@@ -114,8 +118,20 @@ function setupLightbox() {
     const closeBtn = document.getElementById('gallery-modal-close');
     const prevBtn = document.getElementById('gallery-modal-prev');
     const nextBtn = document.getElementById('gallery-modal-next');
+    const fullscreenBtn = document.getElementById('gallery-modal-fullscreen');
     carouselTrack = document.getElementById('gallery-carousel-track');
     carouselContainer = modal ? modal.querySelector('.gallery-carousel') : null;
+    galleryModalElement = modal;
+    galleryModalContainer = modal ? modal.querySelector('.gallery-modal-container') : null;
+    fullscreenButton = fullscreenBtn;
+    updateFullscreenButton(false);
+    
+    if (!isFullscreenEventsBound) {
+        ['fullscreenchange', 'webkitfullscreenchange', 'msfullscreenchange'].forEach(eventName => {
+            document.addEventListener(eventName, handleFullscreenChange);
+        });
+        isFullscreenEventsBound = true;
+    }
     
     // Ouvre le lightbox au clic sur une photo
     document.querySelectorAll('.gallery-view-btn').forEach((btn, index) => {
@@ -142,6 +158,13 @@ function setupLightbox() {
     // Ferme le lightbox
     if (closeBtn) {
         closeBtn.addEventListener('click', closeLightbox);
+    }
+    
+    if (fullscreenBtn) {
+        fullscreenBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleGalleryFullscreen();
+        });
     }
     
     // Navigation précédent/suivant
@@ -171,13 +194,20 @@ function setupLightbox() {
     // Navigation au clavier
     document.addEventListener('keydown', function(e) {
         if (!modal || !modal.classList.contains('active')) return;
-        
+        const tagName = e.target && e.target.tagName ? e.target.tagName.toLowerCase() : '';
+        if (tagName === 'input' || tagName === 'textarea' || e.target.isContentEditable) {
+            return;
+        }
+
         if (e.key === 'Escape') {
             closeLightbox();
         } else if (e.key === 'ArrowLeft') {
             showPrevAlbumPhoto();
         } else if (e.key === 'ArrowRight') {
             showNextAlbumPhoto();
+        } else if (e.key === 'f' || e.key === 'F') {
+            e.preventDefault();
+            toggleGalleryFullscreen();
         }
     });
     
@@ -346,6 +376,7 @@ async function openLightboxWithAlbum(index) {
     
     // Affiche le modal et le loader
     modal.classList.add('active');
+    setGalleryFullscreenState(false);
     document.body.style.overflow = 'hidden';
     
     if (loading) {
@@ -543,6 +574,7 @@ function showNextAlbumPhoto() {
 function closeLightbox() {
     const modal = document.getElementById('gallery-modal');
     if (!modal) return;
+    exitGalleryFullscreen();
     
     modal.classList.remove('active');
     document.body.style.overflow = '';
@@ -567,6 +599,121 @@ function closeLightbox() {
     // Réinitialise l'album
     currentAlbumImages = [];
     currentAlbumIndex = 0;
+}
+
+function toggleGalleryFullscreen() {
+    const modal = getGalleryModalElement();
+    if (!modal) {
+        return;
+    }
+    if (modal.classList.contains('is-fullscreen')) {
+        exitGalleryFullscreen();
+    } else {
+        enterGalleryFullscreen();
+    }
+}
+
+async function enterGalleryFullscreen() {
+    const modal = getGalleryModalElement();
+    const container = getGalleryModalContainer();
+    if (!modal || !container) {
+        return;
+    }
+    setGalleryFullscreenState(true);
+    const requestMethod = container.requestFullscreen || container.webkitRequestFullscreen || container.msRequestFullscreen;
+    if (!requestMethod) {
+        return;
+    }
+    try {
+        const result = requestMethod.call(container);
+        if (result && typeof result.then === 'function') {
+            await result;
+        }
+    } catch (error) {
+        console.warn('Erreur lors du passage en plein écran :', error);
+    }
+}
+
+function exitGalleryFullscreen() {
+    const modal = getGalleryModalElement();
+    if (!modal) {
+        return;
+    }
+    setGalleryFullscreenState(false);
+    const fullscreenElement = getFullscreenElement();
+    if (!fullscreenElement || !modal.contains(fullscreenElement)) {
+        return;
+    }
+    const exitMethod = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
+    if (!exitMethod) {
+        return;
+    }
+    try {
+        const result = exitMethod.call(document);
+        if (result && typeof result.catch === 'function') {
+            result.catch(() => {});
+        }
+    } catch (error) {
+        console.warn('Erreur lors de la sortie du plein écran :', error);
+    }
+}
+
+function setGalleryFullscreenState(isFullscreen) {
+    const modal = getGalleryModalElement();
+    if (!modal) {
+        return;
+    }
+    modal.classList.toggle('is-fullscreen', Boolean(isFullscreen));
+    updateFullscreenButton(Boolean(isFullscreen));
+}
+
+function updateFullscreenButton(isFullscreen) {
+    if (!fullscreenButton) {
+        return;
+    }
+    const label = isFullscreen ? 'Quitter le plein écran' : 'Activer le mode plein écran';
+    fullscreenButton.setAttribute('aria-pressed', isFullscreen ? 'true' : 'false');
+    fullscreenButton.setAttribute('aria-label', label);
+    fullscreenButton.setAttribute('title', label);
+    const icon = fullscreenButton.querySelector('i');
+    if (icon) {
+        icon.classList.toggle('fa-expand', !isFullscreen);
+        icon.classList.toggle('fa-compress', isFullscreen);
+    }
+}
+
+function handleFullscreenChange() {
+    const modal = getGalleryModalElement();
+    if (!modal) {
+        return;
+    }
+    const fullscreenElement = getFullscreenElement();
+    const isActive = Boolean(fullscreenElement && modal.contains(fullscreenElement));
+    setGalleryFullscreenState(isActive);
+}
+
+function getFullscreenElement() {
+    return document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement || null;
+}
+
+function getGalleryModalElement() {
+    if (galleryModalElement && galleryModalElement.isConnected) {
+        return galleryModalElement;
+    }
+    galleryModalElement = document.getElementById('gallery-modal');
+    return galleryModalElement;
+}
+
+function getGalleryModalContainer() {
+    if (galleryModalContainer && galleryModalContainer.isConnected) {
+        return galleryModalContainer;
+    }
+    const modal = getGalleryModalElement();
+    if (!modal) {
+        return null;
+    }
+    galleryModalContainer = modal.querySelector('.gallery-modal-container');
+    return galleryModalContainer;
 }
 
 /**
