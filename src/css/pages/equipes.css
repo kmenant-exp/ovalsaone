@@ -29,6 +29,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .equipe-card::before {
@@ -269,8 +270,9 @@
     }
     
     .equipe-card {
-        max-width: 500px;
-        margin: 0 auto;
+        width: 100%;
+        margin: 0;
+        height: auto;
     }
     
     .equipe-header {
@@ -309,5 +311,16 @@
     
     .equipe-planning li span, .equipe-resultats li span {
         text-align: left;
+    }
+
+    .equipe-content {
+        flex: initial;
+        min-height: auto;
+        justify-content: flex-start;
+    }
+
+    .planning-container {
+        min-height: auto;
+        max-height: none;
     }
 }
