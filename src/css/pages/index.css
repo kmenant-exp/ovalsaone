@@ -297,16 +297,6 @@
     isolation: isolate;
 }
 
-.histoire .parallax-overlay {
-    /* background: linear-gradient(
-        180deg,
-        rgba(5, 16, 54, 0.75) 0%,
-        rgba(11, 32, 86, 0.7) 45%,
-        rgba(11, 32, 86, 0.65) 100%
-    );
-    mix-blend-mode: normal; */
-}
-
 .histoire-content {
     text-align: center;
     max-width: 800px;
@@ -445,6 +435,115 @@
     }
 }
 
+/* Media queries spécifiques pour mobile en orientation paysage */
+@media (max-width: 768px) and (orientation: landscape) and (max-height: 500px) {
+    .hero {
+        height: 100vh;
+        min-height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--spacing-4) 0;
+    }
+    
+    .hero-content {
+        max-width: 85%;
+        padding: var(--spacing-4) var(--spacing-5);
+        margin-top: 20px;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+    }
+    
+    .hero-logo {
+        margin-bottom: var(--spacing-3);
+    }
+    
+    .hero-logo img {
+        width: 80px;
+        height: auto;
+    }
+    
+    .hero-title {
+        font-size: var(--font-size-2xl);
+        margin-bottom: var(--spacing-2);
+        line-height: 1.2;
+    }
+    
+    .hero-subtitle {
+        font-size: var(--font-size-base);
+        margin-bottom: var(--spacing-3);
+        line-height: 1.4;
+    }
+    
+    .hero-description {
+        font-size: var(--font-size-sm);
+        margin-bottom: var(--spacing-4);
+        line-height: 1.5;
+    }
+    
+    .hero-buttons {
+        flex-direction: row;
+        gap: var(--spacing-2);
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .hero-buttons .btn {
+        font-size: var(--font-size-sm);
+        padding: var(--spacing-2) var(--spacing-4);
+        min-width: 120px;
+        white-space: nowrap;
+    }
+    
+    /* Masquer l'indicateur de défilement en mode paysage mobile pour économiser l'espace */
+    .scroll-indicator {
+        display: none;
+    }
+}
+
+/* Media query pour les très petits écrans en paysage (phones < 480px) */
+@media (max-width: 480px) and (orientation: landscape) and (max-height: 400px) {
+    .hero {
+        min-height: 350px;
+        padding: var(--spacing-2) 0;
+    }
+    
+    .hero-content {
+        max-width: 90%;
+        padding: var(--spacing-3) var(--spacing-4);
+    }
+    
+    .hero-logo img {
+        width: 60px;
+    }
+    
+    .hero-title {
+        font-size: var(--font-size-xl);
+        margin-bottom: var(--spacing-2);
+    }
+    
+    .hero-subtitle {
+        font-size: var(--font-size-sm);
+        margin-bottom: var(--spacing-2);
+    }
+    
+    .hero-description {
+        font-size: var(--font-size-xs);
+        margin-bottom: var(--spacing-3);
+    }
+    
+    .hero-buttons {
+        gap: var(--spacing-1);
+    }
+    
+    .hero-buttons .btn {
+        font-size: var(--font-size-xs);
+        padding: var(--spacing-1) var(--spacing-3);
+        min-width: 100px;
+    }
+}
+
 /* Section Sponsors */
 .sponsors {
     background: var(--light-color);
@@ -544,6 +643,11 @@
     animation-play-state: paused;
 }
 
+@media (max-width: 768px) {
+    .sponsors {
+        padding: var(--spacing-5) 0;
+    }
+}
 /* ===================================
    SECTION ACTUALITÉS - BOUTON VOIR PLUS
    =================================== */

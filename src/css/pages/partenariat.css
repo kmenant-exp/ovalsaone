@@ -2,92 +2,7 @@
    Styles spécifiques à la page partenariat.html
    ============================================================================= */
 
-/* Section Sponsors */
-.sponsors {
-    background: var(--light-color);
-    padding: var(--spacing-20) 0;
-}
 
-.sponsors-carousel-container {
-    position: relative;
-    overflow: hidden;
-    mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
-    -webkit-mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
-}
-
-.sponsors-carousel {
-    display: flex;
-    gap: var(--spacing-12);
-    animation: scroll-sponsors 30s linear infinite;
-    width: max-content;
-}
-
-.sponsor-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--spacing-3);
-    min-width: 160px;
-    padding: var(--spacing-4);
-    background: transparent;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-}
-
-.sponsor-item:hover {
-    transform: translateY(-5px);
-}
-
-.sponsor-logo-container {
-    width: 120px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--spacing-2);
-    transition: all 0.3s ease;
-}
-
-.sponsor-logo {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transition: all 0.5s ease;
-    transform: scale(0.9);
-}
-
-.sponsor-item:hover .sponsor-logo {
-    filter: grayscale(0%);
-    transform: scale(1.05);
-}
-
-.sponsor-name {
-    font-size: var(--font-size-base);
-    font-weight: 600;
-    color: var(--primary-color);
-    text-align: center;
-    margin-top: var(--spacing-2);
-    transition: color 0.3s ease;
-}
-
-.sponsor-item:hover .sponsor-name {
-    color: var(--dark-color);
-}
-
-@keyframes scroll-sponsors {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
-}
-
-/* Pause l'animation au hover */
-.sponsors-carousel-container:hover .sponsors-carousel {
-    animation-play-state: paused;
-}
 
 /* Styles pour la page Partenariat */
 .sponsors-section {
@@ -168,28 +83,6 @@
     font-size: var(--font-size-xl);
     font-weight: 700;
     margin: 0 0 var(--spacing-2) 0;
-}
-
-.sponsor-niveau {
-    display: inline-block;
-    margin-bottom: var(--spacing-3);
-    padding: var(--spacing-1) var(--spacing-3);
-    border-radius: var(--border-radius-full);
-    font-size: var(--font-size-xs);
-    font-weight: 600;
-    color: var(--white);
-}
-
-.niveau-or {
-    background: var(--gold-color);
-}
-
-.niveau-argent {
-    background: var(--silver-color);
-}
-
-.niveau-bronze {
-    background: var(--bronze-color);
 }
 
 .sponsor-description {
@@ -402,85 +295,7 @@
     margin-top: var(--spacing-6);
 }
 
-/* Niveaux de partenariat */
-.niveaux-partenariat {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--spacing-6);
-}
 
-.niveau-card {
-    background: var(--white);
-    border-radius: var(--border-radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-}
-
-.niveau-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.2);
-}
-
-.niveau-card.niveau-or {
-    border-color: var(--gold-color);
-}
-
-.niveau-card.niveau-argent {
-    border-color: var(--silver-color);
-}
-
-.niveau-card.niveau-bronze {
-    border-color: var(--bronze-color);
-}
-
-.niveau-header {
-    padding: var(--spacing-4);
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: var(--white);
-    text-align: center;
-}
-
-.niveau-nom {
-    font-size: var(--font-size-lg);
-    font-weight: 700;
-    margin: 0 0 var(--spacing-2) 0;
-}
-
-.niveau-montant {
-    display: block;
-    font-size: var(--font-size-2xl);
-    font-weight: 700;
-}
-
-.niveau-avantages {
-    padding: var(--spacing-4);
-}
-
-.niveau-avantages h4 {
-    color: var(--primary-color);
-    font-size: var(--font-size-base);
-    font-weight: 600;
-    margin-bottom: var(--spacing-3);
-}
-
-.niveau-avantages ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.niveau-avantages li {
-    padding: var(--spacing-2) 0;
-    border-bottom: 1px solid var(--gray-200);
-    color: var(--gray-700);
-    font-size: var(--font-size-sm);
-}
-
-.niveau-avantages li:last-child {
-    border-bottom: none;
-}
 
 /* Section Avantages Fiscaux */
 .fiscalite-section {
@@ -559,99 +374,7 @@
     font-weight: 700;
 }
 
-/* Paliers de dons */
-.paliers-section {
-    margin-bottom: var(--spacing-16);
-}
 
-.paliers-header {
-    text-align: center;
-    margin-bottom: var(--spacing-12);
-}
-
-.paliers-header h3 {
-    font-size: var(--font-size-xl);
-    color: var(--text-color);
-    margin-bottom: var(--spacing-2);
-}
-
-.paliers-header p {
-    color: var(--text-color-light);
-    font-size: var(--font-size-base);
-}
-
-.paliers-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--spacing-6);
-    margin-top: var(--spacing-8);
-}
-
-.palier-card {
-    background: var(--white-color);
-    border: 2px solid var(--border-color);
-    border-radius: var(--border-radius);
-    padding: var(--spacing-6);
-    text-align: center;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.palier-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--primary-color);
-    box-shadow: var(--shadow-soft);
-}
-
-.palier-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-}
-
-.palier-montant {
-    font-size: var(--font-size-2xl);
-    font-weight: 700;
-    color: var(--primary-color);
-    margin-bottom: var(--spacing-2);
-}
-
-.palier-titre {
-    font-size: var(--font-size-lg);
-    color: var(--text-color);
-    margin-bottom: var(--spacing-4);
-    font-weight: 600;
-}
-
-.palier-avantages {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.palier-avantages li {
-    padding: var(--spacing-2) 0;
-    color: var(--text-color-light);
-    font-size: var(--font-size-sm);
-    border-bottom: 1px solid var(--border-color-light);
-    position: relative;
-}
-
-.palier-avantages li:last-child {
-    border-bottom: none;
-}
-
-.palier-avantages li:before {
-    content: '✓';
-    color: var(--success-color);
-    font-weight: bold;
-    margin-right: var(--spacing-2);
-}
 
 /* Responsive pour la section particuliers */
 @media (max-width: 768px) {
@@ -697,18 +420,5 @@
 
     .particuliers-section .content-image {
         display: none;
-    }
-    
-    .paliers-grid {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-4);
-    }
-    
-    .cta-particuliers .cta-titre {
-        font-size: var(--font-size-xl);
-    }
-    
-    .palier-montant {
-        font-size: var(--font-size-xl);
     }
 }
