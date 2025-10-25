@@ -655,9 +655,48 @@
 
 /* Responsive pour la section particuliers */
 @media (max-width: 768px) {
+    .partenariat-section .content-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-6);
+        align-items: start;
+        margin-bottom: 0;
+    }
+
+    .partenariat-section .content-text {
+        order: 1;
+        width: 100%;
+    }
+
+    .partenariat-section .content-image {
+        order: 2;
+        justify-self: stretch;
+        width: 100%;
+        margin-top: var(--spacing-4);
+        display: none;
+    }
+
+    .partenariat-section .content-image img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .particuliers-section .cta-particuliers, .partenariat-section .cta-partenariat {
+        margin-bottom: 0;
+    }
+
+    .particuliers-section .cta-particuliers .avantages-grid, .partenariat-section .cta-partenariat .avantages-grid {
+        margin-bottom: 0;
+    }
+
     .particuliers-section .content-grid {
         grid-template-columns: 1fr;
         gap: var(--spacing-8);
+        margin-bottom: 0;
+    }
+
+    .particuliers-section .content-image {
+        display: none;
     }
     
     .paliers-grid {
