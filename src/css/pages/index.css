@@ -372,11 +372,12 @@
         flex-direction: column;
         gap: var(--spacing-3);
         width: 100%;
+        align-items: center;
     }
     
     .hero-buttons .btn {
-        width: 100%;
-        max-width: 280px;
+        width: min(100%, 280px);
+        margin: 0 auto;
     }
     
     .hero-logo img {
