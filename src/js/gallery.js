@@ -172,6 +172,108 @@ function setupLightbox() {
             showNextAlbumPhoto();
         }
     });
+    
+    // Gestion des gestes tactiles (swipe) pour mobile
+    setupTouchGestures(modal);
+}
+
+/**
+ * Configure les gestes tactiles pour la navigation dans le lightbox
+ */
+function setupTouchGestures(modal) {
+    if (!modal) return;
+    
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
+    let isDragging = false;
+    
+    const minSwipeDistance = 50; // Distance minimale pour déclencher un swipe (en pixels)
+    const maxVerticalDistance = 100; // Distance verticale max pour considérer comme un swipe horizontal
+    
+    const modalContent = modal.querySelector('.gallery-modal-content');
+    const modalImage = document.getElementById('gallery-modal-image');
+    
+    if (!modalContent || !modalImage) return;
+    
+    // Début du toucher
+    modalImage.addEventListener('touchstart', function(e) {
+        // Ne pas interférer si on touche les boutons de navigation
+        if (e.target.closest('.gallery-modal-nav')) {
+            return;
+        }
+        
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+        isDragging = true;
+        
+        console.log('Touch start:', touchStartX, touchStartY);
+        
+        // Désactive la transition pendant le drag
+        modalImage.style.transition = 'none';
+    }, { passive: true });
+    
+    // Déplacement du doigt
+    modalImage.addEventListener('touchmove', function(e) {
+        if (!isDragging) return;
+        
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+        
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = Math.abs(touchEndY - touchStartY);
+        
+        // Si le mouvement est principalement horizontal
+        if (Math.abs(deltaX) > deltaY) {
+            // Empêche le scroll de la page pendant le swipe horizontal
+            e.preventDefault();
+            
+            // Applique un effet de déplacement visuel (optionnel)
+            const translateX = deltaX * 0.3; // Réduit l'amplitude pour un effet subtil
+            modalImage.style.transform = `translateX(${translateX}px)`;
+        }
+    }, { passive: false });
+    
+    // Fin du toucher
+    modalImage.addEventListener('touchend', function(e) {
+        if (!isDragging) return;
+        
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+        
+        // Réactive la transition
+        modalImage.style.transition = '';
+        modalImage.style.transform = '';
+        
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = Math.abs(touchEndY - touchStartY);
+        
+        console.log('Touch end - deltaX:', deltaX, 'deltaY:', deltaY);
+        
+        // Vérifie si c'est un swipe horizontal valide
+        if (Math.abs(deltaX) > minSwipeDistance && deltaY < maxVerticalDistance) {
+            console.log('Swipe détecté!', deltaX > 0 ? 'Droite (prev)' : 'Gauche (next)');
+            if (deltaX > 0) {
+                // Swipe vers la droite -> photo précédente
+                showPrevAlbumPhoto();
+            } else {
+                // Swipe vers la gauche -> photo suivante
+                showNextAlbumPhoto();
+            }
+        } else {
+            console.log('Swipe non valide - distance trop courte ou trop vertical');
+        }
+        
+        isDragging = false;
+    }, { passive: true });
+    
+    // Annulation du toucher
+    modalImage.addEventListener('touchcancel', function() {
+        isDragging = false;
+        modalImage.style.transition = '';
+        modalImage.style.transform = '';
+    }, { passive: true });
 }
 
 /**
