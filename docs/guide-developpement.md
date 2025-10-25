@@ -396,6 +396,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 ```
 
+#### Effet parallax responsive
+
+- Les sections parallax utilisent la classe `.parallax-section` qui définit les variables CSS `--parallax-base-position` et `--parallax-offset`. Le script `RugbyClubApp.setupParallax()` met à jour `--parallax-offset` sur les périphériques tactiles ou lorsque `background-attachment: fixed` n'est pas fiable.
+- Ajoutez `data-parallax-speed="0.25"` (par défaut `0.3`) sur une section pour ajuster la vitesse relative de défilement :
+
+```liquid
+<section class="hero parallax-section" data-parallax-speed="0.2">
+    <!-- contenu -->
+</section>
+```
+- L'effet est automatiquement désactivé si l'utilisateur a activé `prefers-reduced-motion`, afin de respecter l'accessibilité.
+
 ## Backend (Azure Functions)
 
 ### Structure des Azure Functions

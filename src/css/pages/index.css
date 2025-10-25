@@ -9,7 +9,7 @@
     color: var(--white);
     background-image: url('../../assets/hero-image2.png');
     background-size: cover;
-    background-position: center center;
+    background-position: center calc(var(--parallax-base-position) + var(--parallax-offset));
     background-attachment: fixed;
     position: relative;
     height: 100vh;
@@ -291,10 +291,20 @@
     color: var(--white);
     background-image: url('../../assets/histoire-bg-2.jpg');
     background-size: cover;
-    background-position: center center;
+    background-position: center calc(var(--parallax-base-position) + var(--parallax-offset));
     background-attachment: fixed;
     position: relative;
     isolation: isolate;
+}
+
+.histoire .parallax-overlay {
+    /* background: linear-gradient(
+        180deg,
+        rgba(5, 16, 54, 0.75) 0%,
+        rgba(11, 32, 86, 0.7) 45%,
+        rgba(11, 32, 86, 0.65) 100%
+    );
+    mix-blend-mode: normal; */
 }
 
 .histoire-content {
@@ -360,7 +370,7 @@
     
     /* Ajustements pour la section histoire en responsive */
     .histoire {
-        background-attachment: scroll; /* Désactiver parallax sur mobile pour les performances */
+        background-attachment: scroll; /* Le JS mobile gère le parallax, on force scroll pour compatibilité */
     }
 
     .histoire-content {
@@ -376,7 +386,7 @@
 @media (max-width: 768px) {
     .hero {
         height: 100vh;
-        background-attachment: scroll; /* Désactiver parallax sur mobile pour les performances */
+        background-attachment: scroll; /* Le JS mobile gère le parallax, on force scroll pour compatibilité */
     }
     
     .hero-content {

@@ -34,23 +34,124 @@ class RugbyClubApp {
     // Effet parallax pour les sections
     }
     setupParallax() {
-        // Pour un vrai effet parallax, nous n'avons pas besoin de manipuler les images
-        // Les images sont positionnées avec background-attachment: fixed en CSS
-        // Le contenu défile naturellement par-dessus
-        
-        // Aucune manipulation JavaScript n'est nécessaire pour l'effet de base
-        // Si nous avions besoin d'une personnalisation supplémentaire, nous pourrions l'ajouter ici
-
-        // Désactivons tout code qui pourrait interférer avec l'effet parallax CSS
         const parallaxElements = document.querySelectorAll('.parallax-section');
-        
-        if (parallaxElements.length > 0) {
-            window.addEventListener('scroll', () => {
-                // Juste pour s'assurer que le z-index est correctement géré
-                document.body.style.setProperty('--scroll-y', `${window.scrollY}px`);
-            });
+
+        if (parallaxElements.length === 0) {
+            return;
         }
-    }// Gestion du bandeau cookies RGPD
+
+        const getMediaQuery = (query) => {
+            if (typeof window.matchMedia !== 'function') {
+                return { matches: false };
+            }
+            return window.matchMedia(query);
+        };
+
+        const prefersReducedMotion = getMediaQuery('(prefers-reduced-motion: reduce)');
+        if (prefersReducedMotion.matches) {
+            parallaxElements.forEach(element => {
+                element.style.setProperty('--parallax-offset', '0px');
+                element.classList.remove('parallax-fallback');
+            });
+            return;
+        }
+
+        const isCoarsePointer = getMediaQuery('(pointer: coarse)');
+        const supportsBackgroundFixed = this.isBackgroundFixedSupported();
+        const shouldUseFallback = isCoarsePointer.matches || !supportsBackgroundFixed;
+
+        if (!shouldUseFallback) {
+            parallaxElements.forEach(element => {
+                element.classList.remove('parallax-fallback');
+                element.style.removeProperty('--parallax-offset');
+            });
+            return;
+        }
+
+        const elementsMeta = Array.from(parallaxElements).map(element => ({
+            element,
+            speed: parseFloat(element.dataset.parallaxSpeed || '0.3'),
+            top: 0
+        }));
+
+        const recalcPositions = () => {
+            elementsMeta.forEach(meta => {
+                const rect = meta.element.getBoundingClientRect();
+                meta.top = rect.top + window.scrollY;
+            });
+        };
+
+        let ticking = false;
+
+        const updateParallax = () => {
+            const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+            elementsMeta.forEach(({ element, speed, top }) => {
+                const offset = (scrollY - top) * speed;
+                element.style.setProperty('--parallax-offset', `${offset}px`);
+            });
+            ticking = false;
+        };
+
+        const requestTick = () => {
+            if (!ticking) {
+                ticking = true;
+                window.requestAnimationFrame(updateParallax);
+            }
+        };
+
+        parallaxElements.forEach(element => {
+            element.classList.add('parallax-fallback');
+        });
+
+        recalcPositions();
+        updateParallax();
+
+        const handleLayoutChange = () => {
+            recalcPositions();
+            updateParallax();
+        };
+
+        window.addEventListener('scroll', requestTick, { passive: true });
+        window.addEventListener('resize', handleLayoutChange);
+        window.addEventListener('orientationchange', handleLayoutChange);
+        window.addEventListener('load', handleLayoutChange);
+    }
+
+    isBackgroundFixedSupported() {
+        if (this._backgroundFixedSupport !== undefined) {
+            return this._backgroundFixedSupport;
+        }
+
+        if (typeof window === 'undefined' || typeof document === 'undefined') {
+            this._backgroundFixedSupport = true;
+            return this._backgroundFixedSupport;
+        }
+
+        const userAgent = window.navigator.userAgent;
+        const isIOS = /iP(ad|hone|od)/.test(userAgent);
+        if (isIOS) {
+            this._backgroundFixedSupport = false;
+            return this._backgroundFixedSupport;
+        }
+
+        if (!document.body) {
+            this._backgroundFixedSupport = true;
+            return this._backgroundFixedSupport;
+        }
+
+        const testElement = document.createElement('div');
+        testElement.style.backgroundAttachment = 'fixed';
+        testElement.style.visibility = 'hidden';
+        testElement.style.position = 'absolute';
+        testElement.style.pointerEvents = 'none';
+        document.body.appendChild(testElement);
+        const computed = window.getComputedStyle(testElement).backgroundAttachment;
+        document.body.removeChild(testElement);
+
+        this._backgroundFixedSupport = computed === 'fixed';
+        return this._backgroundFixedSupport;
+    }
+    // Gestion du bandeau cookies RGPD
     setupCookieBanner() {
         const cookieBanner = document.getElementById('cookie-banner');
         const acceptBtn = document.getElementById('accept-cookies');

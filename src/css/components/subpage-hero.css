@@ -6,9 +6,10 @@
 
 /* Section Hero général pour toutes les sous-pages avec effet parallax */
 .subpage-hero {
+    --parallax-base-position: -170px;
     background-image: url('../../assets/hero-image2.png');
     background-size: cover;
-    background-position: center -170px;
+    background-position: center calc(var(--parallax-base-position) + var(--parallax-offset));
     background-attachment: fixed;
     position: relative;
     height: 40vh; /* Hauteur adaptée pour les sous-pages */
@@ -81,8 +82,8 @@
     .subpage-hero {
         height: 35vh;
         min-height: 280px;
-        background-attachment: scroll; /* Désactiver parallax sur mobile pour les performances */
-        background-position: center center; /* Corriger la position de l'image en mode responsive */
+        background-attachment: scroll; /* Le JS mobile gère le parallax, on force scroll pour compatibilité */
+        --parallax-base-position: 50%; /* Corriger la position de l'image en mode responsive */
     }
     
     .subpage-hero .hero-title {
@@ -103,6 +104,6 @@
     .subpage-hero {
         height: 38vh;
         min-height: 320px;
-        background-position: center center; /* Corriger la position de l'image en mode responsive */
+        --parallax-base-position: 50%; /* Corriger la position de l'image en mode responsive */
     }
 }
