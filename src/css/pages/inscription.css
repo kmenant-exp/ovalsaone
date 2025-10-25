@@ -497,6 +497,17 @@
         padding: 1.5rem;
     }
     
+    .process-container {
+        padding: 1.5rem 1.25rem;
+    }
+    
+    .process-step,
+    .ffr-steps,
+    .validation-info,
+    .cotisation-info {
+        padding: 1.25rem 1rem;
+    }
+    
     .form-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
@@ -526,6 +537,19 @@
     }
     
 
+}
+
+@media (max-width: 480px) {
+    .process-container {
+        padding: 1.25rem 1rem;
+    }
+
+    .process-step,
+    .ffr-steps,
+    .validation-info,
+    .cotisation-info {
+        padding: 1.15rem 0.85rem;
+    }
 }
 .form-group.touched input:not(:focus):not(:placeholder-shown):valid,
 .form-group.touched select:not(:focus):valid:not([value=""]),
