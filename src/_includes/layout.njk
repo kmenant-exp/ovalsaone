@@ -30,6 +30,22 @@ title: "default"
         <!-- Canonical URL -->
         <link rel="canonical" href="{{ site.url }}{{ page.url }}">
         
+        <!-- Preconnect to external domains for faster loading -->
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+        <link rel="preconnect" href="https://www.clarity.ms">
+        <link rel="preconnect" href="https://www.instagram.com">
+        <link rel="dns-prefetch" href="https://ligueaura.ffr.fr">
+        <link rel="dns-prefetch" href="https://www.auvergnerhonealpes.fr">
+        <link rel="dns-prefetch" href="https://cd01rugby.com">
+        
+        <!-- Preload critical resources -->
+        {% if page.url == "/" %}
+        <link rel="preload" href="/assets/logo.webp" as="image" type="image/webp">
+        <link rel="preload" href="/assets/hero-image2.webp" as="image" type="image/webp">
+        {% endif %}
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
+        
         <!-- Favicon -->
         <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
         <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
@@ -43,7 +59,6 @@ title: "default"
         
         <!-- Stylesheets -->
         <link rel="stylesheet" href="/css-bundle.css">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
         
         <script type="text/javascript">
             (function(c,l,a,r,i,t,y){
@@ -101,7 +116,7 @@ title: "default"
         <nav class="navbar" id="navbar">
             <div class="nav-container">
                 <a href="/" class="nav-logo">
-                    <img src="/assets/logo.png" alt="Logo Association Rugby" id="nav-logo-img">
+                    <img src="/assets/logo.webp" alt="Logo Association Rugby" id="nav-logo-img" loading="eager">
                     <span>Oval Saône</span>
                 </a>
                 <div class="nav-menu" id="nav-menu">
@@ -161,6 +176,7 @@ title: "default"
                                 width="400"
                                 height="480"
                                 title="Instagram Feed"
+                                loading="lazy"
                                 style="border: none; overflow: hidden; width: 100%; max-width: 300px; height: 350px;"></iframe>
                         </div>
                     </div>
@@ -168,13 +184,13 @@ title: "default"
                 <div class="footer-sponsors">
                     <div class="footer-sponsor-logos">
                         <a href="https://ligueaura.ffr.fr/" target="_blank" rel="noopener noreferrer" title="Visiter le site de la Ligue Auvergne-Rhône-Alpes de Rugby">
-                            <img src="/assets/aura-rugby.png" alt="Logo Rugby Auvergne Rhône-Alpes" class="footer-logo">
+                            <img src="/assets/aura-rugby.png" alt="Logo Rugby Auvergne Rhône-Alpes" class="footer-logo" loading="lazy">
                         </a>
                         <a href="https://www.auvergnerhonealpes.fr/" target="_blank" rel="noopener noreferrer" title="Visiter le site de la Région Auvergne-Rhône-Alpes">
-                            <img src="/assets/aura-region.png" alt="Logo Région Auvergne Rhône-Alpes" class="footer-logo">
+                            <img src="/assets/aura-region.png" alt="Logo Région Auvergne Rhône-Alpes" class="footer-logo" loading="lazy">
                         </a>
                         <a href="https://cd01rugby.com/" target="_blank" rel="noopener noreferrer" title="Visiter le site du Comité de Rugby de l'Ain">
-                            <img src="/assets/ain-rugby.png" alt="Logo Comité de Rugby de l'Ain" class="footer-logo">
+                            <img src="/assets/ain-rugby.png" alt="Logo Comité de Rugby de l'Ain" class="footer-logo" loading="lazy">
                         </a>
                     </div>
                 </div>

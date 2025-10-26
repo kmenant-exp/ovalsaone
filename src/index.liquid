@@ -17,7 +17,7 @@ sponsors_description: "Nos partenaires sont essentiels au développement de notr
     <div class="hero-overlay"></div>
     <div class="hero-content">
         <div class="hero-logo">
-            <img src="assets/logo.webp" alt="Logo École de Rugby">
+            <img src="assets/logo.webp" alt="Logo École de Rugby" fetchpriority="high" loading="eager">
         </div>
         <h1 class="hero-title">{{ hero_title  }}</h1>
         <p class="hero-subtitle">{{ hero_subtitle }}</p>
@@ -51,7 +51,7 @@ sponsors_description: "Nos partenaires sont essentiels au développement de notr
             {% for actualite in futureActualites limit:3 %}
                 <article class="actualite-card fade-in-up">
                     <div class="actualite-image">
-                        <img src="{{ actualite.image }}" alt="{{ actualite.titre }}">
+                        <img src="{{ actualite.image }}" alt="{{ actualite.titre }}" loading="lazy">
                         <div class="actualite-date-badge">{{ actualite.date | date: "%d/%m/%Y"}}</div>
                     </div>
                     <div class="actualite-content">
@@ -75,7 +75,7 @@ sponsors_description: "Nos partenaires sont essentiels au développement de notr
                 {% for actualite in futureActualites offset:3 %}
                     <article class="actualite-card fade-in-up">
                         <div class="actualite-image">
-                            <img src="{{ actualite.image }}" alt="{{ actualite.titre }}">
+                            <img src="{{ actualite.image }}" alt="{{ actualite.titre }}" loading="lazy">
                             <div class="actualite-date-badge">{{ actualite.date | date: "%d/%m/%Y"}}</div>
                         </div>
                         <div class="actualite-content">
