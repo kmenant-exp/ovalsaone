@@ -1,18 +1,31 @@
 ---
 permalink: /css-bundle.css
+eleventyExcludeFromCollections: true
 ---
+{# 
+CSS Bundle - Single concatenated stylesheet for Oval Saône
+Order matters: Base → Layout → Components → Pages
+#}
+
+{# === BASE STYLES === #}
 {% include "./css/styles.css" %}
-{% include "./css/components/button.css" %}
-{% include "./css/components/footer.css" %}
+
+{# === LAYOUT COMPONENTS === #}
 {% include "./css/components/nav.css" %}
+{% include "./css/components/footer.css" %}
 {% include "./css/components/page-hero.css" %}
+{% include "./css/components/subpage-hero.css" %}
+
+{# === UI COMPONENTS === #}
+{% include "./css/components/button.css" %}
 {% include "./css/components/cookie-banner.css" %}
+
+{# === PAGE-SPECIFIC STYLES === #}
 {% include "./css/pages/index.css" %}
 {% include "./css/pages/equipes.css" %}
 {% include "./css/pages/ecole.css" %}
-{% include "./css/pages/partenariat.css" %}
+{% include "./css/pages/contact.css" %}
 {% include "./css/pages/boutique.css" %}
 {% include "./css/pages/inscription.css" %}
-{% include "./css/pages/contact.css" %}
+{% include "./css/pages/partenariat.css" %}
 {% include "./css/pages/evenements.css" %}
-{% include "./css/components/subpage-hero.css" %}
