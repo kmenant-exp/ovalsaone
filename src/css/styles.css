@@ -36,6 +36,8 @@
     --font-size-4xl: 2.25rem;
     --font-size-5xl: 3rem;
     
+    --navbar-height: 5.25rem;
+
     --spacing-1: 0.25rem;
     --spacing-2: 0.5rem;
     --spacing-3: 0.75rem;
@@ -336,7 +338,7 @@ ul, ol {
     
     /* Responsive pour l'indicateur de défilement */
     .scroll-indicator {
-        bottom: 40px;
+        bottom: -6px;
     }
     
     .scroll-indicator-icon {

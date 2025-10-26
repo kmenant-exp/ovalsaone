@@ -375,45 +375,53 @@
 /* Responsive pour la section hero principale */
 @media (max-width: 768px) {
     .hero {
-        height: 100vh;
+        height: auto;
+        min-height: 100vh;
         background-attachment: scroll; /* Le JS mobile gère le parallax, on force scroll pour compatibilité */
+        align-items: center;
+        justify-content: center;
+        padding: calc(var(--navbar-height) + var(--spacing-4)) var(--spacing-4) var(--spacing-6);
+        clip-path: none;
+        background-position: center top;
     }
     
     .hero-content {
         max-width: 90%;
-        padding: var(--spacing-6);
-        background: rgba(0, 0, 0, 0.5);
+        width: min(100%, 420px);
+        padding: var(--spacing-5) var(--spacing-4);
+        background: rgba(0, 0, 0, 0.55);
         backdrop-filter: blur(8px);
-        margin-top: var(--spacing-12);
-        width: 90%;
+        margin: 0 auto;
     }
     
     .hero-title {
         font-size: var(--font-size-3xl);
+        margin-bottom: var(--spacing-3);
         text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8), 1px 1px 2px rgba(0, 0, 0, 1);
     }
     
     .hero-subtitle {
         font-size: var(--font-size-lg);
+        margin-bottom: var(--spacing-4);
         text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7), 0px 0px 2px rgba(0, 0, 0, 0.9);
     }
     
     .hero-description {
         font-size: var(--font-size-base);
-        margin-bottom: var(--spacing-6);
+        margin-bottom: var(--spacing-5);
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
     }
     
     .hero-buttons {
         flex-direction: column;
         gap: var(--spacing-3);
-        width: 100%;
-        align-items: center;
+        width: min(100%, 320px);
+        align-items: stretch;
+        margin: 0 auto;
     }
     
     .hero-buttons .btn {
-        width: min(100%, 280px);
-        margin: 0 auto;
+        width: 100%;
     }
     
     .hero-logo img {
@@ -422,7 +430,7 @@
     
     /* Responsive pour l'indicateur de défilement */
     .scroll-indicator {
-        bottom: 40px;
+        bottom: -6px;
     }
     
     .scroll-indicator-icon {
@@ -432,6 +440,18 @@
     
     .scroll-indicator-text {
         font-size: 9px;
+    }
+}
+
+@media (min-width: 769px) {
+    .hero {
+        height: calc(100vh - var(--navbar-height));
+        min-height: calc(100vh - var(--navbar-height));
+        padding: calc(var(--navbar-height) + var(--spacing-4)) var(--spacing-8) var(--spacing-6);
+    }
+
+    .hero-content {
+        margin: 0 auto;
     }
 }
 
