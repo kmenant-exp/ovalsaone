@@ -6,8 +6,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Vérifie si la configuration du calendrier est disponible
     if (!window.calendarConfig) {
-        console.error("Configuration du calendrier non disponible");
-        showError();
         return;
     }
 
