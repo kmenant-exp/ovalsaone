@@ -1,0 +1,46 @@
+/* =============================================================================
+   Styles des sections parallax - Composant centralisé
+   ============================================================================= */
+
+/* Sections avec parallax */
+.parallax-section {
+    position: relative;
+    overflow: hidden;
+    padding: var(--spacing-24) 0;
+    z-index: 1;
+    --parallax-base-position: 50%;
+    --parallax-offset: 0px;
+    background-position: center calc(var(--parallax-base-position) + var(--parallax-offset));
+    background-repeat: no-repeat;
+}
+
+.parallax-section.parallax-fallback {
+    background-attachment: scroll;
+    will-change: background-position;
+}
+
+.parallax-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+.parallax-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-attachment: fixed;
+}
+
+.parallax-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: -1;
+}
