@@ -567,7 +567,7 @@
 /* Section Sponsors */
 .sponsors {
     background: var(--light-color);
-    padding: var(--spacing-20) 0;
+    padding: var(--spacing-10) 0;
 }
 
 .sponsors-intro {
