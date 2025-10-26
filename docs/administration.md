@@ -5,21 +5,94 @@ Ce guide explique comment mettre à jour le contenu du site web sans connaissanc
 ## Table des matières
 
 1. [Prérequis](#prérequis)
-2. [Modifier les pages du site](#modifier-les-pages-du-site)
-3. [Mettre à jour les données](#mettre-à-jour-les-données)
-4. [Gérer les événements (Google Calendar)](#gérer-les-événements-google-calendar)
-5. [Gérer la galerie photos](#gérer-la-galerie-photos)
-6. [Ajouter ou modifier des images](#ajouter-ou-modifier-des-images)
-7. [Publier les modifications](#publier-les-modifications)
+2. [Accéder aux fichiers via GitHub](#accéder-aux-fichiers-via-github)
+3. [Modifier les pages du site](#modifier-les-pages-du-site)
+4. [Mettre à jour les données](#mettre-à-jour-les-données)
+5. [Gérer les événements (Google Calendar)](#gérer-les-événements-google-calendar)
+6. [Gérer la galerie photos](#gérer-la-galerie-photos)
+7. [Ajouter ou modifier des images](#ajouter-ou-modifier-des-images)
+8. [Publier les modifications](#publier-les-modifications)
 
 ---
 
 ## Prérequis
 
 Pour mettre à jour le site, vous aurez besoin de :
-- Un éditeur de texte (Visual Studio Code recommandé)
-- Accès au code source du site (dossier du projet)
+- Un compte GitHub avec accès au repository du site
+- Un navigateur web moderne
 - Droits d'accès au portail Azure (pour la galerie photos uniquement)
+
+**Note :** La majorité des modifications se font directement via l'interface web de GitHub, sans besoin d'installer d'outils sur votre ordinateur.
+
+---
+
+## Accéder aux fichiers via GitHub
+
+L'administration du site se fait principalement via l'interface web de GitHub. Voici comment accéder aux fichiers :
+
+### Se connecter au repository
+
+1. Rendez-vous sur : https://github.com/laetitia-gente/ovalsaone
+2. Connectez-vous avec votre compte GitHub
+3. Assurez-vous d'avoir les droits d'écriture sur le repository
+
+### Naviguer dans les fichiers
+
+#### Fichiers des pages
+- Page d'accueil : `src/index.liquid`
+- Page contact : `src/contact.liquid`
+- Page équipes : `src/equipes.liquid`
+- Page école de rugby : `src/ecole.liquid`
+- Page boutique : `src/boutique.liquid`
+- Page événements : `src/evenements.liquid`
+- Page inscription : `src/inscription.liquid`
+- Page partenariat : `src/partenariat.liquid`
+
+#### Fichiers de données
+- Actualités : `src/_data/actualites.json`
+- Équipes : `src/_data/teams.json`
+- Sponsors : `src/_data/sponsors.json`
+- Bureau : `src/_data/bureau.json`
+- Entraîneurs : `src/_data/entraineurs.json`
+- Calendriers : `src/_data/calendars.json`
+- Contact : `src/_data/contact.json`
+- Galerie : `src/_data/gallery.json`
+
+#### Dossiers d'images
+- `src/assets/` : Toutes les images du site
+- `src/assets/sponsors/` : Logos des sponsors
+- `src/assets/bureau/` : Photos du bureau
+- `src/assets/entraineurs/` : Photos des entraîneurs
+- `src/assets/actualites/` : Images des actualités
+
+### Éditer un fichier dans GitHub
+
+1. **Naviguez jusqu'au fichier** à modifier en cliquant sur les dossiers
+2. **Cliquez sur le nom du fichier** pour l'ouvrir
+3. **Cliquez sur l'icône crayon** (✏️) en haut à droite pour éditer
+4. **Effectuez vos modifications** dans l'éditeur
+5. **Prévisualisez vos modifications** avec l'onglet "Preview"
+6. **Décrivez vos modifications** dans la section "Commit changes" en bas
+7. **Cliquez sur "Commit changes"** pour sauvegarder
+
+### Ajouter un nouveau fichier
+
+1. **Naviguez jusqu'au dossier** où ajouter le fichier
+2. **Cliquez sur "Add file"** puis "Create new file"
+3. **Tapez le nom du fichier** (avec son extension)
+4. **Ajoutez le contenu** dans l'éditeur
+5. **Décrivez l'ajout** dans "Commit new file"
+6. **Cliquez sur "Commit new file"**
+
+### Télécharger des images
+
+1. **Naviguez jusqu'au dossier** `src/assets/` (ou sous-dossier approprié)
+2. **Cliquez sur "Add file"** puis "Upload files"
+3. **Glissez-déposez vos images** ou cliquez sur "choose your files"
+4. **Décrivez l'ajout** dans "Commit changes"
+5. **Cliquez sur "Commit changes"**
+
+**⚠️ Attention :** Respectez la structure des dossiers et les conventions de nommage.
 
 ---
 
@@ -41,7 +114,7 @@ description: Contactez l'Oval Saône Rugby Club
 
 ### Comment modifier le Frontmatter
 
-1. **Ouvrez le fichier de la page** à modifier (fichiers `.liquid` dans le dossier `src/`)
+1. **Naviguez vers le fichier** de la page à modifier sur GitHub :
    - Page d'accueil : `src/index.liquid`
    - Page contact : `src/contact.liquid`
    - Page équipes : `src/equipes.liquid`
@@ -51,13 +124,16 @@ description: Contactez l'Oval Saône Rugby Club
    - Page inscription : `src/inscription.liquid`
    - Page partenariat : `src/partenariat.liquid`
 
-2. **Modifiez les valeurs** entre les tirets (`---`)
+2. **Cliquez sur l'icône crayon** (✏️) pour éditer le fichier
+
+3. **Modifiez les valeurs** entre les tirets (`---`)
 
    - `title` : Le titre de la page (affiché dans l'onglet du navigateur)
    - `description` : La description pour les moteurs de recherche
    - `layout` : **Ne pas modifier** (toujours `layout.njk`)
 
-3. **Enregistrez le fichier**
+4. **Décrivez vos modifications** dans la section "Commit changes"
+5. **Cliquez sur "Commit changes"** pour sauvegarder
 
 **⚠️ Important :** Ne supprimez pas les lignes `---` et ne modifiez pas la ligne `layout: layout.njk`.
 
@@ -96,15 +172,16 @@ Les fichiers JSON utilisent une structure simple avec des accolades `{}`, des cr
 ```
 
 **Pour ajouter une actualité :**
-1. Ouvrez `src/_data/actualites.json`
-2. Ajoutez un nouvel objet en haut de la liste
-3. Remplissez les champs :
+1. Naviguez vers `src/_data/actualites.json` sur GitHub
+2. Cliquez sur l'icône crayon (✏️) pour éditer
+3. Ajoutez un nouvel objet en haut de la liste
+4. Remplissez les champs :
    - `titre` : Le titre de l'actualité
    - `extrait` : Un court résumé (affiché dans la liste)
    - `date` : La date au format `AAAA-MM-JJ`
    - `image` : Chemin de l'image (commence par `assets/`)
    - `contenu` : Le texte complet de l'actualité
-4. Enregistrez
+5. Décrivez vos modifications et cliquez sur "Commit changes"
 
 #### 2. `teams.json` - Les équipes
 
@@ -132,16 +209,17 @@ Les fichiers JSON utilisent une structure simple avec des accolades `{}`, des cr
 ```
 
 **Pour modifier une équipe :**
-1. Ouvrez `src/_data/teams.json`
-2. Trouvez l'équipe à modifier
-3. Changez les valeurs souhaitées :
+1. Naviguez vers `src/_data/teams.json` sur GitHub
+2. Cliquez sur l'icône crayon (✏️) pour éditer
+3. Trouvez l'équipe à modifier
+4. Changez les valeurs souhaitées :
    - `name` : Nom de la catégorie (U6, U8, U10, etc.)
    - `description` : Description de l'équipe
    - `min_age` / `max_age` : Tranche d'âge
    - `players_count` : Nombre de joueurs
    - `coaches` : Liste des entraîneurs (tableau d'objets avec `name`)
    - `schedule` : Horaires d'entraînement (tableau avec `day` et `time`)
-4. Enregistrez
+5. Décrivez vos modifications et cliquez sur "Commit changes"
 
 #### 3. `sponsors.json` - Les sponsors
 
@@ -164,9 +242,10 @@ Les fichiers JSON utilisent une structure simple avec des accolades `{}`, des cr
 **Types disponibles :** `"sponsor_or"` (sponsor or), `"partenaire"` (partenaire)
 
 **Pour ajouter un sponsor :**
-1. Ouvrez `src/_data/sponsors.json`
-2. Ajoutez un nouvel objet dans la liste
-3. Remplissez les champs :
+1. Naviguez vers `src/_data/sponsors.json` sur GitHub
+2. Cliquez sur l'icône crayon (✏️) pour éditer
+3. Ajoutez un nouvel objet dans la liste
+4. Remplissez les champs :
    - `nom` : Nom de l'entreprise
    - `logo` : Chemin du logo (commence par `/assets/`)
    - `description` : Présentation de l'entreprise
@@ -176,7 +255,7 @@ Les fichiers JSON utilisent une structure simple avec des accolades `{}`, des cr
    - `adresse` : Adresse (optionnel)
    - `partenariat_depuis` : Année de début du partenariat
    - `type` : `"sponsor_or"` ou `"partenaire"`
-4. Enregistrez
+5. Décrivez vos modifications et cliquez sur "Commit changes"
 
 #### 4. `bureau.json` - Les membres du bureau
 
@@ -193,15 +272,16 @@ Les fichiers JSON utilisent une structure simple avec des accolades `{}`, des cr
 ```
 
 **Pour modifier un membre du bureau :**
-1. Ouvrez `src/_data/bureau.json`
-2. Trouvez le membre à modifier
-3. Changez les valeurs :
+1. Naviguez vers `src/_data/bureau.json` sur GitHub
+2. Cliquez sur l'icône crayon (✏️) pour éditer
+3. Trouvez le membre à modifier
+4. Changez les valeurs :
    - `nom` : Nom de famille (en majuscules)
    - `prenom` : Prénom
    - `poste` : Fonction au bureau
    - `description` : Biographie et présentation du rôle
    - `photo` : Chemin de la photo (commence par `/assets/`)
-4. Enregistrez
+5. Décrivez vos modifications et cliquez sur "Commit changes"
 
 #### 5. `entraineurs.json` - Les entraîneurs
 
@@ -226,9 +306,10 @@ Les fichiers JSON utilisent une structure simple avec des accolades `{}`, des cr
 ```
 
 **Pour modifier un entraîneur :**
-1. Ouvrez `src/_data/entraineurs.json`
-2. Trouvez l'entraîneur à modifier
-3. Changez les valeurs :
+1. Naviguez vers `src/_data/entraineurs.json` sur GitHub
+2. Cliquez sur l'icône crayon (✏️) pour éditer
+3. Trouvez l'entraîneur à modifier
+4. Changez les valeurs :
    - `nom` : Nom de famille
    - `prenom` : Prénom
    - `categories` : Liste des catégories entraînées (ex: `["U8"]`)
@@ -236,7 +317,7 @@ Les fichiers JSON utilisent une structure simple avec des accolades `{}`, des cr
    - `diplomes` : Liste des diplômes (tableau)
    - `photo` : Chemin de la photo
    - `specialites` : Liste des spécialités (tableau)
-4. Enregistrez
+5. Décrivez vos modifications et cliquez sur "Commit changes"
 
 #### 6. `calendars.json` - Les calendriers des équipes
 
@@ -255,14 +336,15 @@ Les fichiers JSON utilisent une structure simple avec des accolades `{}`, des cr
 ```
 
 **Pour ajouter un calendrier d'équipe :**
-1. Ouvrez `src/_data/calendars.json`
-2. Dans la liste `teams`, ajoutez un nouvel objet
-3. Remplissez les champs :
+1. Naviguez vers `src/_data/calendars.json` sur GitHub
+2. Cliquez sur l'icône crayon (✏️) pour éditer
+3. Dans la liste `teams`, ajoutez un nouvel objet
+4. Remplissez les champs :
    - `name` : Nom de l'équipe (doit correspondre à `teams.json`)
    - `calendarId` : ID du calendrier Google
    - `calendarUrl` : URL publique du calendrier
    - `icsUrl` : URL du fichier ICS pour l'export
-4. Enregistrez
+5. Décrivez vos modifications et cliquez sur "Commit changes"
 
 **⚠️ Note :** Les URL proviennent de Google Calendar. Ne modifiez pas l'`apiKey` sans consulter l'équipe technique.
 
@@ -439,12 +521,13 @@ Si vous ajoutez une nouvelle équipe au club, suivez ces étapes :
 ```
 
 **Pour modifier les informations de contact :**
-1. Ouvrez `src/_data/contact.json`
-2. Modifiez directement les valeurs :
+1. Naviguez vers `src/_data/contact.json` sur GitHub
+2. Cliquez sur l'icône crayon (✏️) pour éditer
+3. Modifiez directement les valeurs :
    - `address` : Adresse complète du club
    - `phone` : Numéro de téléphone
    - `email` : Email de contact
-3. Enregistrez
+4. Décrivez vos modifications et cliquez sur "Commit changes"
 
 #### 8. `gallery.json` - Configuration de la galerie
 
@@ -463,9 +546,10 @@ Si vous ajoutez une nouvelle équipe au club, suivez ces étapes :
 ```
 
 **Pour ajouter un album :**
-1. Ouvrez `src/_data/gallery.json`
-2. Ajoutez un nouvel objet dans la liste
-3. Remplissez les champs :
+1. Naviguez vers `src/_data/gallery.json` sur GitHub
+2. Cliquez sur l'icône crayon (✏️) pour éditer
+3. Ajoutez un nouvel objet dans la liste
+4. Remplissez les champs :
    - `titre` : Titre de l'album
    - `description` : Description courte
    - `date` : Date au format `AAAA-MM-JJ`
@@ -473,7 +557,7 @@ Si vous ajoutez une nouvelle équipe au club, suivez ces étapes :
    - `storageUrl` : URL du dossier Azure (sans trailing slash)
    - `categorie` : Catégorie de l'album (ex: `"matches"`, `"entrainements"`, `"evenements"`, `"equipes"`)
    - `alt` : Texte alternatif pour l'accessibilité
-4. Enregistrez
+5. Décrivez vos modifications et cliquez sur "Commit changes"
 
 **⚠️ Note :** La modification de la galerie nécessite également l'accès au portail Azure (voir section suivante).
 
@@ -505,24 +589,27 @@ La galerie utilise Azure Blob Storage pour stocker les photos. Les albums sont o
 
 #### Étape 2 : Déclarer l'album dans le code
 
-1. Ouvrez `src/_data/gallery.json`
-2. Ajoutez un nouvel objet dans la liste (voir structure dans la section précédente)
-3. **Important** : L'URL `storageUrl` doit correspondre exactement au nom du dossier créé dans Azure
-4. Enregistrez le fichier
+1. Naviguez vers `src/_data/gallery.json` sur GitHub
+2. Cliquez sur l'icône crayon (✏️) pour éditer
+3. Ajoutez un nouvel objet dans la liste (voir structure dans la section précédente)
+4. **Important** : L'URL `storageUrl` doit correspondre exactement au nom du dossier créé dans Azure
+5. Décrivez vos modifications et cliquez sur "Commit changes"
 
 ### Supprimer un album
 
-1. Ouvrez `src/_data/gallery.json`
-2. Supprimez l'objet correspondant à l'album
-3. Enregistrez le fichier
-4. *Optionnel* : Supprimez le dossier dans Azure pour libérer de l'espace
+1. Naviguez vers `src/_data/gallery.json` sur GitHub
+2. Cliquez sur l'icône crayon (✏️) pour éditer
+3. Supprimez l'objet correspondant à l'album
+4. Décrivez vos modifications et cliquez sur "Commit changes"
+5. *Optionnel* : Supprimez le dossier dans Azure pour libérer de l'espace
 
 ### Modifier un album existant
 
-1. Ouvrez `src/_data/gallery.json`
-2. Trouvez l'album à modifier
-3. Changez les valeurs souhaitées (`titre`, `description`, etc.)
-4. Enregistrez
+1. Naviguez vers `src/_data/gallery.json` sur GitHub
+2. Cliquez sur l'icône crayon (✏️) pour éditer
+3. Trouvez l'album à modifier
+4. Changez les valeurs souhaitées (`titre`, `description`, etc.)
+5. Décrivez vos modifications et cliquez sur "Commit changes"
 
 **⚠️ Ne modifiez pas le `storageUrl`** sauf si vous renommez aussi le dossier dans Azure.
 
@@ -532,7 +619,7 @@ La galerie utilise Azure Blob Storage pour stocker les photos. Les albums sont o
 
 ### Images des pages (logos, photos d'équipe, etc.)
 
-1. **Placez l'image** dans le dossier approprié :
+1. **Naviguez vers le dossier approprié** sur GitHub :
    - Photos d'équipes : `src/assets/equipes/`
    - Logos de sponsors : `src/assets/sponsors/`
    - Photos du bureau : `src/assets/bureau/`
@@ -540,10 +627,16 @@ La galerie utilise Azure Blob Storage pour stocker les photos. Les albums sont o
    - Actualités : `src/assets/actualites/`
    - Autres images : `src/assets/`
 
-2. **Référencez l'image** dans le fichier JSON ou la page :
+2. **Cliquez sur "Add file"** puis "Upload files"
+
+3. **Glissez-déposez vos images** ou cliquez sur "choose your files"
+
+4. **Référencez l'image** dans le fichier JSON correspondant :
    ```json
    "image": "/assets/equipes/seniors-masculins.jpg"
    ```
+
+5. **Décrivez l'ajout** et cliquez sur "Commit changes"
 
 **Formats recommandés :** JPG, PNG, WebP
 
@@ -557,42 +650,46 @@ Les images de la galerie se gèrent uniquement via le portail Azure (voir sectio
 
 ## Publier les modifications
 
-Une fois vos modifications effectuées, vous devez les publier pour qu'elles apparaissent sur le site.
+Avec l'interface GitHub, vos modifications sont automatiquement publiées dès que vous cliquez sur "Commit changes".
 
-### Méthode 1 : Via GitHub (recommandé)
+### Processus automatique
 
-1. **Enregistrez tous vos fichiers**
-2. **Ouvrez un terminal** (ou l'invite de commande dans VS Code)
-3. **Tapez les commandes suivantes :**
-
-```bash
-# Ajouter tous les fichiers modifiés
-git add .
-
-# Créer un commit avec un message descriptif
-git commit -m "Mise à jour des sponsors et actualités"
-
-# Envoyer les modifications sur GitHub
-git push
-```
-
-4. **Attendez quelques minutes** : Azure Static Web Apps détecte automatiquement les modifications et met à jour le site.
-
-### Méthode 2 : Via Visual Studio Code (interface graphique)
-
-1. **Enregistrez tous vos fichiers**
-2. Cliquez sur l'icône **Source Control** (branches) dans la barre latérale gauche
-3. Ajoutez un message décrivant vos modifications
-4. Cliquez sur **✓ Commit**
-5. Cliquez sur **Sync Changes** (ou **Push**)
-6. Attendez la mise à jour automatique
+1. **Effectuez vos modifications** via l'interface GitHub (édition de fichiers, ajout d'images, etc.)
+2. **Cliquez sur "Commit changes"** avec un message descriptif
+3. **GitHub déclenche automatiquement** le déploiement sur Azure Static Web Apps
+4. **Attendez 2-5 minutes** pour que les modifications apparaissent sur le site
 
 ### Vérifier la publication
 
-1. Attendez 2-5 minutes après le push
+1. Attendez 2-5 minutes après le commit
 2. Visitez le site : https://www.ovalsaone.fr
 3. Vérifiez que vos modifications sont visibles
 4. Si besoin, rafraîchissez la page avec `Ctrl+F5` (Windows) ou `Cmd+Shift+R` (Mac)
+
+### Suivre le déploiement
+
+Vous pouvez suivre l'état du déploiement :
+
+1. **Dans GitHub** : Rendez-vous dans l'onglet "Actions" du repository
+2. **Dans Azure** : Consultez le portail Azure Static Web Apps pour voir les logs de déploiement
+
+### Bonnes pratiques pour les commits
+
+#### Messages de commit descriptifs
+
+Utilisez des messages clairs qui décrivent vos modifications :
+- ✅ "Ajout de l'actualité sur le tournoi de Trévoux"
+- ✅ "Mise à jour des sponsors - ajout Entreprise XYZ"
+- ✅ "Modification des horaires de l'équipe U12"
+- ❌ "update"
+- ❌ "modif"
+
+#### Commits atomiques
+
+Regroupez les modifications logiquement :
+- Un commit par actualité ajoutée
+- Un commit par sponsor ajouté
+- Un commit pour toutes les modifications d'une même équipe
 
 ---
 
@@ -600,12 +697,32 @@ git push
 
 ### Erreur de syntaxe JSON
 
-**Symptôme :** Le site ne se construit pas ou affiche une erreur.
+**Symptôme :** Le site ne se construit pas ou affiche une erreur dans l'onglet "Actions" de GitHub.
 
 **Solution :**
 - Vérifiez qu'il n'y a pas de virgule après le dernier élément d'une liste
 - Vérifiez que toutes les accolades `{}` et crochets `[]` sont fermés
+- Utilisez l'onglet "Preview" de GitHub lors de l'édition pour détecter les erreurs
 - Utilisez un validateur JSON en ligne : https://jsonlint.com
+
+### Les modifications ne sont pas visibles sur le site
+
+**Symptôme :** Le site n'a pas changé après le commit.
+
+**Solution :**
+- Attendez 5-10 minutes (le déploiement peut prendre du temps)
+- Vérifiez l'onglet "Actions" de GitHub pour voir si le déploiement s'est bien passé
+- Videz le cache du navigateur (`Ctrl+F5` ou `Cmd+Shift+R`)
+- Consultez les logs de déploiement dans Azure Static Web Apps
+
+### Erreur lors du commit sur GitHub
+
+**Symptôme :** Message d'erreur lors de la sauvegarde.
+
+**Solution :**
+- Vérifiez que vous avez les droits d'écriture sur le repository
+- Assurez-vous d'avoir fourni un message de commit
+- Actualisez la page et réessayez
 
 ### Les images ne s'affichent pas
 
@@ -614,26 +731,17 @@ git push
 **Solution :**
 - Vérifiez que le chemin est correct (commence par `/assets/`)
 - Vérifiez que le nom du fichier correspond exactement (majuscules/minuscules)
-- Vérifiez que l'image existe bien dans le dossier spécifié
+- Vérifiez que l'image a bien été téléchargée dans le bon dossier sur GitHub
+- Attendez quelques minutes après l'upload pour que l'image soit disponible
 
 ### La galerie ne charge pas les photos
 
 **Symptôme :** Album vide ou erreur de chargement.
 
 **Solution :**
-- Vérifiez que l'`id` dans `gallery.json` correspond au nom du dossier Azure
+- Vérifiez que le `storageUrl` dans `gallery.json` correspond au nom du dossier Azure
 - Vérifiez que le dossier Azure contient bien des images
 - Vérifiez que les permissions CORS sont correctes (voir `docs/azure-storage-gallery.md`)
-
-### Les modifications ne sont pas visibles sur le site
-
-**Symptôme :** Le site n'a pas changé après publication.
-
-**Solution :**
-- Attendez 5-10 minutes (le déploiement peut prendre du temps)
-- Videz le cache du navigateur (`Ctrl+F5` ou `Cmd+Shift+R`)
-- Vérifiez que le commit a bien été poussé sur GitHub
-- Consultez les logs de déploiement dans Azure Static Web Apps
 
 ---
 
@@ -648,4 +756,4 @@ Pour plus d'informations techniques :
 
 ---
 
-*Dernière mise à jour : 25 octobre 2025*
+*Dernière mise à jour : 26 octobre 2025*
