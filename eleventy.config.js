@@ -4,6 +4,7 @@ export default function(eleventyConfig) {
     // Copier les assets
     eleventyConfig.addPassthroughCopy("./src/assets");
     eleventyConfig.addPassthroughCopy("./src/robots.txt");
+    eleventyConfig.addPassthroughCopy({ "src/site.webmanifest": "site.webmanifest" });
     
     // Watch CSS files for changes
     eleventyConfig.addWatchTarget("./src/css/**/*.css");
