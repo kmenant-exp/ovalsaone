@@ -200,8 +200,8 @@
         max-width: 90%;
         width: min(100%, 420px);
         padding: var(--spacing-5) var(--spacing-4);
-        background: rgba(0, 0, 0, 0.55);
-        backdrop-filter: blur(8px);
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(4px);
         margin: 0 auto;
     }
     
