@@ -39,7 +39,7 @@
 
 .navbar.scrolled {
     padding: var(--spacing-2) 0;
-    background: rgba(10, 37, 72, 0.95); /* Utilisant la nouvelle couleur navy */
+    /*background: rgba(10, 37, 72, 0.95);  Utilisant la nouvelle couleur navy */
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
     border-bottom: 2px solid rgba(243, 167, 18, 0.7); /* Bordure dorée au scroll */
 }
@@ -308,4 +308,8 @@
         padding: var(--spacing-2) 0;
     }
     
+    .navbar .nav-logo img {
+    width: 32px;
+    height: 32px;
+}
 }

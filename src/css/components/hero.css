@@ -186,7 +186,7 @@
 /* Responsive pour la section hero principale */
 @media (max-width: 768px) {
     .hero {
-        height: auto;
+        /* height: auto; */
         min-height: 100vh;
         background-attachment: scroll; /* Le JS mobile gère le parallax, on force scroll pour compatibilité */
         align-items: center;
