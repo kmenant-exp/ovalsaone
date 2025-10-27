@@ -136,6 +136,21 @@ title: "default"
             </div>
         </nav>
         {{ content | safe }}
+
+        <nav class="mobile-bottom-nav" aria-label="Navigation principale mobile">
+            <a href="/evenements" class="mobile-bottom-nav__link{% if page.url == "/evenements/" %} is-active{% endif %}" aria-label="Calendrier"{% if page.url == "/evenements/" %} aria-current="page"{% endif %}>
+                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                <span>Calendrier</span>
+            </a>
+            <a href="/" class="mobile-bottom-nav__link mobile-bottom-nav__link--center{% if page.url == "/" %} is-active{% endif %}" aria-label="Accueil"{% if page.url == "/" %} aria-current="page"{% endif %}>
+                <i class="fas fa-home" aria-hidden="true"></i>
+                <span>Accueil</span>
+            </a>
+            <a href="/inscription" class="mobile-bottom-nav__link{% if page.url == "/inscription/" %} is-active{% endif %}" aria-label="Inscription"{% if page.url == "/inscription/" %} aria-current="page"{% endif %}>
+                <i class="fas fa-user-plus" aria-hidden="true"></i>
+                <span>Inscription</span>
+            </a>
+        </nav>
         <!-- Footer -->
         <footer class="footer">
             <div class="container">

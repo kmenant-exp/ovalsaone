@@ -302,3 +302,10 @@
         padding-top: var(--spacing-3);
     }
 }
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: var(--spacing-2) 0;
+    }
+    
+}
