@@ -38,6 +38,8 @@
     transition: all 0.4s ease;
     border: 2px solid transparent;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .produit-featured-card::before {
@@ -73,30 +75,20 @@
 .produit-featured-card .produit-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     transition: transform 0.3s ease;
+    padding: var(--spacing-4);
 }
 
 .produit-featured-card:hover .produit-image img {
     transform: scale(1.05);
 }
 
-.produit-badge {
-    position: absolute;
-    top: var(--spacing-3);
-    right: var(--spacing-3);
-    background: var(--gold-color);
-    color: var(--white);
-    padding: var(--spacing-1) var(--spacing-3);
-    border-radius: var(--border-radius-full);
-    font-size: var(--font-size-xs);
-    font-weight: 600;
-    text-transform: uppercase;
-    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
-}
-
 .produit-featured-card .produit-info {
     padding: var(--spacing-6);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .produit-featured-card .produit-nom {
@@ -112,16 +104,17 @@
     font-size: var(--font-size-sm);
     line-height: 1.6;
     margin-bottom: var(--spacing-4);
-    height: auto;
+    flex-grow: 1;
 }
 
 .produit-featured-card .produit-details {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--spacing-3);
+    margin-bottom: var(--spacing-4);
     flex-wrap: wrap;
     gap: var(--spacing-2);
+    margin-top: auto;
 }
 
 .produit-featured-card .produit-prix {
@@ -136,13 +129,6 @@
     background: var(--light-color);
     padding: var(--spacing-1) var(--spacing-2);
     border-radius: var(--border-radius);
-}
-
-.produit-featured-card .produit-stock {
-    font-size: var(--font-size-sm);
-    color: var(--success-color);
-    margin-bottom: var(--spacing-4);
-    font-weight: 600;
 }
 
 .produit-voir-plus {

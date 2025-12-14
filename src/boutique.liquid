@@ -8,38 +8,6 @@ hero_description: Équipements et produits dérivés du club
 products_title: Nos Produits Phares
 products_description: Découvrez notre sélection de produits officiels du club. Pour voir l'intégralité de notre boutique et passer commande, visitez notre boutique en ligne.
 
-products:
-  - id: 1
-    name: "Maillot de match domicile"
-    description: "Maillot officiel du club avec logo brodé, technologie anti-transpiration"
-    price: 65
-    image: "assets/boutique/maillot-domicile.jpg"
-    sizes: ["XS", "S", "M", "L", "XL", "XXL"]
-    categories: ["Maillots", "Officiel"]
-    stock: 25
-    available: true
-    url: "https://www.rugbyclub.fr/boutique/maillot-domicile"
-  - id: 2
-    name: "Sweat-shirt à capuche"
-    description: "Sweat confortable avec logo du club, parfait pour l'échauffement"
-    price: 45
-    image: "assets/boutique/sweat-capuche.jpg"
-    sizes: ["XS", "S", "M", "L", "XL", "XXL"]
-    categories: ["Sweats", "Casual"]
-    stock: 22
-    available: true
-    url: "https://www.rugbyclub.fr/boutique/sweat-capuche"
-  - id: 3
-    name: "Casquette Oval Saône"
-    description: "Casquette ajustable aux couleurs du club"
-    price: 18
-    image: "assets/boutique/casquette.jpg"
-    sizes: ["Unique"]
-    categories: ["Accessoires", "Casual"]
-    stock: 35
-    available: true
-    url: "https://www.rugbyclub.fr/boutique/casquette"
-
 shop_title: Envie de découvrir tous nos produits ?
 shop_description: Retrouvez l'intégralité de notre boutique officielle avec tous nos équipements, produits dérivés et goodies du club.
 ---
@@ -66,11 +34,10 @@ shop_description: Retrouvez l'intégralité de notre boutique officielle avec to
         
         <!-- Produits phares -->
         <div class="produits-featured" id="produits-featured">
-            {% for product in products %}
+            {% for product in products.products %}
                 <div class="produit-featured-card">
                     <div class="produit-image">
                         <img src="{{ product.image }}" alt="{{ product.name }}" onerror="this.src='/assets/logo.png'">
-                        <div class="produit-badge">Produit phare</div>
                     </div>
                     <div class="produit-info">
                         <h3 class="produit-nom">{{ product.name }}</h3>
@@ -81,7 +48,6 @@ shop_description: Retrouvez l'intégralité de notre boutique officielle avec to
                                 <span class="produit-tailles">Tailles: {{ product.sizes | join: ', ' }}</span>
                             {% endif %}
                         </div>
-                        <div class="produit-stock">Stock: {{ product.stock }}</div>
                         <a href="{{ product.url }}" class="btn btn-primary" data-produit="{{ product.name }}">
                             <i class="fas fa-eye"></i>
                             Voir sur HelloAsso

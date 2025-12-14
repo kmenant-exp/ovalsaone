@@ -1,0 +1,84 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Porte-clés décapsuleur",
+      "description": "",
+      "price": 8,
+      "image": "https://cdn.helloasso.com/img/photos/items/shops/croppedimage-7348cd8a003d42f3937d2022f4359927.png",
+      "sizes": ["Unique"],
+      "categories": ["Accessoires"],
+      "url": "https://www.helloasso.com/associations/oval-saone/boutiques/oval-soane-boutique"
+    },
+    {
+      "id": 2,
+      "name": "Polo coupe femme (taille S à 3XL)",
+      "description": "Livraison à partir de janvier",
+      "price": 20,
+      "image": "https://cdn.helloasso.com/img/photos/items/shops/croppedimage-7922c18051e04cd38a5648949769d0d3.png",
+      "sizes": ["S", "M", "L", "XL", "XXL", "3XL"],
+      "categories": ["Polos", "Femme"],
+      "url": "https://www.helloasso.com/associations/oval-saone/boutiques/oval-soane-boutique"
+    },
+    {
+      "id": 3,
+      "name": "Polo coupe homme (taille S à 3XL)",
+      "description": "Livraison à partir de janvier",
+      "price": 20,
+      "image": "https://cdn.helloasso.com/img/photos/items/shops/croppedimage-0edee0ab1bd04433985ebb9d8dbc8ae3.png",
+      "sizes": ["S", "M", "L", "XL", "XXL", "3XL"],
+      "categories": ["Polos", "Homme"],
+      "url": "https://www.helloasso.com/associations/oval-saone/boutiques/oval-soane-boutique"
+    },
+    {
+      "id": 4,
+      "name": "Bonnet logoté (taille unique)",
+      "description": "Livraison à partir de janvier",
+      "price": 20,
+      "image": "https://cdn.helloasso.com/img/photos/items/shops/croppedimage-306cf737771b4e0eaee6ab64a0c78b0f.png",
+      "sizes": ["Unique"],
+      "categories": ["Accessoires", "Hiver"],
+      "url": "https://www.helloasso.com/associations/oval-saone/boutiques/oval-soane-boutique"
+    },
+    {
+      "id": 5,
+      "name": "Casquette logotée (taille unique)",
+      "description": "Livraison à partir de janvier",
+      "price": 20,
+      "image": "https://cdn.helloasso.com/img/photos/items/shops/croppedimage-fcfcaa1f584945f08f6c3cc0051a512b.png",
+      "sizes": ["Unique"],
+      "categories": ["Accessoires"],
+      "url": "https://www.helloasso.com/associations/oval-saone/boutiques/oval-soane-boutique"
+    },
+    {
+      "id": 6,
+      "name": "Bob logoté (taille unique)",
+      "description": "Livraison à partir de janvier",
+      "price": 20,
+      "image": "https://cdn.helloasso.com/img/photos/items/shops/croppedimage-966aed9805064ad48f63c39a8ae1c949.png",
+      "sizes": ["Unique"],
+      "categories": ["Accessoires"],
+      "url": "https://www.helloasso.com/associations/oval-saone/boutiques/oval-soane-boutique"
+    },
+    {
+      "id": 7,
+      "name": "Parapluie logoté - 66 cm de diamètre",
+      "description": "Livraison à partir de janvier",
+      "price": 25,
+      "image": "https://cdn.helloasso.com/img/photos/items/shops/croppedimage-14ea066263be48b5a6e9bddf9c149498.png",
+      "sizes": ["Unique"],
+      "categories": ["Accessoires"],
+      "url": "https://www.helloasso.com/associations/oval-saone/boutiques/oval-soane-boutique"
+    },
+    {
+      "id": 8,
+      "name": "Serviette de toilette logotée - 100x150 cm",
+      "description": "Livraison à partir de janvier",
+      "price": 35,
+      "image": "https://cdn.helloasso.com/img/photos/items/shops/croppedimage-fc5020a71cc740ad9dba5206a8da3ff6.png",
+      "sizes": ["100x150 cm"],
+      "categories": ["Accessoires"],
+      "url": "https://www.helloasso.com/associations/oval-saone/boutiques/oval-soane-boutique"
+    }
+  ]
+}
