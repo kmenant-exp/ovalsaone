@@ -93,16 +93,6 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.equipe-effectif {
-    display: inline-block;
-    background: var(--accent-color);
-    color: var(--white);
-    padding: var(--spacing-1) var(--spacing-3);
-    border-radius: var(--border-radius-full);
-    font-size: var(--font-size-sm);
-    font-weight: 600;
-}
-
 .equipe-content {
     padding: var(--spacing-6);
     padding-bottom: var(--spacing-4);
@@ -289,7 +279,7 @@
         align-items: center;
     }
     
-    .equipe-age, .equipe-effectif {
+    .equipe-age {
         width: fit-content;
     }
     

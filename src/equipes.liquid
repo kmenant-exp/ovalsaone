@@ -37,8 +37,11 @@ intro:
                     <div class="equipe-header">
                         <h3 class="equipe-title">{{ categorie.name }}</h3>
                         <div class="equipe-badges">
+                            {% if categorie.max_age != null %}
                             <span class="equipe-age">{{ categorie.min_age }}-{{ categorie.max_age }} ans</span>
-                            <span class="equipe-effectif">{{ categorie.players_count }} joueurs</span>
+                            {% else %}
+                            <span class="equipe-age">{{ categorie.min_age }} ans et +</span>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="equipe-content">

@@ -8,7 +8,7 @@ hero:
   subtitle: "Rejoignez notre club et vivez la passion du rugby"
 
 intro:
-  title: "Votre enfant rêve de jouer au rugby ??"
+  title: "Votre enfant rêve de jouer au rugby ?"
   description: "Chers parents, nous comprenons que l'envie de découvrir le rugby peut naître chez votre enfant, fille comme garçon, à tout moment de l'année. À l'École de Rugby Oval Saône, nous accueillons avec plaisir les nouveaux jeunes joueurs tout au long de la saison sportive. Notre objectif est d'offrir à votre enfant un environnement bienveillant où il pourra développer ses compétences sportives, apprendre les valeurs du rugby et se faire de nouveaux amis dans une ambiance conviviale et familiale."
   features:
     - icon: "fas fa-play-circle"
@@ -25,14 +25,26 @@ sidebar:
   tarif:
     icon: "fas fa-euro-sign"
     title: "Tarifs"
-    normal:
-      price: 190
-      title: "Tarif normal"
-      description: "Pour toutes les catégories M6 à M14"
-    baby:
-      price: 130
-      title: "Baby Rugby"
-      description: "Pour les enfants nés en 2021"
+    enfants:
+      title: "École de Rugby (Enfants)"
+      normal:
+        price: 190
+        title: "Tarif normal"
+        description: "Pour toutes les catégories M6 à M14"
+      baby:
+        price: 130
+        title: "Baby Rugby"
+        description: "Pour les enfants nés en 2021"
+    adultes:
+      title: "Rugby Touch (Adultes)"
+      touch_unique:
+        price: 110
+        title: "Licence unique"
+        description: "Pour une licence unique au sein du club"
+      touch_multiple:
+        price: 90
+        title: "Licences multiples"
+        description: "Dans le cas de licences multiples au sein du club"
     description: "Comprend : licence FFR, assurance, dotation annuelle (tenue d'entraînement : short, tee-shirt, chaussettes)"
   documents:
     icon: "fas fa-file-alt"
@@ -125,21 +137,50 @@ inscription_process:
                         <h3>{{ sidebar.tarif.title }}</h3>
                     </div>
                     <div class="info-content" id="tarifs-content">
-                        <!-- Tarif normal -->
-                        <div class="price-display">
-                            <div class="price-amount">{{ sidebar.tarif.normal.price }} €</div>
-                            <div class="price-description">{{ sidebar.tarif.normal.title }}</div>
-                            <div class="price-category">{{ sidebar.tarif.normal.description }}</div>
+                        <!-- Tarifs Enfants -->
+                        <div class="pricing-section-wrapper">
+                            <h4 class="pricing-section-title">
+                                <i class="fas fa-child"></i>{{ sidebar.tarif.enfants.title }}
+                            </h4>
+                            
+                            <!-- Tarif normal -->
+                            <div class="price-display">
+                                <div class="price-amount">{{ sidebar.tarif.enfants.normal.price }} €</div>
+                                <div class="price-description">{{ sidebar.tarif.enfants.normal.title }}</div>
+                                <div class="price-category">{{ sidebar.tarif.enfants.normal.description }}</div>
+                            </div>
+                            
+                            <!-- Tarif Baby Rugby -->
+                            <div class="price-display">
+                                <div class="price-amount">{{ sidebar.tarif.enfants.baby.price }} €</div>
+                                <div class="price-description">{{ sidebar.tarif.enfants.baby.title }}</div>
+                                <div class="price-category">{{ sidebar.tarif.enfants.baby.description }}</div>
+                            </div>
                         </div>
                         
-                        <!-- Tarif Baby Rugby -->
-                        <div class="price-display" style="margin-top: 1.5rem;">
-                            <div class="price-amount">{{ sidebar.tarif.baby.price }} €</div>
-                            <div class="price-description">{{ sidebar.tarif.baby.title }}</div>
-                            <div class="price-category">{{ sidebar.tarif.baby.description }}</div>
+                        <!-- Tarifs Adultes -->
+                        <div>
+                            <h4 class="pricing-section-title">
+                                <i class="fas fa-user-friends"></i>{{ sidebar.tarif.adultes.title }}
+                            </h4>
+                            
+                            <!-- Tarif Rugby Touch - Licence unique -->
+                            <div class="price-display">
+                                <div class="price-amount">{{ sidebar.tarif.adultes.touch_unique.price }} €</div>
+                                <div class="price-description">{{ sidebar.tarif.adultes.touch_unique.title }}</div>
+                                <div class="price-category">{{ sidebar.tarif.adultes.touch_unique.description }}</div>
+                            </div>
+                            
+                            <!-- Tarif Rugby Touch - Licences multiples -->
+                            <div class="price-display">
+                                <div class="price-amount">{{ sidebar.tarif.adultes.touch_multiple.price }} €</div>
+                                <div class="price-description">{{ sidebar.tarif.adultes.touch_multiple.title }}</div>
+                                <div class="price-category">{{ sidebar.tarif.adultes.touch_multiple.description }}</div>
+                            </div>
                         </div>
                         
-                        <p style="color: var(--gray-600); font-size: 0.875rem; text-align: center; line-height: 1.5; margin-top: 1rem;">
+                        <p class="pricing-info-text">
+                            <i class="fas fa-info-circle"></i>
                             {{ sidebar.tarif.description }}
                         </p>
                     </div>

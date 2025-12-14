@@ -5,7 +5,6 @@
         "description": "École de rugby pour les moins de 6 ans",
         "min_age": 3,
         "max_age": 5,
-        "players_count": 15,
         "coaches": [
             {
                 "name": "Angélique Gomez"
@@ -27,7 +26,6 @@
         "description": "École de rugby pour les moins de 8 ans",
         "min_age": 6,
         "max_age": 7,
-        "players_count": 18,
         "coaches": [
             {
                 "name": "Mathieu Charignon"
@@ -49,7 +47,6 @@
         "description": "École de rugby pour les moins de 10 ans",
         "min_age": 8,
         "max_age": 9,
-        "players_count": 22,
         "coaches": [
             {
                 "name": "Alexandre Deniau"
@@ -81,7 +78,6 @@
         "description": "École de rugby pour les moins de 12 ans",
         "min_age": 10,
         "max_age": 11,
-        "players_count": 25,
         "coaches": [
             {
                 "name": "Kevyn Johannes"
@@ -114,7 +110,6 @@
         "description": "École de rugby pour les moins de 14 ans",
         "min_age": 12,
         "max_age": 13,
-        "players_count": 20,
         "coaches": [
             {
                 "name": "Nicolas Hayart"
@@ -131,6 +126,23 @@
             {
                 "day": "Vendredi",
                 "time": "18h00-19h30"
+            }
+        ]
+    },
+    {
+        "name": "Rugby Touch",
+        "description": "Rugby Touch pour adultes - Une version dynamique et sans plaquage",
+        "min_age": 18,
+        "max_age": null,
+        "coaches": [
+            {
+                "name": "Franck Gomez"
+            }
+        ],
+        "schedule": [
+            {
+                "day": "Vendredi",
+                "time": "18h30-20h30"
             }
         ]
     }
