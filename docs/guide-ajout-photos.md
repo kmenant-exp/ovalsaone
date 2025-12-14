@@ -161,13 +161,21 @@ https://stovalsaoneprd.blob.core.windows.net/medias/match-u12-20251220
 
 **Notez cette URL également.**
 
-### 4.3 Modifier le fichier de configuration
+### 4.3 Modifier le fichier de configuration sur GitHub
 
-1. **Ouvrez Visual Studio Code** (ou votre éditeur de code)
+1. **Allez sur GitHub** dans votre navigateur : [https://github.com/laetitia-gente/ovalsaone](https://github.com/laetitia-gente/ovalsaone)
 
-2. Ouvrez le fichier : `src/_data/gallery.json`
+2. **Connectez-vous** à votre compte GitHub (si ce n'est pas déjà fait)
 
-3. Ce fichier contient une liste d'albums. Vous allez **ajouter le vôtre**.
+3. **Naviguez** vers le fichier à modifier :
+   - Cliquez sur le dossier **`src`**
+   - Cliquez sur le dossier **`_data`**
+   - Cliquez sur le fichier **`gallery.json`**
+
+4. **Activez le mode édition** :
+   - Cliquez sur l'icône **crayon** ✏️ en haut à droite du fichier (tooltip : "Edit this file")
+
+5. Le fichier contient une liste d'albums. Vous allez **ajouter le vôtre**.
 
 **Structure actuelle :**
 ```json
@@ -251,52 +259,57 @@ Pour votre nouvel album, remplissez :
 - **Guillemets :** Tous les textes doivent être entre guillemets `""`
 - **Accolades :** Vérifiez que toutes les `{` sont fermées par `}`
 
-💡 **Astuce :** VS Code souligne automatiquement les erreurs de syntaxe en rouge.
+💡 **Astuce :** GitHub affiche le fichier avec coloration syntaxique qui aide à repérer les erreurs.
 
-### 4.7 Enregistrer le fichier
+### 4.7 Valider les modifications
 
-1. **Enregistrez** le fichier : `Ctrl+S` (Windows) ou `Cmd+S` (Mac)
+1. **Descendez** en bas de la page GitHub
+
+2. Dans la section **"Commit changes"** :
+   - **Titre du commit** : Entrez un message court décrivant votre ajout
+     - Exemple : `Ajout galerie : Match U12 contre Villefranche`
+   - **Description** (optionnel) : Vous pouvez ajouter plus de détails si nécessaire
+
+3. Laissez l'option **"Commit directly to the `main` branch"** sélectionnée
+
+4. Cliquez sur le bouton vert **"Commit changes"**
 
 ---
 
-## 🚀 Étape 5 : Publier vos modifications
+## 🚀 Étape 5 : Vérifier la publication
 
-### 5.1 Reconstruire le site
+### 5.1 Déploiement automatique
 
-Dans le terminal de VS Code :
+Une fois que vous avez cliqué sur "Commit changes", le site se met à jour **automatiquement**.
 
-```bash
-npm run build
-```
+⏱️ **Temps d'attente :** 2 à 5 minutes
 
-Attendez que la commande se termine (environ 5-10 secondes).
+### 5.2 Suivre le déploiement (optionnel)
 
-### 5.2 Tester en local (optionnel)
+Pour voir la progression du déploiement :
 
-Pour vérifier que tout fonctionne avant de publier :
+1. Sur la page GitHub du projet, cliquez sur l'onglet **"Actions"** (en haut)
 
-```bash
-npm run start
-```
+2. Vous verrez une ligne avec votre message de commit et une icône :
+   - 🟡 **Point orange** = En cours de déploiement
+   - ✅ **Coche verte** = Déploiement réussi
+   - ❌ **Croix rouge** = Erreur (contactez l'administrateur)
 
-Ouvrez votre navigateur à l'adresse : `http://localhost:8002`
+3. Cliquez sur la ligne pour voir les détails du déploiement
 
-Vérifiez que :
-- ✅ Votre nouvel album apparaît dans la galerie
-- ✅ La photo principale s'affiche correctement
-- ✅ En cliquant sur l'album, toutes vos photos se chargent dans le carrousel
+### 5.3 Vérifier sur le site
 
-### 5.3 Publier sur le site
+Une fois le déploiement terminé (coche verte) :
 
-Une fois que tout fonctionne, vous pouvez publier vos modifications :
+1. **Ouvrez** le site dans votre navigateur : [https://ovalsaone.com](https://ovalsaone.com)
 
-```bash
-git add .
-git commit -m "Ajout galerie : Match U12 contre Villefranche"
-git push
-```
+2. **Rafraîchissez** la page (F5 ou Ctrl+R)
 
-Le site se mettra à jour automatiquement en quelques minutes.
+3. **Vérifiez** que :
+   - ✅ Votre nouvel album apparaît dans la galerie
+   - ✅ La photo principale s'affiche correctement
+   - ✅ En cliquant sur l'album, toutes vos photos se chargent dans le carrousel
+   - ✅ Le filtre de catégorie fonctionne correctement
 
 ---
 
@@ -322,19 +335,23 @@ Choisissez la catégorie qui correspond le mieux à votre album :
 2. Les photos ont bien été téléchargées dans Azure (vérifiez dans Storage Explorer)
 3. Le fichier `gallery.json` n'a pas d'erreur de syntaxe (pas de virgule manquante)
 
-### ❌ Erreur "Cannot read property..."
+### ❌ Erreur lors du commit sur GitHub
+
+**Message :** "Invalid JSON" ou erreur de syntaxe
 
 **Solution :** Il y a probablement une erreur de syntaxe dans `gallery.json`
 - Vérifiez que chaque `{` a son `}`
 - Vérifiez les virgules entre les albums
 - Vérifiez que tous les champs ont des guillemets
+- Utilisez un validateur JSON en ligne : [https://jsonlint.com](https://jsonlint.com)
 
 ### ❌ Le site ne se met pas à jour
 
 **Solution :**
-1. Vérifiez que vous avez bien fait `npm run build`
-2. Vérifiez que vous avez bien fait `git push`
-3. Attendez 2-3 minutes que le déploiement automatique se termine
+1. Vérifiez que le commit a bien été effectué (visible dans l'historique GitHub)
+2. Vérifiez l'onglet "Actions" sur GitHub pour voir si le déploiement a réussi
+3. Attendez 3-5 minutes que le déploiement automatique se termine
+4. Videz le cache de votre navigateur (Ctrl+F5 ou Cmd+Shift+R)
 
 ### ❌ "Accès refusé" dans Azure Storage Explorer
 
@@ -348,10 +365,12 @@ Si vous rencontrez un problème :
 
 1. **Vérifiez** que vous avez suivi toutes les étapes dans l'ordre
 2. **Relisez** la section "Problèmes courants" ci-dessus
-3. **Contactez** l'administrateur du site en fournissant :
+3. **Vérifiez** l'onglet "Actions" sur GitHub pour voir les erreurs de déploiement
+4. **Contactez** l'administrateur du site en fournissant :
    - Le message d'erreur exact (si affiché)
    - L'étape où vous êtes bloqué
    - Une capture d'écran si possible
+   - Le lien du commit GitHub si disponible
 
 ---
 
@@ -364,12 +383,12 @@ Avant de publier, vérifiez que :
 - [ ] Les photos sont téléchargées dans Azure Storage
 - [ ] L'URL de la photo principale est correcte
 - [ ] L'URL du dossier est correcte (sans nom de fichier)
-- [ ] Vous avez ajouté l'album dans `gallery.json`
+- [ ] Vous avez modifié `gallery.json` sur GitHub
 - [ ] Tous les champs sont remplis (titre, description, date, etc.)
-- [ ] La syntaxe JSON est correcte (pas d'erreur rouge dans VS Code)
-- [ ] Vous avez testé en local avec `npm run start`
-- [ ] Vous avez fait `npm run build`
-- [ ] Vous avez fait `git push`
+- [ ] La syntaxe JSON est correcte (pas d'erreur visible)
+- [ ] Vous avez fait "Commit changes" sur GitHub
+- [ ] Le déploiement automatique est terminé (coche verte dans Actions)
+- [ ] Vous avez vérifié le site en ligne
 
 ---
 
@@ -380,11 +399,17 @@ Vous savez maintenant comment ajouter des photos à la galerie du site !
 **Récapitulatif :**
 1. ✅ Préparer vos photos
 2. ✅ Se connecter à Azure Storage Explorer
-3. ✅ Télécharger vos photos
-4. ✅ Modifier `gallery.json`
-5. ✅ Publier
+3. ✅ Télécharger vos photos dans Azure
+4. ✅ Modifier `gallery.json` sur GitHub
+5. ✅ Vérifier la publication automatique
 
 **Temps nécessaire :** 10-15 minutes une fois que vous maîtrisez le processus.
+
+**Avantages de cette méthode :**
+- 🌐 Modifiable depuis n'importe quel ordinateur avec un navigateur
+- 🔒 Historique complet des modifications sur GitHub
+- 🚀 Déploiement automatique sans commandes techniques
+- ✅ Pas besoin d'installer Git ou VS Code localement
 
 ---
 
