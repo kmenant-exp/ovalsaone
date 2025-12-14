@@ -12,7 +12,7 @@
     },
     {
       "id": 2,
-      "name": "Polo coupe femme (taille S à 3XL)",
+      "name": "Polo coupe femme",
       "description": "Livraison à partir de janvier",
       "price": 20,
       "image": "https://cdn.helloasso.com/img/photos/items/shops/croppedimage-7922c18051e04cd38a5648949769d0d3.png",
@@ -22,7 +22,7 @@
     },
     {
       "id": 3,
-      "name": "Polo coupe homme (taille S à 3XL)",
+      "name": "Polo coupe homme",
       "description": "Livraison à partir de janvier",
       "price": 20,
       "image": "https://cdn.helloasso.com/img/photos/items/shops/croppedimage-0edee0ab1bd04433985ebb9d8dbc8ae3.png",
@@ -32,7 +32,7 @@
     },
     {
       "id": 4,
-      "name": "Bonnet logoté (taille unique)",
+      "name": "Bonnet logoté",
       "description": "Livraison à partir de janvier",
       "price": 20,
       "image": "https://cdn.helloasso.com/img/photos/items/shops/croppedimage-306cf737771b4e0eaee6ab64a0c78b0f.png",
@@ -42,7 +42,7 @@
     },
     {
       "id": 5,
-      "name": "Casquette logotée (taille unique)",
+      "name": "Casquette logotée",
       "description": "Livraison à partir de janvier",
       "price": 20,
       "image": "https://cdn.helloasso.com/img/photos/items/shops/croppedimage-fcfcaa1f584945f08f6c3cc0051a512b.png",
@@ -52,7 +52,7 @@
     },
     {
       "id": 6,
-      "name": "Bob logoté (taille unique)",
+      "name": "Bob logoté",
       "description": "Livraison à partir de janvier",
       "price": 20,
       "image": "https://cdn.helloasso.com/img/photos/items/shops/croppedimage-966aed9805064ad48f63c39a8ae1c949.png",
@@ -72,7 +72,7 @@
     },
     {
       "id": 8,
-      "name": "Serviette de toilette logotée - 100x150 cm",
+      "name": "Serviette de toilette logotée",
       "description": "Livraison à partir de janvier",
       "price": 35,
       "image": "https://cdn.helloasso.com/img/photos/items/shops/croppedimage-fc5020a71cc740ad9dba5206a8da3ff6.png",
