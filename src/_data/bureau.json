@@ -4,7 +4,7 @@
     "nom": "DENIAU",
     "prenom": "Alexandre",
     "poste": "Président",
-    "description": "Avec son énergie communicative et sa vision claire, Alexandre insuffle un nouvel élan à notre club. Passionné de rugby depuis son plus jeune âge, il met son expérience et son dynamisme au service du développement de notre école. Toujours à l'écoute des membres et des parents, il porte haut les valeurs d'engagement et de respect qui font la richesse de notre sport.",
+    "description": "",
     "photo": "/assets/bureau/default.jpg"
   },
   {
@@ -12,7 +12,7 @@
     "nom": "CORRÉIA",
     "prenom": "Raphael",
     "poste": "Vice-Président",
-    "description": "Raphael apporte son expertise technique et sa passion du rugby à notre école. Son approche pédagogique innovante et son sens de l'organisation contribuent grandement à la qualité de notre enseignement sportif. Il supervise particulièrement les relations avec les autres clubs de la région.",
+    "description": "",
     "photo": "/assets/bureau/default.jpg"
   },
   {
@@ -20,7 +20,7 @@
     "nom": "HAYART",
     "prenom": "Nicolas",
     "poste": "Vice-Président",
-    "description": "Fort de son expérience dans le milieu associatif, Nicolas coordonne le développement des projets sportifs et la formation des jeunes talents. Sa capacité d'analyse et son esprit d'équipe font de lui un pilier essentiel dans la structure de notre club.",
+    "description": "",
     "photo": "/assets/bureau/default.jpg"
   },
   {
@@ -28,7 +28,7 @@
     "nom": "LEFÈBVRE",
     "prenom": "Guillaume",
     "poste": "Vice-Président & Commission Partenariat",
-    "description": "Double casquette pour Guillaume qui met à profit son réseau et son expertise en communication pour développer notre club. Chargé des relations extérieures, il travaille activement à tisser des liens solides avec nos partenaires et à trouver de nouveaux soutiens pour faire grandir notre école de rugby.",
+    "description": "",
     "photo": "/assets/bureau/default.jpg"
   },
   {
@@ -36,7 +36,7 @@
     "nom": "BRÉGEON",
     "prenom": "Julie",
     "poste": "Secrétaire",
-    "description": "Julie assure avec rigueur et efficacité la gestion administrative de notre association. Sa méthodologie et son sens de l'organisation permettent un suivi impeccable des dossiers et des licences. Toujours disponible pour répondre aux questions des parents et des membres.",
+    "description": "",
     "photo": "/assets/bureau/default.jpg"
   },
   {
@@ -44,7 +44,7 @@
     "nom": "CHARIGNON",
     "prenom": "Morgane",
     "poste": "Secrétaire",
-    "description": "Précise et méthodique, Morgane gère avec brio la correspondance du club et l'organisation des événements. Sa maîtrise des outils numériques a permis de moderniser notre système d'archivage et de communication interne.",
+    "description": "",
     "photo": "/assets/bureau/default.jpg"
   },
   {
@@ -52,7 +52,7 @@
     "nom": "DENIAU",
     "prenom": "Amélie",
     "poste": "Trésorière",
-    "description": "Experte en gestion financière, Amélie veille à l'équilibre budgétaire de notre association avec précision et transparence. Sa vision à long terme et sa rigueur permettent d'optimiser nos ressources pour offrir le meilleur environnement possible à nos jeunes rugbymen.",
+    "description": "",
     "photo": "/assets/bureau/default.jpg"
   },
   {
@@ -60,7 +60,7 @@
     "nom": "MOREL",
     "prenom": "Olivier",
     "poste": "Trésorier",
-    "description": "Avec son background en comptabilité, Olivier apporte son expertise pour la gestion quotidienne des finances du club. Il supervise les investissements en équipements et s'assure que chaque euro dépensé contribue au développement de nos jeunes sportifs.",
+    "description": "",
     "photo": "/assets/bureau/default.jpg"
   },
   {
@@ -68,7 +68,7 @@
     "nom": "GALLAY",
     "prenom": "Yann",
     "poste": "Coordination Sportive",
-    "description": "Ancien joueur de haut niveau, Yann met son expérience au service de notre école de rugby. Il coordonne les différentes catégories pour assurer une progression cohérente de nos jeunes talents et veille à la qualité de l'encadrement technique sur l'ensemble des sections.",
+    "description": "",
     "photo": "/assets/bureau/default.jpg"
   },
   {
@@ -76,7 +76,7 @@
     "nom": "SPICA",
     "prenom": "Anaïs",
     "poste": "Commission Communication",
-    "description": "Créative et dynamique, Anaïs assure la visibilité de notre club sur tous les canaux de communication. Réseaux sociaux, site web, relations presse... Elle met ses compétences au service du rayonnement de notre école de rugby dans la région.",
+    "description": "",
     "photo": "/assets/bureau/default.jpg"
   },
   {
@@ -84,7 +84,7 @@
     "nom": "RONDEPIERRE",
     "prenom": "Elioth",
     "poste": "Commission Communication",
-    "description": "Expert en nouvelles technologies, Elioth modernise notre stratégie digitale et apporte un regard neuf sur notre communication. Son approche innovante permet de toucher un public plus large et de valoriser les actions de notre club auprès de tous nos interlocuteurs.",
+    "description": "",
     "photo": "/assets/bureau/default.jpg"
   },
   {

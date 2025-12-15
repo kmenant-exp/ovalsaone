@@ -6,8 +6,8 @@ description: "École de rugby familiale et conviviale à Trévoux. Formation rug
 histoire:
     description: "Notre école de rugby a vu le jour en 2025, portée par une idée simple mais forte : <b>offrir aux enfants un espace où le sport est synonyme de joie, de partage et de bienveillance.</b>"
     annee_creation: 2025
-    licencies: 180
-    equipes: 8
+    licencies: 89
+    equipes: 6
     sections:
       - titre: "Un club ouvert à tous"
         contenu: "Ici, tout le monde est le bienvenu. Peu importe l'âge, le niveau ou l'expérience : <b>chaque enfant a sa place sur le terrain</b>. Pas de sélection, pas de pression — juste l'envie de jouer, de progresser et de s'amuser ensemble."
@@ -92,7 +92,9 @@ histoire:
                         <span class="bureau-poste">{{ membre.poste }}</span>
                         <div class="bureau-description-container">
                             <p class="bureau-description truncated">{{ membre.description }}</p>
+                            {% if membre.description and membre.description != '' %}
                             <button class="btn-voir-plus">Voir plus</button>
+                            {% endif %}
                         </div>
                     </div>
                 </div>  

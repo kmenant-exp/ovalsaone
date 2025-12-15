@@ -5,6 +5,7 @@
         "description": "École de rugby pour les moins de 6 ans",
         "min_age": 3,
         "max_age": 5,
+        "players": 6,
         "coaches": [
             {
                 "name": "Angélique Gomez"
@@ -26,6 +27,7 @@
         "description": "École de rugby pour les moins de 8 ans",
         "min_age": 6,
         "max_age": 7,
+        "players": 17,
         "coaches": [
             {
                 "name": "Mathieu Charignon"
@@ -47,6 +49,7 @@
         "description": "École de rugby pour les moins de 10 ans",
         "min_age": 8,
         "max_age": 9,
+        "players": 17,
         "coaches": [
             {
                 "name": "Alexandre Deniau"
@@ -78,6 +81,7 @@
         "description": "École de rugby pour les moins de 12 ans",
         "min_age": 10,
         "max_age": 11,
+        "players": 18,
         "coaches": [
             {
                 "name": "Kevyn Johannes"
@@ -110,6 +114,7 @@
         "description": "École de rugby pour les moins de 14 ans",
         "min_age": 12,
         "max_age": 13,
+        "players": 7,
         "coaches": [
             {
                 "name": "Nicolas Hayart"

@@ -42,6 +42,9 @@ intro:
                             {% else %}
                             <span class="equipe-age">{{ categorie.min_age }} ans et +</span>
                             {% endif %}
+                            {% if categorie.players %}
+                            <span class="equipe-players">{{ categorie.players }} joueurs</span>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="equipe-content">
