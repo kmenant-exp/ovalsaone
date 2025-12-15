@@ -43,12 +43,11 @@ sponsors_description: "Nos partenaires sont essentiels au développement de notr
             </div>
         </div>
         <div class="actualites-grid" id="actualites-grid">
-            <!-- Les 3 premières actualités futures (visibles par défaut) -->
-            {% assign currentDate = 'now' | date: '%Y-%m-%d' %}
-            {% assign futureActualites = actualites | where_exp: "item", "item.date >= currentDate" %}
+            <!-- Affiche les 3 actualités les plus récentes, quelle que soit leur date (passée ou future) -->
+            {% assign sortedActualites = actualites | sort: 'date' | reverse %}
             
-            {% if futureActualites.size > 0 %}
-            {% for actualite in futureActualites limit:3 %}
+            {% if sortedActualites.size > 0 %}
+            {% for actualite in sortedActualites limit:3 %}
                 <article class="actualite-card fade-in-up">
                     <div class="actualite-image">
                         <img src="{{ actualite.image }}" alt="{{ actualite.titre }}" loading="lazy">
@@ -72,7 +71,7 @@ sponsors_description: "Nos partenaires sont essentiels au développement de notr
             
             <!-- Les actualités supplémentaires (masquées par défaut) -->
             <div id="actualites-supplementaires" class="actualites-supplementaires" style="display: none;">
-                {% for actualite in futureActualites offset:3 %}
+                {% for actualite in sortedActualites offset:3 %}
                     <article class="actualite-card fade-in-up">
                         <div class="actualite-image">
                             <img src="{{ actualite.image }}" alt="{{ actualite.titre }}" loading="lazy">
@@ -96,14 +95,14 @@ sponsors_description: "Nos partenaires sont essentiels au développement de notr
             </div>
             {% else %}
             <div class="no-actualites">
-                <p>Aucun événement à venir pour le moment. Revenez bientôt pour découvrir nos prochaines actualités !</p>
+                <p>Aucune actualité pour le moment. Revenez bientôt pour découvrir nos prochaines actualités !</p>
             </div>
             {% endif %}
         </div>
         
         <!-- Boutons d'actions -->
         <div class="actualites-actions">
-            {% if futureActualites.size > 3 %}
+            {% if sortedActualites.size > 3 %}
             <button id="btn-voir-plus" class="btn btn-outline-primary btn-large">
                 <span class="btn-text">Voir plus d'actualités</span>
                 <i class="fas fa-chevron-down btn-icon"></i>

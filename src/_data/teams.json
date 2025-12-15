@@ -39,7 +39,7 @@
         "schedule": [
             {
                 "day": "Samedi",
-                "time": "10h00-11h00"
+                "time": "10h00-11h30"
             }
         ]
     },
@@ -67,11 +67,11 @@
         "schedule": [
             {
                 "day": "Mercredi",
-                "time": "18h00-19h00"
+                "time": "18h00-19h30"
             },
             {
                 "day": "Samedi",
-                "time": "10h00-11h30"
+                "time": "10h00-12h00"
             }
         ]
     },
