@@ -1,14 +1,5 @@
 /* Page d'inscription moderne - Styles simplifiés et épurés */
 
-/* Section d'introduction */
-.inscription-intro {
-    background: var(--white);
-    padding: 1rem 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-
-
 /* Features grid */
 .intro-features {
     display: grid;
@@ -548,11 +539,6 @@
     
     .inscription-sidebar {
         grid-template-columns: 1fr;
-    }
-    
-    /* Responsive pour la section d'introduction */
-    .inscription-intro {
-        padding: 3rem 0;
     }
 
     .intro-features {
