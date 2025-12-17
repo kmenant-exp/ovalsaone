@@ -1,32 +1,6 @@
 /* Styles spécifiques à la page École */
 
 /* Section histoire de l'école */
-.histoire-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: var(--spacing-4);
-    margin: var(--spacing-6) 0 var(--spacing-8) 0;
-}
-
-.stat-item {
-    text-align: center;
-    border: 1px solid var(--gray-200);
-    padding: var(--spacing-4);
-}
-
-.stat-number {
-    display: block;
-    font-size: var(--font-size-3xl);
-    font-weight: 700;
-    margin-bottom: var(--spacing-1);
-    color: var(--primary-color);
-}
-
-.stat-label {
-    font-size: var(--font-size-sm);
-    opacity: 0.9;
-}
-
 .histoire-titres {
     background: rgba(143, 188, 143, 0.1);
     padding: var(--spacing-4);
@@ -365,5 +339,98 @@
     
     .histoire-section ul {
         padding-left: var(--spacing-4);
+    }
+}
+/* Section Stats GEO */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--spacing-6);
+    margin: var(--spacing-8) 0 var(--spacing-6) 0;
+}
+
+.stat-card {
+    background: white;
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-6);
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-3);
+}
+
+.stat-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1;
+}
+
+.stats-text-geo {
+    background: white;
+    border-left: 4px solid var(--primary-color);
+    padding: var(--spacing-6);
+    border-radius: var(--border-radius);
+    margin-top: var(--spacing-6);
+}
+
+.stats-text-geo ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--spacing-3);
+}
+
+.stats-text-geo li {
+    padding-left: var(--spacing-4);
+    position: relative;
+    line-height: 1.6;
+}
+
+.stats-text-geo li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.stats-text-geo strong {
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-4);
+    }
+    
+    .stat-card {
+        padding: var(--spacing-4);
+    }
+    
+    .stat-icon {
+        font-size: 2rem;
+    }
+    
+    .stat-value {
+        font-size: 2rem;
     }
 }

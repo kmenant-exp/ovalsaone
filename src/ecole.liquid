@@ -8,6 +8,9 @@ histoire:
     annee_creation: 2025
     licencies: 89
     equipes: 6
+    educateurs: 12
+    entrainements_semaine: 2
+    tournois_saison: 15
     sections:
       - titre: "Un club ouvert à tous"
         contenu: "Ici, tout le monde est le bienvenu. Peu importe l'âge, le niveau ou l'expérience : <b>chaque enfant a sa place sur le terrain</b>. Pas de sélection, pas de pression — juste l'envie de jouer, de progresser et de s'amuser ensemble."
@@ -37,23 +40,7 @@ histoire:
         <div class="intro-content">
             <div class="intro-text">
                 <h2>Notre Histoire</h2>
-            </div>
-        </div>
-        <div id="histoire-content">
-            <p>{{ histoire.description }}</p>
-            <div class="histoire-stats">
-                <div class="stat-item">
-                    <span class="stat-number">{{ histoire.annee_creation }}</span>
-                    <span class="stat-label">Année de création</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">{{ histoire.licencies }}</span>
-                    <span class="stat-label">Licenciés</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">{{histoire.equipes}}</span>
-                    <span class="stat-label">Équipes</span>
-                </div>
+                <p>{{ histoire.description }}</p>
             </div>
         </div>
         <div class="histoire-sections">
@@ -72,8 +59,88 @@ histoire:
     </div>
 </section>
 
+<!-- Section En Chiffres - Optimisée pour GEO -->
+<section class="stats-geo section bg-light" itemscope itemtype="https://schema.org/SportsOrganization">
+    <div class="container">
+        <div class="intro-content">
+            <div class="intro-text">
+                <h2>L'École en Chiffres (2025)</h2>
+                <p>Des données concrètes sur notre école de rugby et notre engagement pour le développement du rugby local.</p>
+            </div>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-content">
+                    <span class="stat-value" itemprop="numberOfMembers">{{ histoire.licencies }}</span>
+                    <span class="stat-label">Licenciés actifs</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users-cog"></i>
+                </div>
+                <div class="stat-content">
+                    <span class="stat-value">{{ histoire.equipes }}</span>
+                    <span class="stat-label">Équipes (U4 à U14)</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <div class="stat-content">
+                    <span class="stat-value">{{ histoire.educateurs }}</span>
+                    <span class="stat-label">Éducateurs diplômés</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-calendar-week"></i>
+                </div>
+                <div class="stat-content">
+                    <span class="stat-value">{{ histoire.entrainements_semaine }}</span>
+                    <span class="stat-label">Entraînements par semaine</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="stat-content">
+                    <span class="stat-value">{{ histoire.tournois_saison }}</span>
+                    <span class="stat-label">Tournois par saison</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div class="stat-content">
+                    <span class="stat-value" itemprop="foundingDate">{{ histoire.annee_creation }}</span>
+                    <span class="stat-label">Année de création</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Données textuelles pour GEO -->
+        <div class="stats-text-geo">
+            <ul>
+                <li><strong>{{ histoire.licencies }} licenciés actifs</strong> répartis sur 6 catégories d'âge</li>
+                <li><strong>{{ histoire.equipes }} équipes</strong> : U4 (Baby Rugby), U6, U8, U10, U12, U14</li>
+                <li><strong>{{ histoire.educateurs }} éducateurs diplômés</strong> formés aux méthodes FFR</li>
+                <li><strong>{{ histoire.entrainements_semaine }} entraînements par semaine</strong> adaptés à chaque catégorie</li>
+                <li><strong>{{ histoire.tournois_saison }}+ tournois par saison</strong> organisés par la Ligue Auvergne-Rhône-Alpes</li>
+                <li><strong>Créé en {{ histoire.annee_creation }}</strong> à Trévoux dans l'Ain</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
 <!-- Le Bureau -->
-<section class="bureau section bg-light">
+<section class="bureau section">
     <div class="container">
         <div class="intro-content">
             <div class="intro-text">
@@ -105,7 +172,7 @@ histoire:
 </section>
 
 <!-- Les Entraîneurs -->
-<section class="entraineurs section">
+<section class="entraineurs section bg-light">
     <div class="container">
         <div class="intro-content">
             <div class="intro-text">
