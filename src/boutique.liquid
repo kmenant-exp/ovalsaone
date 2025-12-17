@@ -5,7 +5,7 @@ description: Découvrez notre boutique officielle avec tous les équipements et 
 
 hero_title: Notre Boutique
 hero_description: Équipements et produits dérivés du club
-products_title: Nos Produits Phares
+products_title: Nos Produits
 products_description: Découvrez notre sélection de produits officiels du club. Pour voir l'intégralité de notre boutique et passer commande, visitez notre boutique en ligne.
 
 shop_title: Envie de découvrir tous nos produits ?
@@ -48,7 +48,7 @@ shop_description: Retrouvez l'intégralité de notre boutique officielle avec to
                                 <span class="produit-tailles">Tailles: {{ product.sizes | join: ', ' }}</span>
                             {% endif %}
                         </div>
-                        <a href="{{ product.url }}" class="btn btn-primary" data-produit="{{ product.name }}">
+                        <a href="{{ product.url }}" target="_blank" class="btn btn-primary" data-produit="{{ product.name }}">
                             <i class="fas fa-eye"></i>
                             Voir sur HelloAsso
                         </a>
@@ -61,7 +61,7 @@ shop_description: Retrouvez l'intégralité de notre boutique officielle avec to
         <div class="boutique-cta">
             <h3>{{ shop_title }}</h3>
             <p>{{ shop_description }}</p>
-            <a href="https://helloasso.com/associations/rugby-club" 
+            <a href="https://www.helloasso.com/associations/oval-saone/boutiques/oval-soane-boutique" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 class="btn btn-primary btn-large boutique-cta-btn">
