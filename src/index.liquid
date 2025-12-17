@@ -94,7 +94,8 @@ sponsors_description: "Nos partenaires sont essentiels au développement de notr
                 {% endfor %}
             </div>
             {% else %}
-            <div class="no-actualites">
+            <div class="empty-content-message">
+                <i class="far fa-newspaper"></i>
                 <p>Aucune actualité pour le moment. Revenez bientôt pour découvrir nos prochaines actualités !</p>
             </div>
             {% endif %}
@@ -164,6 +165,8 @@ sponsors_description: "Nos partenaires sont essentiels au développement de notr
         <!-- Grille de photos -->
         <div class="gallery-grid" id="gallery-grid">
             {% assign sortedGallery = gallery | sort: 'date' | reverse %}
+            
+            {% if sortedGallery.size > 0 %}
             {% for photo in sortedGallery limit:6 %}
                 <article class="gallery-item fade-in-up" data-category="{{ photo.categorie }}">
                     <div class="gallery-image-container">
@@ -187,10 +190,16 @@ sponsors_description: "Nos partenaires sont essentiels au développement de notr
                     </div>
                 </article>
             {% endfor %}
+            {% else %}
+            <div class="empty-content-message">
+                <i class="far fa-images"></i>
+                <p>Aucune photo pour le moment. Revenez bientôt pour découvrir nos meilleurs moments en images !</p>
+            </div>
+            {% endif %}
         </div>
         
         <!-- Bouton voir plus -->
-        {% if gallery.size > 6 %}
+        {% if sortedGallery.size > 6 %}
         <div class="gallery-actions">
             <button id="btn-gallery-load-more" class="btn btn-outline-primary btn-large">
                 <span class="btn-text">Voir plus de photos</span>

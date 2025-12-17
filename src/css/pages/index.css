@@ -4,6 +4,32 @@
    SECTION ACTUALITÉS
    =================================== */
 
+/* Message d'absence de contenu (réutilisable pour actualités et galerie) */
+.empty-content-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: var(--spacing-10) var(--spacing-8);
+    background: linear-gradient(135deg, #f8f9ff 0%, var(--white) 100%);
+    border-radius: var(--border-radius-lg);
+    border: 2px dashed var(--gray-300);
+    margin: var(--spacing-8) 0;
+}
+
+.empty-content-message i {
+    font-size: 3rem;
+    color: var(--gray-400);
+    margin-bottom: var(--spacing-3);
+    display: block;
+}
+
+.empty-content-message p {
+    font-size: var(--font-size-lg);
+    color: var(--gray-600);
+    line-height: 1.6;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
 .actualites-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));

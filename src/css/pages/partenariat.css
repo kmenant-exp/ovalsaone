@@ -29,27 +29,10 @@
     position: relative;
 }
 
-.sponsor-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--dark-color), var(--primary-color), var(--accent-color));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-}
-
 .sponsor-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 15px 30px rgba(15, 23, 42, 0.2);
     border-color: var(--accent-color);
-}
-
-.sponsor-card:hover::before {
-    transform: scaleX(1);
 }
 
 .sponsor-logo {
@@ -235,27 +218,10 @@
     overflow: hidden;
 }
 
-.avantage-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-}
-
 .avantage-item:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(15, 23, 42, 0.15);
     border-color: var(--accent-color);
-}
-
-.avantage-item:hover::before {
-    transform: scaleX(1);
 }
 
 .avantage-icone {
