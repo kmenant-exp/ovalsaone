@@ -90,6 +90,96 @@ inscription_process:
     title: "COTISATION"
     description: "Tarif pour la saison 2025 - 2026 : 190 € des catégories M6 à M14 et 130 € pour le baby rugby (enfants nés en année 2021).<br>Le prix de la licence comprend :<br>- la licence auprès de la FFR<br>- l'assurance obligatoire<br>- la dotation annuelle (tenue d'entraînement : short, tee-shirt, chaussettes)<br>A partir de 3 licences, vous pouvez bénéficier d'une réduction de 25 € sur la 3ème licence.<br>La licence est payable directement sur Hello Asso ou au club par chèque (payable en 3 fois), espèces, chèques vacances, chéquier jeunes Ain, virement."
 ---
+<!-- Schema.org HowTo pour le processus d'inscription -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Comment inscrire son enfant à l'École de Rugby Oval Saône",
+  "description": "Guide complet pour inscrire votre enfant à l'École de Rugby Oval Saône à Trévoux. Processus en 5 étapes incluant inscription Hello Asso, activation FFR, documents et paiement.",
+  "image": "{{ site.url }}/assets/logo.png",
+  "totalTime": "PT30M",
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "EUR",
+    "value": "190"
+  },
+  "supply": [
+    {
+      "@type": "HowToSupply",
+      "name": "Autorisation de soins dûment complétée"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "Carte d'identité ou passeport en cours de validité"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "Livret de famille (page des parents et de l'enfant)"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "Photo d'identité au format JPEG"
+    }
+  ],
+  "tool": [
+    {
+      "@type": "HowToTool",
+      "name": "Ordinateur ou smartphone avec accès internet"
+    },
+    {
+      "@type": "HowToTool",
+      "name": "Scanner ou appareil photo pour numériser les documents"
+    }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Inscription sur Hello Asso",
+      "text": "Créez votre compte et inscrivez votre enfant sur la plateforme Hello Asso. Sélectionnez la catégorie d'âge appropriée (U4 à U14 ou Rugby Touch Adultes) et complétez le formulaire d'inscription.",
+      "url": "https://www.helloasso.com/associations/oval-saone/adhesions/licence-2025-2026",
+      "image": "{{ site.url }}/assets/logo.png"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Réception de l'email FFR",
+      "text": "Après votre inscription sur Hello Asso, vous recevrez un email de ne_pas_repondre@ffr.fr contenant vos codes d'activation pour accéder au site OVAL-e de la Fédération Française de Rugby. Conservez précieusement cet email.",
+      "image": "{{ site.url }}/assets/logo.png"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Activation du compte FFR",
+      "text": "Utilisez les codes reçus pour activer votre compte sur le site OVAL-e de la FFR. Complétez tous les champs requis du formulaire d'inscription en ligne.",
+      "image": "{{ site.url }}/assets/logo.png"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Téléchargement des documents",
+      "text": "Scannez et téléchargez sur le site FFR les documents suivants : autorisation de soins (obligatoire), carte d'identité recto-verso sur la même page ou passeport + livret de famille, et une photo d'identité au format JPEG.",
+      "image": "{{ site.url }}/assets/logo.png"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 5,
+      "name": "Validation et paiement",
+      "text": "Remettez au club les documents téléchargés et effectuez le règlement de la cotisation (190€ pour U6-U14, 130€ pour Baby Rugby, 110€ ou 90€ pour Rugby Touch Adultes). Paiement possible par Hello Asso, chèque en 3 fois, espèces, chèques vacances, chéquier jeunes Ain ou virement. Le club validera ensuite votre licence auprès de la FFR.",
+      "image": "{{ site.url }}/assets/logo.png"
+    }
+  ],
+  "about": {
+    "@type": "SportsClub",
+    "name": "École de Rugby Oval Saône",
+    "url": "{{ site.url }}",
+    "telephone": "06 83 62 27 10",
+    "email": "edr.ovalsaone@gmail.com"
+  }
+}
+</script>
+
 <!-- Hero Section avec effet parallax -->
 <section class="hero parallax-section subpage-hero" data-parallax-speed="0.25">
     <div class="hero-overlay"></div>
