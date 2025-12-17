@@ -122,6 +122,67 @@ title: "default"
             ]
         }
         </script>
+
+        <!-- Breadcrumb Schema.org -->
+        {% if page.url != "/" %}
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Accueil",
+                    "item": "{{ site.url }}/"
+                }
+                {% if page.url == "/equipes/" %},
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Nos Équipes"
+                }
+                {% elif page.url == "/ecole/" %},
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "L'École"
+                }
+                {% elif page.url == "/evenements/" %},
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Calendrier"
+                }
+                {% elif page.url == "/inscription/" %},
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Inscription"
+                }
+                {% elif page.url == "/contact/" %},
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Contact"
+                }
+                {% elif page.url == "/partenariat/" %},
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Partenariat & Dons"
+                }
+                {% elif page.url == "/boutique/" %},
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Boutique"
+                }
+                {% endif %}
+            ]
+        }
+        </script>
+        {% endif %}
     </head>
     <body>
         <!-- Bandeau cookies RGPD -->
