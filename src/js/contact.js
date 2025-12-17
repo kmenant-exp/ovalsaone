@@ -86,8 +86,8 @@ function initializeMap() {
     try {
         // Coordonnées pour l'adresse : {{ contact.address }}
         // Coordonnées approximatives pour Sainte-Euphémie
-        const latitude = 45.8833;
-        const longitude = 4.8667;
+        const latitude = 45.936273;
+        const longitude = 4.770315;
 
         // Initialiser la carte
         const map = L.map('stadium-map').setView([latitude, longitude], 15);
@@ -105,9 +105,9 @@ function initializeMap() {
         marker.bindPopup(`
             <div style="text-align: center;">
                 <h3>🏉 Stade Municipal - Oval Saône</h3>
-                <p><strong>420 Route de Reyrieux</strong><br>
-                01600 Sainte-Euphémie</p>
-                <a href="https://www.openstreetmap.org/search?query=420%20Route%20de%20Reyrieux,%2001600%20Sainte-Euphémie" 
+                <p><strong>Chemin de la passerelle</strong><br>
+                69650 Quincieux</p>
+                <a href="https://www.openstreetmap.org/search?query=Chemin+de+la+passerelle%2C+69650+QUINCIEUX" 
                    target="_blank" 
                    rel="noopener noreferrer"
                    style="color: #8fbc8f; text-decoration: none;">
@@ -134,7 +134,7 @@ function initializeMap() {
 
 function geocodeAddress(address, map, marker) {
     // Utiliser le service de géocodage Nominatim d'OpenStreetMap
-    const geocodeUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&limit=1`;
+    const geocodeUrl = `https://nominatim.openstreetmap.org/search?format=json&q=Chemin+de+la+passerelle%2C+69650+QUINCIEUX&limit=1`;
     
     fetch(geocodeUrl)
         .then(response => response.json())
