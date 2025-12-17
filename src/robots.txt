@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /
 
 # Sitemap
-Sitemap: https://votre-domaine.com/sitemap.xml
+Sitemap: https://www.ovalsaone.fr/sitemap.xml

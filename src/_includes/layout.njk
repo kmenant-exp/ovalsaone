@@ -12,6 +12,12 @@ title: "default"
         <meta name="description" content="{{ description | default("École de rugby pour enfants de 4 à 14 ans à Trévoux. Apprentissage du rugby dans un cadre convivial et familial. Inscription ouverte toute l'année.") }}">
         <meta name="keywords" content="rugby, école rugby, enfants, Trévoux, Sainte-Euphémie, sport, formation, U4, U6, U8, U10, U12, U14">
         
+        <!-- Geo Tags pour SEO Local -->
+        <meta name="geo.region" content="FR-01">
+        <meta name="geo.placename" content="Trévoux">
+        <meta name="geo.position" content="45.9417;4.7833">
+        <meta name="ICBM" content="45.9417, 4.7833">
+        
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website">
         <meta property="og:url" content="{{ site.url }}{{ page.url }}">
@@ -92,6 +98,24 @@ title: "default"
                 "latitude": "45.9417",
                 "longitude": "4.7833"
             },
+            "areaServed": [
+                {
+                    "@type": "City",
+                    "name": "Trévoux"
+                },
+                {
+                    "@type": "City",
+                    "name": "Sainte-Euphémie"
+                },
+                {
+                    "@type": "City",
+                    "name": "Quincieux"
+                },
+                {
+                    "@type": "State",
+                    "name": "Ain"
+                }
+            ],
             "sameAs": [
                 "https://www.instagram.com/ovalsaone/",
                 "https://www.facebook.com/profile.php?id=61580067910711"
