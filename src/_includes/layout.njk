@@ -132,6 +132,16 @@ title: "default"
                     "name": "Ain"
                 }
             ],
+            "memberOf": {
+                "@type": "SportsOrganization",
+                "name": "Fédération Française de Rugby",
+                "url": "https://www.ffr.fr"
+            },
+            "parentOrganization": {
+                "@type": "SportsOrganization",
+                "name": "Ligue Auvergne-Rhône-Alpes Rugby",
+                "url": "https://ligueaura.ffr.fr"
+            },
             "sameAs": [
                 "https://www.instagram.com/ovalsaone/",
                 "https://www.facebook.com/profile.php?id=61580067910711"
@@ -193,6 +203,12 @@ title: "default"
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Boutique"
+                }
+                {% elif page.url == "/faq/" %},
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "FAQ"
                 }
                 {% endif %}
             ]
@@ -274,6 +290,7 @@ title: "default"
                             <li><a href="/inscription">Inscription</a></li>
                             <li><a href="/equipes">Nos équipes</a></li>
                             <li><a href="/contact">Contact</a></li>
+                            <li><a href="/faq">FAQ</a></li>
                         </ul>
                     </div>
                     <div class="footer-section">
