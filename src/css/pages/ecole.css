@@ -82,7 +82,7 @@
     box-shadow: var(--shadow);
     text-align: center;
     transition: all 0.3s ease;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
 }
 
 .bureau-card:hover {

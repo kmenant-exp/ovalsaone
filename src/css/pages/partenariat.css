@@ -21,7 +21,7 @@
     padding: var(--spacing-6);
     box-shadow: var(--shadow-md);
     transition: all 0.3s ease;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -207,7 +207,7 @@
 
 .avantage-item {
     background: var(--white);
-    border: 2px solid var(--gray-200);
+    border: 1px solid var(--gray-200);
     border-radius: var(--border-radius-lg);
     padding: var(--spacing-4);
     transition: all 0.3s ease;

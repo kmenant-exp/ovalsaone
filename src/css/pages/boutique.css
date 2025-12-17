@@ -36,7 +36,7 @@
     overflow: hidden;
     box-shadow: var(--shadow-lg);
     transition: all 0.4s ease;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
     position: relative;
     display: flex;
     flex-direction: column;
