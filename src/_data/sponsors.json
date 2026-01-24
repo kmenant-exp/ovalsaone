@@ -1,5 +1,10 @@
 [
-
+  {
+    "nom": "Mairie de Trévoux",
+    "description": "Collectivité territoriale de Trévoux.",
+    "partenariat_depuis": 2025,
+    "type": "partenaire"
+  },
   {
     "nom": "ITINÉRAIRE PRODUCTIONS - FLASHBACK",
     "description": "Production audiovisuelle et événementielle.",

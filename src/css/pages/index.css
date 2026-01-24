@@ -355,6 +355,7 @@
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.5s ease;
+    grid-column: 1 / -1;
 }
 
 .actualites-supplementaires.show {
