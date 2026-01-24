@@ -7,9 +7,9 @@
 /* Section Hero général pour toutes les sous-pages avec effet parallax */
 .subpage-hero {
     --parallax-base-position: -170px;
-    background-image: url('../../assets/hero-image2.webp');
+    background-image: url('../../assets/hero-background.webp');
     background-size: cover;
-    background-position: center calc(var(--parallax-base-position) + var(--parallax-offset));
+    background-position: center calc(var(--parallax-base-position) + var(--parallax-offset) - 100px);
     background-attachment: fixed;
     position: relative;
     height: 40vh; /* Hauteur adaptée pour les sous-pages */

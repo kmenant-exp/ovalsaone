@@ -5,7 +5,7 @@
 /* Section Hero avec effet parallax */
 .hero {
     color: var(--white);
-    background-image: url('../../assets/hero-image2.webp');
+    background-image: url('../../assets/hero-background.webp');
     background-size: cover;
     background-position: center calc(var(--parallax-base-position) + var(--parallax-offset));
     background-attachment: fixed;

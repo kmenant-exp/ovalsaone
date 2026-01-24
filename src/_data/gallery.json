@@ -1,20 +1,3 @@
 [
-  {
-    "titre": "Tournoi de Trévoux",
-    "description": "Nos jeunes en action",
-    "date": "2025-10-10",
-    "mainImage": "https://stovalsaoneprd.blob.core.windows.net/medias/tournoi-trevoux-20251010/Image1.jpeg",
-    "storageUrl": "https://stovalsaoneprd.blob.core.windows.net/medias/tournoi-trevoux-20251010",
-    "categorie": "matches",
-    "alt": "Tournoi de Trévoux - 10 octobre 2025"
-  },
-  {
-    "titre": "Tournoi de Lyon",
-    "description": "Tournoi à Lyon",
-    "date": "2025-11-10",
-    "mainImage": "https://stovalsaoneprd.blob.core.windows.net/medias/tournoi-lyon-20251110/Image1.jpeg",
-    "storageUrl": "https://stovalsaoneprd.blob.core.windows.net/medias/tournoi-lyon-20251110",
-    "categorie": "matches",
-    "alt": "Tournoi de Lyon - 10 novembre 2025"
-  }
+
 ]
