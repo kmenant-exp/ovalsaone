@@ -91,7 +91,7 @@ partenariat_particulier:
                     <div class="sponsor-details">
                         {% if sponsor.website %}<a href="{{ sponsor.website }}" target="_blank" class="sponsor-link">🌐 Site web</a>{% endif %}
                         {% if sponsor.telephone %}<span class="sponsor-phone">📞 {{ sponsor.telephone }}</span>{% endif %}
-                        {% if sponsor.email %}<a href="mailto:{{ sponsor.email }}" class="sponsor-email">✉️ Email</a>{% endif %}
+                        {% comment %} {% if sponsor.email %}<a href="mailto:{{ sponsor.email }}" class="sponsor-email">✉️ Email</a>{% endif %} {% endcomment %}
                     </div>
                     <div class="sponsor-partenariat">
                         Partenaire depuis {{ sponsor.partenariat_depuis }}
