@@ -79,10 +79,12 @@ partenariat_particulier:
         <div class="sponsors-list" id="sponsors-list">
             <!-- Les sponsors seront chargés dynamiquement -->
             {% for sponsor in sponsors %}
-            <div class="sponsor-card fade-in-up">
+                <div class="sponsor-card fade-in-up">
+                {% if sponsor.logo %}
                 <div class="sponsor-logo">
-                    <img src="{{ sponsor.logo }}" alt="{{ sponsor.nom }}" onerror="this.src='assets/logo.png'">
+                    <img src="{{ sponsor.logo }}" alt="{{ sponsor.nom }}" onerror="this.src='assets/logo.png'">                
                 </div>
+                {% endif %}
                 <div class="sponsor-info">
                     <h3 class="sponsor-name">{{ sponsor.nom }}</h3>
                     <p class="sponsor-description">{{ sponsor.description }}</p>
