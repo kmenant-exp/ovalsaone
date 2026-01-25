@@ -1181,3 +1181,10 @@
     }
 }
 
+/* ===================================
+   SECTION PROCHAINS TOURNOIS
+   =================================== */
+
+.tournois.section {
+    background: linear-gradient(135deg, #f8f9ff 0%, var(--white) 100%);
+}

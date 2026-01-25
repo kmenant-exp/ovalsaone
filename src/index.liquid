@@ -118,6 +118,37 @@ sponsors_description: "Nos partenaires sont essentiels au développement de notr
     </div>
 </section>
 
+<!-- Section Prochains Tournois -->
+<section class="tournois section">
+    <div class="container">
+        <div class="intro-content">
+            <div class="intro-text">
+                <h2>Prochains Tournois</h2>
+                <p>Découvrez les tournois à venir dans les 2 prochaines semaines</p>
+            </div>
+        </div>
+        
+        <!-- État de chargement -->
+        <div class="tournaments-loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Chargement des tournois...</p>
+        </div>
+        
+        <!-- Message d'erreur -->
+        <div class="tournaments-error" style="display: none;">
+            <p>❌ Une erreur est survenue lors du chargement des tournois.</p>
+        </div>
+        
+        <!-- Grille des tournois -->
+        <div class="tournaments-grid" style="display: none;"></div>
+        
+        <!-- Message si aucun tournoi -->
+        <div class="no-tournaments" style="display: none;">
+            <p>📅 Aucun tournoi prévu dans les 2 prochaines semaines.</p>
+        </div>
+    </div>
+</section>
+
 <!-- Section Histoire du club avec parallax -->
 <section class="histoire parallax-section" data-parallax-speed="0.2">
     <div class="parallax-overlay"></div>
@@ -314,3 +345,18 @@ sponsors_description: "Nos partenaires sont essentiels au développement de notr
         </div>
     </div>
 </div>
+
+<script>
+    // Nous exposons les données des calendriers pour que le JS puisse y accéder
+    window.calendarConfig = {
+        apiKey: "{{ calendars.apiKey }}",
+        teams: [
+            {% for team in calendars.teams %}
+            {
+                name: "{{ team.name }}",
+                calendarId: "{{ team.calendarId }}"
+            }{% if forloop.last == false %},{% endif %}
+            {% endfor %}
+        ]
+    };
+</script>
