@@ -3,12 +3,15 @@
  * Fonctions partagées entre evenements.js et tournaments.js
  */
 
+// Namespace global pour éviter les conflits
+window.CalendarUtils = window.CalendarUtils || {};
+
 /**
  * Regroupe les événements qui ont le même nom et la même date
  * @param {Array} events - Liste des événements à regrouper
  * @return {Array} Liste des événements regroupés
  */
-export function mergeIdenticalEvents(events) {
+window.CalendarUtils.mergeIdenticalEvents = function(events) {
     const mergedEventsMap = new Map();
     
     events.forEach(event => {
@@ -29,7 +32,7 @@ export function mergeIdenticalEvents(events) {
     });
     
     return Array.from(mergedEventsMap.values());
-}
+};
 
 /**
  * Génère un identifiant unique pour un événement
@@ -37,12 +40,12 @@ export function mergeIdenticalEvents(events) {
  * @param {string} team - Nom de l'équipe
  * @returns {string} Identifiant unique
  */
-export function generateEventId(event, team) {
+window.CalendarUtils.generateEventId = function(event, team) {
     const startDate = new Date(event.start.dateTime || event.start.date);
     const dateStr = startDate.toISOString().split('T')[0];
     const summary = (event.summary || 'event').replace(/[^a-zA-Z0-9]/g, '_').substring(0, 30);
     return `${team}_${dateStr}_${summary}`;
-}
+};
 
 /**
  * Crée un élément HTML pour un événement/tournoi
@@ -50,7 +53,7 @@ export function generateEventId(event, team) {
  * @param {boolean} isUpcoming - Indique si l'événement est à venir (affiche le bouton convocation)
  * @return {HTMLElement} Élément HTML représentant l'événement
  */
-export function createEventCard(event, isUpcoming = true) {
+window.CalendarUtils.createEventCard = function(event, isUpcoming = true) {
     const startDate = new Date(event.start.dateTime || event.start.date);
     const endDate = event.end ? new Date(event.end.dateTime || event.end.date) : null;
     
@@ -84,9 +87,19 @@ export function createEventCard(event, isUpcoming = true) {
     }
 
     // Génère l'identifiant unique de l'événement pour les convocations
-    const eventId = generateEventId(event, primaryTeam);
+    const eventId = window.CalendarUtils.generateEventId(event, primaryTeam);
     const eventDateString = startDate.toISOString().split('T')[0];
     const eventDateTimeString = `${dateStr}${!isAllDay ? ' à ' + timeStr : ' (toute la journée)'}`;
+
+    // Génère le lien Google Maps pour l'adresse
+    let locationHtml = '';
+    if (event.location) {
+        const encodedLocation = encodeURIComponent(event.location);
+        const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedLocation}`;
+        locationHtml = `<a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" class="event-location">
+            <span class="location-icon">📍</span>${event.location}
+        </a>`;
+    }
 
     // Bouton de convocation (uniquement pour les événements à venir)
     let convocationButton = '';
@@ -99,7 +112,7 @@ export function createEventCard(event, isUpcoming = true) {
                     data-event-datetime="${eventDateTimeString}"
                     data-event-team="${primaryTeam}">
                 <span class="convocation-icon">📋</span>
-                <span class="convocation-text">Répondre</span>
+                <span class="convocation-text">Participation</span>
             </button>
         `;
     }
@@ -117,7 +130,7 @@ export function createEventCard(event, isUpcoming = true) {
             <div class="event-meta">
                 <div class="event-teams">${teamDisplay}</div>
                 <span class="event-time">${isAllDay ? 'Toute la journée' : timeStr}</span>
-                ${event.location ? `<span class="event-location">${event.location}</span>` : ''}
+                ${locationHtml}
             </div>
             ${event.description ? `<div class="event-description">${event.description}</div>` : ''}
         </div>
@@ -148,12 +161,12 @@ export function createEventCard(event, isUpcoming = true) {
     }
     
     return eventElement;
-}
+};
 
 /**
  * Classe pour gérer le chargement des événements depuis Google Calendar
  */
-export class CalendarLoader {
+window.CalendarUtils.CalendarLoader = class {
     /**
      * @param {Object} config - Configuration du loader
      * @param {string} config.apiKey - Clé API Google Calendar
@@ -249,14 +262,14 @@ export class CalendarLoader {
                 }
             });
     }
-}
+};
 
 /**
  * Regroupe les événements par mois
  * @param {Array} events - Tableau d'événements à regrouper
  * @return {Object} Événements regroupés par mois
  */
-export function groupEventsByMonth(events) {
+window.CalendarUtils.groupEventsByMonth = function(events) {
     const eventsByMonth = {};
     const months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
     
@@ -272,4 +285,4 @@ export function groupEventsByMonth(events) {
     });
     
     return eventsByMonth;
-}
+};

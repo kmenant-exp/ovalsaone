@@ -3,14 +3,12 @@
  * Affiche les tournois des 2 prochaines semaines
  */
 
-import { CalendarLoader, mergeIdenticalEvents, createEventCard } from './calendar-utils.js';
-
 document.addEventListener('DOMContentLoaded', () => {
     // Vérifie si on est sur la page d'accueil et si la section tournois existe
     console.log('Tournaments script loaded');
 
     const tournamentsSection = document.querySelector('.tournois');
-    if (!tournamentsSection || !window.calendarConfig) {
+    if (!tournamentsSection || !window.calendarConfig || !window.CalendarUtils) {
         return;
     }
 
@@ -21,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const noTournaments = document.querySelector('.no-tournaments');
 
     // Initialise le loader de calendrier
-    const calendarLoader = new CalendarLoader({
+    const calendarLoader = new window.CalendarUtils.CalendarLoader({
         apiKey,
         teams,
         onLoadStart: showLoading,
@@ -69,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function renderTournaments(tournaments) {
         // Fusionne les tournois identiques
-        const mergedTournaments = mergeIdenticalEvents(tournaments);
+        const mergedTournaments = window.CalendarUtils.mergeIdenticalEvents(tournaments);
         
         // Efface le contenu précédent
         tournamentsGrid.innerHTML = '';
@@ -82,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             // Crée les cartes de tournoi
             mergedTournaments.forEach(tournament => {
-                const tournamentCard = createEventCard(tournament, true);
+                const tournamentCard = window.CalendarUtils.createEventCard(tournament, true);
                 tournamentsGrid.appendChild(tournamentCard);
             });
             

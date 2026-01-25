@@ -3,11 +3,9 @@
  * Script pour la page événements.liquid
  */
 
-import { CalendarLoader, mergeIdenticalEvents, createEventCard, groupEventsByMonth } from './calendar-utils.js';
-
 document.addEventListener('DOMContentLoaded', () => {
     // Vérifie si la configuration du calendrier est disponible
-    if (!window.calendarConfig) {
+    if (!window.calendarConfig || !window.CalendarUtils) {
         return;
     }
 
@@ -37,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Initialise le loader de calendrier
-    const calendarLoader = new CalendarLoader({
+    const calendarLoader = new window.CalendarUtils.CalendarLoader({
         apiKey,
         teams,
         onLoadStart: showLoading,
@@ -101,8 +99,8 @@ document.addEventListener('DOMContentLoaded', () => {
             filteredPastEvents = pastEvents.filter(event => event.team === activeTeam);
         } else {
             // Pour l'onglet "Tous les événements", fusionner les événements identiques
-            filteredUpcomingEvents = mergeIdenticalEvents(upcomingEvents);
-            filteredPastEvents = mergeIdenticalEvents(pastEvents);
+            filteredUpcomingEvents = window.CalendarUtils.mergeIdenticalEvents(upcomingEvents);
+            filteredPastEvents = window.CalendarUtils.mergeIdenticalEvents(pastEvents);
         }
         
         // Efface le contenu précédent
@@ -114,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
             calendarEvents.innerHTML = `<div class="no-events"><p>Aucun événement à venir pour ${activeTeam === 'all' ? 'les équipes' : `l'équipe ${activeTeam}`}.</p></div>`;
         } else {
             // Regroupe les événements à venir par mois
-            const upcomingEventsByMonth = groupEventsByMonth(filteredUpcomingEvents);
+            const upcomingEventsByMonth = window.CalendarUtils.groupEventsByMonth(filteredUpcomingEvents);
             
             // Crée l'élément HTML pour chaque mois d'événements à venir
             for (const [month, events] of Object.entries(upcomingEventsByMonth)) {
@@ -124,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Crée l'élément HTML pour chaque événement (avec bouton convocation)
                 events.forEach(event => {
-                    const eventElement = createEventCard(event, true);
+                    const eventElement = window.CalendarUtils.createEventCard(event, true);
                     monthElement.appendChild(eventElement);
                 });
                 
@@ -135,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Si des événements passés sont disponibles
         if (filteredPastEvents.length > 0) {
             // Regroupe les événements passés par mois
-            const pastEventsByMonth = groupEventsByMonth(filteredPastEvents);
+            const pastEventsByMonth = window.CalendarUtils.groupEventsByMonth(filteredPastEvents);
             
             // Crée l'élément HTML pour chaque mois d'événements passés
             for (const [month, events] of Object.entries(pastEventsByMonth)) {
@@ -145,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Crée l'élément HTML pour chaque événement passé (sans bouton convocation)
                 events.forEach(event => {
-                    const eventElement = createEventCard(event, false);
+                    const eventElement = window.CalendarUtils.createEventCard(event, false);
                     monthElement.appendChild(eventElement);
                 });
                 
