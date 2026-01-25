@@ -1,0 +1,683 @@
+/**
+ * Styles pour le système de convocations
+ */
+
+/* ==========================================================================
+   Bouton de convocation sur les événements
+   ========================================================================== */
+
+.event-actions {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.btn-convocation {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--primary-color, #1a5f2a);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-convocation:hover {
+    background: var(--primary-dark, #134520);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(26, 95, 42, 0.3);
+}
+
+.btn-convocation:active {
+    transform: translateY(0);
+}
+
+.convocation-icon {
+    font-size: 1rem;
+}
+
+/* Responsive: sur mobile, afficher le bouton pleine largeur */
+@media (max-width: 640px) {
+    .btn-convocation {
+        width: 100%;
+        justify-content: center;
+        padding: 0.75rem 1rem;
+    }
+    
+    .calendar-event {
+        flex-wrap: wrap;
+    }
+    
+    .event-actions {
+        width: 100%;
+        margin-left: 0; 
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 0.75rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        justify-content: stretch;
+    }
+}
+
+/* ==========================================================================
+   Modale de convocation
+   ========================================================================== */
+
+.convocation-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    padding: 1rem;
+    overflow-y: auto;
+    backdrop-filter: blur(4px);
+}
+
+.convocation-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.convocation-modal-content {
+    background: white;
+    border-radius: 1rem;
+    max-width: 500px;
+    width: 100%;
+    margin: 1rem auto;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.convocation-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: none;
+    background: #f0f0f0;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.convocation-modal-close:hover {
+    background: #e0e0e0;
+    color: #333;
+}
+
+/* ==========================================================================
+   En-tête de la modale
+   ========================================================================== */
+
+.convocation-modal-header {
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--primary-color, #1a5f2a) 0%, var(--primary-dark, #134520) 100%);
+    border-radius: 1rem 1rem 0 0;
+    color: white;
+}
+
+.convocation-modal-header h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.25rem;
+    padding-right: 2rem;
+}
+
+.convocation-event-info {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+}
+
+.convocation-event-info p {
+    margin: 0.15rem 0;
+    font-size: 0.85rem;
+}
+
+.convocation-event-info .event-name {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.convocation-event-info .event-team {
+    display: inline-block;
+    background: white;
+    color: var(--primary-color, #1a5f2a);
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    margin-top: 0.25rem;
+}
+
+/* ==========================================================================
+   Formulaire de convocation
+   ========================================================================== */
+
+.convocation-form {
+    padding: 1rem;
+    overflow: hidden;
+}
+
+.convocation-form .form-grid-compact {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.convocation-form .form-section {
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+}
+
+.convocation-form .form-section h3 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: #333;
+    border-bottom: 2px solid var(--primary-color, #1a5f2a);
+    padding-bottom: 0.25rem;
+}
+
+.convocation-form .form-actions {
+    margin-top: 0;
+}
+
+.covoiturage-section {
+    margin-bottom: 0;
+}
+
+.covoiturage-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    align-items: end;
+}
+
+/* ==========================================================================
+   Boutons de statut
+   ========================================================================== */
+
+.status-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.status-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.4rem 0.6rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: white;
+    gap: 0.5rem;
+}
+
+.status-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.status-option:hover {
+    border-color: #ccc;
+    background: #fafafa;
+}
+
+.status-option.selected,
+.status-option:has(input:checked) {
+    border-width: 3px;
+}
+
+.status-option.present.selected,
+.status-option.present:has(input:checked) {
+    border-color: #22c55e;
+    background: #f0fdf4;
+}
+
+.status-option.absent.selected,
+.status-option.absent:has(input:checked) {
+    border-color: #ef4444;
+    background: #fef2f2;
+}
+
+.status-option.incertain.selected,
+.status-option.incertain:has(input:checked) {
+    border-color: #f59e0b;
+    background: #fffbeb;
+}
+
+.status-icon {
+    font-size: 1.1rem;
+}
+
+.status-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #333;
+}
+
+/* ==========================================================================
+   Champs du formulaire
+   ========================================================================== */
+
+.form-group {
+    margin-bottom: 0.75rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    color: #333;
+    font-size: 0.85rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color, #1a5f2a);
+    box-shadow: 0 0 0 3px rgba(26, 95, 42, 0.1);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #999;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+/* Compteur de caractères */
+.char-count {
+    display: block;
+    text-align: right;
+    font-size: 0.75rem;
+    color: #999;
+    margin-top: 0.25rem;
+}
+
+/* Radio group pour covoiturage */
+.radio-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.25rem;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    cursor: pointer;
+}
+
+.radio-option input[type="radio"] {
+    width: 1rem;
+    height: 1rem;
+    accent-color: var(--primary-color, #1a5f2a);
+}
+
+.radio-option span {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+/* Input number pour places */
+.form-group input[type="number"] {
+    width: 100%;
+    max-width: 120px;
+}
+
+@media (max-width: 580px) {
+    .convocation-modal {
+        padding: 0;
+    }
+    
+    .convocation-modal-content {
+        margin: 0;
+        border-radius: 0;
+        max-height: 100vh;
+        padding-bottom: 70px; /* Espace pour le menu du bas */
+    }
+    
+    .convocation-modal-header {
+        padding: 0.5rem 0.75rem;
+        border-radius: 0;
+    }
+    
+    .convocation-modal-header h2 {
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    .convocation-event-info {
+        padding: 0.25rem 0.5rem;
+    }
+    
+    .convocation-event-info p {
+        font-size: 0.75rem;
+        margin: 0;
+    }
+    
+    .convocation-event-info .event-name {
+        font-size: 0.85rem;
+    }
+    
+    .convocation-event-info .event-team {
+        padding: 0.15rem 0.5rem;
+        font-size: 0.8rem;
+    }
+    
+    .convocation-form {
+        padding: 0.5rem;
+    }
+    
+    .form-grid-compact {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 0.5rem;
+    }
+    
+    .form-grid-compact > .form-section {
+        flex: 1;
+        min-width: 0;
+    }
+    
+    .form-grid-compact > .form-section:first-child {
+        flex: 1.2;
+    }
+    
+    .form-grid-compact > .form-section:last-child {
+        flex: 1;
+    }
+    
+    .form-section {
+        margin-bottom: 0.25rem;
+    }
+    
+    .form-section h3 {
+        font-size: 0.75rem;
+        margin-bottom: 0.25rem;
+        padding-bottom: 0.15rem;
+    }
+    
+    .form-group {
+        margin-bottom: 0.35rem;
+    }
+    
+    .form-group label {
+        font-size: 0.75rem;
+        margin-bottom: 0.15rem;
+    }
+    
+    .form-group input {
+        padding: 0.35rem 0.5rem;
+        font-size: 0.8rem;
+    }
+    
+    .status-buttons {
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+    
+    .status-option {
+        flex-direction: row;
+        padding: 0.25rem 0.4rem;
+        border-width: 1px;
+        gap: 0.3rem;
+    }
+    
+    .status-icon {
+        font-size: 0.85rem;
+    }
+    
+    .status-label {
+        font-size: 0.7rem;
+    }
+    
+    .covoiturage-section {
+        margin-bottom: 0;
+    }
+    
+    .covoiturage-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.35rem;
+    }
+    
+    .radio-group {
+        gap: 0.5rem;
+        margin-top: 0.15rem;
+    }
+    
+    .radio-option input[type="radio"] {
+        width: 0.9rem;
+        height: 0.9rem;
+    }
+    
+    .radio-option span {
+        font-size: 0.8rem;
+    }
+    
+    .form-actions {
+        margin-top: 0.5rem;
+        padding-top: 0.5rem;
+        gap: 0.35rem;
+    }
+    
+    .form-actions .btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* ==========================================================================
+   Actions du formulaire
+   ========================================================================== */
+
+.form-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.form-actions .btn {
+    padding: 0.6rem 1.25rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.form-actions .btn-secondary {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    color: #666;
+}
+
+.form-actions .btn-secondary:hover {
+    background: #eee;
+}
+
+.form-actions .btn-primary {
+    background: var(--primary-color, #1a5f2a);
+    border: none;
+    color: white;
+}
+
+.form-actions .btn-primary:hover {
+    background: var(--primary-dark, #134520);
+}
+
+/* ==========================================================================
+   Messages du formulaire
+   ========================================================================== */
+
+.form-message {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.form-message.error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+}
+
+.form-message.success {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #16a34a;
+}
+
+/* ==========================================================================
+   État de chargement
+   ========================================================================== */
+
+.convocation-loading {
+    padding: 3rem;
+    text-align: center;
+    color: #666;
+}
+
+.convocation-loading::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 1rem;
+    border: 3px solid #eee;
+    border-top-color: var(--primary-color, #1a5f2a);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ==========================================================================
+   État de succès
+   ========================================================================== */
+
+.convocation-success {
+    padding: 3rem;
+    text-align: center;
+}
+
+.convocation-success .success-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.convocation-success h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
+    color: #16a34a;
+}
+
+.convocation-success .success-message {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.convocation-success .btn {
+    padding: 0.75rem 2rem;
+    background: var(--primary-color, #1a5f2a);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.convocation-success .btn:hover {
+    background: var(--primary-dark, #134520);
+}
+
+/* ==========================================================================
+   Badge de résumé des convocations
+   ========================================================================== */
+
+.convocation-summary-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    background: #f5f5f5;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    color: #666;
+    margin-left: 0.5rem;
+}
+
+.convocation-summary-badge .badge-present {
+    color: #16a34a;
+}
+
+.convocation-summary-badge .badge-absent {
+    color: #dc2626;
+}
+
+.convocation-summary-badge .badge-incertain {
+    color: #f59e0b;
+}

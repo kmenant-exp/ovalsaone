@@ -4,7 +4,7 @@
   "scripts": {
     "start": "npx @11ty/eleventy --input=./src --serve --watch --port 8002",
     "start:swa": "npx swa start http://localhost:8002  --api-location src/api --host 127.0.0.1 --port 4280",
-    "dev": "swa start src --api-location src/api --host 127.0.0.1 --port 4280",
+    "dev": "swa start _site --api-location src/api --host 127.0.0.1 --port 4280",
     "build:api": "cd ./src/api && dotnet build",
     "clean:api": "cd ./src/api && dotnet clean",
     "build": "npx @11ty/eleventy --input=./src",

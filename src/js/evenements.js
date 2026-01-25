@@ -203,9 +203,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 monthElement.className = 'calendar-month';
                 monthElement.innerHTML = `<h2>${month}</h2>`;
                 
-                // Crée l'élément HTML pour chaque événement
+                // Crée l'élément HTML pour chaque événement (avec bouton convocation)
                 events.forEach(event => {
-                    const eventElement = createEventElement(event);
+                    const eventElement = createEventElement(event, true);
                     monthElement.appendChild(eventElement);
                 });
                 
@@ -224,9 +224,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 monthElement.className = 'calendar-month';
                 monthElement.innerHTML = `<h2>${month}</h2>`;
                 
-                // Crée l'élément HTML pour chaque événement passé
+                // Crée l'élément HTML pour chaque événement passé (sans bouton convocation)
                 events.forEach(event => {
-                    const eventElement = createEventElement(event);
+                    const eventElement = createEventElement(event, false);
                     monthElement.appendChild(eventElement);
                 });
                 
@@ -269,9 +269,10 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * Crée un élément HTML pour un événement
      * @param {Object} event - Événement à afficher
+     * @param {boolean} isUpcoming - Indique si l'événement est à venir
      * @return {HTMLElement} Élément HTML représentant l'événement
      */
-    function createEventElement(event) {
+    function createEventElement(event, isUpcoming = true) {
         const startDate = new Date(event.start.dateTime || event.start.date);
         const endDate = event.end ? new Date(event.end.dateTime || event.end.date) : null;
         
@@ -291,14 +292,38 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Gestion de l'affichage des équipes
         let teamDisplay = '';
+        let primaryTeam = '';
         
         // Vérifiez si l'événement a été fusionné (possède un tableau d'équipes)
         if (event.teams && event.teams.length > 0) {
             // Pour les événements fusionnés, afficher toutes les équipes concernées
             teamDisplay = event.teams.map(team => `<span class="event-team">${team}</span>`).join('');
+            primaryTeam = event.teams[0];
         } else {
             // Pour les événements non fusionnés (vue par équipe), afficher l'équipe unique
             teamDisplay = `<span class="event-team">${event.team}</span>`;
+            primaryTeam = event.team;
+        }
+
+        // Génère l'identifiant unique de l'événement pour les convocations
+        const eventId = generateEventId(event, primaryTeam);
+        const eventDateString = startDate.toISOString().split('T')[0];
+        const eventDateTimeString = `${dateStr}${!isAllDay ? ' à ' + timeStr : ' (toute la journée)'}`;
+
+        // Bouton de convocation (uniquement pour les événements à venir)
+        let convocationButton = '';
+        if (isUpcoming) {
+            convocationButton = `
+                <button class="btn btn-convocation" 
+                        data-event-id="${eventId}"
+                        data-event-summary="${(event.summary || 'Événement').replace(/"/g, '&quot;')}"
+                        data-event-date="${eventDateString}"
+                        data-event-datetime="${eventDateTimeString}"
+                        data-event-team="${primaryTeam}">
+                    <span class="convocation-icon">📋</span>
+                    <span class="convocation-text">Répondre</span>
+                </button>
+            `;
         }
         
         // Crée l'élément HTML
@@ -318,9 +343,46 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 ${event.description ? `<div class="event-description">${event.description}</div>` : ''}
             </div>
+            <div class="event-actions">
+                ${convocationButton}
+            </div>
         `;
+
+        // Ajoute l'événement de clic sur le bouton de convocation
+        const convBtn = eventElement.querySelector('.btn-convocation');
+        if (convBtn) {
+            convBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const eventData = {
+                    eventId: convBtn.dataset.eventId,
+                    summary: convBtn.dataset.eventSummary,
+                    dateString: convBtn.dataset.eventDate,
+                    dateTimeString: convBtn.dataset.eventDatetime,
+                    team: convBtn.dataset.eventTeam
+                };
+                
+                if (window.ConvocationManager) {
+                    window.ConvocationManager.openModal(eventData);
+                }
+            });
+        }
         
         return eventElement;
+    }
+
+    /**
+     * Génère un identifiant unique pour un événement
+     * @param {Object} event - Événement Google Calendar
+     * @param {string} team - Nom de l'équipe
+     * @returns {string} Identifiant unique
+     */
+    function generateEventId(event, team) {
+        const startDate = new Date(event.start.dateTime || event.start.date);
+        const dateStr = startDate.toISOString().split('T')[0];
+        const summary = (event.summary || 'event').replace(/[^a-zA-Z0-9]/g, '_').substring(0, 30);
+        return `${team}_${dateStr}_${summary}`;
     }
 
     function showLoading() {

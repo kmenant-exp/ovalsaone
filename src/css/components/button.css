@@ -11,6 +11,7 @@
     padding: var(--spacing-3) var(--spacing-6);
     border: none;
     border-radius: var(--border-radius);
+    font-family: var(--font-family);
     font-weight: 600;
     font-size: var(--font-size-base);
     text-decoration: none;
@@ -231,11 +232,13 @@
     .btn-large {
         padding: var(--spacing-3) var(--spacing-6);
         font-size: var(--font-size-base);
+        text-transform: none;
     }
     
     .btn {
         min-width: 120px;
         text-align: center;
+        text-transform: none;
     }
     
     .btn-submit {
@@ -248,6 +251,7 @@
     .btn {
         width: 100%;
         justify-content: center;
+        text-transform: none;
     }
 }
 
