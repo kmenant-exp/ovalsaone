@@ -533,8 +533,9 @@
         gap: 1rem;
     }
     
-    .form-section {
-        padding: 1rem;
+    .convocation-form .form-section {
+        padding: 0.5rem;
+        margin: 0;
     }
     
     .inscription-sidebar {

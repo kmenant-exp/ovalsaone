@@ -113,7 +113,7 @@ window.CalendarUtils.createEventCard = function(event, isUpcoming = true) {
     let convocationButton = '';
     if (isUpcoming) {
         convocationButton = `
-            <button class="btn btn-convocation" 
+            <button class="btn btn-primary btn-convocation" 
                     data-event-id="${eventId}"
                     data-event-summary="${(event.summary || 'Événement').replace(/"/g, '&quot;')}"
                     data-event-date="${eventDateString}"
