@@ -30,7 +30,7 @@ const ConvocationManager = {
                     <div class="convocation-event-info">
                         <p class="event-name"></p>
                         <p class="event-date-time"></p>
-                        <p class="event-team"></p>
+                        <div class="event-teams"></div>
                     </div>
                 </div>
 
@@ -219,7 +219,9 @@ const ConvocationManager = {
         // Remplir les informations de l'événement
         modal.querySelector('.event-name').textContent = eventData.summary || 'Événement';
         modal.querySelector('.event-date-time').textContent = eventData.dateTimeString;
-        modal.querySelector('.event-team').textContent = eventData.team;
+        // Afficher toutes les catégories si multiples (séparées par des virgules)
+        const teams = eventData.team.split(',');
+        modal.querySelector('.event-teams').innerHTML = teams.map(team => `<span class="event-team">${team}</span>`).join('');
 
         // Remplir les champs cachés
         document.getElementById('conv-eventId').value = eventData.eventId;

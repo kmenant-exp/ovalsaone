@@ -74,22 +74,30 @@ window.CalendarUtils.createEventCard = function(event, isUpcoming = true) {
     // Gestion de l'affichage des équipes
     let teamDisplay = '';
     let primaryTeam = '';
+    let teamsString = '';
     
     // Vérifiez si l'événement a été fusionné (possède un tableau d'équipes)
     if (event.teams && event.teams.length > 0) {
         // Pour les événements fusionnés, afficher toutes les équipes concernées
         teamDisplay = event.teams.map(team => `<span class="event-team">${team}</span>`).join('');
+        teamsString = event.teams.join(',');
+        console.log('Équipes fusionnées pour l\'événement:', event.teams);
         primaryTeam = event.teams[0];
     } else {
         // Pour les événements non fusionnés (vue par équipe), afficher l'équipe unique
         teamDisplay = `<span class="event-team">${event.team}</span>`;
+        teamsString = event.team;
         primaryTeam = event.team;
+        console.log('Équipe unique pour l\'événement:', event.team);
     }
 
     // Génère l'identifiant unique de l'événement pour les convocations
     const eventId = window.CalendarUtils.generateEventId(event, primaryTeam);
     const eventDateString = startDate.toISOString().split('T')[0];
     const eventDateTimeString = `${dateStr}${!isAllDay ? ' à ' + timeStr : ' (toute la journée)'}`;
+
+    // Prépare la liste des équipes pour le data-attribute
+    //const teamsString = event.teams ? event.teams.join(',') : event.team;
 
     // Génère le lien Google Maps pour l'adresse
     let locationHtml = '';
@@ -110,7 +118,7 @@ window.CalendarUtils.createEventCard = function(event, isUpcoming = true) {
                     data-event-summary="${(event.summary || 'Événement').replace(/"/g, '&quot;')}"
                     data-event-date="${eventDateString}"
                     data-event-datetime="${eventDateTimeString}"
-                    data-event-team="${primaryTeam}">
+                    data-event-team="${teamsString}">
                 <span class="convocation-icon">📋</span>
                 <span class="convocation-text">Participation</span>
             </button>
