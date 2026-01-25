@@ -75,7 +75,7 @@ public class ConvocationService : IConvocationService
             EventDate = form.EventDate,
             Equipe = form.Equipe,
             Prenom = form.Prenom,
-            Nom = form.Nom,
+            Nom = form.Nom.ToUpper(),
             Statut = form.Statut.ToString(),
             BesoinCovoiturage = form.BesoinCovoiturage,
             PlacesProposees = form.PlacesProposees,
