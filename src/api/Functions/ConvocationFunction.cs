@@ -84,7 +84,6 @@ public class ConvocationFunction
             {
                 ConvocationStatus.Present => "présent(e)",
                 ConvocationStatus.Absent => "absent(e)",
-                ConvocationStatus.Incertain => "incertain(e)",
                 _ => convocationForm.Statut.ToString()
             };
 

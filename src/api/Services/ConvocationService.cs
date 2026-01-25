@@ -147,9 +147,6 @@ public class ConvocationService : IConvocationService
                     case ConvocationStatus.Absent:
                         summary.TotalAbsents++;
                         break;
-                    case ConvocationStatus.Incertain:
-                        summary.TotalIncertains++;
-                        break;
                 }
 
                 if (entity.BesoinCovoiturage)

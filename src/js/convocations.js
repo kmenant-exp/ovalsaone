@@ -68,11 +68,6 @@ const ConvocationManager = {
                                     <span class="status-icon">❌</span>
                                     <span class="status-label">Absent</span>
                                 </label>
-                                <label class="status-option incertain">
-                                    <input type="radio" name="statut" value="Incertain">
-                                    <span class="status-icon">❔</span>
-                                    <span class="status-label">Incertain</span>
-                                </label>
                             </div>
                         </div>
                     </div>
@@ -273,7 +268,7 @@ const ConvocationManager = {
         // Validation côté client
         const statut = form.querySelector('input[name="statut"]:checked');
         if (!statut) {
-            this.showMessage(messageDiv, 'Veuillez sélectionner votre statut (Présent, Absent ou Incertain)', 'error');
+            this.showMessage(messageDiv, 'Veuillez sélectionner votre statut (Présent ou Absent)', 'error');
             return;
         }
 

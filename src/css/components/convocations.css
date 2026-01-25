@@ -279,12 +279,6 @@
     background: #fef2f2;
 }
 
-.status-option.incertain.selected,
-.status-option.incertain:has(input:checked) {
-    border-color: #f59e0b;
-    background: #fffbeb;
-}
-
 .status-icon {
     font-size: 1.1rem;
 }
@@ -676,8 +670,4 @@
 
 .convocation-summary-badge .badge-absent {
     color: #dc2626;
-}
-
-.convocation-summary-badge .badge-incertain {
-    color: #f59e0b;
 }

@@ -10,8 +10,7 @@ namespace RugbyClubApi.Models;
 public enum ConvocationStatus
 {
     Present,
-    Absent,
-    Incertain
+    Absent
 }
 
 /// <summary>
@@ -102,8 +101,7 @@ public class ConvocationSummary
     public string EventId { get; set; } = string.Empty;
     public int TotalPresents { get; set; }
     public int TotalAbsents { get; set; }
-    public int TotalIncertains { get; set; }
-    public int TotalReponses => TotalPresents + TotalAbsents + TotalIncertains;
+    public int TotalReponses => TotalPresents + TotalAbsents;
     public int TotalBesoinCovoiturage { get; set; }
     public int TotalPlacesDisponibles { get; set; }
     public List<ConvocationResponseModel> Reponses { get; set; } = new();
