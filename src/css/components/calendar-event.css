@@ -109,10 +109,13 @@
     
     .event-time,
     .event-location {
-        font-size: 0.8: 0.5rem;
+        font-size: 0.85rem;
         width: 100%;
         min-width: unset;
         gap: 0.5rem;
+        white-space: normal;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
     
     .event-meta {
