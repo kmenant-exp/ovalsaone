@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: event-notification-function
+metadata:
+  template: event-notification-function@0.0.1-beta
+
+services:
+  notificationfunc:
+    project: .
+    language: dotnet
+    host: function
+    hooks:
+      postdeploy:
+        shell: sh
+        run: echo "Function deployed successfully! Configure SMTP settings in Azure Portal."
+        continueOnError: false
