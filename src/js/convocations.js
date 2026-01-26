@@ -39,6 +39,9 @@ const ConvocationManager = {
                     <input type="hidden" name="eventDate" id="conv-eventDate">
                     <input type="hidden" name="eventName" id="conv-eventName">
                     <input type="hidden" name="equipe" id="conv-equipe">
+                    <input type="hidden" name="eventStart" id="conv-eventStart">
+                    <input type="hidden" name="eventEnd" id="conv-eventEnd">
+                    <input type="hidden" name="eventLocation" id="conv-eventLocation">
 
                     <div class="form-grid-compact">
                         <div class="form-section">
@@ -112,7 +115,13 @@ const ConvocationManager = {
                     <div class="success-icon">✅</div>
                     <h3>Réponse enregistrée !</h3>
                     <p class="success-message"></p>
-                    <button class="btn btn-primary convocation-close-success">Fermer</button>
+                    <div class="success-actions">
+                        <button class="btn btn-secondary add-to-calendar" style="display: none;">
+                            <span class="calendar-icon">📅</span>
+                            <span>Ajouter au calendrier</span>
+                        </button>
+                        <button class="btn btn-primary convocation-close-success">Fermer</button>
+                    </div>
                 </div>
             </div>
         `;
@@ -128,6 +137,7 @@ const ConvocationManager = {
         const closeBtn = modal.querySelector('.convocation-modal-close');
         const cancelBtn = modal.querySelector('.convocation-cancel');
         const closeSuccessBtn = modal.querySelector('.convocation-close-success');
+        const addToCalendarBtn = modal.querySelector('.add-to-calendar');
 
         // Fermer la modale
         closeBtn.addEventListener('click', () => this.closeModal());
@@ -139,6 +149,9 @@ const ConvocationManager = {
                 this.closeModal();
             }
         });
+
+        // Bouton "Ajouter au calendrier"
+        addToCalendarBtn.addEventListener('click', () => this.handleAddToCalendar());
 
         // Soumission du formulaire
         form.addEventListener('submit', (e) => this.handleSubmit(e));
@@ -223,6 +236,9 @@ const ConvocationManager = {
         document.getElementById('conv-eventDate').value = eventData.dateString;
         document.getElementById('conv-eventName').value = eventData.summary || 'Événement';
         document.getElementById('conv-equipe').value = eventData.team;
+        document.getElementById('conv-eventStart').value = eventData.startDate || '';
+        document.getElementById('conv-eventEnd').value = eventData.endDate || '';
+        document.getElementById('conv-eventLocation').value = eventData.location || '';
 
         // Réinitialiser les boutons de statut
         const statusOptions = modal.querySelectorAll('.status-option');
@@ -310,6 +326,24 @@ const ConvocationManager = {
                 successDiv.querySelector('.success-message').textContent = result.message;
                 successDiv.style.display = 'block';
 
+                // Afficher le bouton "Ajouter au calendrier" uniquement si présent
+                const addToCalendarBtn = modal.querySelector('.add-to-calendar');
+                if (formData.statut === 'Present') {
+                    // Stocker les données de l'événement pour le bouton calendrier
+                    this.currentEventData = {
+                        eventId: formData.eventId,
+                        eventName: formData.eventName,
+                        eventDate: formData.eventDate,
+                        equipe: formData.equipe,
+                        startDate: form.eventStart.value,
+                        endDate: form.eventEnd.value,
+                        location: form.eventLocation.value
+                    };
+                    addToCalendarBtn.style.display = 'inline-flex';
+                } else {
+                    addToCalendarBtn.style.display = 'none';
+                }
+
                 // Déclencher un événement pour mettre à jour l'affichage
                 window.dispatchEvent(new CustomEvent('convocationUpdated', {
                     detail: { eventId: formData.eventId }
@@ -325,6 +359,36 @@ const ConvocationManager = {
             form.style.display = 'block';
             this.showMessage(messageDiv, 'Impossible de contacter le serveur. Veuillez réessayer.', 'error');
         }
+    },
+
+    /**
+     * Gère l'ajout de l'événement au calendrier
+     */
+    handleAddToCalendar() {
+        if (!this.currentEventData) {
+            console.error('Aucune donnée d\'événement disponible');
+            return;
+        }
+
+        if (!window.CalendarUtils || !window.CalendarUtils.downloadICalFile) {
+            console.error('CalendarUtils n\'est pas disponible');
+            return;
+        }
+
+        const eventData = {
+            eventId: this.currentEventData.eventId,
+            eventName: this.currentEventData.eventName,
+            eventDate: this.currentEventData.startDate || this.currentEventData.eventDate,
+            endDate: this.currentEventData.endDate,
+            description: `Vous avez confirmé votre présence pour ${this.currentEventData.eventName} - ${this.currentEventData.equipe}`,
+            location: this.currentEventData.location || ''
+        };
+
+        // Génère un nom de fichier propre
+        const fileName = `${this.currentEventData.eventName.replace(/[^a-zA-Z0-9]/g, '_')}.ics`;
+        
+        // Télécharge le fichier iCal
+        window.CalendarUtils.downloadICalFile(eventData, fileName);
     },
 
     /**

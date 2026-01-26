@@ -112,13 +112,30 @@ window.CalendarUtils.createEventCard = function(event, isUpcoming = true) {
     // Bouton de convocation (uniquement pour les événements à venir)
     let convocationButton = '';
     if (isUpcoming) {
+        // Préparer les données pour le fichier iCal
+        const startISO = startDate.toISOString();
+        const endISO = endDate ? endDate.toISOString() : '';
+        const location = event.location || '';
+        
+        // Encoder proprement les caractères spéciaux pour les data attributes
+        const escapeHtml = (str) => {
+            return str.replace(/&/g, '&amp;')
+                     .replace(/"/g, '&quot;')
+                     .replace(/'/g, '&#39;')
+                     .replace(/</g, '&lt;')
+                     .replace(/>/g, '&gt;');
+        };
+        
         convocationButton = `
             <button class="btn btn-primary btn-convocation" 
                     data-event-id="${eventId}"
-                    data-event-summary="${(event.summary || 'Événement').replace(/"/g, '&quot;')}"
+                    data-event-summary="${escapeHtml(event.summary || 'Événement')}"
                     data-event-date="${eventDateString}"
                     data-event-datetime="${eventDateTimeString}"
-                    data-event-team="${teamsString}">
+                    data-event-team="${teamsString}"
+                    data-event-start="${startISO}"
+                    data-event-end="${endISO}"
+                    data-event-location="${escapeHtml(location)}">
                 <span class="convocation-icon">📋</span>
                 <span class="convocation-text">Participation</span>
             </button>
@@ -159,7 +176,10 @@ window.CalendarUtils.createEventCard = function(event, isUpcoming = true) {
                 summary: convBtn.dataset.eventSummary,
                 dateString: convBtn.dataset.eventDate,
                 dateTimeString: convBtn.dataset.eventDatetime,
-                team: convBtn.dataset.eventTeam
+                team: convBtn.dataset.eventTeam,
+                startDate: convBtn.dataset.eventStart,
+                endDate: convBtn.dataset.eventEnd,
+                location: convBtn.dataset.eventLocation || ''
             };
             
             if (window.ConvocationManager) {
@@ -293,4 +313,113 @@ window.CalendarUtils.groupEventsByMonth = function(events) {
     });
     
     return eventsByMonth;
+};
+
+/**
+ * Génère un fichier iCal/ICS pour ajouter un événement au calendrier
+ * @param {Object} eventData - Données de l'événement
+ * @param {string} eventData.eventName - Nom de l'événement
+ * @param {string} eventData.eventDate - Date de l'événement (format ISO ou date string)
+ * @param {string} eventData.location - Lieu de l'événement (optionnel)
+ * @param {string} eventData.description - Description de l'événement (optionnel)
+ * @param {string} eventData.eventId - ID unique de l'événement
+ * @returns {string} URL data: du fichier iCal
+ */
+window.CalendarUtils.generateICalUrl = function(eventData) {
+    const { eventName, eventDate, endDate, location = '', description = '', eventId } = eventData;
+    
+    // Parse la date de l'événement
+    const eventStartDate = new Date(eventDate);
+    
+    // Vérifie si la date est valide
+    if (isNaN(eventStartDate.getTime())) {
+        console.error('Date invalide:', eventDate);
+        return null;
+    }
+    
+    // Formate la date au format iCal (YYYYMMDDTHHmmss)
+    const formatICalDate = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+        return `${year}${month}${day}T${hours}${minutes}${seconds}`;
+    };
+    
+    // Utilise la date de fin fournie, sinon 2 heures après le début par défaut
+    let eventEndDate;
+    if (endDate) {
+        eventEndDate = new Date(endDate);
+        // Si la date de fin est invalide, utilise la date de début + 2h
+        if (isNaN(eventEndDate.getTime())) {
+            eventEndDate = new Date(eventStartDate.getTime() + 2 * 60 * 60 * 1000);
+        }
+    } else {
+        eventEndDate = new Date(eventStartDate.getTime() + 2 * 60 * 60 * 1000);
+    }
+    
+    // Date actuelle pour DTSTAMP
+    const now = new Date();
+    
+    // Fonction pour échapper les caractères spéciaux selon la RFC 5545
+    const escapeICalText = (text) => {
+        if (!text) return '';
+        return text
+            .replace(/\\/g, '\\\\')  // Backslash d'abord
+            .replace(/;/g, '\\;')     // Point-virgule
+            .replace(/,/g, '\\,')     // Virgule
+            .replace(/\n/g, '\\n');   // Retour à la ligne
+    };
+    
+    // Génère le contenu iCal avec échappement des caractères spéciaux
+    const icalContent = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Oval Saône Rugby//Convocations//FR',
+        'CALSCALE:GREGORIAN',
+        'METHOD:PUBLISH',
+        'BEGIN:VEVENT',
+        `UID:${eventId}@ovalsaone.fr`,
+        `DTSTAMP:${formatICalDate(now)}`,
+        `DTSTART:${formatICalDate(eventStartDate)}`,
+        `DTEND:${formatICalDate(eventEndDate)}`,
+        `SUMMARY:${escapeICalText(eventName)}`,
+        description ? `DESCRIPTION:${escapeICalText(description)}` : '',
+        location ? `LOCATION:${escapeICalText(location)}` : '',
+        'STATUS:CONFIRMED',
+        'SEQUENCE:0',
+        'END:VEVENT',
+        'END:VCALENDAR'
+    ].filter(line => line).join('\r\n');
+    
+    // Encode en base64 et crée l'URL data:
+    const blob = new Blob([icalContent], { type: 'text/calendar;charset=utf-8' });
+    return URL.createObjectURL(blob);
+};
+
+/**
+ * Télécharge un fichier iCal pour un événement
+ * @param {Object} eventData - Données de l'événement
+ * @param {string} filename - Nom du fichier à télécharger (optionnel)
+ */
+window.CalendarUtils.downloadICalFile = function(eventData, filename = 'evenement.ics') {
+    const icalUrl = this.generateICalUrl(eventData);
+    
+    if (!icalUrl) {
+        console.error('Impossible de générer le fichier iCal');
+        return;
+    }
+    
+    // Crée un lien temporaire et déclenche le téléchargement
+    const link = document.createElement('a');
+    link.href = icalUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // Libère l'URL objet après un délai
+    setTimeout(() => URL.revokeObjectURL(icalUrl), 100);
 };
