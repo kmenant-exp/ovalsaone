@@ -188,3 +188,5 @@ StyleCopReport.xml
 swa-db.json
 
 _site/
+# Cloudflare
+.wrangler/

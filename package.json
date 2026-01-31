@@ -5,13 +5,15 @@
     "start": "npx @11ty/eleventy --input=./src --serve --watch --port 8002",
     "start:swa": "npx swa start http://localhost:8002  --api-location src/api --host 127.0.0.1 --port 4280",
     "dev": "swa start _site --api-location src/api --host 127.0.0.1 --port 4280",
+    "dev:pages": "npm run build && wrangler pages dev _site --port 8788",
     "build:api": "cd ./src/api && dotnet build",
     "clean:api": "cd ./src/api && dotnet clean",
     "build": "npx @11ty/eleventy --input=./src",
     "minify:css": "postcss _site/css-bundle.css --use cssnano --replace --no-map",
     "minify:js": "terser _site/bundle.js --compress --mangle --output _site/bundle.js",
     "minify": "npm run minify:css && npm run minify:js",
-    "build:prod": "npm run build && npm run minify"
+    "build:prod": "npm run build && npm run minify",
+    "deploy:pages": "npm run build:prod && wrangler pages deploy _site --project-name ovalsaone"
   },
   "dependencies": {
     "@11ty/eleventy": "^3.1.1",
@@ -22,6 +24,9 @@
     "terser": "^5.22.0"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260131.0",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.61.1"
   },
   "type": "module"
 }
