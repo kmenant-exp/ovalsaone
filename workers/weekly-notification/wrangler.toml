@@ -1,0 +1,24 @@
+name = "ovalsaone-weekly-notification"
+main = "src/index.ts"
+compatibility_date = "2024-01-17"
+compatibility_flags = ["nodejs_compat"]
+
+# Cron Trigger: Every Thursday at 8:00 AM UTC
+# Format: minute hour day-of-month month day-of-week
+# Day 4 = Thursday (0=Sunday, 1=Monday, ..., 6=Saturday)
+[triggers]
+crons = ["0 8 * * 4"]
+
+# D1 Database binding
+[[d1_databases]]
+binding = "DB"
+database_name = "ovalsaonedb"
+database_id = "cf056ba0-46fb-4e84-974d-24a38131163a" # Fill with your D1 database ID after creation
+
+# Development variables
+[vars]
+SMTP_FROM = "onboarding@resend.dev"
+
+# Secrets (configure via `wrangler secret put`):
+# - RESEND_API_KEY: Your Resend API key
+# - NOTIFICATION_EMAILS: Semicolon-separated list of recipient emails
