@@ -8,5 +8,11 @@ pages_build_output_dir = "_site"
 SMTP_FROM = "onboarding@resend.dev"  # Changer pour votre domaine vérifié dans Resend
 CONTACT_EMAIL = "kevin.menant@gmail.com" # "contact@ovalsaone.fr"
 
+# D1 Database binding for Pages Functions
+[[d1_databases]]
+binding = "DB"
+database_name = "ovalsaonedb"
+database_id = "cf056ba0-46fb-4e84-974d-24a38131163a"  # À remplir avec: wrangler d1 list
+
 # Secrets (configurer via Cloudflare Dashboard ou `wrangler pages secret put`):
 # - RESEND_API_KEY: Votre clé API Resend
