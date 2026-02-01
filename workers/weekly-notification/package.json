@@ -7,8 +7,8 @@
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
     "db:create": "wrangler d1 create ovalsaonedb",
-    "db:migrate": "wrangler d1 execute ovalsaonedb --file=./migrations/0001_initial.sql",
-    "db:migrate:local": "wrangler d1 execute ovalsaonedb --local --file=./migrations/0001_initial.sql",
+    "db:migrate": "wrangler d1 execute ovalsaonedb --remote",
+    "db:migrate:local": "wrangler d1 execute ovalsaonedb --local",
     "tail": "wrangler tail"
   },
   "devDependencies": {

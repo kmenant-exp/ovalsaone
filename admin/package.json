@@ -1,0 +1,21 @@
+{
+  "name": "ovalsaone-admin",
+  "version": "1.0.0",
+  "description": "Admin dashboard for Oval Saône convocations",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler pages dev public --port 8788 --d1 DB=cf056ba0-46fb-4e84-974d-24a38131163a",
+    "build": "tsc",
+    "deploy": "wrangler pages deploy public --project-name ovalsaone-admin",
+    "db:migrate:local": "wrangler d1 migrations apply DB --local",
+    "db:migrate": "wrangler d1 migrations apply DB --remote"
+  },
+  "dependencies": {
+    "hono": "^4.6.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260131.0",
+    "typescript": "^5.3.3",
+    "wrangler": "^4.61.1"
+  }
+}

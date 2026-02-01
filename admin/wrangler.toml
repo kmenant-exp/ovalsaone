@@ -1,0 +1,15 @@
+name = "ovalsaone-admin"
+compatibility_date = "2024-01-17"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "public"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "ovalsaonedb"
+database_id = "cf056ba0-46fb-4e84-974d-24a38131163a"
+
+[vars]
+GOOGLE_CLIENT_ID = "992613089621-fgnh0vq7skhl8gq106alfn3d4ftievn3.apps.googleusercontent.com"
+# GOOGLE_CLIENT_SECRET and JWT_SECRET should be set via:
+# wrangler secret put GOOGLE_CLIENT_SECRET
+# wrangler secret put JWT_SECRET
