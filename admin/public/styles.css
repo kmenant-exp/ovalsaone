@@ -98,6 +98,11 @@ body::before {
 /* Loading Overlay */
 .loading-overlay {
     position: fixed;
+}
+
+.show-mobile-only {
+    display: none;
+}
     inset: 0;
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: var(--glass-blur);
@@ -836,6 +841,10 @@ body::before {
 @media (max-width: 768px) {
     .hide-mobile {
         display: none !important;
+    }
+
+    .show-mobile-only {
+        display: inline !important;
     }
 
     .header {

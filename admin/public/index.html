@@ -224,7 +224,10 @@
                                     <span x-show="!c.needs_carpool" class="carpool-badge none">—</span>
                                 </td>
                                 <td class="cell-seats">
-                                    <span x-show="c.carpool_seats > 0" class="seats-badge" x-text="c.carpool_seats + ' place(s)'"></span>
+                                    <span x-show="c.carpool_seats > 0" class="seats-badge">
+                                        <span class="show-mobile-only" x-text="c.carpool_seats"></span>
+                                        <span class="hide-mobile" x-text="c.carpool_seats + ' place(s)'"></span>
+                                    </span>
                                     <span x-show="!c.carpool_seats || c.carpool_seats === 0">—</span>
                                 </td>
                                 <td class="cell-date" x-text="formatDateTime(c.updated_at)"></td>
