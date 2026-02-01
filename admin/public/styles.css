@@ -834,6 +834,10 @@ body::before {
 
 /* Responsive */
 @media (max-width: 768px) {
+    .hide-mobile {
+        display: none !important;
+    }
+
     .header {
         flex-direction: column;
         gap: 1rem;
