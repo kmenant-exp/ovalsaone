@@ -22,6 +22,7 @@ export interface Convocation {
   event_date: string;
   first_name: string;
   last_name: string;
+  email: string;
   response: string;
   needs_carpool: number; // 0 or 1 in SQLite
   carpool_seats: number;

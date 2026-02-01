@@ -56,6 +56,11 @@ const ConvocationManager = {
                                 <input type="text" id="conv-nom" name="nom" required 
                                        placeholder="Nom" minlength="2" maxlength="50">
                             </div>
+                            <div class="form-group">
+                                <label for="conv-email">Email du parent *</label>
+                                <input type="email" id="conv-email" name="email" required 
+                                       placeholder="votre@email.com" maxlength="100">
+                            </div>
                         </div>
 
                         <div class="form-section">
@@ -299,6 +304,7 @@ const ConvocationManager = {
             equipe: form.equipe.value,
             prenom: form.prenom.value.trim(),
             nom: form.nom.value.trim(),
+            email: form.email.value.trim(),
             statut: statut.value,
             besoinCovoiturage: besoinCovoiturage ? besoinCovoiturage.value === 'true' : false,
             placesProposees: parseInt(form.placesProposees.value) || 0
