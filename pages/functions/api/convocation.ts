@@ -26,10 +26,10 @@ interface ConvocationForm {
  * API response envelope
  */
 interface ApiResponse<T = unknown> {
-  Success: boolean;
-  Message: string;
-  Data?: T;
-  Errors?: string[];
+  success: boolean;
+  message: string;
+  data?: T;
+  errors?: string[];
 }
 
 /**
@@ -66,20 +66,20 @@ function jsonResponse<T>(data: ApiResponse<T>, status: number = 200): Response {
 
 function errorResponse(message: string, status: number = 400, errors?: string[]): Response {
   const body: ApiResponse = {
-    Success: false,
-    Message: message,
+    success: false,
+    message: message,
   };
   if (errors) {
-    body.Errors = errors;
+    body.errors = errors;
   }
   return jsonResponse(body, status);
 }
 
 function successResponse(message: string, data?: unknown): Response {
   return jsonResponse({
-    Success: true,
-    Message: message,
-    Data: data,
+    success: true,
+    message: message,
+    data: data,
   });
 }
 

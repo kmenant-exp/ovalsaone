@@ -1,23 +1,22 @@
-name: Deploy to Cloudflare Pages
+name: Deploy Cloudflare Workers
 
 on:
   workflow_dispatch:
-  # Uncomment the following lines to enable automatic deployment on push
-  # push:
-  #   branches:
-  #     - main
-  #     - dev
-  #   paths:
-  #     - 'pages/**'
+#  Uncomment the following lines to enable automatic deployment on push
+#   push:
+#     branches:
+#       - main
+#       - dev
+#     paths:
+#       - 'workers/**'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    name: Build and Deploy
+    name: Build and Deploy Workers
     permissions:
       contents: read
       deployments: write
-      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,16 +26,16 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
+          cache-dependency-path: 'workers/weekly-notification/package.json'
 
       - name: Install dependencies
+        working-directory: ./workers/weekly-notification
         run: npm ci
 
-      - name: Build site
-        run: npm run build:prod
-
-      - name: Deploy to Cloudflare Pages
+      - name: Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy _site --project-name=ovalsaone --commit-dirty=true
+          workingDirectory: 'workers/weekly-notification'
+          command: deploy

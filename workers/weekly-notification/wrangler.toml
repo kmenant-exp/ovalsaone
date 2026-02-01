@@ -17,7 +17,8 @@ database_id = "cf056ba0-46fb-4e84-974d-24a38131163a" # Fill with your D1 databas
 
 # Development variables
 [vars]
-SMTP_FROM = "onboarding@resend.dev"
+SMTP_FROM = "onboarding@resend.dev"  # Use Resend test domain for local dev
+NOTIFICATION_EMAILS = "kevin.menant@gmail.com"
 
 # Secrets (configure via `wrangler secret put`):
 # - RESEND_API_KEY: Your Resend API key
