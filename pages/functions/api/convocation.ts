@@ -180,11 +180,12 @@ function validateConvocationForm(data: unknown): ValidationError[] {
 async function insertConvocation(db: D1Database, form: ConvocationForm): Promise<number> {
   const response = form.statut === 'Present' ? 'présent' : 'absent';
   const eventDate = form.eventDate.split('T')[0];
+  const category = form.equipe?.trim() || null;
 
   const result = await db
     .prepare(
-      `INSERT INTO convocations (event_name, event_date, first_name, last_name, email, response, needs_carpool, carpool_seats)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      `INSERT INTO convocations (event_name, event_date, first_name, last_name, email, response, needs_carpool, carpool_seats, category)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
        RETURNING id`
     )
     .bind(
@@ -195,7 +196,8 @@ async function insertConvocation(db: D1Database, form: ConvocationForm): Promise
       form.email.trim().toLowerCase(),
       response,
       form.besoinCovoiturage ? 1 : 0,
-      form.placesProposees || 0
+      form.placesProposees || 0,
+      category
     )
     .first<{ id: number }>();
 
@@ -205,11 +207,12 @@ async function insertConvocation(db: D1Database, form: ConvocationForm): Promise
 async function updateConvocation(db: D1Database, form: ConvocationForm): Promise<boolean> {
   const response = form.statut === 'Present' ? 'présent' : 'absent';
   const eventDate = form.eventDate.split('T')[0];
+  const category = form.equipe?.trim() || null;
 
   const result = await db
     .prepare(
       `UPDATE convocations 
-       SET first_name = ?, last_name = ?, response = ?, needs_carpool = ?, carpool_seats = ?, updated_at = datetime('now')
+       SET first_name = ?, last_name = ?, response = ?, needs_carpool = ?, carpool_seats = ?, category = ?, updated_at = datetime('now')
        WHERE event_name = ? AND event_date = ? AND email = ?`
     )
     .bind(
@@ -218,6 +221,7 @@ async function updateConvocation(db: D1Database, form: ConvocationForm): Promise
       response,
       form.besoinCovoiturage ? 1 : 0,
       form.placesProposees || 0,
+      category,
       form.eventName.trim(),
       eventDate,
       form.email.trim().toLowerCase()

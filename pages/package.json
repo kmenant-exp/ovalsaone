@@ -13,7 +13,9 @@
     "minify:js": "terser _site/bundle.js --compress --mangle --output _site/bundle.js",
     "minify": "npm run minify:css && npm run minify:js",
     "build:prod": "npm run build && npm run minify",
-    "deploy:pages": "npm run build:prod && wrangler pages deploy _site --project-name ovalsaone"
+    "deploy:pages": "npm run build:prod && wrangler pages deploy _site --project-name ovalsaone",
+    "db:migrate": "wrangler d1 migrations apply ovalsaonedb --remote",
+    "db:migrate:local": "wrangler d1 migrations apply ovalsaonedb --local"
   },
   "dependencies": {
     "@11ty/eleventy": "^3.1.1",

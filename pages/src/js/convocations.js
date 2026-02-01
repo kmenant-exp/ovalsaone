@@ -38,7 +38,6 @@ const ConvocationManager = {
                     <input type="hidden" name="eventId" id="conv-eventId">
                     <input type="hidden" name="eventDate" id="conv-eventDate">
                     <input type="hidden" name="eventName" id="conv-eventName">
-                    <input type="hidden" name="equipe" id="conv-equipe">
                     <input type="hidden" name="eventStart" id="conv-eventStart">
                     <input type="hidden" name="eventEnd" id="conv-eventEnd">
                     <input type="hidden" name="eventLocation" id="conv-eventLocation">
@@ -46,6 +45,12 @@ const ConvocationManager = {
                     <div class="form-grid-compact">
                         <div class="form-section">
                             <h3>Joueur</h3>
+                            <div class="form-group" id="category-group">
+                                <label for="conv-equipe">Catégorie *</label>
+                                <select id="conv-equipe" name="equipe" required>
+                                    <option value="">-- Sélectionner --</option>
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <label for="conv-prenom">Prénom *</label>
                                 <input type="text" id="conv-prenom" name="prenom" required 
@@ -233,17 +238,32 @@ const ConvocationManager = {
         modal.querySelector('.event-name').textContent = eventData.summary || 'Événement';
         modal.querySelector('.event-date-time').textContent = eventData.dateTimeString;
         // Afficher toutes les catégories si multiples (séparées par des virgules)
-        const teams = eventData.team.split(',');
+        const teams = eventData.team.split(',').map(t => t.trim()).filter(t => t);
         modal.querySelector('.event-teams').innerHTML = teams.map(team => `<span class="event-team">${team}</span>`).join('');
 
         // Remplir les champs cachés
         document.getElementById('conv-eventId').value = eventData.eventId;
         document.getElementById('conv-eventDate').value = eventData.dateString;
         document.getElementById('conv-eventName').value = eventData.summary || 'Événement';
-        document.getElementById('conv-equipe').value = eventData.team;
         document.getElementById('conv-eventStart').value = eventData.startDate || '';
         document.getElementById('conv-eventEnd').value = eventData.endDate || '';
         document.getElementById('conv-eventLocation').value = eventData.location || '';
+
+        // Peupler le dropdown de catégorie
+        const categorySelect = document.getElementById('conv-equipe');
+        const categoryGroup = document.getElementById('category-group');
+        categorySelect.innerHTML = '';
+        
+        if (teams.length === 1) {
+            // Une seule catégorie: la sélectionner automatiquement et masquer le dropdown
+            categorySelect.innerHTML = `<option value="${teams[0]}" selected>${teams[0]}</option>`;
+            categoryGroup.style.display = 'none';
+        } else {
+            // Plusieurs catégories: afficher le dropdown
+            categorySelect.innerHTML = '<option value="">-- Sélectionner votre catégorie --</option>' + 
+                teams.map(team => `<option value="${team}">${team}</option>`).join('');
+            categoryGroup.style.display = 'block';
+        }
 
         // Réinitialiser les boutons de statut
         const statusOptions = modal.querySelectorAll('.status-option');

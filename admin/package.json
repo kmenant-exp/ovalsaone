@@ -7,8 +7,8 @@
     "dev": "wrangler pages dev public --port 8788 --d1 DB=cf056ba0-46fb-4e84-974d-24a38131163a",
     "build": "tsc",
     "deploy": "wrangler pages deploy public --project-name ovalsaone-admin",
-    "db:migrate:local": "wrangler d1 migrations apply DB --local",
-    "db:migrate": "wrangler d1 migrations apply DB --remote"
+    "db:migrate": "wrangler d1 migrations apply ovalsaonedb --remote",
+    "db:migrate:local": "wrangler d1 migrations apply ovalsaonedb --local"
   },
   "dependencies": {
     "hono": "^4.6.0"

@@ -26,6 +26,7 @@ export interface Convocation {
   response: string;
   needs_carpool: number; // 0 or 1 in SQLite
   carpool_seats: number;
+  category: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -33,6 +34,7 @@ export interface Convocation {
 interface EventSummary {
   eventName: string;
   eventDate: string;
+  category: string;
   totalResponses: number;
   nombrePresents: number;
   nombreAbsents: number;
@@ -95,9 +97,12 @@ function generateEventSummaries(convocations: Convocation[]): EventSummary[] {
   const summaries: EventSummary[] = [];
   for (const [key, group] of grouped) {
     const [eventName, eventDate] = key.split('|');
+    // Get unique categories for this event (excluding nulls)
+    const categories = [...new Set(group.map((c) => c.category).filter((c) => c))];
     summaries.push({
       eventName,
       eventDate,
+      category: categories.join(', '),
       totalResponses: group.length,
       nombrePresents: group.filter((c) => c.response.toLowerCase() === 'présent' || c.response.toLowerCase() === 'present').length,
       nombreAbsents: group.filter((c) => c.response.toLowerCase() === 'absent').length,
@@ -150,6 +155,7 @@ function generateHtmlEmail(convocations: Convocation[]): string {
         <thead>
             <tr>
                 <th>Événement</th>
+                <th>Catégorie</th>
                 <th>Date</th>
                 <th>Total</th>
                 <th>✅ Présents</th>
@@ -164,6 +170,7 @@ function generateHtmlEmail(convocations: Convocation[]): string {
     html += `
             <tr>
                 <td><strong>${escapeHtml(summary.eventName)}</strong></td>
+                <td>${escapeHtml(summary.category) || ''}</td>
                 <td>${formatDate(summary.eventDate)}</td>
                 <td>${summary.totalResponses}</td>
                 <td>${summary.nombrePresents}</td>
@@ -182,6 +189,7 @@ function generateHtmlEmail(convocations: Convocation[]): string {
         <thead>
             <tr>
                 <th>Événement</th>
+                <th>Catégorie</th>
                 <th>Date</th>
                 <th>Prénom</th>
                 <th>Nom</th>
@@ -203,6 +211,7 @@ function generateHtmlEmail(convocations: Convocation[]): string {
     html += `
             <tr>
                 <td><strong>${escapeHtml(conv.event_name)}</strong></td>
+                <td>${conv.category ? escapeHtml(conv.category) : ''}</td>
                 <td>${formatDate(conv.event_date)}</td>
                 <td>${escapeHtml(conv.first_name)}</td>
                 <td>${escapeHtml(conv.last_name)}</td>
