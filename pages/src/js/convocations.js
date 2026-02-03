@@ -5,6 +5,8 @@
 
 const ConvocationManager = {
     apiBaseUrl: '/api',
+    turnstileWidgetId: null,
+    turnstileToken: null,
     
     /**
      * Initialise le gestionnaire de convocations
@@ -108,6 +110,10 @@ const ConvocationManager = {
                             </div>
                         </div>
                     </div>
+
+                    <!-- Cloudflare Turnstile invisible widget -->
+                    <div id="turnstile-convocation" style="min-height: 0;"></div>
+                    <div class="turnstile-error" style="display: none; color: #dc2626; font-size: 0.875rem; margin-bottom: 1rem;"></div>
 
                     <div class="form-actions">
                         <button type="button" class="btn btn-secondary convocation-cancel">Annuler</button>
@@ -278,10 +284,74 @@ const ConvocationManager = {
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
 
+        // Initialiser Turnstile pour ce modal
+        this.initTurnstileWidget();
+
         // Focus sur le premier champ
         setTimeout(() => {
             document.getElementById('conv-prenom').focus();
         }, 100);
+    },
+
+    /**
+     * Initialise le widget Turnstile invisible pour la convocation
+     */
+    initTurnstileWidget() {
+        const container = document.getElementById('turnstile-convocation');
+        const errorDiv = document.querySelector('.turnstile-error');
+        
+        if (!container || !window.TURNSTILE_SITE_KEY) {
+            console.warn('Turnstile: conteneur ou clé manquant');
+            return;
+        }
+
+        // Si déjà initialisé, réinitialiser
+        if (this.turnstileWidgetId !== null && typeof turnstile !== 'undefined') {
+            turnstile.reset(this.turnstileWidgetId);
+            this.turnstileToken = null;
+            return;
+        }
+
+        const renderWidget = () => {
+            this.turnstileWidgetId = turnstile.render('#turnstile-convocation', {
+                sitekey: window.TURNSTILE_SITE_KEY,
+                size: 'invisible',
+                callback: (token) => {
+                    this.turnstileToken = token;
+                    if (errorDiv) errorDiv.style.display = 'none';
+                },
+                'expired-callback': () => {
+                    this.turnstileToken = null;
+                    if (errorDiv) {
+                        errorDiv.textContent = 'Vérification expirée, veuillez réessayer.';
+                        errorDiv.style.display = 'block';
+                    }
+                    // Auto-reset
+                    turnstile.reset(this.turnstileWidgetId);
+                },
+                'error-callback': (error) => {
+                    this.turnstileToken = null;
+                    console.error('Turnstile error:', error);
+                    if (errorDiv) {
+                        errorDiv.textContent = 'La vérification de sécurité a échoué. Rechargez la page si le problème persiste.';
+                        errorDiv.style.display = 'block';
+                    }
+                }
+            });
+        };
+
+        if (typeof turnstile !== 'undefined') {
+            renderWidget();
+        } else {
+            // Attendre le chargement du script
+            const checkTurnstile = setInterval(() => {
+                if (typeof turnstile !== 'undefined') {
+                    clearInterval(checkTurnstile);
+                    renderWidget();
+                }
+            }, 100);
+            setTimeout(() => clearInterval(checkTurnstile), 10000);
+        }
     },
 
     /**
@@ -305,12 +375,45 @@ const ConvocationManager = {
         const messageDiv = modal.querySelector('.form-message');
         const loadingDiv = modal.querySelector('.convocation-loading');
         const successDiv = modal.querySelector('.convocation-success');
+        const turnstileErrorDiv = modal.querySelector('.turnstile-error');
 
         // Validation côté client
         const statut = form.querySelector('input[name="statut"]:checked');
         if (!statut) {
             this.showMessage(messageDiv, 'Veuillez sélectionner votre statut (Présent ou Absent)', 'error');
             return;
+        }
+
+        // Vérifier/obtenir le token Turnstile
+        if (this.turnstileWidgetId !== null) {
+            if (!this.turnstileToken) {
+                // Exécuter le challenge invisible
+                turnstile.execute(this.turnstileWidgetId);
+                
+                // Attendre le token (max 10s)
+                const tokenReceived = await new Promise((resolve) => {
+                    let attempts = 0;
+                    const checkToken = setInterval(() => {
+                        attempts++;
+                        if (this.turnstileToken) {
+                            clearInterval(checkToken);
+                            resolve(true);
+                        } else if (attempts > 100) { // 10 secondes
+                            clearInterval(checkToken);
+                            resolve(false);
+                        }
+                    }, 100);
+                });
+
+                if (!tokenReceived) {
+                    if (turnstileErrorDiv) {
+                        turnstileErrorDiv.textContent = 'La vérification de sécurité a échoué. Veuillez réessayer.';
+                        turnstileErrorDiv.style.display = 'block';
+                    }
+                    this.showMessage(messageDiv, 'Vérification de sécurité échouée. Veuillez réessayer.', 'error');
+                    return;
+                }
+            }
         }
 
         // Récupérer la valeur du covoiturage
@@ -327,7 +430,8 @@ const ConvocationManager = {
             email: form.email.value.trim(),
             statut: statut.value,
             besoinCovoiturage: besoinCovoiturage ? besoinCovoiturage.value === 'true' : false,
-            placesProposees: parseInt(form.placesProposees.value) || 0
+            placesProposees: parseInt(form.placesProposees.value) || 0,
+            'cf-turnstile-response': this.turnstileToken || ''
         };
 
         // Afficher le chargement
@@ -348,6 +452,9 @@ const ConvocationManager = {
             loadingDiv.style.display = 'none';
 
             if (result.success) {
+                // Réinitialiser Turnstile pour permettre une nouvelle soumission
+                this.resetTurnstile();
+
                 // Afficher le succès
                 successDiv.querySelector('.success-message').textContent = result.message;
                 successDiv.style.display = 'block';
@@ -384,6 +491,16 @@ const ConvocationManager = {
             loadingDiv.style.display = 'none';
             form.style.display = 'block';
             this.showMessage(messageDiv, 'Impossible de contacter le serveur. Veuillez réessayer.', 'error');
+        }
+    },
+
+    /**
+     * Réinitialise le widget Turnstile
+     */
+    resetTurnstile() {
+        this.turnstileToken = null;
+        if (this.turnstileWidgetId !== null && typeof turnstile !== 'undefined') {
+            turnstile.reset(this.turnstileWidgetId);
         }
     },
 

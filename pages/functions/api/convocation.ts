@@ -1,10 +1,12 @@
 import type { PagesFunction } from '@cloudflare/workers-types';
+import { verifyTurnstile } from './_shared';
 
 /**
  * Environment variables for the Pages Function
  */
 interface Env {
   DB: D1Database;
+  TURNSTILE_SECRET_KEY: string;
 }
 
 /**
@@ -21,6 +23,7 @@ interface ConvocationForm {
   statut: 'Present' | 'Absent';
   besoinCovoiturage: boolean;
   placesProposees: number;
+  'cf-turnstile-response'?: string;
 }
 
 /**
@@ -268,6 +271,20 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       formData = await request.json();
     } catch {
       return errorResponse('Format JSON invalide', 400);
+    }
+
+    // Vérifier le token Turnstile avant tout traitement
+    const turnstileToken = formData['cf-turnstile-response'];
+    const clientIp = request.headers.get('CF-Connecting-IP');
+    
+    const turnstileResult = await verifyTurnstile(
+      turnstileToken || '',
+      env.TURNSTILE_SECRET_KEY,
+      clientIp
+    );
+
+    if (!turnstileResult.success) {
+      return errorResponse(turnstileResult.error || 'Vérification de sécurité échouée', 403);
     }
 
     const validationErrors = validateConvocationForm(formData);

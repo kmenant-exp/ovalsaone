@@ -2,11 +2,31 @@
 document.addEventListener('DOMContentLoaded', () => {
     setupContactForm();
     
+    // Initialiser Turnstile pour le formulaire de contact
+    initContactTurnstile();
+    
     // Vérifier si nous sommes sur la page de contact avant d'initialiser la carte
     if (document.getElementById('stadium-map')) {
         initializeMap();
     }
 });
+
+function initContactTurnstile() {
+    const turnstileContainer = document.getElementById('turnstile-contact');
+    if (!turnstileContainer || !window.formHandler) {
+        return;
+    }
+
+    // Attendre que formHandler soit disponible
+    const initWhenReady = () => {
+        if (window.formHandler && typeof window.formHandler.initTurnstile === 'function') {
+            window.formHandler.initTurnstile('turnstile-contact');
+        } else {
+            setTimeout(initWhenReady, 100);
+        }
+    };
+    initWhenReady();
+}
 
 function setupContactForm() {
     const form = document.getElementById('contact-form');

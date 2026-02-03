@@ -161,19 +161,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showLoading() {
-        calendarLoading.style.display = 'block';
-        calendarError.style.display = 'none';
-        calendarEvents.style.display = 'none';
+        if (calendarLoading) calendarLoading.style.display = 'block';
+        if (calendarError) calendarError.style.display = 'none';
+        if (calendarEvents) calendarEvents.style.display = 'none';
     }
 
     function hideLoading() {
-        calendarLoading.style.display = 'none';
+        if (calendarLoading) calendarLoading.style.display = 'none';
     }
 
     function showError() {
-        calendarLoading.style.display = 'none';
-        calendarError.style.display = 'block';
-        calendarEvents.style.display = 'none';
+        if (calendarLoading) calendarLoading.style.display = 'none';
+        if (calendarError) calendarError.style.display = 'block';
+        if (calendarEvents) calendarEvents.style.display = 'none';
     }
 
     // Gestion du bouton des événements passés

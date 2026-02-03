@@ -1,4 +1,5 @@
 import type { PagesFunction, EventContext } from '@cloudflare/workers-types';
+import { verifyTurnstile } from './_shared';
 
 /**
  * Environment variables for the Pages Function
@@ -7,6 +8,7 @@ interface Env {
   RESEND_API_KEY: string;
   SMTP_FROM: string;
   CONTACT_EMAIL: string;
+  TURNSTILE_SECRET_KEY: string;
 }
 
 /**
@@ -21,6 +23,7 @@ interface ContactForm {
   message: string;
   dateEnvoi?: string;
   source?: string;
+  'cf-turnstile-response'?: string;
 }
 
 /**
@@ -289,6 +292,20 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       formData = JSON.parse(body);
     } catch {
       return errorResponse('Format JSON invalide');
+    }
+
+    // Vérifier le token Turnstile avant tout traitement
+    const turnstileToken = (formData as Record<string, unknown>)?.['cf-turnstile-response'] as string | undefined;
+    const clientIp = request.headers.get('CF-Connecting-IP');
+    
+    const turnstileResult = await verifyTurnstile(
+      turnstileToken || '',
+      env.TURNSTILE_SECRET_KEY,
+      clientIp
+    );
+
+    if (!turnstileResult.success) {
+      return errorResponse(turnstileResult.error || 'Vérification de sécurité échouée', 403);
     }
 
     // Validate form data

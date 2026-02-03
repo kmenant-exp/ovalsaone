@@ -339,6 +339,10 @@ title: "default"
             </div>
         </footer>
 
+        <!-- Cloudflare Turnstile (mode explicite) -->
+        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+        <script>window.TURNSTILE_SITE_KEY = "{{ turnstile.siteKey }}";</script>
+
         <script src="/bundle.js"></script>
     </body>
 </html>

@@ -550,11 +550,128 @@ class RugbyClubApp {
 // Gestionnaire de formulaires
 class FormHandler {
     constructor() {
-        this.apiBaseUrl = '/api'; // Azure Function endpoint
+        this.apiBaseUrl = '/api'; // Cloudflare Pages Function endpoint
+        this.turnstileWidgetId = null;
+        this.turnstileToken = null;
+        this.turnstileReady = false;
+        this.turnstileCallbacks = [];
+    }
+
+    /**
+     * Initialise le widget Turnstile invisible sur un conteneur
+     * @param {string} containerId - ID du conteneur HTML
+     * @returns {Promise<void>}
+     */
+    initTurnstile(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) {
+            console.warn(`Turnstile container #${containerId} not found`);
+            return;
+        }
+
+        if (!window.TURNSTILE_SITE_KEY) {
+            console.warn('TURNSTILE_SITE_KEY not defined');
+            return;
+        }
+
+        // Attendre que le script Turnstile soit chargé
+        const renderWidget = () => {
+            if (this.turnstileWidgetId !== null) {
+                // Widget déjà rendu, le réinitialiser
+                this.resetTurnstile();
+                return;
+            }
+
+            this.turnstileWidgetId = turnstile.render(`#${containerId}`, {
+                sitekey: window.TURNSTILE_SITE_KEY,
+                size: 'invisible',
+                callback: (token) => {
+                    this.turnstileToken = token;
+                    this.turnstileReady = true;
+                    // Exécuter les callbacks en attente
+                    this.turnstileCallbacks.forEach(cb => cb(token));
+                    this.turnstileCallbacks = [];
+                },
+                'expired-callback': () => {
+                    this.turnstileToken = null;
+                    this.turnstileReady = false;
+                    console.log('Turnstile token expired, resetting...');
+                    this.resetTurnstile();
+                },
+                'error-callback': (error) => {
+                    this.turnstileToken = null;
+                    this.turnstileReady = false;
+                    console.error('Turnstile error:', error);
+                }
+            });
+        };
+
+        if (typeof turnstile !== 'undefined') {
+            renderWidget();
+        } else {
+            // Attendre le chargement du script
+            const checkTurnstile = setInterval(() => {
+                if (typeof turnstile !== 'undefined') {
+                    clearInterval(checkTurnstile);
+                    renderWidget();
+                }
+            }, 100);
+            // Timeout après 10 secondes
+            setTimeout(() => clearInterval(checkTurnstile), 10000);
+        }
+    }
+
+    /**
+     * Récupère le token Turnstile, en exécutant le challenge si nécessaire
+     * @returns {Promise<string|null>}
+     */
+    async getTurnstileToken() {
+        if (this.turnstileWidgetId === null) {
+            console.warn('Turnstile widget not initialized');
+            return null;
+        }
+
+        // Si un token valide existe, le retourner
+        if (this.turnstileToken) {
+            return this.turnstileToken;
+        }
+
+        // Exécuter le challenge invisible et attendre le token
+        return new Promise((resolve) => {
+            this.turnstileCallbacks.push(resolve);
+            turnstile.execute(this.turnstileWidgetId);
+            
+            // Timeout après 30 secondes
+            setTimeout(() => {
+                if (!this.turnstileToken) {
+                    resolve(null);
+                }
+            }, 30000);
+        });
+    }
+
+    /**
+     * Réinitialise le widget Turnstile (après soumission ou expiration)
+     */
+    resetTurnstile() {
+        this.turnstileToken = null;
+        this.turnstileReady = false;
+        if (this.turnstileWidgetId !== null && typeof turnstile !== 'undefined') {
+            turnstile.reset(this.turnstileWidgetId);
+        }
     }
 
     async submitForm(formData, endpoint) {
         try {
+            // Récupérer le token Turnstile si le widget est initialisé
+            if (this.turnstileWidgetId !== null) {
+                const token = await this.getTurnstileToken();
+                if (!token) {
+                    throw new Error('La vérification de sécurité a échoué. Veuillez recharger la page et réessayer.');
+                }
+                formData['cf-turnstile-response'] = token;
+            }
+
             const response = await fetch(`${this.apiBaseUrl}/${endpoint}`, {
                 method: 'POST',
                 headers: {
@@ -562,6 +679,9 @@ class FormHandler {
                 },
                 body: JSON.stringify(formData)
             });
+
+            // Réinitialiser Turnstile après soumission pour permettre une nouvelle soumission
+            this.resetTurnstile();
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);

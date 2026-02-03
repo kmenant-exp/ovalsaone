@@ -16,3 +16,4 @@ database_id = "cf056ba0-46fb-4e84-974d-24a38131163a"  # À remplir avec: wrangle
 
 # Secrets (configurer via Cloudflare Dashboard ou `wrangler pages secret put`):
 # - RESEND_API_KEY: Votre clé API Resend
+# - TURNSTILE_SECRET_KEY: Votre clé secrète Cloudflare Turnstile (obtenue dans le dashboard Cloudflare > Turnstile)
