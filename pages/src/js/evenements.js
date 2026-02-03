@@ -5,7 +5,8 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     // Vérifie si la configuration du calendrier est disponible
-    if (!window.calendarConfig || !window.CalendarUtils) {
+    const calendarSection = document.getElementById('calendar-section');
+    if (!window.calendarConfig || !window.CalendarUtils || !calendarSection) {
         return;
     }
 

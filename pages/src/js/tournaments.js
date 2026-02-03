@@ -4,9 +4,6 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Vérifie si on est sur la page d'accueil et si la section tournois existe
-    console.log('Tournaments script loaded');
-
     const tournamentsSection = document.querySelector('.tournois');
     if (!tournamentsSection || !window.calendarConfig || !window.CalendarUtils) {
         return;
