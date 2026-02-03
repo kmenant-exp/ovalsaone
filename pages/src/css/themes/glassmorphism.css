@@ -1,0 +1,750 @@
+/* =============================================================================
+   THÈME GLASSMORPHISM - Oval Saône
+   Style verre givré moderne avec conservation du parallax
+   ============================================================================= */
+
+/* =============================================
+   VARIABLES GLASSMORPHISM
+   ============================================= */
+:root {
+    /* Couleurs de base glassmorphism */
+    --glass-bg: rgba(255, 255, 255, 0.15);
+    --glass-bg-light: rgba(255, 255, 255, 0.25);
+    --glass-bg-dark: rgba(14, 49, 96, 0.65);
+    --glass-bg-card: rgba(255, 255, 255, 0.85);
+    --glass-bg-card-hover: rgba(255, 255, 255, 0.95);
+    
+    /* Bordures glassmorphism */
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --glass-border-light: rgba(255, 255, 255, 0.5);
+    --glass-border-accent: rgba(7, 191, 239, 0.4);
+    --glass-border-gold: rgba(243, 167, 18, 0.5);
+    
+    /* Effets de flou */
+    --glass-blur: blur(12px);
+    --glass-blur-light: blur(8px);
+    --glass-blur-heavy: blur(20px);
+    
+    /* Ombres glassmorphism */
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    --glass-shadow-lg: 0 15px 45px rgba(0, 0, 0, 0.15);
+    --glass-shadow-inset: inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    --glass-shadow-glow: 0 0 40px rgba(7, 191, 239, 0.15);
+    
+    /* Gradients */
+    --glass-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 100%);
+    --glass-gradient-accent: linear-gradient(135deg, rgba(7, 191, 239, 0.15) 0%, rgba(243, 167, 18, 0.1) 100%);
+    --glass-gradient-dark: linear-gradient(135deg, rgba(14, 49, 96, 0.85) 0%, rgba(10, 37, 72, 0.9) 100%);
+}
+
+/* =============================================
+   FOND DE PAGE AVEC TEXTURE
+   ============================================= */
+body {
+    background: 
+        linear-gradient(180deg, 
+            var(--sky-color) 0%, 
+            rgba(224, 242, 254, 0.5) 30%,
+            var(--white) 50%,
+            rgba(224, 242, 254, 0.3) 80%,
+            var(--sky-color) 100%
+        );
+    background-attachment: fixed;
+}
+
+/* Texture subtile de fond */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(7, 191, 239, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(243, 167, 18, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(14, 49, 96, 0.03) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* =============================================
+   NAVIGATION GLASSMORPHISM
+   ============================================= */
+.navbar {
+    background: var(--glass-bg-dark);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--glass-border-gold);
+    box-shadow: 
+        var(--glass-shadow),
+        var(--glass-shadow-inset);
+}
+
+.navbar.scrolled {
+    background: rgba(14, 49, 96, 0.85);
+    backdrop-filter: var(--glass-blur-heavy);
+    -webkit-backdrop-filter: var(--glass-blur-heavy);
+    box-shadow: 
+        var(--glass-shadow-lg),
+        inset 0 -1px 0 rgba(243, 167, 18, 0.3);
+}
+
+.nav-link {
+    background: transparent;
+    border-radius: var(--border-radius-lg);
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: var(--glass-shadow-inset);
+}
+
+.nav-link.active {
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid var(--glass-border);
+    box-shadow: 
+        var(--glass-shadow-inset),
+        0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Menu mobile glassmorphism */
+@media (max-width: 1180px) {
+    .nav-menu {
+        background: var(--glass-gradient-dark);
+        backdrop-filter: var(--glass-blur-heavy);
+        -webkit-backdrop-filter: var(--glass-blur-heavy);
+        border-left: 1px solid var(--glass-border-accent);
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* =============================================
+   HERO GLASSMORPHISM
+   ============================================= */
+.hero-content {
+    background: var(--glass-gradient);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border-light);
+    border-radius: var(--border-radius-xl);
+    box-shadow: 
+        var(--glass-shadow-lg),
+        var(--glass-shadow-inset),
+        var(--glass-shadow-glow);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Effet de reflet en haut */
+.hero-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.6) 50%, 
+        transparent 100%
+    );
+}
+
+/* Bordure lumineuse subtile */
+.hero-content::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        rgba(7, 191, 239, 0.1) 60deg,
+        transparent 120deg,
+        rgba(243, 167, 18, 0.1) 180deg,
+        transparent 240deg,
+        rgba(7, 191, 239, 0.1) 300deg,
+        transparent 360deg
+    );
+    animation: rotateGlow 20s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes rotateGlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.hero-buttons .btn {
+    backdrop-filter: var(--glass-blur-light);
+    -webkit-backdrop-filter: var(--glass-blur-light);
+}
+
+/* Indicateur de scroll glassmorphism */
+.scroll-indicator-icon {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: var(--glass-blur-light);
+    -webkit-backdrop-filter: var(--glass-blur-light);
+    border: 2px solid var(--glass-border-light);
+    box-shadow: var(--glass-shadow);
+}
+
+/* =============================================
+   BOUTONS GLASSMORPHISM
+   ============================================= */
+.btn-primary {
+    background: linear-gradient(135deg, rgba(14, 49, 96, 0.9) 0%, rgba(10, 37, 72, 0.95) 100%);
+    backdrop-filter: var(--glass-blur-light);
+    -webkit-backdrop-filter: var(--glass-blur-light);
+    border: 1px solid var(--glass-border-gold);
+    box-shadow: 
+        var(--glass-shadow),
+        var(--glass-shadow-inset),
+        0 0 20px rgba(243, 167, 18, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, rgba(14, 49, 96, 0.95) 0%, rgba(7, 191, 239, 0.3) 100%);
+    border-color: var(--secondary-color);
+    box-shadow: 
+        var(--glass-shadow-lg),
+        var(--glass-shadow-inset),
+        0 0 30px rgba(7, 191, 239, 0.3);
+    transform: translateY(-3px);
+}
+
+.btn-secondary {
+    background: var(--glass-bg-light);
+    backdrop-filter: var(--glass-blur-light);
+    -webkit-backdrop-filter: var(--glass-blur-light);
+    border: 1px solid var(--glass-border-gold);
+    box-shadow: var(--glass-shadow);
+    color: var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background: rgba(243, 167, 18, 0.25);
+    border-color: var(--accent-color);
+    box-shadow: 
+        var(--glass-shadow-lg),
+        0 0 25px rgba(243, 167, 18, 0.25);
+    transform: translateY(-2px);
+}
+
+.btn-outline-white {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: var(--glass-blur-light);
+    -webkit-backdrop-filter: var(--glass-blur-light);
+    border: 2px solid var(--glass-border-light);
+    box-shadow: var(--glass-shadow);
+}
+
+.btn-outline-white:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: var(--white);
+    box-shadow: 
+        var(--glass-shadow-lg),
+        0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+/* =============================================
+   CARTES GLASSMORPHISM
+   ============================================= */
+.actualite-card,
+.team-card,
+.trainer-card,
+.product-card,
+.faq-card {
+    background: var(--glass-bg-card);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius-xl);
+    box-shadow: 
+        var(--glass-shadow),
+        var(--glass-shadow-inset);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.actualite-card::before,
+.team-card::before,
+.trainer-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        var(--primary-color), 
+        var(--secondary-color), 
+        var(--accent-color)
+    );
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.actualite-card:hover,
+.team-card:hover,
+.trainer-card:hover,
+.product-card:hover {
+    background: var(--glass-bg-card-hover);
+    border-color: var(--glass-border-accent);
+    box-shadow: 
+        var(--glass-shadow-lg),
+        var(--glass-shadow-glow),
+        var(--glass-shadow-inset);
+    transform: translateY(-8px);
+}
+
+.actualite-card:hover::before,
+.team-card:hover::before,
+.trainer-card:hover::before {
+    transform: scaleX(1);
+}
+
+/* Badge de date glassmorphism */
+.actualite-date-badge {
+    background: rgba(14, 49, 96, 0.85);
+    backdrop-filter: var(--glass-blur-light);
+    -webkit-backdrop-filter: var(--glass-blur-light);
+    border: 1px solid var(--glass-border-accent);
+    box-shadow: var(--glass-shadow);
+}
+
+/* =============================================
+   SECTIONS PARALLAX GLASSMORPHISM
+   ============================================= */
+.histoire-content,
+.parallax-content {
+    background: var(--glass-gradient);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border-light);
+    border-radius: var(--border-radius-xl);
+    box-shadow: 
+        var(--glass-shadow-lg),
+        var(--glass-shadow-inset);
+    position: relative;
+    overflow: hidden;
+}
+
+.histoire-content::before,
+.parallax-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.5), 
+        transparent
+    );
+}
+
+/* =============================================
+   SECTIONS GLASSMORPHISM
+   ============================================= */
+.section {
+    position: relative;
+}
+
+/* Fond alterné avec effet glassmorphism */
+.section.bg-light {
+    background: 
+        linear-gradient(180deg, 
+            rgba(224, 242, 254, 0.4) 0%, 
+            rgba(255, 255, 255, 0.6) 50%,
+            rgba(224, 242, 254, 0.4) 100%
+        );
+    position: relative;
+}
+
+.section.bg-light::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    pointer-events: none;
+}
+
+/* =============================================
+   FORMULAIRES GLASSMORPHISM
+   ============================================= */
+.form-card {
+    background: var(--glass-bg-card);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius-xl);
+    box-shadow: 
+        var(--glass-shadow-lg),
+        var(--glass-shadow-inset);
+    position: relative;
+    overflow: hidden;
+}
+
+.form-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        var(--primary-color), 
+        var(--secondary-color), 
+        var(--accent-color)
+    );
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius-lg);
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: var(--secondary-color);
+    box-shadow: 
+        0 0 0 3px rgba(7, 191, 239, 0.15),
+        var(--glass-shadow);
+}
+
+/* =============================================
+   FOOTER GLASSMORPHISM
+   ============================================= */
+.footer {
+    background: var(--glass-gradient-dark);
+    backdrop-filter: var(--glass-blur-heavy);
+    -webkit-backdrop-filter: var(--glass-blur-heavy);
+    border-top: 1px solid var(--glass-border-gold);
+    box-shadow: 
+        0 -10px 40px rgba(0, 0, 0, 0.2),
+        var(--glass-shadow-inset);
+    position: relative;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(243, 167, 18, 0.5), 
+        transparent
+    );
+}
+
+.social-link {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: var(--glass-blur-light);
+    -webkit-backdrop-filter: var(--glass-blur-light);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: var(--glass-border-light);
+    box-shadow: 
+        var(--glass-shadow-lg),
+        0 0 20px rgba(255, 255, 255, 0.15);
+    transform: translateY(-3px);
+}
+
+.social-link i {
+    color: var(--white);
+}
+
+.social-link:hover i {
+    color: var(--accent-color);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+/* =============================================
+   SPONSORS GLASSMORPHISM
+   ============================================= */
+.sponsors {
+    background: 
+        linear-gradient(180deg, 
+            rgba(255, 255, 255, 0.8) 0%, 
+            rgba(224, 242, 254, 0.5) 100%
+        );
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}
+
+.sponsor-item {
+    background: var(--glass-bg-card);
+    backdrop-filter: var(--glass-blur-light);
+    -webkit-backdrop-filter: var(--glass-blur-light);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius-xl);
+    box-shadow: var(--glass-shadow);
+    transition: all 0.3s ease;
+}
+
+.sponsor-item:hover {
+    background: var(--glass-bg-card-hover);
+    border-color: var(--glass-border-accent);
+    box-shadow: 
+        var(--glass-shadow-lg),
+        var(--glass-shadow-glow);
+}
+
+/* =============================================
+   TITRES DE SECTION GLASSMORPHISM
+   ============================================= */
+.section-title::after,
+.intro-text h2::after {
+    background: linear-gradient(90deg, 
+        var(--primary-color), 
+        var(--secondary-color), 
+        var(--accent-color),
+        var(--secondary-color),
+        var(--primary-color)
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s ease infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+}
+
+/* =============================================
+   OVAL CARD GLASSMORPHISM
+   ============================================= */
+.oval-card {
+    background: var(--glass-bg-card);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border-accent);
+    border-radius: 20px;
+    box-shadow: 
+        var(--glass-shadow),
+        var(--glass-shadow-inset);
+    transition: all 0.4s ease;
+}
+
+.oval-card:hover {
+    background: var(--glass-bg-card-hover);
+    border-color: var(--glass-border-gold);
+    box-shadow: 
+        var(--glass-shadow-lg),
+        var(--glass-shadow-glow);
+    transform: translateY(-5px);
+}
+
+/* =============================================
+   MESSAGE VIDE GLASSMORPHISM
+   ============================================= */
+.empty-content-message {
+    background: var(--glass-bg-card);
+    backdrop-filter: var(--glass-blur-light);
+    -webkit-backdrop-filter: var(--glass-blur-light);
+    border: 2px dashed var(--glass-border-accent);
+    border-radius: var(--border-radius-xl);
+    box-shadow: var(--glass-shadow);
+}
+
+/* =============================================
+   COOKIE BANNER GLASSMORPHISM
+   ============================================= */
+.cookie-banner {
+    background: var(--glass-bg-dark);
+    backdrop-filter: var(--glass-blur-heavy);
+    -webkit-backdrop-filter: var(--glass-blur-heavy);
+    border-top: 1px solid var(--glass-border);
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* =============================================
+   SUBPAGE HERO GLASSMORPHISM
+   ============================================= */
+.subpage-hero-content {
+    background: var(--glass-gradient);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border-light);
+    border-radius: var(--border-radius-xl);
+    box-shadow: 
+        var(--glass-shadow-lg),
+        var(--glass-shadow-inset);
+    padding: var(--spacing-8);
+}
+
+/* =============================================
+   CALENDRIER/ÉVÉNEMENTS GLASSMORPHISM
+   ============================================= */
+.calendar-event,
+.event-card {
+    background: var(--glass-bg-card);
+    backdrop-filter: var(--glass-blur-light);
+    -webkit-backdrop-filter: var(--glass-blur-light);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--glass-shadow);
+    transition: all 0.3s ease;
+}
+
+.calendar-event:hover,
+.event-card:hover {
+    background: var(--glass-bg-card-hover);
+    border-color: var(--glass-border-accent);
+    box-shadow: 
+        var(--glass-shadow-lg),
+        var(--glass-shadow-glow);
+    transform: translateY(-3px);
+}
+
+/* =============================================
+   ANIMATIONS GLOBALES GLASSMORPHISM
+   ============================================= */
+/* Animation de pulse pour éléments importants */
+@keyframes glassPulse {
+    0%, 100% {
+        box-shadow: 
+            var(--glass-shadow),
+            var(--glass-shadow-inset),
+            0 0 20px rgba(7, 191, 239, 0.1);
+    }
+    50% {
+        box-shadow: 
+            var(--glass-shadow-lg),
+            var(--glass-shadow-inset),
+            0 0 40px rgba(7, 191, 239, 0.2);
+    }
+}
+
+/* Animation de flottement */
+@keyframes glassFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Appliquer aux éléments décoratifs */
+.oval-blob {
+    background: var(--glass-gradient-accent);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    animation: waveBorder 8s linear infinite, glassFloat 6s ease-in-out infinite;
+}
+
+/* =============================================
+   RESPONSIVE GLASSMORPHISM
+   ============================================= */
+@media (max-width: 768px) {
+    /* Réduire l'intensité du flou sur mobile pour la performance */
+    :root {
+        --glass-blur: blur(8px);
+        --glass-blur-light: blur(4px);
+        --glass-blur-heavy: blur(12px);
+    }
+    
+    /* Ajuster les ombres pour mobile */
+    .actualite-card,
+    .team-card,
+    .form-card {
+        box-shadow: var(--glass-shadow);
+    }
+    
+    .actualite-card:hover,
+    .team-card:hover {
+        transform: translateY(-4px);
+    }
+}
+
+/* Réduire les animations pour les utilisateurs qui préfèrent */
+@media (prefers-reduced-motion: reduce) {
+    .hero-content::after {
+        animation: none;
+    }
+    
+    .section-title::after,
+    .intro-text h2::after {
+        animation: none;
+    }
+    
+    .oval-blob {
+        animation: none;
+    }
+}
+
+/* Support pour les anciens navigateurs sans backdrop-filter */
+@supports not (backdrop-filter: blur(10px)) {
+    .navbar {
+        background: rgba(14, 49, 96, 0.95);
+    }
+    
+    .hero-content {
+        background: rgba(0, 0, 0, 0.7);
+    }
+    
+    .actualite-card,
+    .team-card,
+    .form-card {
+        background: rgba(255, 255, 255, 0.95);
+    }
+    
+    .footer {
+        background: linear-gradient(180deg, var(--navy-color), var(--primary-color));
+    }
+}

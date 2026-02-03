@@ -5,10 +5,6 @@
 
 
 /* Styles pour la page Partenariat */
-.sponsors-section {
-    background: var(--white);
-}
-
 .sponsors-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -264,9 +260,9 @@
 
 
 /* Section Avantages Fiscaux */
-.fiscalite-section {
+/* .fiscalite-section {
     background: var(--white);
-}
+} */
 
 .avantages-fiscaux-content {
     background: rgba(143, 188, 143, 0.1);
