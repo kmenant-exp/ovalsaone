@@ -4,7 +4,7 @@
     "titre": "Barbecue de début d'année",
     "extrait": "Rejoignez-nous pour notre traditionnel barbecue de début d'année. Un moment convivial à ne pas manquer !",
     "date": "2025-09-20",
-    "image": "https://stovalsaoneprd.blob.core.windows.net/medias/actus/barbecue.png",
+    "image": "/assets/actualites/fete.webp",
     "contenu": "Nous vous invitons à notre traditionnel barbecue de début d'année qui aura lieu le 20 septembre 2025. Une occasion parfaite pour faire connaissance, échanger et profiter d'un moment convivial avant le début de la saison."
   },
   {
@@ -12,7 +12,7 @@
     "titre": "Réunion d'information de rentrée",
     "extrait": "Réunion d'information importante pour tous les membres du club et parents. Rendez-vous le 4 octobre à 10h.",
     "date": "2025-10-04",
-    "image": "https://stovalsaoneprd.blob.core.windows.net/medias/actus/rentree.png",
+    "image": "/assets/actualites/rentree.webp",
     "contenu": "Une réunion d'information de rentrée aura lieu le samedi 4 octobre 2025 à 10h au club house. Nous présenterons le programme de la saison, les objectifs du club et répondrons à toutes vos questions. Présence vivement recommandée."
   },
   {
@@ -20,7 +20,7 @@
     "titre": "Arbre de Noël du club",
     "extrait": "Venez célébrer Noël avec nous ! Animation et goûter pour tous les enfants de 16h à 18h.",
     "date": "2025-12-13",
-    "image": "https://stovalsaoneprd.blob.core.windows.net/medias/actus/noel.png",
+    "image": "/assets/actualites/noel.webp",
     "contenu": "Le 13 décembre 2025, nous organisons notre traditionnel Arbre de Noël de 16h à 18h. Au programme : animations, goûter festif et peut-être même une visite surprise du Père Noël pour les plus jeunes joueurs du club !"
   },
   {
@@ -28,7 +28,7 @@
     "titre": "Galette des rois du club",
     "extrait": "Venez partager la galette des rois et célébrer la nouvelle année avec tous les membres du club.",
     "date": "2026-01-10",
-    "image": "https://stovalsaoneprd.blob.core.windows.net/medias/actus/epiphanie.jpg",
+    "image": "/assets/actualites/epiphanie.webp",
     "contenu": "Pour bien débuter l'année, nous vous convions à partager notre traditionnelle galette des rois le 10 janvier 2025. Un moment de convivialité et de bonne humeur à ne pas manquer !"
   },
   {
@@ -36,7 +36,7 @@
     "titre": "Fête du Rugby Ovalsaone",
     "extrait": "Rejoignez-nous pour la fête du Rugby Ovalsaone ! Un événement festif pour célébrer notre passion commune. Date à confirmer.",
     "date": "2026-06-13",
-    "image": "https://stovalsaoneprd.blob.core.windows.net/medias/actus/fete.png",
+    "image": "/assets/actualites/fete.webp",
     "contenu": "Le 13 juin 2026 (date à confirmer), venez célébrer avec nous la fête du Rugby Ovalsaone ! Au programme : animations, matchs amicaux, repas convivial et moments de partage pour tous les membres du club, leurs familles et amis. Plus de détails à venir !"
   }
 ]
