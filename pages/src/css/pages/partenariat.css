@@ -265,7 +265,7 @@
 } */
 
 .avantages-fiscaux-content {
-    background: rgba(143, 188, 143, 0.1);
+    background: white;
     padding: var(--spacing-6);
     border-radius: var(--border-radius-lg);
     border: 1px solid rgba(143, 188, 143, 0.2);
