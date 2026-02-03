@@ -9,9 +9,10 @@
     "build:api": "cd ./src/api && dotnet build",
     "clean:api": "cd ./src/api && dotnet clean",
     "build": "npx @11ty/eleventy --input=./src",
+    "purge:css": "purgecss --config purgecss.config.cjs",
     "minify:css": "postcss _site/css-bundle.css --use cssnano --replace --no-map",
     "minify:js": "terser _site/bundle.js --compress drop_console=true --mangle --output _site/bundle.js",
-    "minify": "npm run minify:css && npm run minify:js",
+    "minify": "npm run purge:css && npm run minify:css && npm run minify:js",
     "build:prod": "npm run build && npm run minify",
     "deploy:pages": "npm run build:prod && wrangler pages deploy _site --project-name ovalsaone",
     "db:migrate": "wrangler d1 migrations apply ovalsaonedb --remote",
@@ -28,6 +29,7 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20260131.0",
     "baseline-browser-mapping": "^2.9.19",
+    "purgecss": "^8.0.0",
     "typescript": "^5.9.3",
     "wrangler": "^4.62.0"
   },
