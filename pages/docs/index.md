@@ -5,6 +5,7 @@
 - [FAQ](faq.md) - Questions fréquemment posées
 
 ## Guides Utilisateurs
+- [Guide Utilisateur Complet](guide-utilisateur.md) - **Nouveau !** Documentation complète avec captures d'écran
 - [Guide d'Utilisation](guide-utilisation.md) - Comment naviguer et utiliser le site
 
 ## Guides Techniques
@@ -29,4 +30,4 @@
 
 ---
 
-*Documentation mise à jour pour Eleventy le 15 juin 2025*
+*Documentation mise à jour le 5 février 2026*
