@@ -46,7 +46,8 @@ title: "default"
         
         <!-- Preload critical resources -->
         {% if page.url == "/" %}
-        <link rel="preload" href="/assets/logo.webp" as="image" type="image/webp">
+        <link rel="preload" href="/assets/logo-48x48.webp" as="image" type="image/webp">
+        <link rel="preload" href="/assets/logo-240x230.webp" as="image" type="image/webp">
         <link rel="preload" href="/assets/hero-background.webp" as="image" type="image/webp">
         {% endif %}
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -239,7 +240,7 @@ title: "default"
         <nav class="navbar" id="navbar">
             <div class="nav-container">
                 <a href="/" class="nav-logo">
-                    <img src="/assets/logo.webp" alt="Logo Association Rugby" id="nav-logo-img" loading="eager">
+                    <img src="/assets/logo-96x96.webp" alt="Logo Association Rugby" id="nav-logo-img" loading="eager">
                     <span>Oval Saône</span>
                 </a>
                 <div class="nav-menu" id="nav-menu">
