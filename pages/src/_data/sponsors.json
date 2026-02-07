@@ -1,70 +1,72 @@
-[
-  {
-    "nom": "Mairie de Trévoux",
-    "description": "Collectivité territoriale de Trévoux.",
-    "partenariat_depuis": 2025,
-    "type": "partenaire"
-  },
-  {
-    "nom": "ITINÉRAIRE PRODUCTIONS - FLASHBACK",
-    "description": "Production audiovisuelle et événementielle.",
-    "partenariat_depuis": 2025,
-    "type": "partenaire"
-  },
-  {
-    "nom": "PARBAMIN",
-    "description": "La veille intelligente des marchés publics.",
-    "email": "salifdiane@gmail.com",
-    "partenariat_depuis": 2025,
-    "type": "partenaire"
-  },
-  {
-    "nom": "DECAP'EXPRESS",
-    "description": "Services de décapage et nettoyage professionnel.",
-    "email": "fjtrouillet@aol.com",
-    "partenariat_depuis": 2025,
-    "type": "partenaire"
-  },
-  {
-    "nom": "FT Services",
-    "description": "Transports routiers de fret de proximité.",
-    "email": "fjtrouillet@aol.com",
-    "partenariat_depuis": 2025,
-    "type": "partenaire"
-  },
-  {
-    "nom": "SIC MARKING",
-    "description": "Solutions de marquage industriel",
-    "email": "yograndjean@gmail.com",
-    "partenariat_depuis": 2025,
-    "type": "partenaire"
-  },
-  {
-    "nom": "PS CONSEIL",
-    "description": "Conseil aux entreprises.",
-    "email": "patrick.spica@outlook.fr",
-    "partenariat_depuis": 2025,
-    "type": "partenaire"
-  },
-  {
-    "nom": "SOFAGEC",
-    "description": "Cabinet d'expertise comptable.",
-    "email": "gregory.seve@sofagec.fr",
-    "partenariat_depuis": 2025,
-    "type": "partenaire"
-  },
-  {
-    "nom": "CMN Industrie",
-    "description": "L'industrie à haute valeur humaine.",
-    "email": "baptiste.rasper@cmn-industrie.com",
-    "partenariat_depuis": 2025,
-    "type": "partenaire"
-  },
-  {
-    "nom": "Le Tipi de Mimi",
-    "description": "Micro-crèches à Frans et Montmerle-sur-Saône.",
-    "email": "vanessruffin@hotmail.com",
-    "partenariat_depuis": 2025,
-    "type": "partenaire"
-  }
-]
+{
+  "sponsors": [
+    {
+      "nom": "Mairie de Trévoux",
+      "description": "Collectivité territoriale de Trévoux.",
+      "partenariat_depuis": 2025,
+      "type": "partenaire"
+    },
+    {
+      "nom": "ITINÉRAIRE PRODUCTIONS - FLASHBACK",
+      "description": "Production audiovisuelle et événementielle.",
+      "partenariat_depuis": 2025,
+      "type": "partenaire"
+    },
+    {
+      "nom": "PARBAMIN",
+      "description": "La veille intelligente des marchés publics.",
+      "email": "salifdiane@gmail.com",
+      "partenariat_depuis": 2025,
+      "type": "partenaire"
+    },
+    {
+      "nom": "DECAP'EXPRESS",
+      "description": "Services de décapage et nettoyage professionnel.",
+      "email": "fjtrouillet@aol.com",
+      "partenariat_depuis": 2025,
+      "type": "partenaire"
+    },
+    {
+      "nom": "FT Services",
+      "description": "Transports routiers de fret de proximité.",
+      "email": "fjtrouillet@aol.com",
+      "partenariat_depuis": 2025,
+      "type": "partenaire"
+    },
+    {
+      "nom": "SIC MARKING",
+      "description": "Solutions de marquage industriel",
+      "email": "yograndjean@gmail.com",
+      "partenariat_depuis": 2025,
+      "type": "partenaire"
+    },
+    {
+      "nom": "PS CONSEIL",
+      "description": "Conseil aux entreprises.",
+      "email": "patrick.spica@outlook.fr",
+      "partenariat_depuis": 2025,
+      "type": "partenaire"
+    },
+    {
+      "nom": "SOFAGEC",
+      "description": "Cabinet d'expertise comptable.",
+      "email": "gregory.seve@sofagec.fr",
+      "partenariat_depuis": 2025,
+      "type": "partenaire"
+    },
+    {
+      "nom": "CMN Industrie",
+      "description": "L'industrie à haute valeur humaine.",
+      "email": "baptiste.rasper@cmn-industrie.com",
+      "partenariat_depuis": 2025,
+      "type": "partenaire"
+    },
+    {
+      "nom": "Le Tipi de Mimi",
+      "description": "Micro-crèches à Frans et Montmerle-sur-Saône.",
+      "email": "vanessruffin@hotmail.com",
+      "partenariat_depuis": 2025,
+      "type": "partenaire"
+    }
+  ]
+}

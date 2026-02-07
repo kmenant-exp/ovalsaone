@@ -4,8 +4,12 @@ title: "Rugby pour Enfants à Trévoux - Initiation, Formation et Compétition"
 description: "Guide complet sur le rugby pour enfants à Trévoux. Découvrez les bienfaits du rugby, nos méthodes d'apprentissage, le développement moteur et les valeurs transmises aux U4-U14."
 
 hero:
-  title: "Le Rugby pour Enfants à Trévoux"
+  title: "Le Rugby pour enfants à Trévoux"
   subtitle: "Tout savoir sur l'apprentissage du rugby à l'École Oval Saône"
+
+intro:
+  title: "Introduction au rugby pour enfants"
+  text: "Découvrez comment le rugby peut être une expérience enrichissante pour les enfants à Trévoux, alliant plaisir, apprentissage et valeurs éducatives."
 
 sections:
   - title: "Pourquoi choisir le rugby pour votre enfant ?"
@@ -59,10 +63,10 @@ sections:
     intro: "La sécurité des enfants est notre priorité absolue :"
     items:
       - "<strong>Entraîneurs diplômés</strong> : tous nos éducateurs possèdent les diplômes FFR et formations premiers secours"
-      - "<strong>Équipement adapté</strong> : protège-dents, shorts rembourrés pour les U12-U14"
-      - "<strong>Règles progressives</strong> : pas de plaquage avant U10, contacts maîtrisés"
+    #   - "<strong>Équipement adapté</strong> : protège-dents, shorts rembourrés pour les U12-U14"
+    #   - "<strong>Règles progressives</strong> : pas de plaquage avant U10, contacts maîtrisés"
       - "<strong>Installations conformes</strong> : terrain homologué FFR au stade de Chamalan (Quincieux)"
-      - "<strong>Groupes à effectif réduit</strong> : maximum 15 enfants par entraîneur"
+    #   - "<strong>Groupes à effectif réduit</strong> : maximum 15 enfants par entraîneur"
   
   - title: "Rugby à Trévoux : un environnement idéal"
     intro: "<strong>Trévoux</strong> et sa région offrent un cadre parfait pour la pratique du rugby :"
@@ -105,11 +109,22 @@ cta:
     </div>
 </section>
 
+<section class="intro section">
+    <div class="container">
+        <div class="intro-content">
+            <div class="intro-text">
+                <h2>{{ intro.title }}</h2>
+                <p>{{ intro.text }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Contenu principal -->
 <main class="container rugby-enfants-page">
     <article>
 
-        <!-- Chiffres clés -->
+        {% comment %} <!-- Chiffres clés -->
         <div class="re-stats-grid">
             <div class="re-stat-card">
                 <span class="re-stat-number">4+</span>
@@ -127,7 +142,7 @@ cta:
                 <span class="re-stat-number">100%</span>
                 <span class="re-stat-label">Éducateurs diplômés</span>
             </div>
-        </div>
+        </div> {% endcomment %}
 
         {% for section in sections %}
         <section class="re-section{% if section.title contains 'sécurité' %} re-section--security{% endif %}{% if section.title contains 'environnement' %} re-section--location{% endif %}">
@@ -149,7 +164,7 @@ cta:
             {% comment %}Image avant la section méthode d'apprentissage{% endcomment %}
             {% if section.title contains 'méthode' %}
             <div class="re-image-banner">
-                <img src="/assets/rugby-enfants/fond2.png" 
+                <img src="/assets/rugby-enfants/fond2.webp" 
                      alt="Entraînement de rugby pour les jeunes" 
                      loading="lazy" width="1200" height="300">
             </div>

@@ -1,190 +1,192 @@
-[
-  {
-    "nom": "Cattier",
-    "prenom": "Lionel",
-    "categories": [
-      "U12"
-    ],
-    "experience": "Formation éducateur",
-    "diplomes": [
-      "Éducateur Rugby"
-    ],
-    "photo": "/assets/entraineurs/default.jpg",
-    "specialites": [
-      "Stratégie de jeu",
-      "Analyse technique"
-    ]
-  },
-  {
-    "nom": "Charignon",
-    "prenom": "Mathieu",
-    "categories": [
-      "U8"
-    ],
-    "experience": "Formation éducateur",
-    "diplomes": [
-      "Éducateur Rugby"
-    ],
-    "photo": "/assets/entraineurs/default.jpg",
-    "specialites": [
-      "Apprentissage ludique"
-    ]
-  },
-  {
-    "nom": "Degarat",
-    "prenom": "Flore",
-    "categories": [
-      "U6"
-    ],
-    "experience": "Formation éducateur",
-    "diplomes": [
-      "Éducateur Rugby"
-    ],
-    "photo": "/assets/entraineurs/default.jpg",
-    "specialites": [
-      "Éveil rugby",
-      "Motricité"
-    ]
-  },
-  {
-    "nom": "Degarat",
-    "prenom": "Rémy",
-    "categories": [
-      "U10"
-    ],
-    "experience": "Formation éducateur",
-    "diplomes": [
-      "Éducateur Rugby"
-    ],
-    "photo": "/assets/entraineurs/default.jpg",
-    "specialites": [
-      "Développement technique"
-    ]
-  },
-  {
-    "nom": "Deniau",
-    "prenom": "Alexandre",
-    "categories": [
-      "U10"
-    ],
-    "experience": "Formation éducateur",
-    "diplomes": [
-      "Éducateur Rugby"
-    ],
-    "photo": "/assets/entraineurs/default.jpg",
-    "specialites": [
-      "Développement technique"
-    ]
-  },
-  {
-    "nom": "Gomez",
-    "prenom": "Angélique",
-    "categories": [
-      "U6"
-    ],
-    "experience": "Formation éducateur",
-    "diplomes": [
-      "Éducateur Rugby"
-    ],
-    "photo": "/assets/entraineurs/default.jpg",
-    "specialites": [
-      "Éveil rugby",
-      "Motricité"
-    ]
-  },
-  {
-    "nom": "Gomez",
-    "prenom": "Franck",
-    "categories": [
-      "U12"
-    ],
-    "experience": "Formation éducateur",
-    "diplomes": [
-      "Éducateur Rugby"
-    ],
-    "photo": "/assets/entraineurs/default.jpg",
-    "specialites": [
-      "Stratégie de jeu",
-      "Analyse technique"
-    ]
-  },
-  {
-    "nom": "Hayart",
-    "prenom": "Nicolas",
-    "categories": [
-      "U14"
-    ],
-    "experience": "Formation éducateur",
-    "diplomes": [
-      "Éducateur Rugby"
-    ],
-    "photo": "/assets/entraineurs/default.jpg",
-    "specialites": [
-      "Préparation physique",
-      "Technique avancée"
-    ]
-  },
-  {
-    "nom": "Johannes",
-    "prenom": "Kevyn",
-    "categories": [
-      "U12"
-    ],
-    "experience": "Formation éducateur",
-    "diplomes": [
-      "Éducateur Rugby"
-    ],
-    "photo": "/assets/entraineurs/default.jpg",
-    "specialites": [
-      "Stratégie de jeu",
-      "Analyse technique"
-    ]
-  },
-  {
-    "nom": "Rondepierre",
-    "prenom": "Elioth",
-    "categories": [
-      "U8",
-      "U14"
-    ],
-    "experience": "Formation éducateur",
-    "diplomes": [
-      "Éducateur Rugby"
-    ],
-    "photo": "/assets/entraineurs/default.jpg",
-    "specialites": [
-      "Apprentissage ludique",
-      "Préparation physique"
-    ]
-  },
-  {
-    "nom": "Sirolli",
-    "prenom": "Guillaume",
-    "categories": [
-      "U10"
-    ],
-    "experience": "Formation éducateur",
-    "diplomes": [
-      "Éducateur Rugby"
-    ],
-    "photo": "/assets/entraineurs/default.jpg",
-    "specialites": [
-      "Développement technique"
-    ]
-  },
-  {
-    "nom": "Spica",
-    "prenom": "Anaïs",
-    "categories": [
-      "U10"
-    ],
-    "experience": "Formation éducateur",
-    "diplomes": [
-      "Éducateur Rugby"
-    ],
-    "photo": "/assets/entraineurs/default.jpg",
-    "specialites": [
-      "Développement technique"
-    ]
-  }
-]
+{
+  "entraineurs": [
+    {
+      "nom": "Cattier",
+      "prenom": "Lionel",
+      "categories": [
+        "U12"
+      ],
+      "experience": "Formation éducateur",
+      "diplomes": [
+        "Éducateur Rugby"
+      ],
+      "photo": "/assets/entraineurs/default.jpg",
+      "specialites": [
+        "Stratégie de jeu",
+        "Analyse technique"
+      ]
+    },
+    {
+      "nom": "Charignon",
+      "prenom": "Mathieu",
+      "categories": [
+        "U8"
+      ],
+      "experience": "Formation éducateur",
+      "diplomes": [
+        "Éducateur Rugby"
+      ],
+      "photo": "/assets/entraineurs/default.jpg",
+      "specialites": [
+        "Apprentissage ludique"
+      ]
+    },
+    {
+      "nom": "Degarat",
+      "prenom": "Flore",
+      "categories": [
+        "U6"
+      ],
+      "experience": "Formation éducateur",
+      "diplomes": [
+        "Éducateur Rugby"
+      ],
+      "photo": "/assets/entraineurs/default.jpg",
+      "specialites": [
+        "Éveil rugby",
+        "Motricité"
+      ]
+    },
+    {
+      "nom": "Degarat",
+      "prenom": "Rémy",
+      "categories": [
+        "U10"
+      ],
+      "experience": "Formation éducateur",
+      "diplomes": [
+        "Éducateur Rugby"
+      ],
+      "photo": "/assets/entraineurs/default.jpg",
+      "specialites": [
+        "Développement technique"
+      ]
+    },
+    {
+      "nom": "Deniau",
+      "prenom": "Alexandre",
+      "categories": [
+        "U10"
+      ],
+      "experience": "Formation éducateur",
+      "diplomes": [
+        "Éducateur Rugby"
+      ],
+      "photo": "/assets/entraineurs/default.jpg",
+      "specialites": [
+        "Développement technique"
+      ]
+    },
+    {
+      "nom": "Gomez",
+      "prenom": "Angélique",
+      "categories": [
+        "U6"
+      ],
+      "experience": "Formation éducateur",
+      "diplomes": [
+        "Éducateur Rugby"
+      ],
+      "photo": "/assets/entraineurs/default.jpg",
+      "specialites": [
+        "Éveil rugby",
+        "Motricité"
+      ]
+    },
+    {
+      "nom": "Gomez",
+      "prenom": "Franck",
+      "categories": [
+        "U12"
+      ],
+      "experience": "Formation éducateur",
+      "diplomes": [
+        "Éducateur Rugby"
+      ],
+      "photo": "/assets/entraineurs/default.jpg",
+      "specialites": [
+        "Stratégie de jeu",
+        "Analyse technique"
+      ]
+    },
+    {
+      "nom": "Hayart",
+      "prenom": "Nicolas",
+      "categories": [
+        "U14"
+      ],
+      "experience": "Formation éducateur",
+      "diplomes": [
+        "Éducateur Rugby"
+      ],
+      "photo": "/assets/entraineurs/default.jpg",
+      "specialites": [
+        "Préparation physique",
+        "Technique avancée"
+      ]
+    },
+    {
+      "nom": "Johannes",
+      "prenom": "Kevyn",
+      "categories": [
+        "U12"
+      ],
+      "experience": "Formation éducateur",
+      "diplomes": [
+        "Éducateur Rugby"
+      ],
+      "photo": "/assets/entraineurs/default.jpg",
+      "specialites": [
+        "Stratégie de jeu",
+        "Analyse technique"
+      ]
+    },
+    {
+      "nom": "Rondepierre",
+      "prenom": "Elioth",
+      "categories": [
+        "U8",
+        "U14"
+      ],
+      "experience": "Formation éducateur",
+      "diplomes": [
+        "Éducateur Rugby"
+      ],
+      "photo": "/assets/entraineurs/default.jpg",
+      "specialites": [
+        "Apprentissage ludique",
+        "Préparation physique"
+      ]
+    },
+    {
+      "nom": "Sirolli",
+      "prenom": "Guillaume",
+      "categories": [
+        "U10"
+      ],
+      "experience": "Formation éducateur",
+      "diplomes": [
+        "Éducateur Rugby"
+      ],
+      "photo": "/assets/entraineurs/default.jpg",
+      "specialites": [
+        "Développement technique"
+      ]
+    },
+    {
+      "nom": "Spica",
+      "prenom": "Anaïs",
+      "categories": [
+        "U10"
+      ],
+      "experience": "Formation éducateur",
+      "diplomes": [
+        "Éducateur Rugby"
+      ],
+      "photo": "/assets/entraineurs/default.jpg",
+      "specialites": [
+        "Développement technique"
+      ]
+    }
+  ]
+}

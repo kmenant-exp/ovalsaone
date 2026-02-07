@@ -1,98 +1,88 @@
-[
-  {
-    
-    "nom": "DENIAU",
-    "prenom": "Alexandre",
-    "poste": "Président",
-    "description": "",
-    "photo": "/assets/bureau/default.jpg"
-  },
-  {
-    
-    "nom": "CORRÉIA",
-    "prenom": "Raphael",
-    "poste": "Vice-Président",
-    "description": "",
-    "photo": "/assets/bureau/default.jpg"
-  },
-  {
-    
-    "nom": "HAYART",
-    "prenom": "Nicolas",
-    "poste": "Vice-Président",
-    "description": "",
-    "photo": "/assets/bureau/default.jpg"
-  },
-  {
-    
-    "nom": "LEFÈBVRE",
-    "prenom": "Guillaume",
-    "poste": "Vice-Président & Commission Partenariat",
-    "description": "",
-    "photo": "/assets/bureau/default.jpg"
-  },
-  {
-    
-    "nom": "BRÉGEON",
-    "prenom": "Julie",
-    "poste": "Secrétaire",
-    "description": "",
-    "photo": "/assets/bureau/default.jpg"
-  },
-  {
-    
-    "nom": "CHARIGNON",
-    "prenom": "Morgane",
-    "poste": "Secrétaire",
-    "description": "",
-    "photo": "/assets/bureau/default.jpg"
-  },
-  {
-    
-    "nom": "DENIAU",
-    "prenom": "Amélie",
-    "poste": "Trésorière",
-    "description": "",
-    "photo": "/assets/bureau/default.jpg"
-  },
-  {
-    
-    "nom": "MOREL",
-    "prenom": "Olivier",
-    "poste": "Trésorier",
-    "description": "",
-    "photo": "/assets/bureau/default.jpg"
-  },
-  {
-    
-    "nom": "GALLAY",
-    "prenom": "Yann",
-    "poste": "Coordination Sportive",
-    "description": "",
-    "photo": "/assets/bureau/default.jpg"
-  },
-  {
-    
-    "nom": "SPICA",
-    "prenom": "Anaïs",
-    "poste": "Commission Communication",
-    "description": "",
-    "photo": "/assets/bureau/default.jpg"
-  },
-  {
-    
-    "nom": "RONDEPIERRE",
-    "prenom": "Elioth",
-    "poste": "Commission Communication",
-    "description": "",
-    "photo": "/assets/bureau/default.jpg"
-  },
-  {
-    
-    "nom": "GENTE",
-    "prenom": "Laëtitia",
-    "poste": "Commission Partenariat & Buvette",
-    "description": "Laëtitia a brillé sur les parquets, elle brille aujourd'hui dans notre association. Ancienne championne de basket, passionnée et bienveillante, elle s'investit avec cœur pour transmettre aux enfants les valeurs du sport collectif. Sur le terrain, elle coache avec passion et bienveillance. En dehors, son café et son sourire réchauffent les cœurs comme un rayon de soleil en hiver. Une présence précieuse, toujours là pour motiver, apaiser et rassembler.",
-    "photo": "/assets/bureau/GENTE_Laetitia.jpg"
-  }
-]
+{
+  "bureau": [
+    {
+      "nom": "DENIAU",
+      "prenom": "Alexandre",
+      "poste": "Président",
+      "description": "",
+      "photo": "/assets/bureau/default.jpg"
+    },
+    {
+      "nom": "CORRÉIA",
+      "prenom": "Raphael",
+      "poste": "Vice-Président",
+      "description": "",
+      "photo": "/assets/bureau/default.jpg"
+    },
+    {
+      "nom": "HAYART",
+      "prenom": "Nicolas",
+      "poste": "Vice-Président",
+      "description": "",
+      "photo": "/assets/bureau/default.jpg"
+    },
+    {
+      "nom": "LEFÈBVRE",
+      "prenom": "Guillaume",
+      "poste": "Vice-Président & Commission Partenariat",
+      "description": "",
+      "photo": "/assets/bureau/default.jpg"
+    },
+    {
+      "nom": "BRÉGEON",
+      "prenom": "Julie",
+      "poste": "Secrétaire",
+      "description": "",
+      "photo": "/assets/bureau/default.jpg"
+    },
+    {
+      "nom": "CHARIGNON",
+      "prenom": "Morgane",
+      "poste": "Secrétaire",
+      "description": "",
+      "photo": "/assets/bureau/default.jpg"
+    },
+    {
+      "nom": "DENIAU",
+      "prenom": "Amélie",
+      "poste": "Trésorière",
+      "description": "",
+      "photo": "/assets/bureau/default.jpg"
+    },
+    {
+      "nom": "MOREL",
+      "prenom": "Olivier",
+      "poste": "Trésorier",
+      "description": "",
+      "photo": "/assets/bureau/default.jpg"
+    },
+    {
+      "nom": "GALLAY",
+      "prenom": "Yann",
+      "poste": "Coordination Sportive",
+      "description": "",
+      "photo": "/assets/bureau/default.jpg"
+    },
+    {
+      "nom": "SPICA",
+      "prenom": "Anaïs",
+      "poste": "Commission Communication",
+      "description": "",
+      "photo": "/assets/bureau/default.jpg"
+    },
+    {
+      "nom": "RONDEPIERRE",
+      "prenom": "Elioth",
+      "poste": "Commission Communication",
+      "description": "",
+      "photo": "/assets/bureau/default.jpg"
+    },
+    {
+      "nom": "GENTE",
+      "prenom": "Laëtitia",
+      "poste": "Commission Partenariat & Buvette",
+      "description": "Laëtitia a brillé sur les parquets, elle brille aujourd'hui dans notre association. Ancienne championne de basket, passionnée et bienveillante, elle s'investit avec cœur pour transmettre aux enfants les valeurs du sport collectif. Sur le terrain, elle coache avec passion et bienveillance. En dehors, son café et son sourire réchauffent les cœurs comme un rayon de soleil en hiver. Une présence précieuse, toujours là pour motiver, apaiser et rassembler.",
+      "photo": "/assets/bureau/GENTE_Laetitia.jpg"
+    }
+  ]
+}

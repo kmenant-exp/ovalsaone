@@ -1,5 +1,29 @@
+import { basename } from 'path';
+
+// Data files wrapped by Decap CMS as {"key": [...]} that need unwrapping
+// to bare arrays for backward-compatible template access.
+const UNWRAP_DATA_FILES = new Set([
+    'actualites', 'bureau', 'teams', 'sponsors', 'entraineurs', 'gallery'
+]);
+
 export default function(eleventyConfig) {
     console.log("Configuring Eleventy...");
+
+    // Custom JSON parser: auto-unwrap Decap CMS wrapped arrays
+    // e.g. {"actualites": [...]} in actualites.json → returns [...] so
+    // templates can keep using `{% for item in actualites %}` directly.
+    eleventyConfig.addDataExtension("json", {
+        parser: (contents, filePath) => {
+            const data = JSON.parse(contents);
+            const stem = basename(filePath, '.json');
+            if (UNWRAP_DATA_FILES.has(stem)
+                && data && typeof data === 'object' && !Array.isArray(data)
+                && stem in data && Array.isArray(data[stem])) {
+                return data[stem];
+            }
+            return data;
+        }
+    });
     
     // Copier les assets
     eleventyConfig.addPassthroughCopy("./src/assets");

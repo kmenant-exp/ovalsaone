@@ -1,154 +1,151 @@
-[
+{
+  "teams": [
     {
-        
-        "name": "U6",
-        "description": "École de rugby pour les moins de 6 ans",
-        "min_age": 3,
-        "max_age": 5,
-        "players": 6,
-        "coaches": [
-            {
-                "name": "Angélique Gomez"
-            },
-            {
-                "name": "Flore Degarat"
-            }
-        ],
-        "schedule": [
-            {
-                "day": "Samedi",
-                "time": "10h00-11h00"
-            }
-        ]
+      "name": "U6",
+      "description": "École de rugby pour les moins de 6 ans",
+      "min_age": 3,
+      "max_age": 5,
+      "players": 6,
+      "coaches": [
+        {
+          "name": "Angélique Gomez"
+        },
+        {
+          "name": "Flore Degarat"
+        }
+      ],
+      "schedule": [
+        {
+          "day": "Samedi",
+          "time": "10h00-11h00"
+        }
+      ]
     },
     {
-        
-        "name": "U8",
-        "description": "École de rugby pour les moins de 8 ans",
-        "min_age": 6,
-        "max_age": 7,
-        "players": 17,
-        "coaches": [
-            {
-                "name": "Mathieu Charignon"
-            },
-            {
-                "name": "Elioth Rondepierre"
-            }
-        ],
-        "schedule": [
-            {
-                "day": "Samedi",
-                "time": "10h00-11h30"
-            }
-        ]
+      "name": "U8",
+      "description": "École de rugby pour les moins de 8 ans",
+      "min_age": 6,
+      "max_age": 7,
+      "players": 17,
+      "coaches": [
+        {
+          "name": "Mathieu Charignon"
+        },
+        {
+          "name": "Elioth Rondepierre"
+        }
+      ],
+      "schedule": [
+        {
+          "day": "Samedi",
+          "time": "10h00-11h30"
+        }
+      ]
     },
     {
-        
-        "name": "U10",
-        "description": "École de rugby pour les moins de 10 ans",
-        "min_age": 8,
-        "max_age": 9,
-        "players": 17,
-        "coaches": [
-            {
-                "name": "Alexandre Deniau"
-            },
-            {
-                "name": "Anaïs Spica"
-            },
-            {
-                "name": "Rémy Degarat"
-            },
-            {
-                "name": "Guillaume Sirolli"
-            }
-        ],
-        "schedule": [
-            {
-                "day": "Mercredi",
-                "time": "18h00-19h30"
-            },
-            {
-                "day": "Samedi",
-                "time": "10h00-12h00"
-            }
-        ]
+      "name": "U10",
+      "description": "École de rugby pour les moins de 10 ans",
+      "min_age": 8,
+      "max_age": 9,
+      "players": 17,
+      "coaches": [
+        {
+          "name": "Alexandre Deniau"
+        },
+        {
+          "name": "Anaïs Spica"
+        },
+        {
+          "name": "Rémy Degarat"
+        },
+        {
+          "name": "Guillaume Sirolli"
+        }
+      ],
+      "schedule": [
+        {
+          "day": "Mercredi",
+          "time": "18h00-19h30"
+        },
+        {
+          "day": "Samedi",
+          "time": "10h00-12h00"
+        }
+      ]
     },
     {
-        
-        "name": "U12",
-        "description": "École de rugby pour les moins de 12 ans",
-        "min_age": 10,
-        "max_age": 11,
-        "players": 18,
-        "coaches": [
-            {
-                "name": "Kevyn Johannes"
-            },
-            {
-                "name": "Franck Gomez"
-            },
-            {
-                "name": "Lionel Cattier"
-            }
-        ],
-        "schedule": [
-            {
-                "day": "Lundi",
-                "time": "18h00-19h00"
-            },
-            {
-                "day": "Mercredi",
-                "time": "18h00-19h30"
-            },
-            {
-                "day": "Samedi",
-                "time": "10h00-12h00"
-            }
-        ]
+      "name": "U12",
+      "description": "École de rugby pour les moins de 12 ans",
+      "min_age": 10,
+      "max_age": 11,
+      "players": 18,
+      "coaches": [
+        {
+          "name": "Kevyn Johannes"
+        },
+        {
+          "name": "Franck Gomez"
+        },
+        {
+          "name": "Lionel Cattier"
+        }
+      ],
+      "schedule": [
+        {
+          "day": "Lundi",
+          "time": "18h00-19h00"
+        },
+        {
+          "day": "Mercredi",
+          "time": "18h00-19h30"
+        },
+        {
+          "day": "Samedi",
+          "time": "10h00-12h00"
+        }
+      ]
     },
     {
-        
-        "name": "U14",
-        "description": "École de rugby pour les moins de 14 ans",
-        "min_age": 12,
-        "max_age": 13,
-        "players": 7,
-        "coaches": [
-            {
-                "name": "Nicolas Hayart"
-            },
-            {
-                "name": "Elioth Rondepierre"
-            }
-        ],
-        "schedule": [
-            {
-                "day": "Mercredi",
-                "time": "18h00-19h30"
-            },
-            {
-                "day": "Vendredi",
-                "time": "18h00-19h30"
-            }
-        ]
+      "name": "U14",
+      "description": "École de rugby pour les moins de 14 ans",
+      "min_age": 12,
+      "max_age": 13,
+      "players": 7,
+      "coaches": [
+        {
+          "name": "Nicolas Hayart"
+        },
+        {
+          "name": "Elioth Rondepierre"
+        }
+      ],
+      "schedule": [
+        {
+          "day": "Mercredi",
+          "time": "18h00-19h30"
+        },
+        {
+          "day": "Vendredi",
+          "time": "18h00-19h30"
+        }
+      ]
     },
     {
-        "name": "Rugby Touch",
-        "description": "Rugby Touch pour adultes - Une version dynamique et sans plaquage",
-        "min_age": 18,
-        "max_age": null,
-        "coaches": [
-            {
-                "name": "Franck Gomez"
-            }
-        ],
-        "schedule": [
-            {
-                "day": "Vendredi",
-                "time": "18h30-20h30"
-            }
-        ]
+      "name": "Rugby Touch",
+      "description": "Rugby Touch pour adultes - Une version dynamique et sans plaquage",
+      "min_age": 18,
+      "max_age": null,
+      "coaches": [
+        {
+          "name": "Franck Gomez"
+        }
+      ],
+      "schedule": [
+        {
+          "day": "Vendredi",
+          "time": "18h30-20h30"
+        }
+      ]
     }
-]
+  ]
+}
