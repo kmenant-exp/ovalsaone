@@ -91,6 +91,9 @@
 .btn-small {
     padding: var(--spacing-2) var(--spacing-4);
     font-size: var(--font-size-sm);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 }
 
 /* Bouton outline blanc */
@@ -102,9 +105,11 @@
 
 .btn-outline-white:hover {
     background: var(--white);
-    color: var(--primary-color);
+    color: var(--white);
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.85);
 }
 
 /* Bouton outline primaire */

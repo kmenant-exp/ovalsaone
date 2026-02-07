@@ -183,11 +183,11 @@
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
 }
-
+/* 
 .histoire .btn-outline-white:hover {
     background: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.85);
-}
+} */
 
 /* ===================================
    RESPONSIVE POUR INDEX

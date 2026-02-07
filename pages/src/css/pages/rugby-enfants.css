@@ -1,0 +1,660 @@
+/* =============================================================================
+   Styles spécifiques – Page Rugby Enfants Trévoux
+   Tous les sélecteurs scopés sous main.rugby-enfants-page pour éviter les
+   conflits avec ecole.css, glassmorphism et autres composants.
+   ============================================================================= */
+
+/* ===================================
+   LAYOUT PRINCIPAL
+   =================================== */
+main.rugby-enfants-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: var(--spacing-12) var(--spacing-4) !important;
+}
+
+main.rugby-enfants-page > article {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-12);
+}
+
+/* ===================================
+   BANNIÈRES IMAGES
+   =================================== */
+main.rugby-enfants-page .re-image-banner {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    border-radius: var(--border-radius-xl);
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(14, 49, 96, 0.18);
+    margin-bottom: var(--spacing-6);
+}
+
+main.rugby-enfants-page .re-image-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+main.rugby-enfants-page .re-image-banner:hover img {
+    transform: scale(1.04);
+}
+
+main.rugby-enfants-page .re-image-banner .image-credit {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.55);
+    color: var(--white);
+    font-size: var(--font-size-xs);
+    padding: var(--spacing-1) var(--spacing-3);
+    border-radius: var(--border-radius) 0 0 0;
+    z-index: 2;
+}
+
+/* Overlay décoratif gradient sur bannières */
+main.rugby-enfants-page .re-image-banner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(14, 49, 96, 0.25) 100%);
+    pointer-events: none;
+}
+
+/* ===================================
+   CHIFFRES CLÉS (stats)
+   =================================== */
+main.rugby-enfants-page .re-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-5);
+}
+
+main.rugby-enfants-page .re-stat-card {
+    text-align: center;
+    padding: var(--spacing-6) var(--spacing-4);
+    background: var(--glass-bg-card, rgba(255, 255, 255, 0.85));
+    backdrop-filter: var(--glass-blur, blur(12px));
+    -webkit-backdrop-filter: var(--glass-blur, blur(12px));
+    border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.3));
+    border-radius: var(--border-radius-xl);
+    box-shadow:
+        0 8px 32px rgba(14, 49, 96, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                box-shadow 0.35s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+main.rugby-enfants-page .re-stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+main.rugby-enfants-page .re-stat-card:hover {
+    transform: translateY(-6px);
+    box-shadow:
+        0 16px 48px rgba(14, 49, 96, 0.16),
+        0 0 30px rgba(7, 191, 239, 0.08);
+}
+
+main.rugby-enfants-page .re-stat-card:hover::before {
+    opacity: 1;
+}
+
+main.rugby-enfants-page .re-stat-number {
+    display: block;
+    font-size: var(--font-size-4xl);
+    font-weight: 800;
+    color: var(--primary-color);
+    line-height: 1;
+    margin-bottom: var(--spacing-2);
+}
+
+main.rugby-enfants-page .re-stat-label {
+    display: block;
+    font-size: var(--font-size-sm);
+    color: var(--gray-600);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 600;
+}
+
+/* ===================================
+   SECTIONS CONTENU
+   =================================== */
+main.rugby-enfants-page .re-section {
+    position: relative;
+}
+
+main.rugby-enfants-page .re-section > h2 {
+    color: var(--primary-color);
+    font-size: var(--font-size-3xl);
+    font-weight: 800;
+    margin-bottom: var(--spacing-6);
+    position: relative;
+    display: inline-block;
+}
+
+main.rugby-enfants-page .re-section > h2::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+    border-radius: var(--border-radius-full);
+}
+
+main.rugby-enfants-page .re-section > p {
+    font-size: var(--font-size-lg);
+    line-height: 1.8;
+    color: var(--gray-700);
+    margin-bottom: var(--spacing-6);
+}
+
+/* ===================================
+   LISTES À PUCES
+   =================================== */
+main.rugby-enfants-page .re-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+}
+
+main.rugby-enfants-page .re-list li {
+    position: relative;
+    padding-left: 2rem;
+    line-height: 1.7;
+    color: var(--gray-700);
+    font-size: var(--font-size-base);
+}
+
+main.rugby-enfants-page .re-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 10px;
+    height: 10px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(247, 183, 50, 0.2);
+}
+
+main.rugby-enfants-page .re-list li strong {
+    color: var(--primary-color);
+}
+
+/* ===================================
+   SOUS-SECTIONS (bienfaits / valeurs)
+   =================================== */
+main.rugby-enfants-page .re-subsection {
+    background: var(--glass-bg-card, rgba(255, 255, 255, 0.85));
+    backdrop-filter: var(--glass-blur-light, blur(8px));
+    -webkit-backdrop-filter: var(--glass-blur-light, blur(8px));
+    border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.3));
+    border-radius: var(--border-radius-xl);
+    padding: var(--spacing-8);
+    margin-bottom: var(--spacing-5);
+    box-shadow:
+        0 4px 20px rgba(14, 49, 96, 0.08),
+        inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+}
+
+main.rugby-enfants-page .re-subsection:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 36px rgba(14, 49, 96, 0.14);
+    border-color: var(--glass-border-accent, rgba(7, 191, 239, 0.4));
+}
+
+main.rugby-enfants-page .re-subsection h3 {
+    color: var(--primary-color);
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-3);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+}
+
+main.rugby-enfants-page .re-subsection h3 .re-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--sky-color), #dbeafe);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+main.rugby-enfants-page .re-subsection p {
+    color: var(--gray-600);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-4);
+}
+
+/* ===================================
+   CARTES PAR TRANCHE D'ÂGE
+   =================================== */
+main.rugby-enfants-page .re-age-card {
+    background: var(--glass-bg-card, rgba(255, 255, 255, 0.85));
+    backdrop-filter: var(--glass-blur-light, blur(8px));
+    -webkit-backdrop-filter: var(--glass-blur-light, blur(8px));
+    border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.3));
+    border-left: 5px solid var(--accent-color);
+    border-radius: var(--border-radius-xl);
+    padding: var(--spacing-8);
+    margin-bottom: var(--spacing-5);
+    box-shadow:
+        0 6px 24px rgba(14, 49, 96, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+main.rugby-enfants-page .re-age-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 140px; height: 140px;
+    background: radial-gradient(circle at top right, rgba(247, 183, 50, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+main.rugby-enfants-page .re-age-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 48px rgba(14, 49, 96, 0.16);
+}
+
+main.rugby-enfants-page .re-age-card:first-of-type {
+    margin-top: var(--spacing-8);
+}
+
+main.rugby-enfants-page .re-age-card:nth-child(2) { border-left-color: var(--secondary-color); }
+main.rugby-enfants-page .re-age-card:nth-child(3) { border-left-color: var(--accent-color); }
+main.rugby-enfants-page .re-age-card:nth-child(4) { border-left-color: var(--primary-color); }
+
+main.rugby-enfants-page .re-age-card h3 {
+    color: var(--primary-color);
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-2);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+}
+
+main.rugby-enfants-page .re-age-card h3 .re-age-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-1) var(--spacing-3);
+    border-radius: var(--border-radius-full);
+    background: linear-gradient(135deg, var(--primary-color), var(--navy-color));
+    color: var(--white);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+main.rugby-enfants-page .re-age-card p {
+    color: var(--gray-600);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-4);
+}
+
+/* ===================================
+   SECTION SÉCURITÉ
+   =================================== */
+main.rugby-enfants-page .re-section--security {
+    background: linear-gradient(135deg,
+        rgba(240, 253, 244, 0.9) 0%,
+        rgba(236, 252, 203, 0.85) 100%);
+    backdrop-filter: var(--glass-blur-light, blur(8px));
+    -webkit-backdrop-filter: var(--glass-blur-light, blur(8px));
+    border-radius: var(--border-radius-xl);
+    padding: var(--spacing-10);
+    border: 1px solid rgba(187, 247, 208, 0.6);
+    position: relative;
+    box-shadow: 0 4px 20px rgba(5, 150, 105, 0.08);
+}
+
+main.rugby-enfants-page .re-section--security::before {
+    content: '🛡️';
+    position: absolute;
+    top: var(--spacing-6);
+    right: var(--spacing-6);
+    font-size: 3rem;
+    opacity: 0.12;
+    pointer-events: none;
+}
+
+main.rugby-enfants-page .re-section--security > h2 {
+    color: #047857;
+}
+
+main.rugby-enfants-page .re-section--security > h2::after {
+    background: linear-gradient(90deg, #10b981, #34d399);
+}
+
+main.rugby-enfants-page .re-section--security .re-list li::before {
+    background: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+/* ===================================
+   SECTION LOCALISATION
+   =================================== */
+main.rugby-enfants-page .re-section--location {
+    background: linear-gradient(135deg,
+        rgba(224, 242, 254, 0.9) 0%,
+        rgba(219, 234, 254, 0.85) 100%);
+    backdrop-filter: var(--glass-blur-light, blur(8px));
+    -webkit-backdrop-filter: var(--glass-blur-light, blur(8px));
+    border-radius: var(--border-radius-xl);
+    padding: var(--spacing-10);
+    border: 1px solid rgba(147, 197, 253, 0.5);
+    box-shadow: 0 4px 20px rgba(14, 49, 96, 0.08);
+    position: relative;
+}
+
+main.rugby-enfants-page .re-section--location::before {
+    content: '📍';
+    position: absolute;
+    top: var(--spacing-6);
+    right: var(--spacing-6);
+    font-size: 3rem;
+    opacity: 0.12;
+    pointer-events: none;
+}
+
+main.rugby-enfants-page .re-section--location > h2::after {
+    background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+}
+
+main.rugby-enfants-page .re-section--location .re-list li::before {
+    background: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(7, 191, 239, 0.15);
+}
+
+/* ===================================
+   FAQ
+   =================================== */
+main.rugby-enfants-page .re-faq {
+    background: var(--glass-bg-card, rgba(255, 255, 255, 0.85));
+    backdrop-filter: var(--glass-blur, blur(12px));
+    -webkit-backdrop-filter: var(--glass-blur, blur(12px));
+    border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.3));
+    border-radius: var(--border-radius-xl);
+    padding: var(--spacing-10);
+    box-shadow: 0 8px 32px rgba(14, 49, 96, 0.08);
+}
+
+main.rugby-enfants-page .re-faq > h2 {
+    color: var(--primary-color);
+    font-size: var(--font-size-3xl);
+    font-weight: 800;
+    margin-bottom: var(--spacing-8);
+    position: relative;
+    display: inline-block;
+}
+
+main.rugby-enfants-page .re-faq > h2::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+    border-radius: var(--border-radius-full);
+}
+
+main.rugby-enfants-page .re-faq-item {
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-6) var(--spacing-8);
+    margin-bottom: var(--spacing-4);
+    border: 1px solid var(--gray-200);
+    transition: all 0.3s ease;
+}
+
+main.rugby-enfants-page .re-faq-item:hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 4px 16px rgba(14, 49, 96, 0.08);
+    transform: translateY(-2px);
+}
+
+main.rugby-enfants-page .re-faq-item h3 {
+    color: var(--primary-color);
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    margin-bottom: var(--spacing-3);
+}
+
+main.rugby-enfants-page .re-faq-item p {
+    color: var(--gray-600);
+    line-height: 1.8;
+    margin: 0;
+}
+
+main.rugby-enfants-page .re-faq-item p strong {
+    color: var(--primary-color);
+}
+
+/* ===================================
+   CTA
+   =================================== */
+main.rugby-enfants-page .re-cta {
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--navy-color) 100%);
+    border-radius: var(--border-radius-xl);
+    padding: var(--spacing-16) var(--spacing-8);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 12px 48px rgba(14, 49, 96, 0.3);
+}
+
+main.rugby-enfants-page .re-cta::before {
+    content: '';
+    position: absolute;
+    top: -60%;
+    right: -20%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(247, 183, 50, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+main.rugby-enfants-page .re-cta::after {
+    content: '';
+    position: absolute;
+    bottom: -40%;
+    left: -15%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(7, 191, 239, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+main.rugby-enfants-page .re-cta h2 {
+    color: var(--white);
+    font-size: var(--font-size-3xl);
+    font-weight: 800;
+    margin-bottom: var(--spacing-4);
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+}
+
+main.rugby-enfants-page .re-cta h2::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+    border-radius: var(--border-radius-full);
+}
+
+main.rugby-enfants-page .re-cta p {
+    font-size: var(--font-size-lg);
+    opacity: 0.92;
+    margin-bottom: var(--spacing-8);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 1;
+    line-height: 1.7;
+}
+
+main.rugby-enfants-page .re-cta-buttons {
+    display: flex;
+    gap: var(--spacing-4);
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+
+main.rugby-enfants-page .re-cta-buttons a.re-btn--primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-color);
+    color: var(--dark-color);
+    padding: var(--spacing-4) var(--spacing-10);
+    border-radius: var(--border-radius-full);
+    font-weight: 700;
+    font-size: var(--font-size-lg);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(247, 183, 50, 0.35);
+    border: none;
+}
+
+main.rugby-enfants-page .re-cta-buttons a.re-btn--primary:hover {
+    background: var(--gold-color);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(247, 183, 50, 0.45);
+}
+
+main.rugby-enfants-page .re-cta-buttons a.re-btn--secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--white);
+    padding: var(--spacing-4) var(--spacing-10);
+    border-radius: var(--border-radius-full);
+    font-weight: 700;
+    font-size: var(--font-size-lg);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.45);
+}
+
+main.rugby-enfants-page .re-cta-buttons a.re-btn--secondary:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--white);
+    transform: translateY(-3px);
+}
+
+/* ===================================
+   RESPONSIVE
+   =================================== */
+@media (max-width: 768px) {
+    main.rugby-enfants-page {
+        padding: var(--spacing-8) var(--spacing-4) !important;
+    }
+
+    main.rugby-enfants-page > article {
+        gap: var(--spacing-8);
+    }
+
+    main.rugby-enfants-page .re-section > h2 {
+        font-size: var(--font-size-2xl);
+    }
+
+    main.rugby-enfants-page .re-image-banner {
+        height: 200px;
+    }
+
+    main.rugby-enfants-page .re-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-3);
+    }
+
+    main.rugby-enfants-page .re-stat-number {
+        font-size: var(--font-size-3xl);
+    }
+
+    main.rugby-enfants-page .re-age-card,
+    main.rugby-enfants-page .re-subsection {
+        padding: var(--spacing-6);
+    }
+
+    main.rugby-enfants-page .re-section--security,
+    main.rugby-enfants-page .re-section--location,
+    main.rugby-enfants-page .re-faq {
+        padding: var(--spacing-6);
+    }
+
+    main.rugby-enfants-page .re-cta {
+        padding: var(--spacing-10) var(--spacing-6);
+    }
+
+    main.rugby-enfants-page .re-cta h2 {
+        font-size: var(--font-size-2xl);
+    }
+
+    main.rugby-enfants-page .re-cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main.rugby-enfants-page .re-cta-buttons a.re-btn--primary,
+    main.rugby-enfants-page .re-cta-buttons a.re-btn--secondary {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    main.rugby-enfants-page .re-stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    main.rugby-enfants-page .re-image-banner {
+        height: 160px;
+    }
+}

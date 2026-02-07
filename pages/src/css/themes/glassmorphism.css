@@ -269,9 +269,6 @@ body::before {
 .btn-outline-white:hover {
     background: rgba(255, 255, 255, 0.25);
     border-color: var(--white);
-    box-shadow: 
-        var(--glass-shadow-lg),
-        0 0 20px rgba(255, 255, 255, 0.2);
 }
 
 /* =============================================
