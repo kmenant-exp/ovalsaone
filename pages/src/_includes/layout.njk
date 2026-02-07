@@ -10,7 +10,8 @@ title: "default"
         <!-- SEO Meta Tags -->
         <title>{{ title | default("École de Rugby Oval Saône - Trévoux") }}</title>
         <meta name="description" content="{{ description | default("École de rugby pour enfants de 4 à 14 ans à Trévoux. Apprentissage du rugby dans un cadre convivial et familial. Inscription ouverte toute l'année.") }}">
-        <meta name="keywords" content="rugby, école rugby, enfants, Trévoux, Sainte-Euphémie, sport, formation, U4, U6, U8, U10, U12, U14">
+        <meta name="author" content="École de Rugby Oval Saône">
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
         
         <!-- Geo Tags pour SEO Local -->
         <meta name="geo.region" content="FR-01">
@@ -149,6 +150,50 @@ title: "default"
             ]
         }
         </script>
+
+        <!-- FAQ Schema.org -->
+        {% if page.url == "/faq/" %}
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "À quel âge peut-on inscrire un enfant à l'École de Rugby Oval Saône ?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Nous accueillons les enfants de 4 à 14 ans, répartis en catégories : U4 (Baby Rugby) pour enfants nés en 2021, et U6, U8, U10, U12, U14 pour les catégories jeunes. Les inscriptions sont ouvertes toute l'année avec une séance d'essai gratuite."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Peut-on s'inscrire en cours d'année ?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Oui ! Nous accueillons les nouveaux joueurs tout au long de la saison sportive. Nous nous adaptons à vos contraintes familiales."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Les filles peuvent-elles s'inscrire au club ?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Oui ! Notre école de rugby accueille aussi bien les filles que les garçons. Le rugby est un sport mixte."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Quels sont les tarifs d'inscription ?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "La licence annuelle est de 150€ et comprend l'assurance, la licence FFR, l'équipement complet (short, maillot, chaussettes) et l'accès à tous les entraînements."
+                    }
+                }
+            ]
+        }
+        </script>
+        {% endif %}
 
         <!-- Breadcrumb Schema.org -->
         {% if page.url != "/" %}

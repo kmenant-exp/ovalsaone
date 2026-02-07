@@ -86,6 +86,10 @@
         --parallax-base-position: 50%; /* Corriger la position de l'image en mode responsive */
     }
     
+    .subpage-hero .hero-overlay {
+        border-bottom: none; /* Masquer la bordure dorée qui interfère avec le clip-path sur mobile */
+    }
+    
     .subpage-hero .hero-title {
         font-size: var(--font-size-3xl);
     }
