@@ -2,13 +2,11 @@ name: Deploy to Cloudflare Pages
 
 on:
   workflow_dispatch:
-  # Uncomment the following lines to enable automatic deployment on push
-  # push:
-  #   branches:
-  #     - main
-  #     - dev
-  #   paths:
-  #     - 'pages/**'
+  push:
+    branches:
+      - main
+    paths:
+      - 'pages/**'
 
 jobs:
   deploy:
@@ -29,9 +27,11 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
+        working-directory: pages
         run: npm ci
 
       - name: Build site
+        working-directory: pages
         run: npm run build:prod
 
       - name: Deploy to Cloudflare Pages
@@ -39,4 +39,5 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: pages
           command: pages deploy _site --project-name=ovalsaone --commit-dirty=true

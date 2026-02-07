@@ -7,8 +7,8 @@ interface Env {
   GOOGLE_CLIENT_ID: string;
   GOOGLE_CLIENT_SECRET: string;
   JWT_SECRET: string;
-  GITHUB_CLIENT_ID: string;
-  GITHUB_CLIENT_SECRET: string;
+  GITHUB_APP_CLIENT_ID: string;
+  GITHUB_APP_CLIENT_SECRET: string;
 }
 
 interface GoogleTokenResponse {
@@ -258,26 +258,25 @@ app.get('/assets/*', async (c) => {
   });
 });
 
-// ============= GITHUB OAUTH PROXY (for Decap CMS) =============
+// ============= GITHUB APP AUTH (for Decap CMS) =============
+// Uses a GitHub App installed only on the target repo.
+// The user-to-server token from a GitHub App is inherently scoped to
+// the app's permissions and installed repositories — no extra step needed.
 
-// Step 1: Decap CMS opens a popup to this URL → redirect straight to GitHub.
-// Security note: GitHub itself handles authentication; only repo collaborators
-// can obtain usable tokens, so a Google session gate is unnecessary here.
+// Step 1: Decap CMS opens a popup → redirect to GitHub App OAuth
 app.get('/oauth/auth', async (c) => {
   const baseUrl = getBaseUrl(c.req.raw);
   const params = new URLSearchParams({
-    client_id: c.env.GITHUB_CLIENT_ID,
+    client_id: c.env.GITHUB_APP_CLIENT_ID,
     redirect_uri: `${baseUrl}/oauth/callback`,
-    scope: 'repo,user',
     state: crypto.randomUUID(),
   });
-
   return c.redirect(`https://github.com/login/oauth/authorize?${params}`);
 });
 
-// Step 2: GitHub redirects back here with an authorization code.
-// We exchange it for an access token, then pass it to Decap CMS via postMessage
-// using the two-step handshake Decap expects (authorizing → success).
+// Step 2: Exchange the code for a user-to-server token and send it to Decap.
+// This token can only access repos where the GitHub App is installed,
+// with only the permissions granted to the App (contents:write, metadata:read).
 app.get('/oauth/callback', async (c) => {
   const code = c.req.query('code');
   const error = c.req.query('error');
@@ -294,35 +293,28 @@ app.get('/oauth/callback', async (c) => {
   }
 
   try {
-    // Exchange code for access token
-    const tokenResponse = await fetch('https://github.com/login/oauth/access_token', {
+    const tokenResp = await fetch('https://github.com/login/oauth/access_token', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
-        client_id: c.env.GITHUB_CLIENT_ID,
-        client_secret: c.env.GITHUB_CLIENT_SECRET,
+        client_id: c.env.GITHUB_APP_CLIENT_ID,
+        client_secret: c.env.GITHUB_APP_CLIENT_SECRET,
         code,
       }),
     });
 
-    if (!tokenResponse.ok) {
-      console.error('GitHub token exchange failed:', await tokenResponse.text());
-      return c.html(`<script>window.close();</script><p>Échec de l'authentification GitHub.</p>`, 500);
+    if (!tokenResp.ok) {
+      console.error('GitHub token exchange failed:', await tokenResp.text());
+      return c.html(`<script>window.close();</script><p>Échec de l'authentification.</p>`, 500);
     }
 
-    const tokenData = await tokenResponse.json() as { access_token?: string; error?: string };
-
+    const tokenData = await tokenResp.json() as { access_token?: string; error?: string };
     if (tokenData.error || !tokenData.access_token) {
       console.error('GitHub token error:', tokenData.error);
       return c.html(`<script>window.close();</script><p>Erreur token GitHub.</p>`, 500);
     }
 
-    // Return HTML page that performs the Decap CMS two-step postMessage handshake:
-    //  1. Send "authorizing:github" to opener → CMS replies with its origin
-    //  2. On receiving the reply, send "authorization:github:success:{token JSON}"
+    // Send the scoped user token to Decap CMS via postMessage handshake
     const token = tokenData.access_token;
     return c.html(`<!DOCTYPE html>
 <html><body>
@@ -333,8 +325,6 @@ app.get('/oauth/callback', async (c) => {
   var data = JSON.stringify({ token: ${JSON.stringify(token)}, provider: provider });
 
   function receiveMessage(e) {
-    console.log("receiveMessage", e);
-    // Send the actual token to the CMS opener using its declared origin
     window.opener.postMessage(
       "authorization:" + provider + ":success:" + data,
       e.origin
@@ -343,14 +333,12 @@ app.get('/oauth/callback', async (c) => {
     setTimeout(function(){ window.close(); }, 250);
   }
   window.addEventListener("message", receiveMessage, false);
-
-  // Kick off the handshake – CMS will answer back so we know its origin
   window.opener.postMessage("authorizing:" + provider, "*");
 })();
 </script>
 </body></html>`);
   } catch (err) {
-    console.error('GitHub OAuth callback error:', err);
+    console.error('GitHub App OAuth callback error:', err);
     return c.html(`<script>window.close();</script><p>Erreur serveur.</p>`, 500);
   }
 });

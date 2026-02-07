@@ -2,7 +2,7 @@ locale: fr
 
 backend:
   name: github
-  repo: laetitia-gente/ovalsaone
+  repo: kmenant-exp/ovalsaone
   branch: main
   base_url: https://ovalsaone-admin.pages.dev
   auth_endpoint: /oauth/auth

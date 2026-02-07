@@ -14,9 +14,11 @@ GOOGLE_CLIENT_ID = "992613089621-fgnh0vq7skhl8gq106alfn3d4ftievn3.apps.googleuse
 # wrangler secret put GOOGLE_CLIENT_SECRET
 # wrangler secret put JWT_SECRET
 
-# GitHub OAuth for Decap CMS — create an OAuth App at:
-# https://github.com/settings/developers
-# Callback URL: https://ovalsaone-admin.pages.dev/oauth/callback
-GITHUB_CLIENT_ID = "Ov23li805s7r3wUo9Mzr"
-# GITHUB_CLIENT_SECRET should be set via:
-# wrangler pages secret put GITHUB_CLIENT_SECRET --project-name ovalsaone-admin
+# GitHub App for Decap CMS — create a GitHub App at:
+# https://github.com/settings/apps/new
+# - Homepage URL: https://ovalsaone-admin.pages.dev
+# - Callback URL: https://ovalsaone-admin.pages.dev/oauth/callback
+# - Permissions: Contents → Read & Write, Metadata → Read-only
+# - Install on the target repo only
+GITHUB_APP_CLIENT_ID = "Iv23liXui7FTzJc7IPWL"
+# Secret (set via wrangler pages secret put GITHUB_APP_CLIENT_SECRET --project-name ovalsaone-admin)
