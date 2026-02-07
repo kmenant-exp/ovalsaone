@@ -7,6 +7,8 @@ interface Env {
   GOOGLE_CLIENT_ID: string;
   GOOGLE_CLIENT_SECRET: string;
   JWT_SECRET: string;
+  GITHUB_CLIENT_ID: string;
+  GITHUB_CLIENT_SECRET: string;
 }
 
 interface GoogleTokenResponse {
@@ -240,6 +242,117 @@ app.get('/auth/me', async (c) => {
   }
   
   return c.json({ authenticated: true, user });
+});
+
+// ============= ASSET PROXY (for Decap CMS image previews) =============
+// The CMS runs on ovalsaone-admin.pages.dev but image paths point to /assets/*
+// which only exist on the main site. Proxy them to the production domain.
+app.get('/assets/*', async (c) => {
+  const resp = await fetch(`https://ovalsaone.pages.dev${c.req.path}`);
+  if (!resp.ok) return c.notFound();
+  return new Response(resp.body, {
+    headers: {
+      'Content-Type': resp.headers.get('Content-Type') || 'application/octet-stream',
+      'Cache-Control': 'public, max-age=86400',
+    },
+  });
+});
+
+// ============= GITHUB OAUTH PROXY (for Decap CMS) =============
+
+// Step 1: Decap CMS opens a popup to this URL → redirect straight to GitHub.
+// Security note: GitHub itself handles authentication; only repo collaborators
+// can obtain usable tokens, so a Google session gate is unnecessary here.
+app.get('/oauth/auth', async (c) => {
+  const baseUrl = getBaseUrl(c.req.raw);
+  const params = new URLSearchParams({
+    client_id: c.env.GITHUB_CLIENT_ID,
+    redirect_uri: `${baseUrl}/oauth/callback`,
+    scope: 'repo,user',
+    state: crypto.randomUUID(),
+  });
+
+  return c.redirect(`https://github.com/login/oauth/authorize?${params}`);
+});
+
+// Step 2: GitHub redirects back here with an authorization code.
+// We exchange it for an access token, then pass it to Decap CMS via postMessage
+// using the two-step handshake Decap expects (authorizing → success).
+app.get('/oauth/callback', async (c) => {
+  const code = c.req.query('code');
+  const error = c.req.query('error');
+
+  if (error || !code) {
+    return c.html(`<!DOCTYPE html><html><body>
+<p>Erreur d'authentification GitHub.</p>
+<script>
+  if (window.opener) {
+    window.opener.postMessage("authorization:github:error:Authentication failed", "*");
+  }
+  setTimeout(function(){ window.close(); }, 1000);
+</script></body></html>`, 400);
+  }
+
+  try {
+    // Exchange code for access token
+    const tokenResponse = await fetch('https://github.com/login/oauth/access_token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({
+        client_id: c.env.GITHUB_CLIENT_ID,
+        client_secret: c.env.GITHUB_CLIENT_SECRET,
+        code,
+      }),
+    });
+
+    if (!tokenResponse.ok) {
+      console.error('GitHub token exchange failed:', await tokenResponse.text());
+      return c.html(`<script>window.close();</script><p>Échec de l'authentification GitHub.</p>`, 500);
+    }
+
+    const tokenData = await tokenResponse.json() as { access_token?: string; error?: string };
+
+    if (tokenData.error || !tokenData.access_token) {
+      console.error('GitHub token error:', tokenData.error);
+      return c.html(`<script>window.close();</script><p>Erreur token GitHub.</p>`, 500);
+    }
+
+    // Return HTML page that performs the Decap CMS two-step postMessage handshake:
+    //  1. Send "authorizing:github" to opener → CMS replies with its origin
+    //  2. On receiving the reply, send "authorization:github:success:{token JSON}"
+    const token = tokenData.access_token;
+    return c.html(`<!DOCTYPE html>
+<html><body>
+<p>Authentification réussie, fermeture…</p>
+<script>
+(function() {
+  var provider = "github";
+  var data = JSON.stringify({ token: ${JSON.stringify(token)}, provider: provider });
+
+  function receiveMessage(e) {
+    console.log("receiveMessage", e);
+    // Send the actual token to the CMS opener using its declared origin
+    window.opener.postMessage(
+      "authorization:" + provider + ":success:" + data,
+      e.origin
+    );
+    window.removeEventListener("message", receiveMessage);
+    setTimeout(function(){ window.close(); }, 250);
+  }
+  window.addEventListener("message", receiveMessage, false);
+
+  // Kick off the handshake – CMS will answer back so we know its origin
+  window.opener.postMessage("authorizing:" + provider, "*");
+})();
+</script>
+</body></html>`);
+  } catch (err) {
+    console.error('GitHub OAuth callback error:', err);
+    return c.html(`<script>window.close();</script><p>Erreur serveur.</p>`, 500);
+  }
 });
 
 // ============= AUTH MIDDLEWARE =============

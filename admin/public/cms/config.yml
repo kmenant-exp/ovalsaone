@@ -1,0 +1,220 @@
+locale: fr
+
+backend:
+  name: github
+  repo: laetitia-gente/ovalsaone
+  branch: main
+  base_url: https://ovalsaone-admin.pages.dev
+  auth_endpoint: /oauth/auth
+  commit_messages:
+    create: "cms: création {{collection}} «{{slug}}»"
+    update: "cms: mise à jour {{collection}} «{{slug}}»"
+    delete: "cms: suppression {{collection}} «{{slug}}»"
+
+media_folder: "pages/src/assets"
+public_folder: "/assets"
+
+# ============================================================
+# COLLECTIONS
+# ============================================================
+
+collections:
+  # ----------------------------------------------------------
+  # CONTENU DU SITE
+  # ----------------------------------------------------------
+  - name: contenu
+    label: "Contenu du site"
+    files:
+      - name: actualites
+        label: "Actualités"
+        file: "pages/src/_data/actualites.json"
+        format: json
+        fields:
+          - label: "Actualités"
+            name: "actualites"
+            widget: list
+            summary: "{{fields.titre}} — {{fields.date}}"
+            fields:
+              - { label: "Titre", name: "titre", widget: "string" }
+              - { label: "Extrait", name: "extrait", widget: "text" }
+              - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+              - { label: "Image", name: "image", widget: "image", required: false }
+              - { label: "Contenu", name: "contenu", widget: "text" }
+
+      - name: gallery
+        label: "Galerie"
+        file: "pages/src/_data/gallery.json"
+        format: json
+        fields:
+          - label: "Photos"
+            name: "gallery"
+            widget: list
+            summary: "{{fields.title}} — {{fields.category}}"
+            fields:
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Catégorie", name: "category", widget: "string", required: false }
+              - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false, required: false }
+
+  # ----------------------------------------------------------
+  # CLUB
+  # ----------------------------------------------------------
+  - name: club
+    label: "Club"
+    files:
+      - name: bureau
+        label: "Bureau"
+        file: "pages/src/_data/bureau.json"
+        format: json
+        fields:
+          - label: "Membres du bureau"
+            name: "bureau"
+            widget: list
+            summary: "{{fields.prenom}} {{fields.nom}} — {{fields.poste}}"
+            fields:
+              - { label: "Nom", name: "nom", widget: "string" }
+              - { label: "Prénom", name: "prenom", widget: "string" }
+              - { label: "Poste", name: "poste", widget: "string" }
+              - { label: "Description", name: "description", widget: "text", required: false, default: "" }
+              - { label: "Photo", name: "photo", widget: "image", default: "/assets/bureau/default.jpg" }
+
+      - name: teams
+        label: "Équipes"
+        file: "pages/src/_data/teams.json"
+        format: json
+        fields:
+          - label: "Équipes"
+            name: "teams"
+            widget: list
+            summary: "{{fields.name}} ({{fields.min_age}}-{{fields.max_age}} ans)"
+            fields:
+              - { label: "Nom", name: "name", widget: "string" }
+              - { label: "Description", name: "description", widget: "string" }
+              - { label: "Âge minimum", name: "min_age", widget: "number", value_type: "int" }
+              - { label: "Âge maximum", name: "max_age", widget: "number", value_type: "int", required: false }
+              - { label: "Nombre de joueurs", name: "players", widget: "number", value_type: "int", required: false }
+              - label: "Entraîneurs"
+                name: "coaches"
+                widget: list
+                summary: "{{fields.name}}"
+                fields:
+                  - { label: "Nom", name: "name", widget: "string" }
+              - label: "Horaires"
+                name: "schedule"
+                widget: list
+                summary: "{{fields.day}} {{fields.time}}"
+                fields:
+                  - { label: "Jour", name: "day", widget: "select", options: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"] }
+                  - { label: "Horaire", name: "time", widget: "string" }
+
+      - name: entraineurs
+        label: "Entraîneurs"
+        file: "pages/src/_data/entraineurs.json"
+        format: json
+        fields:
+          - label: "Entraîneurs"
+            name: "entraineurs"
+            widget: list
+            summary: "{{fields.prenom}} {{fields.nom}} — {{fields.categories}}"
+            fields:
+              - { label: "Nom", name: "nom", widget: "string" }
+              - { label: "Prénom", name: "prenom", widget: "string" }
+              - label: "Catégories"
+                name: "categories"
+                widget: list
+                field: { label: "Catégorie", name: "categorie", widget: "select", options: ["U6", "U8", "U10", "U12", "U14", "Rugby Touch"] }
+              - { label: "Expérience", name: "experience", widget: "string" }
+              - label: "Diplômes"
+                name: "diplomes"
+                widget: list
+                field: { label: "Diplôme", name: "diplome", widget: "string" }
+              - { label: "Photo", name: "photo", widget: "image", default: "/assets/entraineurs/default.jpg" }
+              - label: "Spécialités"
+                name: "specialites"
+                widget: list
+                field: { label: "Spécialité", name: "specialite", widget: "string" }
+
+      - name: sponsors
+        label: "Sponsors & Partenaires"
+        file: "pages/src/_data/sponsors.json"
+        format: json
+        fields:
+          - label: "Sponsors"
+            name: "sponsors"
+            widget: list
+            summary: "{{fields.nom}} (depuis {{fields.partenariat_depuis}})"
+            fields:
+              - { label: "Nom", name: "nom", widget: "string" }
+              - { label: "Description", name: "description", widget: "string" }
+              - { label: "Email", name: "email", widget: "string", required: false }
+              - { label: "Partenaire depuis", name: "partenariat_depuis", widget: "number", value_type: "int" }
+              - { label: "Type", name: "type", widget: "select", options: ["partenaire", "sponsor"], default: "partenaire" }
+
+  # ----------------------------------------------------------
+  # BOUTIQUE
+  # ----------------------------------------------------------
+  - name: boutique
+    label: "Boutique"
+    files:
+      - name: products
+        label: "Produits"
+        file: "pages/src/_data/products.json"
+        format: json
+        fields:
+          - label: "Produits"
+            name: "products"
+            widget: list
+            summary: "{{fields.name}} — {{fields.price}}€"
+            fields:
+              - { label: "ID", name: "id", widget: "number", value_type: "int" }
+              - { label: "Nom", name: "name", widget: "string" }
+              - { label: "Description", name: "description", widget: "string", required: false, default: "" }
+              - { label: "Prix (€)", name: "price", widget: "number", value_type: "int" }
+              - { label: "Image (URL)", name: "image", widget: "string" }
+              - label: "Tailles"
+                name: "sizes"
+                widget: list
+                field: { label: "Taille", name: "size", widget: "string" }
+              - label: "Catégories"
+                name: "categories"
+                widget: list
+                field: { label: "Catégorie", name: "categorie", widget: "string" }
+              - { label: "URL HelloAsso", name: "url", widget: "string" }
+
+  # ----------------------------------------------------------
+  # CONFIGURATION
+  # ----------------------------------------------------------
+  - name: configuration
+    label: "Configuration"
+    files:
+      - name: contact
+        label: "Contact"
+        file: "pages/src/_data/contact.json"
+        format: json
+        fields:
+          - { label: "Adresse", name: "address", widget: "string" }
+          - { label: "Téléphone", name: "phone", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+
+      - name: calendars
+        label: "Calendriers Google"
+        file: "pages/src/_data/calendars.json"
+        format: json
+        fields:
+          - { label: "Clé API Google", name: "apiKey", widget: "string" }
+          - label: "Équipes"
+            name: "teams"
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Nom", name: "name", widget: "string" }
+              - { label: "Calendar ID", name: "calendarId", widget: "string" }
+              - { label: "URL Calendrier", name: "calendarUrl", widget: "string" }
+              - { label: "URL ICS", name: "icsUrl", widget: "string" }
+
+      - name: turnstile
+        label: "Turnstile (anti-bot)"
+        file: "pages/src/_data/turnstile.json"
+        format: json
+        fields:
+          - { label: "Site Key", name: "siteKey", widget: "string" }
