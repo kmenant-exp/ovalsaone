@@ -50,15 +50,29 @@ collections:
         media_folder: "/pages/src/assets/gallery"
         public_folder: "/assets/gallery"
         fields:
-          - label: "Photos"
+          - label: "Albums"
             name: "gallery"
             widget: list
-            summary: "{{fields.title}} — {{fields.category}}"
+            summary: "{{fields.titre}} — {{fields.categorie}} ({{fields.date}})"
             fields:
-              - { label: "Titre", name: "title", widget: "string" }
-              - { label: "Image", name: "image", widget: "image" }
-              - { label: "Catégorie", name: "category", widget: "string", required: false }
-              - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false, required: false }
+              - { label: "Titre", name: "titre", widget: "string" }
+              - { label: "Description", name: "description", widget: "text", required: false, default: "" }
+              - { label: "Image principale (couverture)", name: "mainImage", widget: "image" }
+              - { label: "Texte alternatif", name: "alt", widget: "string", required: false, default: "" }
+              - label: "Catégorie"
+                name: "categorie"
+                widget: "select"
+                options:
+                  - { label: "Matchs", value: "matches" }
+                  - { label: "Entraînements", value: "entrainements" }
+                  - { label: "Événements", value: "evenements" }
+                  - { label: "Équipes", value: "equipes" }
+              - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+              - label: "Photos de l'album"
+                name: "images"
+                widget: "list"
+                summary: "{{fields.image}}"
+                field: { label: "Photo", name: "image", widget: "image" }
 
   # ----------------------------------------------------------
   # CLUB

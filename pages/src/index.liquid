@@ -190,22 +190,22 @@ description: École de rugby familiale à Trévoux pour enfants de 4 à 14 ans (
         <!-- Grille de photos -->
         <div class="gallery-grid" id="gallery-grid">
             {% assign sortedGallery = gallery | sort: 'date' | reverse %}
-            
+
             {% if sortedGallery.size > 0 %}
-            {% for photo in sortedGallery limit:6 %}
-                <article class="gallery-item fade-in-up" data-category="{{ photo.categorie }}">
+            {% for photo in sortedGallery %}
+                <article class="gallery-item{% if forloop.index > 6 %} gallery-item-hidden{% endif %} fade-in-up" data-category="{{ photo.categorie }}">
                     <div class="gallery-image-container">
                         <img src="{{ photo.mainImage }}" alt="{{ photo.alt }}" class="gallery-image" loading="lazy">
                         <div class="gallery-overlay">
                             <div class="gallery-overlay-content">
                                 <h3 class="gallery-title">{{ photo.titre }}</h3>
                                 <p class="gallery-date">{{ photo.date | date: '%d/%m/%Y' }}</p>
-                                <button class="btn btn-primary btn-small gallery-view-btn" 
+                                <button class="btn btn-primary btn-small gallery-view-btn"
                                         data-photo-titre="{{ photo.titre }}"
                                         data-photo-description="{{ photo.description }}"
                                         data-photo-date="{{ photo.date | date: '%d/%m/%Y' }}"
                                         data-photo-main-image="{{ photo.mainImage }}"
-                                        data-photo-storage-url="{{ photo.storageUrl }}"
+                                        data-photo-images='{{ photo.images | jsonify }}'
                                         data-photo-alt="{{ photo.alt }}">
                                     <span class="btn-text">Voir les photos</span>
                                     <i class="fas fa-images btn-icon"></i>
