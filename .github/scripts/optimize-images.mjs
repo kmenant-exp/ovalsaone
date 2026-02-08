@@ -4,7 +4,8 @@
  * Usage : node optimize-images.mjs <file1> [file2 …]
  *
  * Règles appliquées :
- *  - JPEG/PNG > 1920 px de large → redimensionnés à 1920 px (ratio conservé)
+ *  - Largeur max par dossier : actualites → 800 px, bureau → 112 px,
+ *    entraineurs → 94 px, autres → 1920 px
  *  - JPEG → qualité 80, progressive
  *  - PNG  → compression maximale
  *  - WebP → qualité 80
@@ -15,12 +16,29 @@ import { readFile, writeFile, stat } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 
-const MAX_WIDTH = 1920;
+const DEFAULT_MAX_WIDTH = 1920;
 const JPEG_QUALITY = 80;
 const WEBP_QUALITY = 80;
 const MIN_SIZE_BYTES = 10 * 1024; // 10 Ko
 
+/** Largeur max par dossier (sous pages/src/assets/) */
+const FOLDER_MAX_WIDTH = {
+  actualites: 800,
+  bureau: 112,
+  entraineurs: 94,
+};
+
 const IMAGE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp"]);
+
+/**
+ * Détermine la largeur max en fonction du chemin du fichier.
+ */
+function getMaxWidth(filePath) {
+  for (const [folder, width] of Object.entries(FOLDER_MAX_WIDTH)) {
+    if (filePath.includes(`/assets/${folder}/`)) return width;
+  }
+  return DEFAULT_MAX_WIDTH;
+}
 
 async function optimizeImage(filePath) {
   const ext = path.extname(filePath).toLowerCase();
@@ -40,10 +58,11 @@ async function optimizeImage(filePath) {
   const buffer = await readFile(filePath);
   let pipeline = sharp(buffer).rotate(); // auto-rotate via EXIF
 
-  // Redimensionner si trop large
+  // Redimensionner selon la largeur max du dossier
   const metadata = await sharp(buffer).metadata();
-  if (metadata.width && metadata.width > MAX_WIDTH) {
-    pipeline = pipeline.resize({ width: MAX_WIDTH, withoutEnlargement: true });
+  const maxWidth = getMaxWidth(filePath);
+  if (metadata.width && metadata.width > maxWidth) {
+    pipeline = pipeline.resize({ width: maxWidth, withoutEnlargement: true });
   }
 
   // Appliquer la compression selon le format
