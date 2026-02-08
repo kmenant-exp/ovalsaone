@@ -28,8 +28,8 @@ jobs:
       - name: Identify changed images
         id: images
         run: |
-          # Récupérer les images modifiées dans le dernier commit
-          FILES=$(git diff-tree --no-commit-id --name-only -r HEAD \
+          # Récupérer les images ajoutées ou modifiées (pas supprimées) dans le dernier commit
+          FILES=$(git diff-tree --no-commit-id --name-only --diff-filter=ACMR -r HEAD \
             | grep -iE '\.(jpe?g|png|webp)$' \
             | grep '^pages/src/assets/' || true)
 
