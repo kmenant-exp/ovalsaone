@@ -1,3 +1,16 @@
 {
-  "gallery": []
+  "gallery": [
+    {
+      "description": "Description de l'alcum",
+      "alt": "",
+      "titre": "Album Test 1",
+      "mainImage": "/assets/gallery/gemini_generated_image_2n57yg2n57yg2n57.png",
+      "categorie": "entrainements",
+      "date": "2026-02-08",
+      "images": [
+        "/assets/gallery/gemini_generated_image_941d1z941d1z941d.png",
+        "/assets/gallery/gemini_generated_image_z4fx7iz4fx7iz4fx-1-.png"
+      ]
+    }
+  ]
 }
