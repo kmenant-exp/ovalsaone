@@ -19,6 +19,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          # fetch-depth: 2 pour que git diff-tree puisse comparer avec le parent
+          fetch-depth: 2
           # Nécessaire pour pouvoir pusher le commit d'optimisation
           token: ${{ secrets.GITHUB_TOKEN }}
 
