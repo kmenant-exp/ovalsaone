@@ -29,6 +29,8 @@ collections:
         label: "Actualités"
         file: "pages/src/_data/actualites.json"
         format: json
+        media_folder: "/pages/src/assets/actualites"
+        public_folder: "/assets/actualites"
         fields:
           - label: "Actualités"
             name: "actualites"
@@ -45,6 +47,8 @@ collections:
         label: "Galerie"
         file: "pages/src/_data/gallery.json"
         format: json
+        media_folder: "/pages/src/assets/gallery"
+        public_folder: "/assets/gallery"
         fields:
           - label: "Photos"
             name: "gallery"
@@ -66,6 +70,8 @@ collections:
         label: "Bureau"
         file: "pages/src/_data/bureau.json"
         format: json
+        media_folder: "/pages/src/assets/bureau"
+        public_folder: "/assets/bureau"
         fields:
           - label: "Membres du bureau"
             name: "bureau"
@@ -110,6 +116,8 @@ collections:
       - name: entraineurs
         label: "Entraîneurs"
         file: "pages/src/_data/entraineurs.json"
+        media_folder: "/pages/src/assets/entraineurs"
+        public_folder: "/assets/entraineurs"
         format: json
         fields:
           - label: "Entraîneurs"
@@ -137,6 +145,8 @@ collections:
       - name: sponsors
         label: "Sponsors & Partenaires"
         file: "pages/src/_data/sponsors.json"
+        media_folder: "/pages/src/assets/sponsors"
+        public_folder: "/assets/sponsors"
         format: json
         fields:
           - label: "Sponsors"
