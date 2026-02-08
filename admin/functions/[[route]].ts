@@ -486,7 +486,13 @@ app.get('/api/stats', async (c) => {
 
 // Export for Cloudflare Pages Functions
 export const onRequest: PagesFunction<Env> = async (context) => {
-  const response = await app.fetch(context.request, context.env, context);
+  // Create ExecutionContext object from Pages context
+  const ctx = {
+    waitUntil: context.waitUntil.bind(context),
+    passThroughOnException: context.passThroughOnException.bind(context),
+  } as ExecutionContext;
+  
+  const response = await app.fetch(context.request, context.env, ctx);
 
   if (response.status === 404) {
     return context.next();
