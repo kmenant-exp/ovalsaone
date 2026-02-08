@@ -1,0 +1,85 @@
+name: Optimize CMS Images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "pages/src/assets/**"
+
+permissions:
+  contents: write
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    # Ne traiter que les commits Decap CMS
+    if: contains(github.event.head_commit.message, 'cms:')
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Nécessaire pour pouvoir pusher le commit d'optimisation
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Identify changed images
+        id: images
+        run: |
+          # Récupérer les fichiers modifiés dans le dernier commit
+          FILES=$(git diff-tree --no-commit-id --name-only -r HEAD -- \
+            'pages/src/assets/*.jpg' \
+            'pages/src/assets/*.jpeg' \
+            'pages/src/assets/*.png' \
+            'pages/src/assets/*.webp' \
+            'pages/src/assets/**/*.jpg' \
+            'pages/src/assets/**/*.jpeg' \
+            'pages/src/assets/**/*.png' \
+            'pages/src/assets/**/*.webp' \
+          )
+
+          if [ -z "$FILES" ]; then
+            echo "Aucune image détectée dans ce commit."
+            echo "has_images=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Images détectées :"
+            echo "$FILES"
+            # Passer la liste en une seule ligne séparée par des espaces
+            echo "has_images=true" >> "$GITHUB_OUTPUT"
+            echo "files<<EOF" >> "$GITHUB_OUTPUT"
+            echo "$FILES" >> "$GITHUB_OUTPUT"
+            echo "EOF" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Setup Node.js
+        if: steps.images.outputs.has_images == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install sharp
+        if: steps.images.outputs.has_images == 'true'
+        run: npm install --no-save sharp
+
+      - name: Optimize images
+        if: steps.images.outputs.has_images == 'true'
+        id: optimize
+        run: |
+          # Convertir la liste de fichiers (un par ligne) en arguments
+          node .github/scripts/optimize-images.mjs ${{ steps.images.outputs.files }}
+          echo "optimized=true" >> "$GITHUB_OUTPUT"
+        # Le script retourne 78 quand rien n'a changé
+        continue-on-error: true
+
+      - name: Commit optimized images
+        if: steps.images.outputs.has_images == 'true' && steps.optimize.outcome == 'success'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add pages/src/assets/
+          # Ne committer que s'il y a des changements stagés
+          if git diff --cached --quiet; then
+            echo "Aucune modification à committer."
+          else
+            git commit -m "ci: optimisation automatique des images CMS"
+            git push
+          fi
