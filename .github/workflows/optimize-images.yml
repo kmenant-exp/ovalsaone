@@ -25,17 +25,10 @@ jobs:
       - name: Identify changed images
         id: images
         run: |
-          # Récupérer les fichiers modifiés dans le dernier commit
-          FILES=$(git diff-tree --no-commit-id --name-only -r HEAD -- \
-            'pages/src/assets/*.jpg' \
-            'pages/src/assets/*.jpeg' \
-            'pages/src/assets/*.png' \
-            'pages/src/assets/*.webp' \
-            'pages/src/assets/**/*.jpg' \
-            'pages/src/assets/**/*.jpeg' \
-            'pages/src/assets/**/*.png' \
-            'pages/src/assets/**/*.webp' \
-          )
+          # Récupérer les images modifiées dans le dernier commit
+          FILES=$(git diff-tree --no-commit-id --name-only -r HEAD \
+            | grep -iE '\.(jpe?g|png|webp)$' \
+            | grep '^pages/src/assets/' || true)
 
           if [ -z "$FILES" ]; then
             echo "Aucune image détectée dans ce commit."
