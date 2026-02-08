@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "title": "L'École de Rugby",
+    "subtitle": "Un terrain, une famille, des valeurs."
+  },
+  "histoire": {
+    "description": "Notre école de rugby a vu le jour en 2025, portée par une idée simple mais forte : <b>offrir aux enfants un espace où le sport est synonyme de joie, de partage et de bienveillance.</b>",
+    "annee_creation": 2025,
+    "licencies": 101,
+    "equipes": 6,
+    "educateurs": 12,
+    "entrainements_semaine": 2,
+    "tournois_saison": 15,
+    "sections": [
+      {
+        "titre": "Un club ouvert à tous",
+        "contenu": "Ici, tout le monde est le bienvenu. Peu importe l'âge, le niveau ou l'expérience : <b>chaque enfant a sa place sur le terrain</b>. Pas de sélection, pas de pression — juste l'envie de jouer, de progresser et de s'amuser ensemble."
+      },
+      {
+        "titre": "Le sport comme outil d'épanouissement",
+        "contenu": "Notre objectif n'est pas de former l'élite du rugby français, mais de faire grandir les enfants à travers les valeurs du sport collectif.",
+        "liste": [
+          "le respect",
+          "l'entraide",
+          "la persévérance",
+          "et surtout… le plaisir de jouer"
+        ]
+      },
+      {
+        "titre": "Une grande famille",
+        "contenu": "Chaque entraînement est une occasion de sourire, d'apprendre, de tomber et de se relever. Notre école, c'est une grande famille où l'on célèbre chaque petit progrès comme une grande victoire."
+      }
+    ]
+  }
+}

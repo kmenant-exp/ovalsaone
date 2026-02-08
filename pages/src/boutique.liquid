@@ -2,22 +2,14 @@
 layout: layout.njk
 title: Boutique - Oval Saône
 description: Découvrez notre boutique officielle avec tous les équipements et produits dérivés du club Oval Saône. Maillots, sweats, casquettes et plus encore !
-
-hero_title: Notre Boutique
-hero_description: Équipements et produits dérivés du club
-products_title: Nos Produits
-products_description: Découvrez notre sélection de produits officiels du club. Pour voir l'intégralité de notre boutique et passer commande, visitez notre boutique en ligne.
-
-shop_title: Envie de découvrir tous nos produits ?
-shop_description: Retrouvez l'intégralité de notre boutique officielle avec tous nos équipements, produits dérivés et goodies du club.
 ---
 
 <!-- Hero Section avec effet parallax -->
 <section class="hero parallax-section subpage-hero" data-parallax-speed="0.25">
     <div class="hero-overlay"></div>
     <div class="hero-content">
-        <h1 class="hero-title">{{ hero_title }}</h1>
-        <p class="hero-subtitle">{{ hero_description }}</p>
+        <h1 class="hero-title">{{ page_boutique.hero_title }}</h1>
+        <p class="hero-subtitle">{{ page_boutique.hero_description }}</p>
     </div>
 </section>
 
@@ -27,8 +19,8 @@ shop_description: Retrouvez l'intégralité de notre boutique officielle avec to
         <!-- Introduction -->
         <div class="intro-content">
             <div class="intro-text">
-                <h2>{{ products_title }}</h2>
-                <p>{{ products_description }}</p>
+                <h2>{{ page_boutique.products_title }}</h2>
+                <p>{{ page_boutique.products_description }}</p>
             </div>
         </div>
         
@@ -59,8 +51,8 @@ shop_description: Retrouvez l'intégralité de notre boutique officielle avec to
         
         <!-- Call to Action -->
         <div class="boutique-cta">
-            <h3>{{ shop_title }}</h3>
-            <p>{{ shop_description }}</p>
+            <h3>{{ page_boutique.shop_title }}</h3>
+            <p>{{ page_boutique.shop_description }}</p>
             <a href="https://www.helloasso.com/associations/oval-saone/boutiques/oval-soane-boutique" 
                 target="_blank" 
                 rel="noopener noreferrer" 

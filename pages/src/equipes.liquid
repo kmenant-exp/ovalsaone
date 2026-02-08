@@ -2,22 +2,14 @@
 layout: layout.njk
 title: "Nos Équipes Rugby - U6 à U14 | École Rugby Oval Saône Trévoux"
 description: "Découvrez nos équipes de rugby pour enfants : U6, U8, U10, U12, U14. Entraîneurs qualifiés, apprentissage progressif dans un esprit familial à Trévoux."
-
-hero:
-  title: "Nos Équipes"
-  subtitle: "Découvrez nos différentes catégories et leurs entraîneurs"
-  
-intro:
-  title: "Nos équipes, notre fierté"
-  text: "Plaisir, respect et camaraderie : nos équipes de jeunes de U6 à U14 grandissent ensemble autour des vraies valeurs du rugby."
 ---
 
 <!-- Hero Section avec effet parallax -->
 <section class="hero parallax-section subpage-hero" data-parallax-speed="0.25">
     <div class="hero-overlay"></div>
     <div class="hero-content">
-        <h1 class="hero-title">{{ hero.title }}</h1>
-        <p class="hero-subtitle">{{ hero.subtitle }}</p>
+        <h1 class="hero-title">{{ page_equipes.hero.title }}</h1>
+        <p class="hero-subtitle">{{ page_equipes.hero.subtitle }}</p>
     </div>
 </section>
 
@@ -26,8 +18,8 @@ intro:
     <div class="container">
         <div class="intro-content">
             <div class="intro-text">
-                <h2>{{ intro.title }}</h2>
-                <p>{{ intro.text }}</p>
+                <h2>{{ page_equipes.intro.title }}</h2>
+                <p>{{ page_equipes.intro.text }}</p>
                 <p style="margin-top: 1rem;"><a href="/rugby-enfants-trevoux" style="color: var(--primary-color); font-weight: 600; text-decoration: underline;">→ Découvrez notre méthode de formation pour enfants</a></p>
             </div>
         </div>

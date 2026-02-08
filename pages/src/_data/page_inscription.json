@@ -1,0 +1,118 @@
+{
+  "hero": {
+    "title": "Inscription",
+    "subtitle": "Rejoignez notre club et vivez la passion du rugby"
+  },
+  "intro": {
+    "title": "Vous ou votre enfant rêvez de jouer au rugby ?",
+    "description": "Chers parents, nous comprenons que l'envie de <strong>découvrir le rugby</strong> peut naître chez votre enfant, <strong>fille comme garçon</strong>, à tout moment de l'année. À l'École de Rugby Oval Saône, nous accueillons avec plaisir les nouveaux jeunes joueurs <strong>tout au long de la saison sportive</strong>. Notre objectif est d'offrir à votre enfant un <strong>environnement bienveillant</strong> où il pourra développer ses compétences sportives, apprendre les valeurs du rugby et se faire de nouveaux amis dans une ambiance conviviale et familiale. <a href=\"/rugby-enfants-trevoux\" style=\"color: var(--primary-color); font-weight: 600; text-decoration: underline;\">Découvrez tous les bienfaits du rugby pour votre enfant.</a> Et pourquoi pas vous aussi ? Rejoignez notre section <strong>Rugby Touch</strong> pour adultes et partagez cette passion <strong>en famille</strong> ! Une excellente occasion de pratiquer un rugby ludique et convivial, sans plaquage, dans une ambiance décontractée.",
+    "features": [
+      {
+        "icon": "fas fa-play-circle",
+        "title": "Séance d'essai gratuite",
+        "description": "Offrez à votre enfant la possibilité de découvrir le rugby lors d'une séance d'essai gratuite et sans engagement pour vous."
+      },
+      {
+        "icon": "fas fa-clock",
+        "title": "Inscription en cours d'année",
+        "description": "Votre enfant peut rejoindre notre école de rugby à tout moment de l'année, selon vos contraintes familiales."
+      },
+      {
+        "icon": "fas fa-users",
+        "title": "Encadrement bienveillant",
+        "description": "Nos éducateurs diplômés accompagnent chaque enfant individuellement pour garantir son épanouissement et sa progression."
+      }
+    ]
+  },
+  "sidebar": {
+    "tarif": {
+      "icon": "fas fa-euro-sign",
+      "title": "Tarifs",
+      "enfants": {
+        "title": "École de Rugby (Enfants)",
+        "normal": {
+          "price": 190,
+          "title": "Tarif normal",
+          "description": "Pour toutes les catégories M6 à M14"
+        },
+        "baby": {
+          "price": 130,
+          "title": "Baby Rugby",
+          "description": "Pour les enfants nés en 2021"
+        }
+      },
+      "adultes": {
+        "title": "Rugby Touch (Adultes)",
+        "touch_unique": {
+          "price": 110,
+          "title": "Licence unique",
+          "description": "Pour une licence unique au sein du club"
+        },
+        "touch_multiple": {
+          "price": 90,
+          "title": "Licences multiples",
+          "description": "Dans le cas de licences multiples au sein du club"
+        }
+      },
+      "description": "Comprend : licence FFR, assurance, dotation annuelle (tenue d'entraînement : short, tee-shirt, chaussettes)"
+    },
+    "documents": {
+      "icon": "fas fa-file-alt",
+      "title": "Documents requis",
+      "list": [
+        {
+          "name": "Autorisation de soins (obligatoire)",
+          "required": true,
+          "description": "Autorisation de soins dûment complétée"
+        },
+        {
+          "name": "Pièce d'identité",
+          "required": true,
+          "description": "Carte d'identité (scannée recto et verso ET sur la même page) ou passeport en cours de validité ; livret de famille (page des parents et de l'enfant sur une même page)"
+        },
+        {
+          "name": "Photo d'identité",
+          "required": true,
+          "description": "Une photo d'identité au format jpeg"
+        }
+      ]
+    },
+    "contact": {
+      "icon": "fas fa-phone",
+      "title": "Besoin d'aide ?"
+    }
+  },
+  "inscription_process": {
+    "title": "Processus d'inscription 2025-2026",
+    "description": "L'inscription se fait en 2 temps :",
+    "hello_asso_url": "https://www.helloasso.com/associations/oval-saone/adhesions/licence-2025-2026",
+    "steps": [
+      {
+        "title": "1/- L'inscription sur le site Hello Asso :",
+        "description": "Pour accéder à l'inscription, cliquez sur le bouton ci-dessous :"
+      },
+      {
+        "title": "2/- L'inscription à la Fédération Française de Rugby :",
+        "description": "Suite à votre inscription sur Hello Asso, vous allez recevoir un mail de la FFR s'intitulant: ne_pas_repondre@ffr.fr<br>Il n'y a aucun lien entre Hello Asso et la FFR, la création du licencié sur le site de la FFR se fait par une intervention humaine, donc ne désespérez pas si vous ne recevez pas ce lien dans le ¼ d'heure qui suit !!!<br>Dans cet email, vous aurez vos codes d'activation pour accéder au site OVAL-e.<br>(<strong>ATTENTION NE JAMAIS SUPPRIMER CE MESSAGE</strong>, même si vous modifiez votre mot de passe, conservez ce 1er mail)."
+      }
+    ],
+    "ffr_steps": {
+      "title": "Procédure d'inscription à la FFR",
+      "description": "Une fois tous les champs renseignés, vous devez scanner les éléments demandés et les télécharger sur le site de la FFR :",
+      "items": [
+        "<i class=\"fas fa-file-alt\"></i> <strong>Autorisation de soins</strong> (obligatoire)",
+        "<i class=\"fas fa-file-alt\"></i> <strong>Pièce d'identité</strong> : carte d'identité (scannée recto et verso ET sur la même page) ou passeport en cours de validité ; livret de famille (page des parents et de l'enfant sur une même page)",
+        "<i class=\"fas fa-file-alt\"></i> <strong>Photo d'identité</strong> au format jpeg (ou une photo de votre enfant que vous avez dans vos téléphones)"
+      ]
+    },
+    "validation": {
+      "title": "Validation de la licence",
+      "description": "Dès que vous avez terminé la procédure, il revient au club de vérifier et de valider votre licence auprès de la FFR.<br>Afin que le club soit en mesure de valider votre licence, il faut nous remettre les éléments téléchargés sur le site de la FFR, ainsi que le règlement de la cotisation.",
+      "warning": "AUCUNE LICENCE NE SERA VALIDÉE SANS CES ÉLÉMENTS"
+    },
+    "cotisation": {
+      "title": "COTISATION",
+      "description": "Tarif pour la saison 2025 - 2026 : 190 € des catégories M6 à M14 et 130 € pour le baby rugby (enfants nés en année 2021).<br>Le prix de la licence comprend :<br>- la licence auprès de la FFR<br>- l'assurance obligatoire<br>- la dotation annuelle (tenue d'entraînement : short, tee-shirt, chaussettes)<br>A partir de 3 licences, vous pouvez bénéficier d'une réduction de 25 € sur la 3ème licence.<br>La licence est payable directement sur Hello Asso ou au club par chèque (payable en 3 fois), espèces, chèques vacances, chéquier jeunes Ain, virement."
+    }
+  }
+}

@@ -2,68 +2,13 @@
 layout: layout.njk
 title: Partenariat - Oval Saône
 description: Devenez partenaire de l'École de Rugby Oval Saône. Soutenez le rugby local à Trévoux et bénéficiez d'avantages fiscaux et d'une visibilité unique. Entreprises et particuliers bienvenus.
-hero_title: "Partenariat & Dons"
-hero_subtitle: "Ils nous accompagnent dans notre développement"
-sponsor_title: "Nos Sponsors"
-sponsor_subtitle: "Nous sommes fiers de collaborer avec des entreprises locales et régionales qui partagent nos valeurs. Découvrez nos sponsors et soutenez-les comme ils nous soutiennent !"
-cta_sponsor_button: "Devenir Sponsor"
-
-partenariat_title: "Rejoignez l'aventure Oval Saône !"
-partenariat_description: "Devenir partenaire de l'École de Rugby Oval Saône, c'est soutenir le développement du rugby dans notre région et partager nos valeurs : respect, solidarité et esprit d'équipe."
-partenariat_entreprise:
-    subtitle: "Votre entreprise peut faire la différence"
-    description: "En devenant partenaire d'Oval Saône, vous investissez dans l'avenir du rugby local et bénéficiez d'une visibilité unique auprès de notre communauté passionnée."
-    advantages:
-      - icone: "🏟️"
-        titre: "Visibilité au stade"
-        description: "Votre logo affiché lors de nos matchs et événements"
-      - icone: "💼"
-        titre: "Networking local"
-        description: "Accès privilégié à notre réseau d'entreprises partenaires"
-      - icone: "🌟"
-        titre: "Image de marque"
-        description: "Association à des valeurs sportives et de dépassement"
-      - icone: "📱"
-        titre: "Présence digitale"
-        description: "Mise en avant sur notre site web et réseaux sociaux"
-      - icone: "🤝"
-        titre: "Engagement local"
-        description: "Soutien concret au développement du sport dans la région"
-      - icone: "💰"
-        titre: "Avantages fiscaux"
-        description: "Déduction fiscale selon la réglementation en vigueur"
-    fiscal_advantages: "Les entreprises peuvent déduire 60% de leur don de leur impôt sur les sociétés, dans la limite de 5‰ du chiffre d'affaires."
-
-partenariat_particulier:
-    subtitle: "Soutenez Oval Saône en tant que particulier !"
-    description: "En tant que particulier passionné de rugby, vous pouvez nous accompagner dans notre aventure et contribuer au développement du rugby local."
-    advantages:
-      - icone: "❤️"
-        titre: "Soutien au sport local"
-        description: "Contribuez directement au développement du rugby dans votre région"
-      - icone: "🎫"
-        titre: "Invitations privilégiées"
-        description: "Accès à des événements exclusifs et matchs spéciaux"
-      - icone: "👕"
-        titre: "Goodies exclusifs"
-        description: "Recevez des produits dérivés selon le montant de votre soutien"
-      - icone: "📧"
-        titre: "Newsletter privilège"
-        description: "Informations exclusives sur la vie du club et les coulisses"
-      - icone: "🏆"
-        titre: "Reconnaissance"
-        description: "Votre nom affiché sur notre mur des donateurs (si souhaité)"
-      - icone: "💰"
-        titre: "Avantage fiscal"
-        description: "Réduction d'impôt de 66% sur votre don"
-    fiscal_advantages: "Les dons ouvrent droit à une réduction d'impôt de 66% du montant versé, dans la limite de 20% du revenu imposable pour les particuliers."
 ---
 <!-- Hero Section avec effet parallax -->
 <section class="hero parallax-section subpage-hero" data-parallax-speed="0.25">
     <div class="hero-overlay"></div>
     <div class="hero-content">
-        <h1 class="hero-title">{{ hero_title  }}</h1>
-        <p class="hero-subtitle">{{ hero_subtitle  }}</p>
+        <h1 class="hero-title">{{ page_partenariat.hero_title  }}</h1>
+        <p class="hero-subtitle">{{ page_partenariat.hero_subtitle  }}</p>
     </div>
 </section>
 
@@ -72,8 +17,8 @@ partenariat_particulier:
     <div class="container">
         <div class="intro-content">
             <div class="intro-text">
-                <h2>{{ sponsor_title }}</h2>
-                <p>{{ sponsor_subtitle }}</p>
+                <h2>{{ page_partenariat.sponsor_title }}</h2>
+                <p>{{ page_partenariat.sponsor_subtitle }}</p>
             </div>
         </div>
         <div class="sponsors-list" id="sponsors-list">
@@ -103,7 +48,7 @@ partenariat_particulier:
         <div class="dons-actions">
             <a href="./contact.html" class="btn btn-primary btn-large">
                 <i class="fas fa-handshake"></i>
-                {{ cta_sponsor_button }}
+                {{ page_partenariat.cta_sponsor_button }}
             </a>
         </div>
     </div>
@@ -114,20 +59,20 @@ partenariat_particulier:
     <div class="container">
         <div class="intro-content">
             <div class="intro-text">
-                <h2>{{ partenariat_title }}</h2>
-                <p>{{ partenariat_description }}</p>
+                <h2>{{ page_partenariat.partenariat_title }}</h2>
+                <p>{{ page_partenariat.partenariat_description }}</p>
             </div>
         </div>
         <div class="content-grid">
             <div class="content-text">
                 <div class="cta-partenariat" id="cta-partenariat">
                     <div class="cta-header">
-                        <h4 class="cta-sous-titre">{{ partenariat_entreprise.subtitle }}</h4>
-                        <p class="cta-description">{{ partenariat_entreprise.description }}</p>
+                        <h4 class="cta-sous-titre">{{ page_partenariat.partenariat_entreprise.subtitle }}</h4>
+                        <p class="cta-description">{{ page_partenariat.partenariat_entreprise.description }}</p>
                     </div>
 
                     <div class="avantages-grid">
-                        {% for advantage in partenariat_entreprise.advantages %}
+                        {% for advantage in page_partenariat.partenariat_entreprise.advantages %}
                             <div class="avantage-item">
                                 <div class="avantage-icone">{{ advantage.icone }}</div>
                                 <div class="avantage-content">
@@ -146,7 +91,7 @@ partenariat_particulier:
         <div class="dons-actions">
             <a href="./contact.html" class="btn btn-primary btn-large">
                 <i class="fas fa-handshake"></i>
-                {{ cta_sponsor_button }}
+                {{ page_partenariat.cta_sponsor_button }}
             </a>
         </div>
     </div>
@@ -162,12 +107,12 @@ partenariat_particulier:
             <div class="content-text">
                 <div class="cta-particuliers" id="cta-particuliers">
                     <div class="cta-header">
-                        <h4 class="cta-sous-titre">{{ partenariat_particulier.subtitle }}</h4>
-                        <p class="cta-description">{{ partenariat_particulier.description }}</p>
+                        <h4 class="cta-sous-titre">{{ page_partenariat.partenariat_particulier.subtitle }}</h4>
+                        <p class="cta-description">{{ page_partenariat.partenariat_particulier.description }}</p>
                     </div>
                     
                     <div class="avantages-grid">
-                        {% for advantage in partenariat_particulier.advantages %}
+                        {% for advantage in page_partenariat.partenariat_particulier.advantages %}
                             <div class="avantage-item">
                                 <div class="avantage-icone">{{ advantage.icone }}</div>
                                 <div class="avantage-content">
@@ -207,11 +152,11 @@ partenariat_particulier:
                 <div class="avantages-grid">
                     <div class="avantage-fiscal">
                         <h4>🏢 Pour les Entreprises</h4>
-                        <p>{{ partenariat_entreprise.fiscal_advantages }}</p>
+                        <p>{{ page_partenariat.partenariat_entreprise.fiscal_advantages }}</p>
                     </div>
                     <div class="avantage-fiscal">
                         <h4>👤 Pour les Particuliers</h4>
-                        <p>{{ partenariat_particulier.fiscal_advantages }}</p>
+                        <p>{{ page_partenariat.partenariat_particulier.fiscal_advantages }}</p>
                     </div>
                 </div>
             </div>

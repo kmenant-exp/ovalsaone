@@ -2,22 +2,14 @@
 layout: layout.njk
 title: Événements - Oval Saône Rugby
 description: Calendrier des événements et matchs à venir pour toutes les équipes d'Oval Saône Rugby.
-
-hero:
-  title: "Calendrier"
-  subtitle: "Retrouvez ici tous les matchs, entraînements et événements à venir."
-
-intro:
-  title: "Ne manquez aucun rendez-vous"
-  text: "Consultez notre calendrier régulièrement mis à jour pour connaître les tournois et événements spéciaux. Vous pouvez également synchroniser le calendrier de votre équipe avec votre application préférée."
 ---
 
 <!-- Hero Section avec effet parallax -->
 <section class="hero parallax-section subpage-hero" data-parallax-speed="0.25">
     <div class="hero-overlay"></div>
     <div class="hero-content">
-        <h1 class="hero-title">{{ hero.title }}</h1>
-        <p class="hero-subtitle">{{ hero.subtitle }}</p>
+        <h1 class="hero-title">{{ page_evenements.hero.title }}</h1>
+        <p class="hero-subtitle">{{ page_evenements.hero.subtitle }}</p>
     </div>
 </section>
 
@@ -25,8 +17,8 @@ intro:
     <div class="container">
         <div class="intro-content">
             <div class="intro-text">
-                <h2>{{ intro.title }}</h2>
-                <p>{{ intro.text }}</p>
+                <h2>{{ page_evenements.intro.title }}</h2>
+                <p>{{ page_evenements.intro.text }}</p>
             </div>
         </div>
     </div>

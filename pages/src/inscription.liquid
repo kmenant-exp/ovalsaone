@@ -2,93 +2,6 @@
 layout: layout.njk
 title: Inscription - Oval Saône
 description: Inscrivez votre enfant à l'École de Rugby Oval Saône. Tarifs, documents, séances d'essai gratuites. Inscription ouverte toute l'année pour les U4 à U14 et adultes Rugby Touch.
-
-# Configuration des textes
-hero:
-  title: "Inscription"
-  subtitle: "Rejoignez notre club et vivez la passion du rugby"
-
-intro:
-  title: "Vous ou votre enfant rêvez de jouer au rugby ?"
-  description: "Chers parents, nous comprenons que l'envie de <strong>découvrir le rugby</strong> peut naître chez votre enfant, <strong>fille comme garçon</strong>, à tout moment de l'année. À l'École de Rugby Oval Saône, nous accueillons avec plaisir les nouveaux jeunes joueurs <strong>tout au long de la saison sportive</strong>. Notre objectif est d'offrir à votre enfant un <strong>environnement bienveillant</strong> où il pourra développer ses compétences sportives, apprendre les valeurs du rugby et se faire de nouveaux amis dans une ambiance conviviale et familiale. <a href=\"/rugby-enfants-trevoux\" style=\"color: var(--primary-color); font-weight: 600; text-decoration: underline;\">Découvrez tous les bienfaits du rugby pour votre enfant.</a> Et pourquoi pas vous aussi ? Rejoignez notre section <strong>Rugby Touch</strong> pour adultes et partagez cette passion <strong>en famille</strong> ! Une excellente occasion de pratiquer un rugby ludique et convivial, sans plaquage, dans une ambiance décontractée."
-  features:
-    - icon: "fas fa-play-circle"
-      title: "Séance d'essai gratuite"
-      description: "Offrez à votre enfant la possibilité de découvrir le rugby lors d'une séance d'essai gratuite et sans engagement pour vous."
-    - icon: "fas fa-clock"
-      title: "Inscription en cours d'année"
-      description: "Votre enfant peut rejoindre notre école de rugby à tout moment de l'année, selon vos contraintes familiales."
-    - icon: "fas fa-users"
-      title: "Encadrement bienveillant"
-      description: "Nos éducateurs diplômés accompagnent chaque enfant individuellement pour garantir son épanouissement et sa progression."
-
-sidebar:
-  tarif:
-    icon: "fas fa-euro-sign"
-    title: "Tarifs"
-    enfants:
-      title: "École de Rugby (Enfants)"
-      normal:
-        price: 190
-        title: "Tarif normal"
-        description: "Pour toutes les catégories M6 à M14"
-      baby:
-        price: 130
-        title: "Baby Rugby"
-        description: "Pour les enfants nés en 2021"
-    adultes:
-      title: "Rugby Touch (Adultes)"
-      touch_unique:
-        price: 110
-        title: "Licence unique"
-        description: "Pour une licence unique au sein du club"
-      touch_multiple:
-        price: 90
-        title: "Licences multiples"
-        description: "Dans le cas de licences multiples au sein du club"
-    description: "Comprend : licence FFR, assurance, dotation annuelle (tenue d'entraînement : short, tee-shirt, chaussettes)"
-  documents:
-    icon: "fas fa-file-alt"
-    title: "Documents requis"
-    list:
-      - name: "Autorisation de soins (obligatoire)"
-        required: true
-        description: "Autorisation de soins dûment complétée"
-      - name: "Pièce d'identité"
-        required: true
-        description: "Carte d'identité (scannée recto et verso ET sur la même page) ou passeport en cours de validité ; livret de famille (page des parents et de l'enfant sur une même page)"
-      - name: "Photo d'identité"
-        required: true
-        description: "Une photo d'identité au format jpeg"
-  contact:
-    icon: "fas fa-phone"
-    title: "Besoin d'aide ?"
-    email: "{{ contact.email }}"
-    phone: "{{ contact.phone }}"
-
-inscription_process:
-  title: "Processus d'inscription 2025-2026"
-  description: "L'inscription se fait en 2 temps :"
-  hello_asso_url: "https://www.helloasso.com/associations/oval-saone/adhesions/licence-2025-2026"
-  steps:
-    - title: "1/- L'inscription sur le site Hello Asso :"
-      description: "Pour accéder à l'inscription, cliquez sur le bouton ci-dessous :"
-    - title: "2/- L'inscription à la Fédération Française de Rugby :"
-      description: "Suite à votre inscription sur Hello Asso, vous allez recevoir un mail de la FFR s'intitulant: ne_pas_repondre@ffr.fr<br>Il n'y a aucun lien entre Hello Asso et la FFR, la création du licencié sur le site de la FFR se fait par une intervention humaine, donc ne désespérez pas si vous ne recevez pas ce lien dans le ¼ d'heure qui suit !!!<br>Dans cet email, vous aurez vos codes d'activation pour accéder au site OVAL-e.<br>(<strong>ATTENTION NE JAMAIS SUPPRIMER CE MESSAGE</strong>, même si vous modifiez votre mot de passe, conservez ce 1er mail)."
-  ffr_steps:
-    title: "Procédure d'inscription à la FFR"
-    description: "Une fois tous les champs renseignés, vous devez scanner les éléments demandés et les télécharger sur le site de la FFR :"
-    items:
-      - "<i class=\"fas fa-file-alt\"></i> <strong>Autorisation de soins</strong> (obligatoire)"
-      - "<i class=\"fas fa-file-alt\"></i> <strong>Pièce d'identité</strong> : carte d'identité (scannée recto et verso ET sur la même page) ou passeport en cours de validité ; livret de famille (page des parents et de l'enfant sur une même page)"
-      - "<i class=\"fas fa-file-alt\"></i> <strong>Photo d'identité</strong> au format jpeg (ou une photo de votre enfant que vous avez dans vos téléphones)"
-  validation:
-    title: "Validation de la licence"
-    description: "Dès que vous avez terminé la procédure, il revient au club de vérifier et de valider votre licence auprès de la FFR.<br>Afin que le club soit en mesure de valider votre licence, il faut nous remettre les éléments téléchargés sur le site de la FFR, ainsi que le règlement de la cotisation."
-    warning: "AUCUNE LICENCE NE SERA VALIDÉE SANS CES ÉLÉMENTS"
-  cotisation:
-    title: "COTISATION"
-    description: "Tarif pour la saison 2025 - 2026 : 190 € des catégories M6 à M14 et 130 € pour le baby rugby (enfants nés en année 2021).<br>Le prix de la licence comprend :<br>- la licence auprès de la FFR<br>- l'assurance obligatoire<br>- la dotation annuelle (tenue d'entraînement : short, tee-shirt, chaussettes)<br>A partir de 3 licences, vous pouvez bénéficier d'une réduction de 25 € sur la 3ème licence.<br>La licence est payable directement sur Hello Asso ou au club par chèque (payable en 3 fois), espèces, chèques vacances, chéquier jeunes Ain, virement."
 ---
 <!-- Schema.org HowTo pour le processus d'inscription -->
 <script type="application/ld+json">
@@ -186,8 +99,8 @@ inscription_process:
 <section class="hero parallax-section subpage-hero" data-parallax-speed="0.25">
     <div class="hero-overlay"></div>
     <div class="hero-content">
-        <h1 class="hero-title">{{ hero.title }}</h1>
-        <p class="hero-subtitle">{{ hero.subtitle }}</p>
+        <h1 class="hero-title">{{ page_inscription.hero.title }}</h1>
+        <p class="hero-subtitle">{{ page_inscription.hero.subtitle }}</p>
     </div>
 </section>
 
@@ -196,12 +109,12 @@ inscription_process:
     <div class="container">
         <div class="intro-content">
             <div class="intro-text">
-                <h2>{{ intro.title }}</h2>
-                <p>{{ intro.description }}</p>
+                <h2>{{ page_inscription.intro.title }}</h2>
+                <p>{{ page_inscription.intro.description }}</p>
             </div>
             
             <div class="intro-features">
-                {% for feature in intro.features %}
+                {% for feature in page_inscription.intro.features %}
                 <div class="feature-item">
                     <div class="feature-icon">
                         <i class="{{ feature.icon }}"></i>
@@ -226,55 +139,55 @@ inscription_process:
                 <!-- Tarif -->
                 <div class="info-card">
                     <div class="info-header">
-                        <i class="{{ sidebar.tarif.icon }}"></i>
-                        <h3>{{ sidebar.tarif.title }}</h3>
+                        <i class="{{ page_inscription.sidebar.tarif.icon }}"></i>
+                        <h3>{{ page_inscription.sidebar.tarif.title }}</h3>
                     </div>
                     <div class="info-content" id="tarifs-content">
                         <!-- Tarifs Enfants -->
                         <div class="pricing-section-wrapper">
                             <h4 class="pricing-section-title">
-                                <i class="fas fa-child"></i>{{ sidebar.tarif.enfants.title }}
+                                <i class="fas fa-child"></i>{{ page_inscription.sidebar.tarif.enfants.title }}
                             </h4>
                             
                             <!-- Tarif normal -->
                             <div class="price-display">
-                                <div class="price-amount">{{ sidebar.tarif.enfants.normal.price }} €</div>
-                                <div class="price-description">{{ sidebar.tarif.enfants.normal.title }}</div>
-                                <div class="price-category">{{ sidebar.tarif.enfants.normal.description }}</div>
+                                <div class="price-amount">{{ page_inscription.sidebar.tarif.enfants.normal.price }} €</div>
+                                <div class="price-description">{{ page_inscription.sidebar.tarif.enfants.normal.title }}</div>
+                                <div class="price-category">{{ page_inscription.sidebar.tarif.enfants.normal.description }}</div>
                             </div>
                             
                             <!-- Tarif Baby Rugby -->
                             <div class="price-display">
-                                <div class="price-amount">{{ sidebar.tarif.enfants.baby.price }} €</div>
-                                <div class="price-description">{{ sidebar.tarif.enfants.baby.title }}</div>
-                                <div class="price-category">{{ sidebar.tarif.enfants.baby.description }}</div>
+                                <div class="price-amount">{{ page_inscription.sidebar.tarif.enfants.baby.price }} €</div>
+                                <div class="price-description">{{ page_inscription.sidebar.tarif.enfants.baby.title }}</div>
+                                <div class="price-category">{{ page_inscription.sidebar.tarif.enfants.baby.description }}</div>
                             </div>
                         </div>
                         
                         <!-- Tarifs Adultes -->
                         <div>
                             <h4 class="pricing-section-title">
-                                <i class="fas fa-user-friends"></i>{{ sidebar.tarif.adultes.title }}
+                                <i class="fas fa-user-friends"></i>{{ page_inscription.sidebar.tarif.adultes.title }}
                             </h4>
                             
                             <!-- Tarif Rugby Touch - Licence unique -->
                             <div class="price-display">
-                                <div class="price-amount">{{ sidebar.tarif.adultes.touch_unique.price }} €</div>
-                                <div class="price-description">{{ sidebar.tarif.adultes.touch_unique.title }}</div>
-                                <div class="price-category">{{ sidebar.tarif.adultes.touch_unique.description }}</div>
+                                <div class="price-amount">{{ page_inscription.sidebar.tarif.adultes.touch_unique.price }} €</div>
+                                <div class="price-description">{{ page_inscription.sidebar.tarif.adultes.touch_unique.title }}</div>
+                                <div class="price-category">{{ page_inscription.sidebar.tarif.adultes.touch_unique.description }}</div>
                             </div>
                             
                             <!-- Tarif Rugby Touch - Licences multiples -->
                             <div class="price-display">
-                                <div class="price-amount">{{ sidebar.tarif.adultes.touch_multiple.price }} €</div>
-                                <div class="price-description">{{ sidebar.tarif.adultes.touch_multiple.title }}</div>
-                                <div class="price-category">{{ sidebar.tarif.adultes.touch_multiple.description }}</div>
+                                <div class="price-amount">{{ page_inscription.sidebar.tarif.adultes.touch_multiple.price }} €</div>
+                                <div class="price-description">{{ page_inscription.sidebar.tarif.adultes.touch_multiple.title }}</div>
+                                <div class="price-category">{{ page_inscription.sidebar.tarif.adultes.touch_multiple.description }}</div>
                             </div>
                         </div>
                         
                         <p class="pricing-info-text">
                             <i class="fas fa-info-circle"></i>
-                            {{ sidebar.tarif.description }}
+                            {{ page_inscription.sidebar.tarif.description }}
                         </p>
                     </div>
                 </div>
@@ -282,12 +195,12 @@ inscription_process:
                 <!-- Documents essentiels -->
                 <div class="info-card">
                     <div class="info-header">
-                        <i class="{{ sidebar.documents.icon }}"></i>
-                        <h3>{{ sidebar.documents.title }}</h3>
+                        <i class="{{ page_inscription.sidebar.documents.icon }}"></i>
+                        <h3>{{ page_inscription.sidebar.documents.title }}</h3>
                     </div>
                     <div class="info-content">
                         <ul class="document-list" id="documents-list">
-                            {% for document in sidebar.documents.list %}
+                            {% for document in page_inscription.sidebar.documents.list %}
                                 <li>
                                     <i class="fas fa-file-alt"></i>
                                     {{ document.name }}
@@ -300,8 +213,8 @@ inscription_process:
                 <!-- Contact -->
                 <div class="info-card">
                     <div class="info-header">
-                        <i class="{{ sidebar.contact.icon }}"></i>
-                        <h3>{{ sidebar.contact.title }}</h3>
+                        <i class="{{ page_inscription.sidebar.contact.icon }}"></i>
+                        <h3>{{ page_inscription.sidebar.contact.title }}</h3>
                     </div>
                     <div class="info-content">
                         <p><i class="fas fa-envelope"></i> {{ contact.email }}</p>
@@ -315,18 +228,18 @@ inscription_process:
             <main class="inscription-process-main">
                 <div class="process-container">
                     <div class="process-header">
-                        <h2>{{ inscription_process.title }}</h2>
-                        <p>{{ inscription_process.description }}</p>
+                        <h2>{{ page_inscription.inscription_process.title }}</h2>
+                        <p>{{ page_inscription.inscription_process.description }}</p>
                     </div>
 
                     <div class="process-steps">
-                        {% for step in inscription_process.steps %}
+                        {% for step in page_inscription.inscription_process.steps %}
                         <div class="process-step">
                             <h3>{{ step.title }}</h3>
                             <p>{{ step.description }}</p>
                             {% if forloop.first %}
                             <div class="button-container">
-                                <a href="{{ inscription_process.hello_asso_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">
+                                <a href="{{ page_inscription.inscription_process.hello_asso_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">
                                     <i class="fas fa-external-link-alt"></i>
                                     <span>S'inscrire sur Hello Asso</span>
                                 </a>
@@ -337,24 +250,24 @@ inscription_process:
                     </div>
 
                     <div class="ffr-steps">
-                        <h3>{{ inscription_process.ffr_steps.title }}</h3>
-                        <p>{{ inscription_process.ffr_steps.description }}</p>
+                        <h3>{{ page_inscription.inscription_process.ffr_steps.title }}</h3>
+                        <p>{{ page_inscription.inscription_process.ffr_steps.description }}</p>
                         <ul>
-                            {% for item in inscription_process.ffr_steps.items %}
+                            {% for item in page_inscription.inscription_process.ffr_steps.items %}
                             <li>{{ item }}</li>
                             {% endfor %}
                         </ul>
                     </div>
 
                     <div class="validation-info">
-                        <h3>{{ inscription_process.validation.title }}</h3>
-                        <p>{{ inscription_process.validation.description }}</p>
-                        <div class="warning-message">{{ inscription_process.validation.warning }}</div>
+                        <h3>{{ page_inscription.inscription_process.validation.title }}</h3>
+                        <p>{{ page_inscription.inscription_process.validation.description }}</p>
+                        <div class="warning-message">{{ page_inscription.inscription_process.validation.warning }}</div>
                     </div>
 
                     <div class="cotisation-info">
-                        <h3>{{ inscription_process.cotisation.title }}</h3>
-                        <p>{{ inscription_process.cotisation.description }}</p>
+                        <h3>{{ page_inscription.inscription_process.cotisation.title }}</h3>
+                        <p>{{ page_inscription.inscription_process.cotisation.description }}</p>
                     </div>
 
                     <div class="cotisation-info">

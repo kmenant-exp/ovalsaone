@@ -43,6 +43,22 @@ export default function(eleventyConfig) {
         author: "École de Rugby Oval Saône"
     });
     
+    // Filtre JSON pour Schema.org dynamique
+    eleventyConfig.addFilter("jsonify", function(value) {
+        return JSON.stringify(value);
+    });
+
+    // Filtre pour convertir du HTML en texte propre (Schema.org)
+    eleventyConfig.addFilter("schemaText", function(html) {
+        if (!html) return "";
+        return html
+            .replace(/<\/?(p|br|li|ul|ol|div|h[1-6])[^>]*>/gi, ' ')
+            .replace(/<[^>]+>/g, '')
+            .replace(/&[a-z]+;/gi, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
+    });
+
     // Ajouter des filtres pour les URLs absolues
     eleventyConfig.addFilter("absoluteUrl", function(url) {
         return `https://ovalsaone.fr${url}`; // Remplacer par votre vraie URL

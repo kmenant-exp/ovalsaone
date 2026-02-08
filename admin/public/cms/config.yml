@@ -228,3 +228,432 @@ collections:
         format: json
         fields:
           - { label: "Site Key", name: "siteKey", widget: "string" }
+
+  # ----------------------------------------------------------
+  # PAGES DU SITE
+  # ----------------------------------------------------------
+  - name: pages
+    label: "Pages du site"
+    files:
+      # --- Accueil ---
+      - name: page_accueil
+        label: "Page d'accueil"
+        file: "pages/src/_data/page_accueil.json"
+        format: json
+        fields:
+          - { label: "Titre héro", name: "hero_title", widget: "string" }
+          - { label: "Sous-titre héro", name: "hero_subtitle", widget: "string" }
+          - { label: "Description héro", name: "hero_description", widget: "text" }
+          - { label: "Titre histoire", name: "histoire_title", widget: "string" }
+          - { label: "Description histoire", name: "histoire_description", widget: "text" }
+          - { label: "Titre galerie", name: "gallery_title", widget: "string" }
+          - { label: "Sous-titre galerie", name: "gallery_subtitle", widget: "string" }
+          - { label: "Sous-titre tournois", name: "tournois_subtitle", widget: "text" }
+          - { label: "Titre sponsors", name: "sponsors_title", widget: "string" }
+          - { label: "Description sponsors", name: "sponsors_description", widget: "text" }
+
+      # --- Boutique ---
+      - name: page_boutique
+        label: "Boutique"
+        file: "pages/src/_data/page_boutique.json"
+        format: json
+        fields:
+          - { label: "Titre héro", name: "hero_title", widget: "string" }
+          - { label: "Description héro", name: "hero_description", widget: "text" }
+          - { label: "Titre produits", name: "products_title", widget: "string" }
+          - { label: "Description produits", name: "products_description", widget: "text" }
+          - { label: "Titre boutique en ligne", name: "shop_title", widget: "string" }
+          - { label: "Description boutique en ligne", name: "shop_description", widget: "text" }
+
+      # --- Contact ---
+      - name: page_contact
+        label: "Contact"
+        file: "pages/src/_data/page_contact.json"
+        format: json
+        fields:
+          - label: "Héro"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Sous-titre", name: "subtitle", widget: "text" }
+          - label: "Formulaire"
+            name: "form"
+            widget: "object"
+            fields:
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Sous-titre", name: "subtitle", widget: "text" }
+          - label: "Carte"
+            name: "map"
+            widget: "object"
+            fields:
+              - { label: "Titre", name: "title", widget: "string" }
+
+      # --- Équipes ---
+      - name: page_equipes
+        label: "Équipes"
+        file: "pages/src/_data/page_equipes.json"
+        format: json
+        fields:
+          - label: "Héro"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Sous-titre", name: "subtitle", widget: "text" }
+          - label: "Introduction"
+            name: "intro"
+            widget: "object"
+            fields:
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Texte", name: "text", widget: "text" }
+
+      # --- Événements ---
+      - name: page_evenements
+        label: "Événements / Calendrier"
+        file: "pages/src/_data/page_evenements.json"
+        format: json
+        fields:
+          - label: "Héro"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Sous-titre", name: "subtitle", widget: "text" }
+          - label: "Introduction"
+            name: "intro"
+            widget: "object"
+            fields:
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Texte", name: "text", widget: "text" }
+
+      # --- École de Rugby ---
+      - name: page_ecole
+        label: "École de Rugby"
+        file: "pages/src/_data/page_ecole.json"
+        format: json
+        fields:
+          - label: "Héro"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Sous-titre", name: "subtitle", widget: "string" }
+          - label: "Notre histoire"
+            name: "histoire"
+            widget: "object"
+            fields:
+              - { label: "Description (HTML autorisé)", name: "description", widget: "text" }
+              - { label: "Année de création", name: "annee_creation", widget: "number", value_type: "int" }
+              - { label: "Nombre de licenciés", name: "licencies", widget: "number", value_type: "int" }
+              - { label: "Nombre d'équipes", name: "equipes", widget: "number", value_type: "int" }
+              - { label: "Nombre d'éducateurs", name: "educateurs", widget: "number", value_type: "int" }
+              - { label: "Entraînements par semaine", name: "entrainements_semaine", widget: "number", value_type: "int" }
+              - { label: "Tournois par saison", name: "tournois_saison", widget: "number", value_type: "int" }
+              - label: "Sections"
+                name: "sections"
+                widget: "list"
+                summary: "{{fields.titre}}"
+                fields:
+                  - { label: "Titre", name: "titre", widget: "string" }
+                  - { label: "Contenu (HTML autorisé)", name: "contenu", widget: "text" }
+                  - label: "Liste (optionnelle)"
+                    name: "liste"
+                    widget: "list"
+                    required: false
+                    field: { label: "Élément", name: "element", widget: "string" }
+
+      # --- Partenariat ---
+      - name: page_partenariat
+        label: "Partenariat & Dons"
+        file: "pages/src/_data/page_partenariat.json"
+        format: json
+        fields:
+          - { label: "Titre héro", name: "hero_title", widget: "string" }
+          - { label: "Sous-titre héro", name: "hero_subtitle", widget: "text" }
+          - { label: "Titre sponsors", name: "sponsor_title", widget: "string" }
+          - { label: "Sous-titre sponsors", name: "sponsor_subtitle", widget: "text" }
+          - { label: "Bouton CTA sponsor", name: "cta_sponsor_button", widget: "string" }
+          - { label: "Titre partenariat", name: "partenariat_title", widget: "string" }
+          - { label: "Description partenariat", name: "partenariat_description", widget: "text" }
+          - label: "Partenariat Entreprise"
+            name: "partenariat_entreprise"
+            widget: "object"
+            fields:
+              - { label: "Sous-titre", name: "subtitle", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - label: "Avantages"
+                name: "advantages"
+                widget: "list"
+                summary: "{{fields.titre}}"
+                fields:
+                  - { label: "Icône (emoji)", name: "icone", widget: "string" }
+                  - { label: "Titre", name: "titre", widget: "string" }
+                  - { label: "Description", name: "description", widget: "string" }
+              - { label: "Avantages fiscaux", name: "fiscal_advantages", widget: "text" }
+          - label: "Partenariat Particulier"
+            name: "partenariat_particulier"
+            widget: "object"
+            fields:
+              - { label: "Sous-titre", name: "subtitle", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - label: "Avantages"
+                name: "advantages"
+                widget: "list"
+                summary: "{{fields.titre}}"
+                fields:
+                  - { label: "Icône (emoji)", name: "icone", widget: "string" }
+                  - { label: "Titre", name: "titre", widget: "string" }
+                  - { label: "Description", name: "description", widget: "string" }
+              - { label: "Avantages fiscaux", name: "fiscal_advantages", widget: "text" }
+
+      # --- FAQ ---
+      - name: page_faq
+        label: "FAQ"
+        file: "pages/src/_data/page_faq.json"
+        format: json
+        fields:
+          - label: "Héro"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Sous-titre", name: "subtitle", widget: "string" }
+          - label: "Introduction"
+            name: "intro"
+            widget: "object"
+            fields:
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Texte", name: "text", widget: "text" }
+          - label: "Catégories"
+            name: "categories"
+            widget: "list"
+            summary: "{{fields.title}} ({{fields.id}})"
+            fields:
+              - { label: "Identifiant", name: "id", widget: "string" }
+              - { label: "Icône (classe Font Awesome)", name: "icon", widget: "string" }
+              - { label: "Titre", name: "title", widget: "string" }
+              - label: "Questions"
+                name: "questions"
+                widget: "list"
+                summary: "{{fields.q}}"
+                fields:
+                  - { label: "Question", name: "q", widget: "string" }
+                  - { label: "Réponse (HTML autorisé)", name: "a", widget: "text" }
+          - label: "Appel à l'action"
+            name: "cta"
+            widget: "object"
+            fields:
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Texte", name: "text", widget: "text" }
+              - label: "Boutons"
+                name: "buttons"
+                widget: "list"
+                summary: "{{fields.text}}"
+                fields:
+                  - { label: "Texte", name: "text", widget: "string" }
+                  - { label: "URL", name: "url", widget: "string" }
+                  - { label: "Classe CSS", name: "class", widget: "string" }
+
+      # --- Inscription ---
+      - name: page_inscription
+        label: "Inscription"
+        file: "pages/src/_data/page_inscription.json"
+        format: json
+        fields:
+          - label: "Héro"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Sous-titre", name: "subtitle", widget: "string" }
+          - label: "Introduction"
+            name: "intro"
+            widget: "object"
+            fields:
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Description (HTML autorisé)", name: "description", widget: "text" }
+              - label: "Points forts"
+                name: "features"
+                widget: "list"
+                summary: "{{fields.title}}"
+                fields:
+                  - { label: "Icône (classe Font Awesome)", name: "icon", widget: "string" }
+                  - { label: "Titre", name: "title", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+          - label: "Barre latérale"
+            name: "sidebar"
+            widget: "object"
+            fields:
+              - label: "Tarifs"
+                name: "tarif"
+                widget: "object"
+                fields:
+                  - { label: "Icône", name: "icon", widget: "string" }
+                  - { label: "Titre", name: "title", widget: "string" }
+                  - label: "Enfants"
+                    name: "enfants"
+                    widget: "object"
+                    fields:
+                      - { label: "Titre section", name: "title", widget: "string" }
+                      - label: "Tarif normal"
+                        name: "normal"
+                        widget: "object"
+                        fields:
+                          - { label: "Prix (€)", name: "price", widget: "number", value_type: "int" }
+                          - { label: "Titre", name: "title", widget: "string" }
+                          - { label: "Description", name: "description", widget: "string" }
+                      - label: "Baby Rugby"
+                        name: "baby"
+                        widget: "object"
+                        fields:
+                          - { label: "Prix (€)", name: "price", widget: "number", value_type: "int" }
+                          - { label: "Titre", name: "title", widget: "string" }
+                          - { label: "Description", name: "description", widget: "string" }
+                  - label: "Adultes"
+                    name: "adultes"
+                    widget: "object"
+                    fields:
+                      - { label: "Titre section", name: "title", widget: "string" }
+                      - label: "Licence unique"
+                        name: "touch_unique"
+                        widget: "object"
+                        fields:
+                          - { label: "Prix (€)", name: "price", widget: "number", value_type: "int" }
+                          - { label: "Titre", name: "title", widget: "string" }
+                          - { label: "Description", name: "description", widget: "string" }
+                      - label: "Licences multiples"
+                        name: "touch_multiple"
+                        widget: "object"
+                        fields:
+                          - { label: "Prix (€)", name: "price", widget: "number", value_type: "int" }
+                          - { label: "Titre", name: "title", widget: "string" }
+                          - { label: "Description", name: "description", widget: "string" }
+                  - { label: "Description incluse", name: "description", widget: "text" }
+              - label: "Documents requis"
+                name: "documents"
+                widget: "object"
+                fields:
+                  - { label: "Icône", name: "icon", widget: "string" }
+                  - { label: "Titre", name: "title", widget: "string" }
+                  - label: "Liste des documents"
+                    name: "list"
+                    widget: "list"
+                    summary: "{{fields.name}}"
+                    fields:
+                      - { label: "Nom", name: "name", widget: "string" }
+                      - { label: "Obligatoire", name: "required", widget: "boolean" }
+                      - { label: "Description", name: "description", widget: "text" }
+              - label: "Contact aide"
+                name: "contact"
+                widget: "object"
+                fields:
+                  - { label: "Icône", name: "icon", widget: "string" }
+                  - { label: "Titre", name: "title", widget: "string" }
+          - label: "Processus d'inscription"
+            name: "inscription_process"
+            widget: "object"
+            fields:
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "string" }
+              - { label: "URL Hello Asso", name: "hello_asso_url", widget: "string" }
+              - label: "Étapes"
+                name: "steps"
+                widget: "list"
+                summary: "{{fields.title}}"
+                fields:
+                  - { label: "Titre", name: "title", widget: "string" }
+                  - { label: "Description (HTML autorisé)", name: "description", widget: "text" }
+              - label: "Procédure FFR"
+                name: "ffr_steps"
+                widget: "object"
+                fields:
+                  - { label: "Titre", name: "title", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+                  - label: "Éléments à fournir"
+                    name: "items"
+                    widget: "list"
+                    field: { label: "Élément (HTML autorisé)", name: "item", widget: "string" }
+              - label: "Validation"
+                name: "validation"
+                widget: "object"
+                fields:
+                  - { label: "Titre", name: "title", widget: "string" }
+                  - { label: "Description (HTML autorisé)", name: "description", widget: "text" }
+                  - { label: "Avertissement", name: "warning", widget: "string" }
+              - label: "Cotisation"
+                name: "cotisation"
+                widget: "object"
+                fields:
+                  - { label: "Titre", name: "title", widget: "string" }
+                  - { label: "Description (HTML autorisé)", name: "description", widget: "text" }
+
+      # --- Rugby Enfants Trévoux ---
+      - name: page_rugby_enfants
+        label: "Rugby Enfants Trévoux"
+        file: "pages/src/_data/page_rugby_enfants.json"
+        format: json
+        fields:
+          - label: "Héro"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Sous-titre", name: "subtitle", widget: "string" }
+          - label: "Introduction"
+            name: "intro"
+            widget: "object"
+            fields:
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Texte", name: "text", widget: "text" }
+          - label: "Sections"
+            name: "sections"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Introduction", name: "intro", widget: "text", required: false }
+              - label: "Éléments (niveau section)"
+                name: "items"
+                widget: "list"
+                required: false
+                field: { label: "Élément (HTML autorisé)", name: "item", widget: "string" }
+              - label: "Sous-sections"
+                name: "subsections"
+                widget: "list"
+                required: false
+                summary: "{{fields.subtitle}}"
+                fields:
+                  - { label: "Sous-titre", name: "subtitle", widget: "string" }
+                  - { label: "Contenu", name: "content", widget: "text" }
+                  - label: "Éléments"
+                    name: "items"
+                    widget: "list"
+                    required: false
+                    field: { label: "Élément (HTML autorisé)", name: "item", widget: "string" }
+          - label: "FAQ"
+            name: "faq"
+            widget: "object"
+            fields:
+              - { label: "Titre", name: "title", widget: "string" }
+              - label: "Questions"
+                name: "questions"
+                widget: "list"
+                summary: "{{fields.question}}"
+                fields:
+                  - { label: "Question", name: "question", widget: "string" }
+                  - { label: "Réponse (HTML autorisé)", name: "answer", widget: "text" }
+          - label: "Appel à l'action"
+            name: "cta"
+            widget: "object"
+            fields:
+              - { label: "Titre", name: "title", widget: "string" }
+              - { label: "Sous-titre", name: "subtitle", widget: "text" }
+              - label: "Boutons"
+                name: "buttons"
+                widget: "list"
+                summary: "{{fields.text}}"
+                fields:
+                  - { label: "Texte", name: "text", widget: "string" }
+                  - { label: "URL", name: "url", widget: "string" }
+                  - { label: "Style (primary/secondary)", name: "style", widget: "select", options: ["primary", "secondary"] }

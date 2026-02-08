@@ -2,17 +2,6 @@
 layout: layout.njk
 title: Contact - Oval Saône
 description: Contactez l'École de Rugby Oval Saône à Trévoux. Formulaire de contact, téléphone, email et plan d'accès au stade de Chamalan. Nous répondons à toutes vos questions.
-
-hero:
-  title: "Contactez-nous"
-  subtitle: "Pour toute question, suggestion ou demande d'information, n'hésitez pas à nous contacter via le formulaire ci-dessous ou par téléphone."
-
-form:
-  title: "Formulaire de Contact"
-  subtitle: "Remplissez le formulaire ci-dessous et nous vous répondrons dans les plus brefs délais."
-
-map:
-  title: "Localisation du Stade Municipal"
 ---
 
 <!-- Ressources pour la carte OpenStreetMap -->
@@ -27,8 +16,8 @@ map:
 <section class="hero parallax-section subpage-hero" data-parallax-speed="0.25">
     <div class="hero-overlay"></div>
     <div class="hero-content">
-        <h1 class="hero-title">{{ hero.title }}</h1>
-        <p class="hero-subtitle">{{ hero.subtitle }}</p>
+        <h1 class="hero-title">{{ page_contact.hero.title }}</h1>
+        <p class="hero-subtitle">{{ page_contact.hero.subtitle }}</p>
     </div>
 </section>
 
@@ -41,8 +30,8 @@ map:
             <!-- Formulaire de contact compact -->
             <div class="contact-form-compact">
                 <div class="form-header">
-                    <h2>{{ form.title }}</h2>    
-                    <p>{{ form.subtitle }}</p>
+                    <h2>{{ page_contact.form.title }}</h2>    
+                    <p>{{ page_contact.form.subtitle }}</p>
                 </div>
                 
                 <form id="contact-form" class="form-compact">
@@ -126,7 +115,7 @@ map:
     <div class="container">
         <div class="intro-content">
             <div class="intro-text">
-                <h2>{{ map.title }}</h2>
+                <h2>{{ page_contact.map.title }}</h2>
             </div>
         </div>
         <div class="map-container-compact">

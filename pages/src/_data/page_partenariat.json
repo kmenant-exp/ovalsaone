@@ -1,0 +1,35 @@
+{
+  "hero_title": "Partenariat & Dons",
+  "hero_subtitle": "Ils nous accompagnent dans notre développement",
+  "sponsor_title": "Nos Sponsors",
+  "sponsor_subtitle": "Nous sommes fiers de collaborer avec des entreprises locales et régionales qui partagent nos valeurs. Découvrez nos sponsors et soutenez-les comme ils nous soutiennent !",
+  "cta_sponsor_button": "Devenir Sponsor",
+  "partenariat_title": "Rejoignez l'aventure Oval Saône !",
+  "partenariat_description": "Devenir partenaire de l'École de Rugby Oval Saône, c'est soutenir le développement du rugby dans notre région et partager nos valeurs : respect, solidarité et esprit d'équipe.",
+  "partenariat_entreprise": {
+    "subtitle": "Votre entreprise peut faire la différence",
+    "description": "En devenant partenaire d'Oval Saône, vous investissez dans l'avenir du rugby local et bénéficiez d'une visibilité unique auprès de notre communauté passionnée.",
+    "advantages": [
+      { "icone": "🏟️", "titre": "Visibilité au stade", "description": "Votre logo affiché lors de nos matchs et événements" },
+      { "icone": "💼", "titre": "Networking local", "description": "Accès privilégié à notre réseau d'entreprises partenaires" },
+      { "icone": "🌟", "titre": "Image de marque", "description": "Association à des valeurs sportives et de dépassement" },
+      { "icone": "📱", "titre": "Présence digitale", "description": "Mise en avant sur notre site web et réseaux sociaux" },
+      { "icone": "🤝", "titre": "Engagement local", "description": "Soutien concret au développement du sport dans la région" },
+      { "icone": "💰", "titre": "Avantages fiscaux", "description": "Déduction fiscale selon la réglementation en vigueur" }
+    ],
+    "fiscal_advantages": "Les entreprises peuvent déduire 60% de leur don de leur impôt sur les sociétés, dans la limite de 5‰ du chiffre d'affaires."
+  },
+  "partenariat_particulier": {
+    "subtitle": "Soutenez Oval Saône en tant que particulier !",
+    "description": "En tant que particulier passionné de rugby, vous pouvez nous accompagner dans notre aventure et contribuer au développement du rugby local.",
+    "advantages": [
+      { "icone": "❤️", "titre": "Soutien au sport local", "description": "Contribuez directement au développement du rugby dans votre région" },
+      { "icone": "🎫", "titre": "Invitations privilégiées", "description": "Accès à des événements exclusifs et matchs spéciaux" },
+      { "icone": "👕", "titre": "Goodies exclusifs", "description": "Recevez des produits dérivés selon le montant de votre soutien" },
+      { "icone": "📧", "titre": "Newsletter privilège", "description": "Informations exclusives sur la vie du club et les coulisses" },
+      { "icone": "🏆", "titre": "Reconnaissance", "description": "Votre nom affiché sur notre mur des donateurs (si souhaité)" },
+      { "icone": "💰", "titre": "Avantage fiscal", "description": "Réduction d'impôt de 66% sur votre don" }
+    ],
+    "fiscal_advantages": "Les dons ouvrent droit à une réduction d'impôt de 66% du montant versé, dans la limite de 20% du revenu imposable pour les particuliers."
+  }
+}
