@@ -59,19 +59,15 @@ description: Calendrier des événements et matchs à venir pour toutes les équ
 
         <div class="section-intro">
             <div class="calendar-links">
-                <p>Vous pouvez également ajouter les calendriers à votre application préférée :</p>
+                <p>Abonnez-vous au calendrier de votre équipe pour recevoir automatiquement les mises à jour :</p>
                 <div class="calendar-links-grid">
                     {% for team in calendars.teams %}
                     <div class="calendar-links-team">
                         <h3 class="team-name">{{ team.name }}</h3>
                         <div class="calendar-links-buttons">
-                            <a href="{{ team.calendarUrl }}" target="_blank" class="calendar-link google">
-                                <span class="calendar-icon google-icon"></span>
-                                <span class="link-text">Google Calendar</span>
-                            </a>
-                            <a href="{{ team.icsUrl }}" download class="calendar-link ics">
+                            <a href="{{ team.icsUrl | replace: 'https://', 'webcal://' }}" class="calendar-link ics">
                                 <span class="calendar-icon ics-icon"></span>
-                                <span class="link-text">Format ICS</span>
+                                <span class="link-text">S'abonner au calendrier</span>
                             </a>
                         </div>
                     </div>

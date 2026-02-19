@@ -101,10 +101,6 @@
     background-position: center;
 }
 
-.google-icon {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234285F4'%3E%3Cpath d='M19,4h-1V2h-2v2H8V2H6v2H5C3.9,4,3,4.9,3,6v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V6C21,4.9,20.1,4,19,4z M19,20H5V9h14V20z M5,6v2h14V6H5z'%3E%3C/path%3E%3C/svg%3E");
-}
-
 .ics-icon {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D14836'%3E%3Cpath d='M19,4h-1V2h-2v2H8V2H6v2H5C3.9,4,3,4.9,3,6v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V6C21,4.9,20.1,4,19,4z M16,15h-2.5v2.5h-2V15H9v-2h2.5v-2.5h2V13H16V15z'%3E%3C/path%3E%3C/svg%3E");
 }
