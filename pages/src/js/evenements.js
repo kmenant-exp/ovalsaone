@@ -186,8 +186,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Charge tous les calendriers au chargement de la page
-    loadAllCalendars();
+    // Charge les calendriers après le rendu initial pour ne pas bloquer le LCP
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => loadAllCalendars());
+    } else {
+        setTimeout(loadAllCalendars, 200);
+    }
 
     // Gestion intelligente des liens d'abonnement calendrier selon la plateforme
     document.querySelectorAll('.calendar-link.ics[data-ics-url]').forEach(link => {

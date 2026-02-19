@@ -39,8 +39,9 @@ title: "default"
         
         <!-- Preconnect to external domains for faster loading -->
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-        <link rel="preconnect" href="https://www.clarity.ms">
-        <link rel="preconnect" href="https://www.instagram.com">
+        <link rel="preconnect" href="https://www.googleapis.com" crossorigin>
+        <link rel="dns-prefetch" href="https://www.clarity.ms">
+        <link rel="dns-prefetch" href="https://www.instagram.com">
         <link rel="dns-prefetch" href="https://ligueaura.ffr.fr">
         <link rel="dns-prefetch" href="https://www.auvergnerhonealpes.fr">
         <link rel="dns-prefetch" href="https://cd01rugby.com">
@@ -49,7 +50,7 @@ title: "default"
         {% if page.url == "/" %}
         <link rel="preload" href="/assets/logo-48x48.webp" as="image" type="image/webp">
         <link rel="preload" href="/assets/logo-240x230.webp" as="image" type="image/webp">
-        <link rel="preload" href="/assets/hero-background.webp" as="image" type="image/webp">
+        <link rel="preload" href="/assets/hero-background.webp" as="image" type="image/webp" fetchpriority="high">
         {% endif %}
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
@@ -358,6 +359,6 @@ title: "default"
         <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
         <script>window.TURNSTILE_SITE_KEY = "{{ turnstile.siteKey }}";</script>
 
-        <script src="/bundle.js"></script>
+        <script src="/bundle.js" defer></script>
     </body>
 </html>

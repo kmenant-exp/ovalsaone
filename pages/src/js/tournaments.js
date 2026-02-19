@@ -105,6 +105,10 @@ document.addEventListener('DOMContentLoaded', () => {
         noTournaments.style.display = 'none';
     }
 
-    // Charge tous les calendriers au chargement de la page
-    loadAllCalendars();
+    // Charge les calendriers après le rendu initial pour ne pas bloquer le LCP
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => loadAllCalendars());
+    } else {
+        setTimeout(loadAllCalendars, 200);
+    }
 });
