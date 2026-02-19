@@ -78,11 +78,17 @@ window.CalendarUtils.createEventCard = function(event, isUpcoming = true) {
     
     // Vérifiez si l'événement a été fusionné (possède un tableau d'équipes)
     if (event.teams && event.teams.length > 0) {
+        // Trier les équipes par numéro (U6, U8, U10, U12, U14...)
+        const sortedTeams = [...event.teams].sort((a, b) => {
+            const numA = parseInt(a.replace(/\D/g, '')) || 0;
+            const numB = parseInt(b.replace(/\D/g, '')) || 0;
+            return numA - numB;
+        });
         // Pour les événements fusionnés, afficher toutes les équipes concernées
-        teamDisplay = event.teams.map(team => `<span class="event-team">${team}</span>`).join('');
-        teamsString = event.teams.join(',');
-        console.log('Équipes fusionnées pour l\'événement:', event.teams);
-        primaryTeam = event.teams[0];
+        teamDisplay = sortedTeams.map(team => `<span class="event-team">${team}</span>`).join('');
+        teamsString = sortedTeams.join(',');
+        console.log('Équipes fusionnées pour l\'événement:', sortedTeams);
+        primaryTeam = sortedTeams[0];
     } else {
         // Pour les événements non fusionnés (vue par équipe), afficher l'équipe unique
         teamDisplay = `<span class="event-team">${event.team}</span>`;
