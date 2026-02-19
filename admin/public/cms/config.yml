@@ -233,7 +233,6 @@ collections:
             fields:
               - { label: "Nom", name: "name", widget: "string" }
               - { label: "Calendar ID", name: "calendarId", widget: "string" }
-              - { label: "URL Calendrier", name: "calendarUrl", widget: "string" }
               - { label: "URL ICS", name: "icsUrl", widget: "string" }
 
       - name: turnstile

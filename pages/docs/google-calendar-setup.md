@@ -9,9 +9,8 @@ La page des événements (`src/evenements.liquid`) affiche les calendriers publi
 - `apiKey` : Clé API Google pour accéder à l'API Google Calendar
 - `teams` : Liste des équipes avec leurs calendriers respectifs
   - `name` : Nom de l'équipe (ex: "U6", "U8", "U10")
-  - `calendarId` : Identifiant unique du calendrier
-  - `calendarUrl` : URL pour ajouter le calendrier dans Google Calendar
-  - `icsUrl` : URL pour synchroniser le calendrier au format iCal
+  - `calendarId` : Identifiant unique du calendrier (utilisé par l'API Google Calendar pour afficher les événements)
+  - `icsUrl` : URL du calendrier au format iCal (utilisée avec le protocole `webcal://` pour permettre l'abonnement depuis n'importe quelle app calendrier)
 
 ## Étape 1 : Créer un calendrier Google Calendar
 
@@ -60,25 +59,7 @@ Toujours dans les paramètres du calendrier :
 
 > **Note** : Le `calendarId` se termine généralement par `@group.calendar.google.com` pour les calendriers créés manuellement.
 
-### 2.2 Récupérer le `calendarUrl`
-
-1. Dans les paramètres du calendrier, descendez jusqu'à **"Intégrer l'agenda"**
-2. Cliquez sur le lien **"Adresse au format iCal"** ou copiez l'URL qui s'affiche
-3. Alternativement, construisez l'URL manuellement :
-   ```
-   https://calendar.google.com/calendar/u/0?cid=[BASE64_ENCODED_CALENDAR_ID]
-   ```
-   - Pour encoder le `calendarId` en Base64, utilisez un outil en ligne ou ce code JavaScript :
-     ```javascript
-     btoa('votre_calendar_id@group.calendar.google.com')
-     ```
-
-4. Exemple d'URL complète :
-   ```
-   https://calendar.google.com/calendar/u/0?cid=MDc0NmUzYTAzODRlZWM3MWYyNGJmZGU1ZGU1NzgyMGUwNzg0ZWRlYmExMDU1Yjc4OWJkMmUwMDg4ZDVmZjkyN0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t
-   ```
-
-### 2.3 Récupérer le `icsUrl`
+### 2.2 Récupérer le `icsUrl`
 
 1. Dans la section **"Adresse de l'agenda dans un format iCal"**, copiez l'URL complète
 2. Le format est :
@@ -139,9 +120,10 @@ Une fois toutes les informations récupérées, ajoutez-les au fichier `src/_dat
     {
       "name": "U10",
       "calendarId": "votre_calendar_id@group.calendar.google.com",
-      "calendarUrl": "https://calendar.google.com/calendar/u/0?cid=BASE64_ENCODED_ID",
       "icsUrl": "https://calendar.google.com/calendar/ical/calendar_id_url_encoded%40group.calendar.google.com/public/basic.ics"
     }
   ]
 }
 ```
+
+> **Note** : L'URL ICS est stockée en `https://` dans le fichier JSON. Le template Liquid la convertit automatiquement en `webcal://` pour déclencher l'abonnement dans l'app calendrier de l'utilisateur (Apple Calendar, Outlook, Google Calendar, etc.).

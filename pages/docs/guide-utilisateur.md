@@ -245,15 +245,18 @@ La liste des **événements futurs** s'affiche avec :
 
 Cliquez sur **"Voir les événements passés"** pour consulter l'historique.
 
-### Synchroniser le calendrier
+### S'abonner au calendrier
 
-Vous pouvez **ajouter le calendrier** à votre application préférée :
+Vous pouvez **vous abonner au calendrier** d'une équipe pour recevoir automatiquement les mises à jour :
 
-1. **Google Calendar** : Cliquez sur le bouton Google Calendar pour l'équipe souhaitée
-2. **Format ICS** : Téléchargez le fichier ICS pour l'ajouter à Apple Calendar, Outlook, etc.
+1. Cliquez sur le bouton **"S'abonner au calendrier"** pour l'équipe souhaitée
+2. Votre application calendrier s'ouvre automatiquement (Apple Calendar, Outlook, Google Calendar, etc.)
+3. Confirmez l'abonnement — les événements se synchroniseront ensuite automatiquement
+
+> **Astuce** : Grâce à l'abonnement, toute modification faite dans Google Calendar (ajout, suppression ou modification d'événement) sera automatiquement reflétée dans votre calendrier personnel.
 
 ![Liens calendrier](./screenshots/evenements-calendar-links.png)
-*Capture d'écran : Liens pour synchroniser les calendriers*
+*Capture d'écran : Boutons d'abonnement aux calendriers*
 
 ---
 

@@ -328,7 +328,6 @@ Les fichiers JSON utilisent une structure simple avec des accolades `{}`, des cr
     {
       "name": "U6",
       "calendarId": "identifiant_calendrier@group.calendar.google.com",
-      "calendarUrl": "https://calendar.google.com/calendar/u/0?cid=...",
       "icsUrl": "https://calendar.google.com/calendar/ical/...ics"
     }
   ]
@@ -341,9 +340,8 @@ Les fichiers JSON utilisent une structure simple avec des accolades `{}`, des cr
 3. Dans la liste `teams`, ajoutez un nouvel objet
 4. Remplissez les champs :
    - `name` : Nom de l'équipe (doit correspondre à `teams.json`)
-   - `calendarId` : ID du calendrier Google
-   - `calendarUrl` : URL publique du calendrier
-   - `icsUrl` : URL du fichier ICS pour l'export
+   - `calendarId` : ID du calendrier Google (pour l'affichage des événements via l'API)
+   - `icsUrl` : URL ICS du calendrier (pour l'abonnement des utilisateurs)
 5. Décrivez vos modifications et cliquez sur "Commit changes"
 
 **⚠️ Note :** Les URL proviennent de Google Calendar. Ne modifiez pas l'`apiKey` sans consulter l'équipe technique.
