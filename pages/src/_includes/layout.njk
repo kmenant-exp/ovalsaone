@@ -66,7 +66,15 @@ title: "default"
         <meta name="mobile-web-app-capable" content="yes">
         
         <!-- Stylesheets -->
+        {% if page.url == "/" %}
+        {# Critical CSS inlined for instant first paint on the home page #}
+        <style>{% include "critical-home.css" %}</style>
+        {# Full bundle loaded asynchronously – swaps to "all" once ready #}
+        <link rel="preload" href="/css-bundle.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/css-bundle.css"></noscript>
+        {% else %}
         <link rel="stylesheet" href="/css-bundle.css">
+        {% endif %}
         
         <script type="text/javascript">
             (function(c,l,a,r,i,t,y){
