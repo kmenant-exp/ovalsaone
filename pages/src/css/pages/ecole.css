@@ -1,35 +1,5 @@
 /* Styles spécifiques à la page École */
 
-/* Section histoire de l'école */
-.histoire-titres {
-    background: rgba(143, 188, 143, 0.1);
-    padding: var(--spacing-4);
-    border-radius: var(--border-radius);
-    margin-top: var(--spacing-4);
-}
-
-.histoire-titres h4 {
-    color: var(--primary-color);
-    margin-bottom: var(--spacing-3);
-    font-size: var(--font-size-lg);
-}
-
-.histoire-titres ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.histoire-titres li {
-    padding: var(--spacing-2) 0;
-    border-bottom: 1px solid var(--light-color);
-    font-weight: 500;
-}
-
-.histoire-titres li:last-child {
-    border-bottom: none;
-}
-
 /* Histoire sections */
 .histoire-sections {
     margin-top: var(--spacing-8);
@@ -165,30 +135,6 @@
     border-color: var(--gray-400);
 }
 
-.bureau-experience {
-    font-size: var(--font-size-sm);
-    color: var(--gray-600);
-    margin-bottom: var(--spacing-3);
-    text-align: left;
-}
-
-.bureau-email {
-    display: inline-block;
-    background: var(--primary-color);
-    color: var(--white);
-    text-decoration: none;
-    padding: var(--spacing-2) var(--spacing-4);
-    border-radius: var(--border-radius);
-    font-size: var(--font-size-sm);
-    font-weight: 500;
-    transition: background-color 0.3s ease;
-}
-
-.bureau-email:hover {
-    background: var(--dark-color);
-    text-decoration: none;
-}
-
 /* Section Entraîneurs */
 .entraineurs-grid {
     display: grid;
@@ -281,20 +227,6 @@
 
 /* Responsive pour la page école */
 @media (max-width: 768px) {
-    .histoire-stats {
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--spacing-3);
-        margin: var(--spacing-4) 0 var(--spacing-6) 0;
-    }
-    
-    .stat-item {
-        padding: var(--spacing-3);
-    }
-    
-    .stat-number {
-        font-size: var(--font-size-2xl);
-    }
-    
     .bureau-grid {
         grid-template-columns: 1fr;
         gap: var(--spacing-4);

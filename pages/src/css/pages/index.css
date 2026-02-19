@@ -275,16 +275,6 @@
     transform: translateY(-5px);
 }
 
-.sponsor-logo-container {
-    width: 120px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--spacing-2);
-    transition: all 0.3s ease;
-}
-
 .sponsor-logo {
     width: 100%;
     height: 100%;

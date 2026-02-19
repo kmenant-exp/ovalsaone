@@ -4,9 +4,10 @@
   "scripts": {
     "dev:pages": "npm run build && wrangler pages dev _site --port 8788",
     "build": "npx @11ty/eleventy --input=./src",
+    "purge:css": "purgecss --config purgecss.config.cjs",
     "minify:css": "postcss _site/css-bundle.css --use cssnano --replace --no-map",
     "minify:js": "terser _site/bundle.js --compress drop_console=true --mangle --output _site/bundle.js",
-    "minify": "npm run minify:css && npm run minify:js",
+    "minify": "npm run purge:css && npm run minify:css && npm run minify:js",
     "build:prod": "npm run build && npm run minify",
     "deploy:pages": "npm run build:prod && wrangler pages deploy _site --project-name ovalsaone",
     "db:migrate": "wrangler d1 migrations apply ovalsaonedb --remote",

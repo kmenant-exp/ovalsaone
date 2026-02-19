@@ -117,37 +117,6 @@
     align-items: center;
 }
 
-.content-full {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: var(--spacing-4);
-}
-
-.content-full h2 {
-    color: var(--primary-color);
-    font-size: var(--font-size-2xl);
-    margin-bottom: var(--spacing-8);
-    position: relative;
-    display: inline-block;
-}
-
-.content-full h2::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    width: 50px;
-    height: 3px;
-    background-color: var(--primary-color);
-}
-
-.partenariat-intro {
-    font-size: var(--font-size-lg);
-    color: var(--gray-700);
-    line-height: 1.6;
-    margin-bottom: var(--spacing-6);
-}
-
 .content-text h3 {
     color: var(--primary-color);
     font-size: var(--font-size-xl);
@@ -252,11 +221,6 @@
     margin: 0;
 }
 
-.cta-action {
-    text-align: left;
-    margin-top: var(--spacing-6);
-}
-
 
 
 /* Section Avantages Fiscaux */
@@ -327,13 +291,6 @@
     height: auto;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-soft);
-}
-
-.cta-particuliers .cta-titre {
-    font-size: var(--font-size-2xl);
-    color: var(--primary-color);
-    margin-bottom: var(--spacing-2);
-    font-weight: 700;
 }
 
 

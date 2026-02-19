@@ -1,27 +1,5 @@
 /* Styles spécifiques à la page Boutique */
 
-/* Section introduction boutique */
-.boutique-intro {
-    text-align: center;
-    margin-bottom: var(--spacing-8);
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.boutique-intro h2 {
-    color: var(--primary-color);
-    font-size: var(--font-size-3xl);
-    font-weight: 700;
-    margin-bottom: var(--spacing-4);
-}
-
-.boutique-intro p {
-    color: var(--gray-700);
-    font-size: var(--font-size-lg);
-    line-height: 1.6;
-}
-
 /* Produits phares */
 .produits-featured {
     display: grid;
@@ -131,19 +109,6 @@
     border-radius: var(--border-radius);
 }
 
-.produit-voir-plus {
-    width: 100%;
-    padding: var(--spacing-4);
-    font-size: var(--font-size-sm);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-2);
-}
-
 /* Call to Action */
 .boutique-cta {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
@@ -243,10 +208,6 @@
 
 /* Responsive pour la boutique */
 @media (max-width: 768px) {
-    .boutique-intro h2 {
-        font-size: var(--font-size-2xl);
-    }
-    
     .produits-featured {
         grid-template-columns: 1fr;
         gap: var(--spacing-6);

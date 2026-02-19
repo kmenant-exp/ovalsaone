@@ -115,24 +115,6 @@ ul, ol {
 }
 
 /* Animations inspirées par les éléments du logo */
-@keyframes floatBall {
-    0%, 100% {
-        transform: translateY(0) rotate(0);
-    }
-    50% {
-        transform: translateY(-15px) rotate(5deg);
-    }
-}
-
-@keyframes lionGlow {
-    0%, 100% {
-        text-shadow: 0 0 5px rgba(243, 167, 18, 0.3);
-    }
-    50% {
-        text-shadow: 0 0 20px rgba(243, 167, 18, 0.7);
-    }
-}
-
 @keyframes waveBorder {
     0%, 100% {
         border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
@@ -148,26 +130,7 @@ ul, ol {
     }
 }
 
-.rugby-ball-animation {
-    animation: floatBall 6s ease-in-out infinite;
-    display: inline-block;
-}
 
-.lion-text-animation {
-    animation: lionGlow 3s ease-in-out infinite;
-    color: var(--accent-color);
-    font-weight: bold;
-}
-
-.oval-blob {
-    width: 200px;
-    height: 200px;
-    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
-    animation: waveBorder 8s linear infinite;
-    opacity: 0.2;
-    position: absolute;
-    z-index: -1;
-}
 
 /* Utilitaires */
 .container {
@@ -230,16 +193,6 @@ ul, ol {
     border-radius: 2px;
 }
 
-.highlight-text {
-    color: var(--accent-color);
-    font-weight: 700;
-}
-
-.turquoise-text {
-    color: var(--secondary-color);
-    font-weight: 600;
-}
-
 .oval-card {
     border-radius: 20px;
     overflow: hidden;
@@ -252,31 +205,6 @@ ul, ol {
     transform: translateY(-5px);
     box-shadow: 0 15px 40px rgba(14, 49, 96, 0.2);
     border-color: var(--accent-color);
-}
-
-.logo-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: var(--spacing-2) var(--spacing-4);
-    background: linear-gradient(135deg, var(--navy-color), var(--primary-color));
-    border: 2px solid var(--secondary-color);
-    border-radius: 30px;
-    color: var(--white);
-    font-weight: 700;
-    box-shadow: 0 4px 15px rgba(14, 49, 96, 0.3);
-}
-
-.logo-badge img {
-    width: 24px;
-    height: auto;
-    margin-right: var(--spacing-2);
-}
-
-.rugby-divider {
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color), var(--secondary-color), var(--primary-color));
-    margin: var(--spacing-8) 0;
-    border-radius: 2px;
 }
 
 .hidden {

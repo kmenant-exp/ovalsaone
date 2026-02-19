@@ -309,21 +309,6 @@
     color: #999;
 }
 
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
-}
-
-/* Compteur de caractères */
-.char-count {
-    display: block;
-    text-align: right;
-    font-size: 0.75rem;
-    color: #999;
-    margin-top: 0.25rem;
-}
-
 /* Radio group pour covoiturage */
 .radio-group {
     display: flex;

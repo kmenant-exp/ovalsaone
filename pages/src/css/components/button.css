@@ -129,24 +129,6 @@
     border-color: var(--accent-color);
 }
 
-/* Bouton doré spécial pour call-to-action */
-.btn-gold {
-    background: linear-gradient(135deg, var(--accent-color), var(--gold-color));
-    color: var(--navy-color);
-    border: none;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 8px 20px rgba(243, 167, 18, 0.4);
-}
-
-.btn-gold:hover {
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 12px 30px rgba(243, 167, 18, 0.6);
-    color: var(--navy-color);
-    background: linear-gradient(135deg, var(--gold-color), var(--accent-color));
-}
-
 /* Boutons avec gradient (style partenariat) */
 .btn-gradient {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));

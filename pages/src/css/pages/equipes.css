@@ -105,7 +105,6 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-4);
     justify-content: space-between;
     min-height: calc(100% - 100px); /* Ajustez selon la hauteur de l'en-tête */
 }
@@ -151,7 +150,6 @@
     flex-direction: column;
     gap: var(--spacing-4);
     flex: 1;
-    margin-bottom: var(--spacing-3);
 }
 
 .equipe-description {
@@ -160,12 +158,11 @@
     font-size: var(--font-size-sm);
 }
 
-.equipe-planning, .equipe-resultats {
+.equipe-planning {
     background: var(--white);
     border: 1px solid var(--light-color);
     border-radius: var(--border-radius);
     padding: var(--spacing-4);
-    margin-top: var(--spacing-3);
     display: flex;
     flex-direction: column;
 }
@@ -179,7 +176,7 @@
     flex-direction: column;
 }
 
-.equipe-planning h4, .equipe-resultats h4 {
+.equipe-planning h4 {
     color: var(--primary-color);
     font-size: var(--font-size-md);
     font-weight: 600;
@@ -191,13 +188,13 @@
     gap: var(--spacing-2);
 }
 
-.equipe-planning h4 i, .equipe-resultats h4 i {
+.equipe-planning h4 i {
     color: var(--accent-color);
     width: 16px;
     text-align: center;
 }
 
-.equipe-planning ul, .equipe-resultats ul {
+.equipe-planning ul {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -213,7 +210,7 @@
     flex-direction: column;
 }
 
-.equipe-planning li, .equipe-resultats li {
+.equipe-planning li {
     padding: var(--spacing-2) 0;
     border-bottom: 1px solid var(--light-color);
     font-size: var(--font-size-sm);
@@ -224,17 +221,17 @@
     gap: var(--spacing-2);
 }
 
-.equipe-planning li:last-child, .equipe-resultats li:last-child {
+.equipe-planning li:last-child {
     border-bottom: none;
 }
 
-.equipe-planning li strong, .equipe-resultats li strong {
+.equipe-planning li strong {
     color: var(--primary-color);
     font-weight: 600;
     min-width: 80px;
 }
 
-.equipe-planning li span, .equipe-resultats li span {
+.equipe-planning li span {
     color: var(--gray-600);
     text-align: right;
     flex: 1;
@@ -299,13 +296,13 @@
         min-width: auto;
     }
     
-    .equipe-planning li, .equipe-resultats li {
+    .equipe-planning li {
         flex-direction: column;
         align-items: flex-start;
         gap: var(--spacing-1);
     }
     
-    .equipe-planning li span, .equipe-resultats li span {
+    .equipe-planning li span {
         text-align: left;
     }
 
