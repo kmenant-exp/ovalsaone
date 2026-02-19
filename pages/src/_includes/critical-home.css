@@ -394,3 +394,9 @@ body {
     }
     .hero-content { margin: 0 auto; }
 }
+
+/* Prevent modal flash before the full async css-bundle.css loads */
+.modal-overlay,
+.gallery-modal {
+    display: none;
+}
