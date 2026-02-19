@@ -65,7 +65,7 @@ description: Calendrier des événements et matchs à venir pour toutes les équ
                     <div class="calendar-links-team">
                         <h3 class="team-name">{{ team.name }}</h3>
                         <div class="calendar-links-buttons">
-                            <a href="{{ team.icsUrl | replace: 'https://', 'webcal://' }}" class="calendar-link ics">
+                            <a href="{{ team.icsUrl }}" class="calendar-link ics" data-ics-url="{{ team.icsUrl }}">
                                 <span class="calendar-icon ics-icon"></span>
                                 <span class="link-text">S'abonner au calendrier</span>
                             </a>

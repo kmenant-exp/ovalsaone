@@ -188,4 +188,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Charge tous les calendriers au chargement de la page
     loadAllCalendars();
+
+    // Gestion intelligente des liens d'abonnement calendrier selon la plateforme
+    document.querySelectorAll('.calendar-link.ics[data-ics-url]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const icsUrl = this.dataset.icsUrl;
+            const ua = navigator.userAgent || '';
+            const isAndroid = /android/i.test(ua);
+            const isIOS = /iphone|ipad|ipod/i.test(ua);
+
+            if (isAndroid) {
+                // Android : ouvrir via Google Calendar (abonnement par URL)
+                const googleSubUrl = 'https://calendar.google.com/calendar/r?cid=' + encodeURIComponent(icsUrl);
+                window.open(googleSubUrl, '_blank');
+            } else if (isIOS) {
+                // iOS : webcal:// fonctionne nativement avec Apple Calendar
+                window.location.href = icsUrl.replace('https://', 'webcal://');
+            } else {
+                // Desktop (macOS, Windows, Linux) : webcal:// ouvre l'app calendrier par défaut
+                window.location.href = icsUrl.replace('https://', 'webcal://');
+            }
+        });
+    });
 });
