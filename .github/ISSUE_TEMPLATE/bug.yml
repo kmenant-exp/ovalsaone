@@ -1,0 +1,73 @@
+name: "Bug report"
+description: "Signaler un bug sur le site ou l'admin Oval Saône"
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Rapport de bug
+        Merci de décrire le problème rencontré le plus précisément possible.
+
+  - type: dropdown
+    id: composant
+    attributes:
+      label: Composant concerné
+      options:
+        - "pages — Site public"
+        - "admin — Dashboard admin"
+        - "worker — Notification hebdo"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description du bug
+      description: "Décris ce qui ne fonctionne pas"
+      placeholder: "Quand je fais X, il se passe Y au lieu de Z..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Étapes de reproduction
+      description: "Comment reproduire le bug ?"
+      placeholder: |
+        1. Aller sur la page...
+        2. Cliquer sur...
+        3. Observer...
+    validations:
+      required: true
+
+  - type: textarea
+    id: attendu
+    attributes:
+      label: Comportement attendu
+      description: "Ce qui devrait se passer normalement"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: navigateur
+    attributes:
+      label: Navigateur
+      multiple: true
+      options:
+        - Chrome
+        - Firefox
+        - Safari
+        - Edge
+        - Mobile (iOS)
+        - Mobile (Android)
+    validations:
+      required: false
+
+  - type: textarea
+    id: captures
+    attributes:
+      label: Captures d'écran
+      description: "Si applicable, ajoute des captures d'écran"
+    validations:
+      required: false

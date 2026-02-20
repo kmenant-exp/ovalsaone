@@ -1,0 +1,72 @@
+name: "Nouvelle fonctionnalité"
+description: "Proposer une nouvelle fonctionnalité pour le projet Oval Saône"
+title: "[composant] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Nouvelle fonctionnalité
+        Merci de remplir ce formulaire pour proposer une nouvelle fonctionnalité.
+
+  - type: dropdown
+    id: composant
+    attributes:
+      label: Composant(s) impacté(s)
+      multiple: true
+      options:
+        - "pages — Site public"
+        - "admin — Dashboard admin"
+        - "worker — Notification hebdo"
+    validations:
+      required: true
+
+  - type: textarea
+    id: contexte
+    attributes:
+      label: Contexte
+      description: "Pourquoi cette fonctionnalité est nécessaire ?"
+      placeholder: "Décris le besoin ou le problème rencontré..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: objectif
+    attributes:
+      label: Objectif
+      description: "Ce que la fonctionnalité doit accomplir"
+      placeholder: "En tant que [utilisateur], je veux [action] afin de [bénéfice]..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: specification
+    attributes:
+      label: Spécification technique
+      description: "Détails d'implémentation (fichiers, endpoints, schéma D1, etc.)"
+      placeholder: "Optionnel — l'agent Architecte peut compléter cette section"
+    validations:
+      required: false
+
+  - type: textarea
+    id: criteres
+    attributes:
+      label: Critères d'acceptation
+      description: "Conditions vérifiables pour considérer la fonctionnalité terminée"
+      placeholder: |
+        - [ ] Critère 1
+        - [ ] Critère 2
+    validations:
+      required: false
+
+  - type: dropdown
+    id: complexite
+    attributes:
+      label: Complexité estimée
+      options:
+        - S — Quelques heures
+        - M — 1-2 jours
+        - L — 3-5 jours
+        - XL — Plus d'une semaine
+    validations:
+      required: false
