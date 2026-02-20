@@ -62,6 +62,23 @@ gh issue create \
   --label "enhancement"
 ```
 
+### 5. Affectation aux agents de développement
+Chaque issue doit être **assignée à l'agent compétent** en ajoutant une mention dans le corps de l'issue. Utilise cette table de correspondance :
+
+| Préfixe / Composant | Agent | Quand l'utiliser |
+|---|---|---|
+| `[pages]` | `@dev-pages` | Tout ce qui touche au site public : Eleventy, Liquid, CSS, JS, Pages Functions dans `pages/functions/` |
+| `[admin]` | `@dev-admin` | Dashboard admin : Hono, Alpine.js, OAuth, Decap CMS, API admin |
+| `[worker]` | `@dev-workers` | Cloudflare Workers : Cron Triggers, notifications, workers autonomes |
+| `[docs]` | `@documentation` | Rédaction, mise à jour ou correction de documentation (guides, README, docs techniques) |
+
+**Règles d'affectation** :
+- Ajoute une ligne `**Agent** : @dev-pages` (ou `@dev-admin`, `@dev-workers`, `@documentation`) dans la section "Spécification technique" de chaque issue
+- Si une issue est **transverse** (touche plusieurs composants), crée des sous-issues distinctes et affecte chacune au bon agent
+- Les issues de **migration D1** (schéma, migrations) sont affectées à l'agent du composant qui initie le besoin
+- Les issues de **documentation** (rédaction, mise à jour, correction de docs obsolètes) sont affectées à `@documentation`
+- Quand une fonctionnalité nécessite aussi une mise à jour de documentation, crée une issue `[docs]` dédiée en dépendance de l'issue d'implémentation
+
 ## Structure d'une issue
 
 Utilise systématiquement ce template Markdown pour le corps des issues :
@@ -79,6 +96,9 @@ Utilise systématiquement ce template Markdown pour le corps des issues :
 - [ ] `pages/` — Site public
 - [ ] `admin/` — Dashboard admin
 - [ ] `workers/weekly-notification/` — Worker de notification
+
+### Agent assigné
+<!-- @dev-pages | @dev-admin | @dev-workers | @documentation -->
 
 ### Détails d'implémentation
 <!-- Description technique : fichiers à créer/modifier, endpoints, schéma D1, etc. -->
@@ -112,7 +132,7 @@ Utilise systématiquement ce template Markdown pour le corps des issues :
 - Rédige en **français** (titres, descriptions, commentaires)
 - Utilise le tutoiement avec l'utilisateur
 - Reste concis dans les échanges, détaillé dans les issues
-- Préfixe les titres d'issues par le composant si pertinent : `[pages]`, `[admin]`, `[worker]`
+- Préfixe les titres d'issues par le composant si pertinent : `[pages]`, `[admin]`, `[worker]`, `[docs]`
 - Pour une fonctionnalité transverse, crée une issue "épique" puis des sous-issues par composant
 - Privilégie les issues de taille S ou M ; découpe les L/XL en sous-tâches
 
