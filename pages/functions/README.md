@@ -54,7 +54,7 @@ Configurer dans le Dashboard Cloudflare (Settings > Environment Variables) :
 | Variable | Description | Obligatoire |
 |----------|-------------|-------------|
 | `RESEND_API_KEY` | Clé API Resend | Oui (production) |
-| `SMTP_FROM` | Email expéditeur (vérifié dans Resend) | Oui |
+| `SMTP_FROM` | Email expéditeur (domaine vérifié dans Resend) | Oui |
 | `CONTACT_EMAIL` | Email destinataire des messages | Oui |
 
 ## Développement local

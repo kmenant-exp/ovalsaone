@@ -2,65 +2,70 @@
 
 ## Solutions de debug disponibles
 
-### 1. Via VS Code Debug (Recommandé)
-
-1. Ouvrez VS Code dans le dossier du projet
-2. Allez dans le panneau Debug (Ctrl+Shift+D)
-3. Sélectionnez "Start Static Web App" dans la liste déroulante
-4. Cliquez sur le bouton de lancement (▶️)
-
-Le projet se lancera sur `http://127.0.0.1:4280`
-
-### 2. Via le terminal
+### 1. Via le terminal (Recommandé)
 
 ```bash
 # Installer les dépendances si ce n'est pas fait
+cd pages
 npm install
 
-# Lancer le projet
-npm run dev
+# Build Eleventy + lancer Wrangler Pages dev
+npm run dev:pages
 ```
 
-### 3. Via les tâches VS Code
+Le site sera accessible sur `http://localhost:8788` avec les Pages Functions actives.
 
-1. Ouvrez la palette de commandes (Cmd+Shift+P)
-2. Tapez "Tasks: Run Task"
-3. Sélectionnez "Start SWA CLI"
+### 2. Build seul (sans serveur)
 
-## Debug de l'API .NET
+```bash
+# Générer le site statique dans _site/
+npm run build
+```
 
-Pour débugger l'API .NET Functions :
+## Debug des Pages Functions (API)
 
-1. Lancez d'abord SWA avec une des méthodes ci-dessus
-2. Dans VS Code Debug, sélectionnez "Attach to .NET Functions"
-3. Sélectionnez le processus `func` dans la liste
+Les Pages Functions TypeScript sont dans `functions/api/`. Pour les déboguer :
+
+1. Lancez `npm run dev:pages` — Wrangler affiche les logs des fonctions dans le terminal
+2. Ouvrez les DevTools du navigateur (onglet Network) pour inspecter les requêtes
+3. Les erreurs des fonctions apparaissent directement dans la console Wrangler
 
 ## Ports utilisés
 
-- **4280** : Application complète (SWA + API)
-- **7071** : API Functions (automatiquement lancée par SWA)
+- **8788** : Application complète (site statique + Pages Functions via Wrangler)
 
 ## Problèmes courants
 
 ### Port déjà utilisé
 Si vous obtenez une erreur "Port already in use" :
 ```bash
-# Tuer tous les processus SWA/Functions en cours
-pkill -f swa && pkill -f func
+# Tuer les processus Wrangler en cours
+pkill -f wrangler
 ```
 
-### Problème de résolution localhost
-La configuration utilise `127.0.0.1` au lieu de `localhost` pour éviter les problèmes de résolution DNS.
+### Données ou styles obsolètes
+Si le contenu semble périmé :
+```bash
+rm -rf _site && npm run build
+```
 
 ### API non disponible
-Si l'API ne répond pas :
-1. Vérifiez que .NET SDK est installé : `dotnet --version`
-2. Compilez l'API manuellement : `npm run build:api`
-3. Relancez le projet
+Si les endpoints `/api/*` ne répondent pas :
+1. Vérifiez que les fichiers TypeScript dans `functions/api/` compilent sans erreur
+2. Consultez la sortie du terminal Wrangler pour les logs d'erreur
+3. Vérifiez que `wrangler.toml` est correctement configuré
+
+### Emails non envoyés en local
+La variable `RESEND_API_KEY` n'est pas disponible en local par défaut. La fonction retourne une erreur 500 descriptive. Pour tester l'envoi réel, ajoutez le secret dans un fichier `.dev.vars` :
+```
+RESEND_API_KEY=re_votre_cle_api
+```
+
+### Turnstile ignoré en dev
+La vérification Turnstile est automatiquement ignorée quand `TURNSTILE_SECRET_KEY` n'est pas défini (mode développement).
 
 ## URLs d'accès
 
-- **Application** : http://127.0.0.1:4280
-- **API Direct** : http://localhost:7071/api/
-- **Contact API** : http://localhost:7071/api/Contact
-- **Inscription API** : http://localhost:7071/api/Inscription
+- **Site complet** : http://localhost:8788
+- **Contact API** : http://localhost:8788/api/contact
+- **Convocation API** : http://localhost:8788/api/convocation

@@ -184,9 +184,9 @@ Le site utilise des fichiers JSON pour le contenu dynamique :
 
 Pour mettre à jour le contenu du site :
 
-1. Modifier les fichiers JSON correspondants
+1. Modifier les fichiers JSON correspondants (ou utiliser Decap CMS via le dashboard admin)
 2. Ajouter les nouvelles images dans les dossiers appropriés
-3. Déployer les modifications sur Azure Static Web Apps
+3. Commiter les modifications — le déploiement sur Cloudflare Pages est automatique
 
 ## Problèmes Courants
 
@@ -198,8 +198,8 @@ Pour mettre à jour le contenu du site :
    - Vérifier la connexion internet
 
 2. **Message d'erreur après soumission** :
-   - Vérifier les logs des Azure Functions
-   - S'assurer que le service d'email est correctement configuré
+   - Vérifier les logs des Pages Functions (via Wrangler ou le dashboard Cloudflare)
+   - S'assurer que le service d'email Resend est correctement configuré
 
 ### Problèmes d'Affichage
 

@@ -11,67 +11,73 @@
 
 ## Vue d'Ensemble
 
-Le site web Oval Saône est construit sur l'architecture Azure Static Web Apps, qui combine un générateur de site statique moderne (Eleventy) avec un backend serverless basé sur Azure Functions.
+Le site web Oval Saône est construit sur l'écosystème **Cloudflare**, combinant un générateur de site statique moderne (Eleventy 3) avec un backend serverless en TypeScript.
 
 ### Diagramme d'Architecture
 
 ```
-┌───────────────────────────────────────────────────────────┐
-│                Azure Static Web Apps                       │
-│                                                           │
-│  ┌───────────────────┐         ┌───────────────────┐      │
-│  │                   │         │                   │      │
-│  │  Frontend Eleventy│         │ Backend Serverless│      │
-│  │  (Générateur de   │◄───────►│ (Azure Functions) │      │
-│  │   site statique)  │   API   │                   │      │
-│  └───────────────────┘         └───────────────────┘      │
-│            │                            │                 │
-└────────────┼────────────────────────────┼─────────────────┘
-             │                            │
-             ▼                            ▼
-    ┌─────────────────┐         ┌──────────────────┐
-    │      CDN        │         │   Email Service  │
-    │ (Azure Front    │         │   (SMTP)         │
-    │  Door)          │         │                  │
-    └─────────────────┘         └──────────────────┘
+┌───────────────────────────────────────────────────────────────────┐
+│                       Cloudflare Pages                            │
+│                                                                   │
+│  ┌───────────────────┐         ┌───────────────────────────┐     │
+│  │                   │         │                           │     │
+│  │  Frontend Eleventy│         │  Pages Functions          │     │
+│  │  (Site statique   │◄───────►│  (TypeScript)             │     │
+│  │   _site/)         │   API   │                           │     │
+│  └───────────────────┘         └───────────────────────────┘     │
+│            │                       │              │              │
+└────────────┼───────────────────────┼──────────────┼──────────────┘
+             │                       │              │
+             ▼                       ▼              ▼
+    ┌─────────────────┐   ┌──────────────────┐  ┌──────────────┐
+    │   CDN Cloudflare │   │   Resend API     │  │ Cloudflare   │
+    │   (distribution  │   │   (emails)       │  │ D1 (SQLite)  │
+    │    mondiale)     │   │                  │  │              │
+    └─────────────────┘   └──────────────────┘  └──────────────┘
 ```
 
 ### Composants Principaux
 
-1. **Frontend Eleventy** :
-   - Générateur de site statique moderne (11ty)
+1. **Frontend Eleventy 3** :
+   - Générateur de site statique
    - Templates Liquid et Nunjucks
-   - Bundling CSS/JS automatique
-   - Données JSON intégrées via _data et front matter
+   - Bundling CSS/JS par concaténation
+   - Données JSON via `_data/` et front matter
    - Validation des formulaires côté client
+   - Protection anti-bot via Cloudflare Turnstile
 
 2. **Backend Serverless** :
-   - Azure Functions v4 (.NET 8)
-   - API REST pour traitement des formulaires
-   - Validation des données et envoi d'emails
+   - Cloudflare Pages Functions (TypeScript)
+   - API REST pour formulaire de contact et convocations
+   - Envoi d'emails via Resend API
+   - Vérification Turnstile côté serveur
 
-3. **Azure Static Web Apps** :
-   - Hébergement du site généré et du backend
-   - Routage et redirection
-   - CDN intégré
-   - Déploiement continu via GitHub Actions
+3. **Base de données** :
+   - Cloudflare D1 (SQLite distribué)
+   - Convocations et réponses des joueurs
+
+4. **Cloudflare Pages** :
+   - Hébergement du site statique et des Functions
+   - CDN mondial intégré
+   - HTTPS automatique
+   - Déploiement via Wrangler CLI
 
 ## Architecture Frontend avec Eleventy
 
 ### Vue d'ensemble d'Eleventy
 
-Eleventy (11ty) est un générateur de site statique moderne qui transforme les templates et données en HTML statique optimisé. Il offre plusieurs avantages :
+Eleventy 3 transforme les templates et données en HTML statique optimisé :
 
-- **Performance** : Sites ultra-rapides générés statiquement
-- **Flexibilité** : Support de multiples moteurs de templates
-- **Simplicité** : Configuration minimale requise
-- **Évolutivité** : Facilite la maintenance et l'ajout de contenu
+- **Performance** : Sites ultra-rapides
+- **Flexibilité** : Templates Liquid et Nunjucks
+- **Simplicité** : Configuration minimale (`eleventy.config.js`)
+- **Intégration CMS** : Auto-unwrap des fichiers Decap CMS
 
 ### Flux de Build Eleventy
 
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   Templates     │    │    Eleventy      │    │   Site Statique │
+│   Templates     │    │    Eleventy 3    │    │   Site Statique │
 │   (.liquid)     │───▶│    Process       │───▶│   (_site/)      │
 │                 │    │                  │    │                 │
 └─────────────────┘    └──────────────────┘    └─────────────────┘
@@ -83,414 +89,239 @@ Eleventy (11ty) est un générateur de site statique moderne qui transforme les 
 └─────────────────┘    └──────────────────┘    └─────────────────┘
 ```
 
-### Structure de Fichiers Eleventy
+### Structure de Fichiers
 
 ```
 src/
 ├── _includes/                  # Templates partagés
 │   └── layout.njk             # Layout principal Nunjucks
 ├── _data/                     # Données globales JSON
-│   ├── actualites.json
-│   ├── sponsors.json
-│   └── teams.json
-├── _site/                     # Site généré (output)
-├── *.liquid                   # Pages template Liquid
+│   ├── actualites.json        # Actualités (Decap CMS)
+│   ├── gallery.json           # Galerie photo (Decap CMS)
+│   ├── sponsors.json          # Sponsors (Decap CMS)
+│   ├── teams.json             # Équipes (Decap CMS)
+│   ├── bureau.json            # Bureau (Decap CMS)
+│   ├── entraineurs.json       # Entraîneurs (Decap CMS)
+│   ├── calendars.json         # Config Google Calendar
+│   ├── turnstile.json         # Config Turnstile
+│   └── page_*.json            # Données par page
+├── *.liquid                   # Pages templates
 ├── css-bundle.njk             # Bundle CSS
-├── js-bundle.njk              # Bundle JavaScript
+├── js-bundle.njk              # Bundle JS
 ├── css/                       # Sources CSS
-│   ├── styles.css
+│   ├── styles.css             # Variables et resets
 │   ├── components/            # Styles par composant
-│   └── pages/                 # Styles par page
-├── js/                        # Sources JavaScript
+│   ├── pages/                 # Styles par page
+│   └── themes/                # Thèmes
+├── js/                        # Sources JavaScript ESM
+│   ├── main.js                # Comportements cross-page
+│   ├── gallery.js             # Galerie photo
+│   ├── contact.js             # Formulaire contact
+│   ├── convocations.js        # Convocations
+│   ├── calendar-utils.js      # Utilitaires calendrier
+│   └── ...                    # Autres modules par page
 ├── assets/                    # Ressources statiques
-└── eleventy.config.js         # Configuration Eleventy
+└── sitemap.njk                # Sitemap XML
 ```
 
 ### Système de Templates
 
 #### Templates Liquid (.liquid)
-Pages principales avec front matter YAML :
 
 ```liquid
 ---
 layout: layout.njk
 title: "Titre de la page"
-hero_title: "Titre hero personnalisé"
-meta_description: "Description SEO"
 ---
 
-<!-- Contenu de la page -->
 <section class="hero">
-    <h1>{{ hero_title }}</h1>
-    <p>{{ meta_description }}</p>
+    <h1>{{ title }}</h1>
 </section>
 
-<!-- Utilisation des données globales -->
-{% for equipe in teams.teams %}
+{% for equipe in teams %}
     <div class="team-card">
         <h3>{{ equipe.name }}</h3>
-        <p>{{ equipe.description }}</p>
     </div>
 {% endfor %}
 ```
 
-#### Layout Principal (layout.njk)
-Template Nunjucks pour la structure commune :
-
-```html
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
-    <link rel="stylesheet" href="/css-bundle.css">
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-</head>
-<body>
-    <!-- Bandeau cookies RGPD -->
-    <div id="cookie-banner" class="cookie-banner hidden">...</div>
-    
-    <!-- Navigation commune -->
-    <nav class="navbar" id="navbar">...</nav>
-    
-    <!-- Contenu de la page injecté ici -->
-    {{ content | safe }}
-    
-    <!-- Footer commun -->
-    <footer class="footer">...</footer>
-    
-    <!-- Scripts -->
-    <script src="/bundle.js"></script>
-</body>
-</html>
-```
+💡 Les fichiers Decap CMS wrappés (`{"key": [...]}`) sont auto-unwrappés par `eleventy.config.js`, donc `teams` est directement itérable.
 
 ### Système de Bundling
 
-#### CSS Bundle (css-bundle.njk)
-Concatène automatiquement tous les styles :
-
-```njk
----
-permalink: /css-bundle.css
----
-{% include "./css/styles.css" %}
-{% include "./css/components/button.css" %}
-{% include "./css/components/footer.css" %}
-{% include "./css/components/nav.css" %}
-{% include "./css/components/page-hero.css" %}
-{% include "./css/components/cookie-banner.css" %}
-{% include "./css/pages/index.css" %}
-{% include "./css/pages/equipes.css" %}
-{% include "./css/pages/ecole.css" %}
-{% include "./css/pages/partenariat.css" %}
-{% include "./css/pages/boutique.css" %}
-{% include "./css/pages/inscription.css" %}
-{% include "./css/pages/contact.css" %}
-```
-
-#### JavaScript Bundle (js-bundle.njk)
-Concatène les scripts JavaScript :
-
-```njk
----
-permalink: /bundle.js
----
-{% include "./js/main.js" %}
-{% include "./js/data-loader.js" %}
-{% include "./js/contact.js" %}
-{% include "./js/inscription.js" %}
-{% include "./js/boutique.js" %}
-```
+**CSS** (`css-bundle.njk`) et **JS** (`js-bundle.njk`) concatènent les sources en un seul fichier chacun. En production, PurgeCSS + cssnano + terser optimisent les bundles.
 
 ### Gestion des Données
 
-#### Données Globales (_data/)
-Fichiers JSON automatiquement disponibles dans tous les templates :
+Les fichiers JSON dans `_data/` sont automatiquement disponibles dans tous les templates par leur nom de fichier (sans extension) :
 
-```json
-// _data/sponsors.json
-{
-  "sponsors": [
-    {
-      "name": "Sponsor 1",
-      "logo": "assets/sponsors/logo1.png",
-      "url": "https://sponsor1.com",
-      "category": "partenaire-principal"
-    }
-  ]
-}
-```
-
-Utilisation dans les templates :
 ```liquid
-<div class="sponsors-grid">
-{% for sponsor in sponsors.sponsors %}
-    <a href="{{ sponsor.url }}" class="sponsor-card">
-        <img src="{{ sponsor.logo }}" alt="{{ sponsor.name }}">
-    </a>
+{% for actu in actualites %}
+    <article>{{ actu.title }}</article>
 {% endfor %}
-</div>
 ```
-
-#### Front Matter dans les Pages
-Données spécifiques à chaque page :
-
-```liquid
----
-layout: layout.njk
-title: "École de Rugby - Oval Saône"
-hero_title: "École de Rugby"
-hero_subtitle: "Formation aux valeurs du rugby"
-categories:
-  - name: "U6-U8"
-    description: "Éveil rugby"
-  - name: "U10-U12"
-    description: "Apprentissage technique"
----
-```
-
-### Configuration Eleventy
-
-Le fichier `eleventy.config.js` définit le comportement d'Eleventy :
-
-```javascript
-export default function(eleventyConfig) {
-    console.log("Configuring Eleventy...");
-    
-    // Copie des assets statiques
-    eleventyConfig.addPassthroughCopy("./assets");
-    
-    // Configuration des répertoires
-    return {
-        dir: {
-            input: "src",        // Dossier source
-            output: "_site",     // Dossier de sortie
-            includes: "_includes", // Templates partagés
-            data: "_data"        // Données globales
-        },
-        // Formats de templates supportés
-        templateFormats: ["liquid", "njk", "html", "md"],
-        
-        // Moteur de template par défaut
-        markdownTemplateEngine: "liquid",
-        htmlTemplateEngine: "liquid"
-    };
-};
-```
-    }
-});
-```
-
-### Principes de Design
-
-1. **Responsive Design** :
-   - Approche mobile-first
-   - Media queries pour différentes tailles d'écran
-   - Flexbox et Grid pour les layouts
-
-2. **Composants Réutilisables** :
-   - Sections modulaires (header, footer, cartes)
-   - Styles cohérents avec variables CSS
-   - JavaScript organisé en modules
-
-3. **Performance** :
-   - Chargement asynchrone des scripts
-   - Images optimisées
-   - Minification en production
 
 ## Architecture Backend
 
 ### Structure de l'API
 
 ```
-api/
-├── Program.cs                 # Point d'entrée
-├── host.json                  # Configuration Azure Functions
-├── local.settings.json        # Variables d'environnement (local)
-├── Functions/
-│   ├── ContactFunction.cs     # Traitement formulaire contact
-│   └── InscriptionFunction.cs # Traitement formulaire inscription
-├── Models/
-│   └── FormModels.cs          # Modèles de données avec validation
-└── Services/
-    └── EmailService.cs        # Service d'envoi d'emails
+functions/
+├── api/
+│   ├── _shared.ts           # Utilitaires partagés
+│   │   ├── verifyTurnstile() # Vérification anti-bot
+│   │   └── helpers          # Réponses JSON, CORS
+│   ├── contact.ts           # POST /api/contact
+│   └── convocation.ts       # GET /api/convocation
+└── tsconfig.json
 ```
 
 ### Points d'Entrée API
 
-1. **Contact** :
-   - Endpoint: `/api/Contact`
-   - Méthode: POST
-   - Traite les soumissions du formulaire de contact
-   - Envoie des emails via le service d'email
+1. **Contact** (`contact.ts`) :
+   - Endpoint: `POST /api/contact` + `OPTIONS` (CORS)
+   - Vérification Turnstile
+   - Validation des données du formulaire
+   - Envoi d'email via Resend API
+   - Réponse JSON `ApiResponse<T>`
 
-2. **Inscription** :
-   - Endpoint: `/api/Inscription`
-   - Méthode: POST
-   - Traite les soumissions du formulaire d'inscription
-   - Valide les données et envoie des confirmations
+2. **Convocation** (`convocation.ts`) :
+   - Endpoint: `GET /api/convocation`
+   - Requête sur la base D1
+   - Données de convocation
 
-### Modèle d'Exécution
+### Pattern de la Pages Function
 
-Les Azure Functions utilisent le modèle "Isolated Process" de .NET 8 :
+```typescript
+import type { PagesFunction } from '@cloudflare/workers-types';
+import { verifyTurnstile } from './_shared';
 
-```csharp
-// Exemple simplifié
-[Function("Contact")]
-public async Task<HttpResponseData> RunAsync(
-    [HttpTrigger(AuthorizationLevel.Anonymous, "post", "options")] HttpRequestData req)
-{
-    // 1. Validation des en-têtes CORS pour OPTIONS
-    if (req.Method.Equals("OPTIONS", StringComparison.OrdinalIgnoreCase)) {
-        // Retourner réponse CORS
-    }
-
-    // 2. Désérialiser et valider les données
-    var contactForm = JsonSerializer.Deserialize<ContactFormModel>(requestBody);
-    if (!Validator.TryValidateObject(contactForm, validationContext, validationResults, true)) {
-        // Retourner erreurs de validation
-    }
-
-    // 3. Traitement (envoi d'email)
-    await _emailService.SendContactEmailAsync(...);
-
-    // 4. Réponse de succès
-    return response;
+interface Env {
+  RESEND_API_KEY: string;
+  SMTP_FROM: string;
+  CONTACT_EMAIL: string;
+  TURNSTILE_SECRET_KEY: string;
+  DB: D1Database;
 }
+
+export const onRequestPost: PagesFunction<Env> = async (context) => {
+  // 1. Vérifier le token Turnstile
+  // 2. Valider les données
+  // 3. Envoyer l'email via Resend
+  // 4. Retourner la réponse JSON
+};
 ```
+
+### Bindings et Variables
+
+Définis dans `wrangler.toml` :
+
+```toml
+[vars]
+SMTP_FROM = "contact@ovalsaone.fr"
+CONTACT_EMAIL = "kevin.menant@gmail.com"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "ovalsaonedb"
+database_id = "..."
+```
+
+Secrets (via `wrangler pages secret put`) :
+- `RESEND_API_KEY`
+- `TURNSTILE_SECRET_KEY`
 
 ## Intégration Frontend-Backend
 
 ### Communication API
 
-Le frontend communique avec le backend via des requêtes fetch :
+Le frontend communique avec le backend via `fetch` :
 
 ```javascript
-// Exemple d'envoi d'un formulaire
-async function submitForm(formData) {
-    try {
-        const response = await fetch('/api/Contact', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        });
-        
-        const result = await response.json();
-        
-        if (!response.ok) {
-            throw new Error(result.message || 'Une erreur est survenue');
-        }
-        
-        return result;
-    } catch (error) {
-        console.error('Erreur API:', error);
-        throw error;
-    }
-}
+const response = await fetch('/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(formData)
+});
+const result = await response.json();
 ```
 
 ### Gestion des Erreurs
 
-1. **Côté Client** :
-   - Validation avant envoi API
-   - Gestion des erreurs réseau
-   - Affichage des messages d'erreur
-
-2. **Côté Serveur** :
-   - Validation des données entrantes
-   - Journalisation des erreurs
-   - Réponses HTTP avec codes appropriés
+1. **Côté Client** : Validation avant envoi, gestion des erreurs réseau, messages utilisateur
+2. **Côté Serveur** : Validation des données, vérification Turnstile, réponses HTTP avec codes appropriés
 
 ## Sécurité
 
+### Cloudflare Turnstile
+
+Protection anti-bot intégrée dans les formulaires :
+- Widget côté client générant un token
+- Vérification du token côté serveur dans la Pages Function
+- Ignoré en développement local (quand `TURNSTILE_SECRET_KEY` n'est pas défini)
+
 ### Protection CORS
 
-Les Azure Functions sont configurées pour gérer les requêtes CORS :
+Les Pages Functions gèrent les en-têtes CORS explicitement :
 
-```csharp
-// Gestion CORS pour OPTIONS
-if (req.Method.Equals("OPTIONS", StringComparison.OrdinalIgnoreCase))
-{
-    var optionsResponse = req.CreateResponse(HttpStatusCode.OK);
-    optionsResponse.Headers.Add("Access-Control-Allow-Origin", "*");
-    optionsResponse.Headers.Add("Access-Control-Allow-Methods", "POST, OPTIONS");
-    optionsResponse.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
-    return optionsResponse;
-}
+```typescript
+const corsHeaders = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+};
 ```
 
 ### Validation des Données
 
-1. **Validation Côté Client** :
-   - Vérification des champs obligatoires
-   - Validation des formats (email, téléphone)
-   - Prévention de l'envoi de formulaires invalides
+1. **Côté Client** : Validation HTML5 + JavaScript
+2. **Côté Serveur** : Vérification TypeScript dans les Pages Functions
 
-2. **Validation Côté Serveur** :
-   - Utilisation de Data Annotations
-   - Vérification complète des modèles
-   - Protection contre les attaques d'injection
+### Headers de Sécurité
 
-### Sécurité Azure Static Web Apps
+Configurés dans `static/_headers` pour la production.
 
-- **Authentification** : Possibilité d'ajouter des providers d'authentification
-- **Autorisation** : Contrôle d'accès basé sur les rôles
-- **HTTPS** : Certificats SSL/TLS gérés automatiquement
+### HTTPS
+
+Certificats SSL/TLS gérés automatiquement par Cloudflare.
 
 ## Performance
 
 ### Optimisations Frontend
 
-1. **Chargement des Ressources** :
-   - Scripts avec attribut `defer`
-   - Préchargement des ressources critiques
-   - Lazy loading des images
-
-2. **Rendu Optimisé** :
-   - Éviter le FOUC (Flash of Unstyled Content)
-   - Minimiser le CLS (Cumulative Layout Shift)
-   - Animation optimisées pour le GPU
+- **Build de production** : PurgeCSS (CSS inutilisé supprimé), cssnano (minification CSS), terser (minification JS)
+- **Lazy loading** : Images avec `loading="lazy"`
+- **CDN Cloudflare** : Distribution mondiale automatique
+- **Site statique** : Pas de rendu côté serveur, temps de réponse minimal
 
 ### Optimisations Backend
 
-1. **Temps de Réponse** :
-   - Temps de démarrage à froid minimisé
-   - Opérations asynchrones
-   - Validation efficace
-
-2. **Mise en Cache** :
-   - Configuration des en-têtes de cache
-   - Cache des réponses API côté client
-   - Cache des données JSON
+- **Edge Computing** : Pages Functions exécutées au plus proche de l'utilisateur
+- **D1** : Base SQLite distribuée avec faible latence
+- **Resend** : API HTTP directe, pas de connexion SMTP
 
 ## Évolutivité
 
+### Extensions Réalisées
+
+- ✅ **Base de données** : Cloudflare D1 pour les convocations
+- ✅ **Dashboard admin** : Interface d'administration avec Hono + Google OAuth
+- ✅ **CMS intégré** : Decap CMS pour l'édition du contenu
+- ✅ **Worker Cron** : Notifications hebdomadaires automatiques
+
 ### Extensions Possibles
 
-1. **Base de Données** :
-   - Migration vers Azure Cosmos DB pour le contenu dynamique
-   - Tableau de bord d'administration pour la gestion du contenu
-
-2. **Authentification** :
-   - Ajout d'une zone membre
-   - Authentification avec Azure AD B2C
-
-3. **Paiement en Ligne** :
-   - Intégration d'un système de paiement pour la boutique
-   - Gestion des commandes et du stock
+- Système de paiement en ligne pour la boutique
+- Zone membre avec authentification
+- Statistiques avancées de fréquentation
 
 ### Mise à l'Échelle
 
-Azure Static Web Apps s'adapte automatiquement à la charge :
-
-- **Frontend** : CDN global pour la distribution du contenu
-- **Backend** : Mise à l'échelle automatique des fonctions Azure
-- **Ressources** : Adaptation selon le trafic
+Cloudflare s'adapte automatiquement :
+- **Frontend** : CDN mondial
+- **Backend** : Pages Functions distribuées
+- **Base de données** : D1 avec réplication
 
 ---
 
-*Documentation d'architecture mise à jour le 14 juin 2025*
+*Documentation d'architecture mise à jour le 20 février 2026*

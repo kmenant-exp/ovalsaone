@@ -20,7 +20,7 @@ Ce guide explique comment mettre à jour le contenu du site web sans connaissanc
 Pour mettre à jour le site, vous aurez besoin de :
 - Un compte GitHub avec accès au repository du site
 - Un navigateur web moderne
-- Droits d'accès au portail Azure (pour la galerie photos uniquement)
+- Un accès au dashboard admin (Decap CMS) pour la galerie photos
 
 **Note :** La majorité des modifications se font directement via l'interface web de GitHub, sans besoin d'installer d'outils sur votre ordinateur.
 
@@ -535,10 +535,13 @@ Si vous ajoutez une nouvelle équipe au club, suivez ces étapes :
     "titre": "Tournoi de Trévoux",
     "description": "Nos jeunes en action",
     "date": "2025-10-10",
-    "mainImage": "https://stovalsaoneprd.blob.core.windows.net/medias/tournoi-trevoux-20251010/Image1.jpeg",
-    "storageUrl": "https://stovalsaoneprd.blob.core.windows.net/medias/tournoi-trevoux-20251010",
+    "mainImage": "/assets/gallery/tournoi-trevoux-20251010/cover.jpg",
     "categorie": "matches",
-    "alt": "Tournoi de Trévoux - 10 octobre 2025"
+    "alt": "Tournoi de Trévoux - 10 octobre 2025",
+    "images": [
+      "/assets/gallery/tournoi-trevoux-20251010/photo1.jpg",
+      "/assets/gallery/tournoi-trevoux-20251010/photo2.jpg"
+    ]
   }
 ]
 ```
@@ -551,15 +554,15 @@ Si vous ajoutez une nouvelle équipe au club, suivez ces étapes :
    - `titre` : Titre de l'album
    - `description` : Description courte
    - `date` : Date au format `AAAA-MM-JJ`
-   - `mainImage` : URL complète de l'image de couverture dans Azure
-   - `storageUrl` : URL du dossier Azure (sans trailing slash)
-   - `categorie` : Catégorie de l'album (ex: `"matches"`, `"entrainements"`, `"evenements"`, `"equipes"`)
+   - `mainImage` : Chemin relatif de l'image de couverture (ex : `/assets/gallery/mon-album/cover.jpg`)
+   - `categorie` : Catégorie de l'album (ex: `"matches"`, `"entrainements"`, `"evenements"`, `"équipes"`)
    - `alt` : Texte alternatif pour l'accessibilité
+   - `images` : Liste des chemins des photos de l'album
 5. Décrivez vos modifications et cliquez sur "Commit changes"
 
-**⚠️ Note :** La modification de la galerie nécessite également l'accès au portail Azure (voir section suivante).
+💡 **Astuce :** Utilisez plutôt le dashboard admin (Decap CMS) pour gérer la galerie plus facilement.
 
-**Convention de nommage des dossiers Azure :**
+**Convention de nommage des dossiers :**
 - Format : `evenement-lieu-AAAAMMJJ`
 - Exemple : `tournoi-trevoux-20251010`
 - Tout en minuscules, sans espaces ni accents
@@ -568,29 +571,38 @@ Si vous ajoutez une nouvelle équipe au club, suivez ces étapes :
 
 ## Gérer la galerie photos
 
-La galerie utilise Azure Blob Storage pour stocker les photos. Les albums sont organisés en dossiers.
+La galerie utilise des **images locales** stockées dans `src/assets/gallery/`. Les albums sont gérés via **Decap CMS** (dashboard admin) ou manuellement via GitHub.
 
-### Ajouter un nouvel album
+### Méthode recommandée : Decap CMS
 
-#### Étape 1 : Créer le dossier dans Azure
+1. Connectez-vous au **dashboard admin** du site
+2. Dans le menu, cliquez sur **« Galerie »**
+3. Cliquez sur **« Ajouter un album »**
+4. Remplissez les champs et uploadez vos photos
+5. Cliquez sur **« Publish »**
+6. Le site se reconstruit automatiquement (2-3 minutes)
 
-1. **Connectez-vous au portail Azure** : https://portal.azure.com
-2. Naviguez vers le compte de stockage `stovalsaoneprd`
-3. Cliquez sur "Conteneurs" puis sur `medias`
-4. Créez un nouveau dossier virtuel (ex : `tournoi-nom-AAAAMMJJ`)
-5. Téléchargez vos photos dans ce dossier
+📌 Voir le [guide d'ajout de photos](guide-ajout-photos.md) pour des instructions détaillées.
+
+### Méthode alternative : via GitHub
+
+#### Étape 1 : Ajouter les photos
+
+1. Naviguez vers `src/assets/gallery/` sur GitHub
+2. Créez un nouveau dossier (ex : `tournoi-nom-AAAAMMJJ`)
+3. Uploadez vos photos dans ce dossier
 
 **Convention de nommage des albums :**
 - Format : `evenement-lieu-AAAAMMJJ`
 - Exemple : `tournoi-trevoux-20251010`
 - Tout en minuscules, sans espaces ni accents
 
-#### Étape 2 : Déclarer l'album dans le code
+#### Étape 2 : Déclarer l'album dans gallery.json
 
 1. Naviguez vers `src/_data/gallery.json` sur GitHub
 2. Cliquez sur l'icône crayon (✏️) pour éditer
 3. Ajoutez un nouvel objet dans la liste (voir structure dans la section précédente)
-4. **Important** : L'URL `storageUrl` doit correspondre exactement au nom du dossier créé dans Azure
+4. **Important** : Les chemins des images doivent correspondre aux fichiers uploadés dans `src/assets/gallery/`
 5. Décrivez vos modifications et cliquez sur "Commit changes"
 
 ### Supprimer un album
@@ -599,7 +611,7 @@ La galerie utilise Azure Blob Storage pour stocker les photos. Les albums sont o
 2. Cliquez sur l'icône crayon (✏️) pour éditer
 3. Supprimez l'objet correspondant à l'album
 4. Décrivez vos modifications et cliquez sur "Commit changes"
-5. *Optionnel* : Supprimez le dossier dans Azure pour libérer de l'espace
+5. *Optionnel* : Supprimez le dossier correspondant dans `src/assets/gallery/`
 
 ### Modifier un album existant
 
@@ -608,8 +620,6 @@ La galerie utilise Azure Blob Storage pour stocker les photos. Les albums sont o
 3. Trouvez l'album à modifier
 4. Changez les valeurs souhaitées (`titre`, `description`, etc.)
 5. Décrivez vos modifications et cliquez sur "Commit changes"
-
-**⚠️ Ne modifiez pas le `storageUrl`** sauf si vous renommez aussi le dossier dans Azure.
 
 ---
 
@@ -642,7 +652,7 @@ La galerie utilise Azure Blob Storage pour stocker les photos. Les albums sont o
 
 ### Images de la galerie
 
-Les images de la galerie se gèrent uniquement via le portail Azure (voir section [Gérer la galerie photos](#gérer-la-galerie-photos)).
+Les images de la galerie se gèrent via le **dashboard admin (Decap CMS)** ou en ajoutant les fichiers dans `src/assets/gallery/` sur GitHub (voir section [Gérer la galerie photos](#gérer-la-galerie-photos)).
 
 ---
 
@@ -654,7 +664,7 @@ Avec l'interface GitHub, vos modifications sont automatiquement publiées dès q
 
 1. **Effectuez vos modifications** via l'interface GitHub (édition de fichiers, ajout d'images, etc.)
 2. **Cliquez sur "Commit changes"** avec un message descriptif
-3. **GitHub déclenche automatiquement** le déploiement sur Azure Static Web Apps
+3. **GitHub déclenche automatiquement** le déploiement sur Cloudflare Pages
 4. **Attendez 2-5 minutes** pour que les modifications apparaissent sur le site
 
 ### Vérifier la publication
@@ -669,7 +679,7 @@ Avec l'interface GitHub, vos modifications sont automatiquement publiées dès q
 Vous pouvez suivre l'état du déploiement :
 
 1. **Dans GitHub** : Rendez-vous dans l'onglet "Actions" du repository
-2. **Dans Azure** : Consultez le portail Azure Static Web Apps pour voir les logs de déploiement
+2. **Dans Cloudflare** : Consultez le dashboard Cloudflare Pages pour voir les logs de déploiement
 
 ### Bonnes pratiques pour les commits
 
@@ -711,7 +721,7 @@ Regroupez les modifications logiquement :
 - Attendez 5-10 minutes (le déploiement peut prendre du temps)
 - Vérifiez l'onglet "Actions" de GitHub pour voir si le déploiement s'est bien passé
 - Videz le cache du navigateur (`Ctrl+F5` ou `Cmd+Shift+R`)
-- Consultez les logs de déploiement dans Azure Static Web Apps
+- Consultez les logs de déploiement dans le dashboard Cloudflare Pages
 
 ### Erreur lors du commit sur GitHub
 
@@ -737,9 +747,9 @@ Regroupez les modifications logiquement :
 **Symptôme :** Album vide ou erreur de chargement.
 
 **Solution :**
-- Vérifiez que le `storageUrl` dans `gallery.json` correspond au nom du dossier Azure
-- Vérifiez que le dossier Azure contient bien des images
-- Vérifiez que les permissions CORS sont correctes (voir `docs/azure-storage-gallery.md`)
+- Vérifiez que les chemins dans `gallery.json` correspondent aux fichiers dans `src/assets/gallery/`
+- Vérifiez que les images sont bien présentes dans le dossier
+- Vérifiez le format des images (JPG, PNG)
 
 ---
 
@@ -754,4 +764,4 @@ Pour plus d'informations techniques :
 
 ---
 
-*Dernière mise à jour : 26 octobre 2025*
+*Dernière mise à jour : 15 juin 2025*

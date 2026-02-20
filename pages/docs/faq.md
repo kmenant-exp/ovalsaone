@@ -9,95 +9,97 @@
 ## Questions Générales
 
 ### Qu'est-ce que le site web Oval Saône ?
-Le site web Oval Saône est une application web moderne pour un club de rugby, développée avec Azure Static Web Apps. Il combine un frontend statique (HTML, CSS, JavaScript) avec un backend serverless basé sur Azure Functions en C#.
+Le site web Oval Saône est une application web moderne pour un club de rugby, construite avec **Eleventy 3** (générateur de site statique) et déployée sur **Cloudflare Pages**. Le backend utilise des Pages Functions en TypeScript, une base de données Cloudflare D1, et Resend pour l'envoi d'emails.
 
 ### Quelles sont les principales fonctionnalités du site ?
-- Pages informatives (Accueil, Équipes, École de rugby, Partenariat)
-- Pages interactives (Boutique, Inscription, Contact)
-- Formulaires de contact et d'inscription
-- Affichage dynamique du contenu via des fichiers JSON
+- Pages informatives (Accueil, Équipes, École de rugby, Événements, Partenariat)
+- Pages interactives (Boutique, Inscription, Contact, FAQ)
+- Galerie photo avec filtres et lightbox
+- Formulaire de contact avec protection Turnstile et envoi via Resend
+- Système de convocations avec base de données D1
+- Calendrier Google intégré
+- Contenu gérable via Decap CMS
 - Design responsive adapté à tous les appareils
 
 ### Qui peut utiliser ce site ?
 Le site est destiné à plusieurs types d'utilisateurs :
 - Visiteurs (parents, joueurs, supporters) recherchant des informations sur le club
 - Nouveaux membres souhaitant s'inscrire
-- Administrateurs gérant le contenu du site
+- Administrateurs gérant le contenu via le dashboard admin ou Decap CMS
 - Partenaires et sponsors potentiels
 
 ## Questions Utilisateurs
 
 ### Comment mettre à jour les actualités sur la page d'accueil ?
-Les actualités sont stockées dans le fichier `data/actualites.json`. Pour ajouter ou modifier une actualité :
-1. Ouvrez ce fichier
-2. Ajoutez une nouvelle entrée au format JSON avec titre, date, image, et contenu
-3. Ajoutez l'image correspondante dans le dossier `assets/actualites/`
-4. Déployez les modifications
+Deux méthodes possibles :
 
-### Comment ajouter un nouveau produit à la boutique ?
-Pour ajouter un produit dans la boutique :
-1. Ouvrez le fichier `data/boutique.json`
-2. Ajoutez une nouvelle entrée avec la catégorie, le nom, le prix, la description et l'image
-3. Ajoutez l'image du produit dans le dossier `assets/boutique/`
-4. Déployez les modifications
+**Via Decap CMS (recommandé)** :
+1. Se connecter à l'admin (`/cms/`)
+2. Naviguer vers la collection Actualités
+3. Ajouter ou modifier une entrée
+
+**Manuellement** :
+1. Éditer `src/_data/actualites.json`
+2. Ajouter l'image dans `src/assets/actualites/`
+3. Commit + push
 
 ### Comment modifier les tarifs d'inscription ?
-Les tarifs sont définis dans le fichier `data/inscription.json`. Pour les modifier :
-1. Ouvrez ce fichier
-2. Modifiez les valeurs des différentes catégories
-3. Déployez les modifications
+Éditer le fichier `src/_data/page_inscription.json` et commit + push.
 
-### Les formulaires d'inscription sont-ils traités automatiquement ?
-Oui, les formulaires sont traités automatiquement par des Azure Functions :
-- Le formulaire de contact envoie un email à l'adresse configurée
-- Le formulaire d'inscription envoie les détails par email et confirme à l'utilisateur
+### Les formulaires de contact sont-ils traités automatiquement ?
+Oui, le formulaire de contact est traité par une Pages Function TypeScript (`functions/api/contact.ts`) qui :
+1. Vérifie le token Turnstile (anti-bot)
+2. Valide les données
+3. Envoie un email via l'API Resend
 
 ## Questions Techniques
 
 ### Comment déployer une nouvelle version du site ?
-Le déploiement se fait automatiquement via GitHub Actions :
-1. Poussez vos modifications sur la branche principale (main)
-2. GitHub Actions déclenche automatiquement le déploiement
-3. Le site est déployé sur Azure Static Web Apps
+```bash
+cd pages
+npm run deploy:pages
+```
+Cette commande effectue un build de production (Eleventy + PurgeCSS + minification) puis déploie sur Cloudflare Pages.
 
 Pour plus de détails, consultez le [Guide de Déploiement](guide-deploiement.md).
 
 ### Comment ajouter une nouvelle page au site ?
-Pour ajouter une nouvelle page :
-1. Créez un nouveau fichier HTML dans le dossier racine
-2. Copiez la structure de base d'une page existante (navigation, footer)
-3. Ajoutez votre contenu spécifique
-4. Liez la page dans le menu de navigation
-5. Créez un fichier JavaScript correspondant si nécessaire
+1. Créer un fichier `.liquid` dans `src/` avec le front matter `layout: layout.njk`
+2. Ajouter les styles dans `src/css/pages/` et les inclure dans `src/css-bundle.njk`
+3. Ajouter le lien dans la navigation du layout
+4. Build et tester avec `npm run dev:pages`
 
-### Comment configurer l'envoi d'emails pour les formulaires ?
-L'envoi d'emails est configuré via des variables d'environnement dans Azure :
-1. Accédez à votre ressource Azure Static Web App
-2. Allez dans "Configuration"
-3. Configurez les variables : SMTP_HOST, SMTP_PORT, SMTP_USERNAME, SMTP_PASSWORD, EMAIL_FROM, EMAIL_TO
+### Comment configurer l'envoi d'emails ?
+L'envoi d'emails utilise **Resend** (pas de SMTP). Configuration :
+1. `RESEND_API_KEY` : défini comme secret via `wrangler pages secret put`
+2. `SMTP_FROM` et `CONTACT_EMAIL` : définis dans `wrangler.toml` (section `[vars]`)
 
 ### Comment ajouter un domaine personnalisé ?
-Pour ajouter un domaine personnalisé :
-1. Dans le portail Azure, accédez à votre ressource Static Web App
-2. Allez dans "Domaines personnalisés"
-3. Suivez les instructions pour ajouter et valider votre domaine
-4. Configurez les enregistrements DNS chez votre fournisseur
+1. Aller dans le **Dashboard Cloudflare** → Workers & Pages → ovalsaone
+2. Onglet **Custom domains** → Set up a custom domain
+3. Cloudflare configure automatiquement les DNS si le domaine est géré par Cloudflare
 
 ## Troubleshooting
 
 ### Les images ne s'affichent pas correctement
-Si les images ne s'affichent pas :
-1. Vérifiez que les chemins dans les fichiers JSON sont corrects
-2. Assurez-vous que les images existent dans le bon dossier
-3. Vérifiez les extensions des fichiers (sensible à la casse)
+1. Vérifiez les chemins dans les fichiers JSON (`src/_data/`)
+2. Vérifiez que les images existent dans `src/assets/`
+3. Supprimez `_site/` et relancez `npm run build`
 4. Videz le cache du navigateur
 
 ### Les formulaires ne s'envoient pas
-Si les formulaires ne fonctionnent pas :
-1. Vérifiez que tous les champs obligatoires sont remplis
-2. Vérifiez la console du navigateur pour les erreurs JavaScript
-3. Assurez-vous que l'API backend est déployée correctement
-4. Vérifiez les logs des Azure Functions dans le portail Azure
+1. Vérifiez la console du navigateur pour les erreurs
+2. En local : vérifiez que `RESEND_API_KEY` est configuré dans `.dev.vars`
+3. En production : vérifiez le secret via `wrangler pages secret list`
+4. Consultez les logs avec `wrangler pages deployment tail`
+
+### Le build Eleventy échoue
+1. Supprimer `node_modules` et `_site/`, puis `npm install && npm run build`
+2. Vérifier que Node.js >= 18 est installé
+
+---
+
+*Dernière mise à jour : 20 février 2026*
 
 ### Le contenu JSON ne se charge pas
 Si le contenu dynamique ne s'affiche pas :
@@ -117,7 +119,7 @@ Si le déploiement échoue :
 1. Vérifiez les logs GitHub Actions
 2. Assurez-vous que la structure du projet correspond à la configuration
 3. Vérifiez que le projet compile correctement en local
-4. Consultez le portail Azure pour les erreurs de déploiement
+4. Consultez le dashboard Cloudflare pour les logs de déploiement
 
 ---
 

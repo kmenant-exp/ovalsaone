@@ -1,28 +1,36 @@
-# Guide de Maintenance et Mise à Jour (Site Eleventy)
+# Guide de Maintenance et Mise à Jour
 
 ## Sommaire
 1. [Introduction](#introduction)
-2. [Maintenance du Contenu Eleventy](#maintenance-du-contenu-eleventy)
+2. [Maintenance du Contenu](#maintenance-du-contenu)
 3. [Maintenance Technique](#maintenance-technique)
 4. [Mise à Jour du Design](#mise-à-jour-du-design)
 5. [Surveillance et Diagnostics](#surveillance-et-diagnostics)
 6. [Sauvegarde et Récupération](#sauvegarde-et-récupération)
-7. [Mise à Jour des Dépendances](#mise-à-jour-des-dépendances)
-8. [Bonnes Pratiques](#bonnes-pratiques)
+7. [Bonnes Pratiques](#bonnes-pratiques)
 
 ## Introduction
 
-Ce guide explique comment maintenir et mettre à jour le site web Oval Saône développé avec Eleventy (11ty) et Azure Static Web Apps. Il couvre la maintenance du contenu via les templates et données JSON, les mises à jour techniques, et la surveillance du système.
+Ce guide explique comment maintenir et mettre à jour le site web Oval Saône développé avec **Eleventy 3** et hébergé sur **Cloudflare Pages**. Il couvre la maintenance du contenu via Decap CMS et les fichiers JSON, les mises à jour techniques, et la surveillance du système.
 
-## Maintenance du Contenu Eleventy
+## Maintenance du Contenu
 
-L'un des principaux avantages d'Eleventy est la facilité de maintenance du contenu via les fichiers JSON et le front matter des templates.
+### Via Decap CMS (recommandé)
 
-### Mise à Jour des Données JSON
+Le moyen le plus simple de mettre à jour le contenu est d'utiliser le **panneau d'administration Decap CMS** :
 
-#### Actualités (_data/actualites.json)
+1. Accéder à `https://ovalsaone-admin.pages.dev/cms/`
+2. S'authentifier avec un compte autorisé
+3. Modifier les actualités, équipes, sponsors, galerie, etc.
+4. Les modifications sont commitées sur GitHub et déclenchent un redéploiement
 
-Pour ajouter une nouvelle actualité :
+### Via les fichiers JSON (_data/)
+
+Les fichiers JSON dans `src/_data/` sont la source de vérité pour le contenu dynamique. Certains sont gérés par Decap CMS, d'autres manuellement.
+
+⚠️ **Note** : Les fichiers gérés par Decap CMS utilisent le format `{"key": [...]}` et sont auto-unwrapped par `eleventy.config.js`. Dans les templates, on itère directement (`{% for item in actualites %}` et non `{% for item in actualites.actualites %}`).
+
+#### Actualités (actualites.json)
 
 ```json
 {
@@ -35,20 +43,17 @@ Pour ajouter une nouvelle actualité :
       "image": "assets/actualites/nouvelle-actu.jpg",
       "content": "Contenu complet de l'actualité..."
     }
-    // Autres actualités existantes...
   ]
 }
 ```
 
-**Workflow de mise à jour** :
-1. Éditer le fichier `src/_data/actualites.json`
+**Workflow** :
+1. Éditer `src/_data/actualites.json`
 2. Ajouter l'image dans `src/assets/actualites/`
-3. Commit et push vers GitHub
-4. Le site se reconstruit automatiquement
+3. Tester : `npm run dev:pages` → http://localhost:8788
+4. Commit et push
 
-#### Équipes (_data/teams.json)
-
-Pour mettre à jour les informations d'une équipe :
+#### Équipes (teams.json)
 
 ```json
 {
@@ -58,16 +63,13 @@ Pour mettre à jour les informations d'une équipe :
       "name": "École de Rugby",
       "description": "Description mise à jour...",
       "training_days": ["Mercredi 17h", "Samedi 14h"],
-      "coach": "Nouveau Coach",
-      "contact_email": "coach@example.com"
+      "coach": "Nouveau Coach"
     }
   ]
 }
 ```
 
-#### Sponsors (_data/sponsors.json)
-
-Pour ajouter ou modifier un sponsor :
+#### Sponsors (sponsors.json)
 
 ```json
 {
@@ -76,43 +78,15 @@ Pour ajouter ou modifier un sponsor :
       "name": "Nouveau Sponsor",
       "logo": "assets/sponsors/nouveau-logo.png",
       "url": "https://nouveau-sponsor.com",
-      "category": "partenaire-principal",
-      "description": "Description du partenariat"
+      "category": "partenaire-principal"
     }
   ]
 }
 ```
 
-### Mise à Jour du Contenu des Pages
+### Ajout de Nouvelles Pages
 
-#### Modification du Front Matter
-
-Pour changer le contenu d'une page, éditez le front matter du fichier .liquid :
-
-```liquid
----
-layout: layout.njk
-title: "Nouveau titre de page"
-hero_title: "Nouveau titre hero"
-hero_subtitle: "Nouveau sous-titre"
-meta_description: "Nouvelle description SEO"
-# Nouvelles données spécifiques
-custom_section_title: "Section personnalisée"
-custom_content: "Contenu personnalisé"
----
-
-<!-- Le contenu HTML peut aussi être modifié -->
-<section class="new-section">
-    <h2>{{ custom_section_title }}</h2>
-    <p>{{ custom_content }}</p>
-</section>
-```
-
-#### Ajout de Nouvelles Pages
-
-Pour créer une nouvelle page :
-
-1. **Créer le fichier template** :
+1. **Créer le fichier template** dans `src/` :
    ```liquid
    ---
    layout: layout.njk
@@ -126,46 +100,35 @@ Pour créer une nouvelle page :
    </section>
    ```
 
-2. **Ajouter les styles spécifiques** :
-   ```css
-   /* Dans src/css/pages/nouvelle-page.css */
-   .page-content {
-       padding: 2rem;
-   }
-   ```
+2. **Ajouter les styles** dans `src/css/pages/nouvelle-page.css`
 
-3. **Inclure les styles dans le bundle** :
+3. **Inclure dans le bundle** — ajouter dans `src/css-bundle.njk` :
    ```njk
-   <!-- Dans src/css-bundle.njk -->
    {% include "./css/pages/nouvelle-page.css" %}
    ```
 
-4. **Mettre à jour la navigation** :
-   Modifier le layout principal pour inclure le lien dans le menu.
+4. **Mettre à jour la navigation** dans `src/_includes/layout.njk`
 
 ### Workflow de Publication
 
 ```
 1. Éditer les fichiers (JSON, .liquid, CSS)
    ↓
-2. Test local avec `npx @11ty/eleventy --serve`
+2. Test local : npm run dev:pages → http://localhost:8788
    ↓
 3. Commit et push vers GitHub
    ↓
-4. GitHub Actions build automatique
+4. Déploiement via npm run deploy:pages (ou déploiement automatique si connecté)
    ↓
-5. Déploiement automatique sur Azure SWA
-   ↓
-6. Vérification du site en production
+5. Vérification du site en production
 ```
 
 ### Vérifications après Mise à Jour
 
 1. **Test local** :
    ```bash
-   # Build et test du site
-   npx @11ty/eleventy --config=src/eleventy.config.js --input=src --output=src/_site
-   npx swa start src --api-location src/api
+   npm run dev:pages
+   # Ouvrir http://localhost:8788
    ```
 
 2. **Vérifications** :
@@ -173,285 +136,229 @@ Pour créer une nouvelle page :
    - Les nouveaux contenus s'affichent
    - Les images sont accessibles
    - Pas d'erreurs JavaScript dans la console
+   - Les formulaires fonctionnent (API + Turnstile)
 
-3. **Compatibilité des navigateurs** :
-   - Tester le site sur les navigateurs principaux
-   - Vérifier la compatibilité mobile
-
-4. **Performance** :
-   - Vérifier les temps de chargement
-   - Identifier les ressources lentes
+3. **Compatibilité** :
+   - Tester sur navigateurs principaux + mobile
 
 ### Vérifications Trimestrielles
 
-Effectuez ces vérifications tous les trois mois :
-
 1. **Mise à jour des dépendances** :
-   - Vérifier les mises à jour du SDK .NET
-   - Mettre à jour les packages NuGet
-   - Mettre à jour les bibliothèques JavaScript
+   ```bash
+   cd pages
+   npm outdated          # Voir les dépendances obsolètes
+   npm update            # Mettre à jour les patch/minor
+   npm audit             # Vérifier les vulnérabilités
+   ```
 
 2. **Vérification de sécurité** :
-   - Analyser les vulnérabilités
-   - Vérifier les paramètres de sécurité Azure
+   - Vérifier les alertes Dependabot sur GitHub
+   - Valider les clés API (Resend, Turnstile)
+   - Vérifier les secrets Cloudflare
 
 3. **Révision du contenu** :
-   - Vérifier que le contenu est à jour
-   - Mettre à jour les informations saisonnières
+   - Vérifier les informations de saison
+   - Mettre à jour les horaires d'entraînement
+   - Actualiser les photos et actualités
 
-## Mise à Jour du Contenu
+## Maintenance Technique
 
-### Modification des Fichiers JSON
+### Mise à Jour des Dépendances Node.js
 
-Le contenu dynamique du site est stocké dans des fichiers JSON dans le dossier `data/` :
+```bash
+cd pages
 
-1. **Actualités (actualites.json)** :
-   ```json
-   [
-     {
-       "id": 1,
-       "titre": "Nouveau titre",
-       "date": "2025-06-14",
-       "image": "assets/actualites/nouvelle-image.jpg",
-       "contenu": "Contenu de l'actualité...",
-       "lien": "#"
-     },
-     // Autres actualités...
-   ]
+# Vérifier les dépendances obsolètes
+npm outdated
+
+# Mettre à jour les dépendances
+npm update
+
+# Pour une mise à jour majeure (ex : Eleventy, Wrangler)
+npm install @11ty/eleventy@latest
+npm install wrangler@latest --save-dev
+
+# Tester après mise à jour
+npm run build
+npm run dev:pages
+```
+
+### Mise à Jour des Bibliothèques Frontend
+
+Les bibliothèques externes (Font Awesome, etc.) sont chargées via CDN dans `layout.njk`. Pour les mettre à jour :
+
+1. Vérifier la dernière version sur le site officiel ou cdnjs
+2. Modifier l'URL dans `src/_includes/layout.njk`
+3. Tester la compatibilité
+
+### Migrations D1
+
+Pour modifier le schéma de la base de données :
+
+1. Créer un fichier de migration dans `migrations/` :
+   ```sql
+   -- migrations/0003_add_new_table.sql
+   CREATE TABLE IF NOT EXISTS new_table (
+     id INTEGER PRIMARY KEY AUTOINCREMENT,
+     ...
+   );
    ```
 
-2. **Équipes (equipes.json)** :
-   ```json
-   [
-     {
-       "categorie": "U6",
-       "age": "Moins de 6 ans",
-       "description": "Nouvelle description...",
-       "entrainements": ["Mercredi 14h-15h30"],
-       "image": "assets/equipes/u6-nouvelle.jpg"
-     },
-     // Autres équipes...
-   ]
-   ```
+2. Appliquer localement : `npm run db:migrate:local`
+3. Appliquer en production : `npm run db:migrate`
 
-3. **Processus de mise à jour** :
-   - Modifier les fichiers JSON localement
-   - Tester les changements en local
-   - Pousser les modifications sur GitHub
-   - Vérifier le déploiement automatique
-
-### Ajout de Nouvelles Images
-
-1. **Préparer les images** :
-   - Optimiser les images (taille et compression)
-   - Utiliser des formats adaptés (JPG, PNG, WebP)
-   - Respecter les dimensions recommandées
-
-2. **Ajouter les images** :
-   - Placer les images dans le dossier approprié
-   - Mettre à jour les références dans les fichiers JSON
-   - Vérifier l'affichage après déploiement
-
-### Modification des Textes HTML
-
-Pour les textes statiques dans les pages HTML :
-
-1. **Identifier la page** :
-   - Localiser le fichier HTML correspondant
-
-2. **Modifier le contenu** :
-   - Éditer le texte dans la balise appropriée
-   - Préserver la structure HTML et les classes CSS
-
-3. **Tester et déployer** :
-   - Vérifier les changements localement
-   - Pousser les modifications
-
-## Modification du Design
+## Mise à Jour du Design
 
 ### Changements CSS Mineurs
 
-1. **Identifier le fichier CSS** :
-   - Styles principaux : `css/styles.css`
-   - Styles spécifiques : fichiers CSS dédiés
+1. Identifier le fichier CSS concerné dans `src/css/` (composants, pages, thèmes)
+2. Utiliser les DevTools du navigateur pour tester les changements
+3. Modifier le fichier source
+4. Vérifier que le fichier est inclus dans `css-bundle.njk`
+5. Tester la responsivité (mobile-first)
 
-2. **Apporter les modifications** :
-   - Utiliser les outils de développement du navigateur pour tester
-   - Modifier les propriétés CSS
-
-3. **Tester sur différents appareils** :
-   - Vérifier la responsivité
-   - Tester sur mobile et desktop
-
-### Changements Majeurs de Design
-
-Pour des changements importants :
+### Changements Majeurs
 
 1. **Créer une branche dédiée** :
    ```bash
    git checkout -b redesign-feature
    ```
 
-2. **Développer et tester localement** :
+2. **Développer et tester** :
    ```bash
-   # Lancer le site en local
-   npx swa start . --api-location api
+   npm run dev:pages
    ```
 
-3. **Créer une pull request** pour révision et prévisualisation
+3. **Créer une pull request** pour révision
 
-4. **Fusionner après validation** pour déployer en production
+4. **Fusionner après validation** → le déploiement se fait via `npm run deploy:pages`
 
-## Mise à Jour Technique
-
-### Mise à Jour du Runtime .NET
-
-1. **Mettre à jour le SDK localement** :
-   ```bash
-   # Installer le nouveau SDK
-   dotnet new globaljson --sdk-version X.Y.Z
-   ```
-
-2. **Mettre à jour le projet** :
-   - Modifier le fichier `.csproj` pour cibler la nouvelle version
-   - Mettre à jour les packages NuGet
-
-3. **Tester localement** :
-   ```bash
-   cd api
-   dotnet build
-   dotnet run
-   ```
-
-4. **Déployer** :
-   - Pousser les modifications
-   - Vérifier le déploiement
-
-### Mise à Jour des Bibliothèques JavaScript
-
-1. **Identifier les bibliothèques externes** :
-   - Vérifier les versions et les CDN utilisés
-
-2. **Mettre à jour les liens** :
-   ```html
-   <!-- Avant -->
-   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-   
-   <!-- Après -->
-   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" rel="stylesheet">
-   ```
-
-3. **Tester la compatibilité** avant de déployer
+💡 Si le repo est connecté à Cloudflare Pages, les pull requests génèrent automatiquement un environnement de prévisualisation.
 
 ## Surveillance et Diagnostics
 
-### Surveillance avec Azure
+### Logs Cloudflare
 
-1. **Accéder aux métriques** :
-   - Dans le portail Azure, aller à votre ressource Static Web App
-   - Cliquer sur "Surveillance" > "Métriques"
+1. **Logs en temps réel** :
+   ```bash
+   wrangler pages deployment tail --project-name ovalsaone
+   ```
 
-2. **Configurer des alertes** :
-   - Définir des alertes pour les erreurs HTTP
-   - Surveiller les temps de réponse
+2. **Dashboard Cloudflare** :
+   - Workers & Pages → ovalsaone → Deployments
+   - Voir les logs de chaque déploiement
+   - Métriques de requêtes, erreurs, latence
 
-3. **Analyser les logs** :
-   - Consulter les logs des fonctions Azure
-   - Identifier les erreurs et problèmes
+3. **Logs D1** :
+   ```bash
+   wrangler d1 execute ovalsaonedb --command="SELECT * FROM convocations ORDER BY id DESC LIMIT 5"
+   ```
 
 ### Diagnostics des Problèmes
 
 1. **Problèmes frontend** :
-   - Utiliser la console du navigateur
-   - Analyser les erreurs réseau
+   - Console du navigateur (erreurs JS)
+   - Onglet Network (requêtes API échouées)
+   - Supprimer `_site/` et relancer `npm run build`
 
 2. **Problèmes API** :
-   - Vérifier les logs des fonctions
-   - Tester les endpoints avec Postman
+   - Vérifier les logs : `wrangler pages deployment tail`
+   - Tester l'endpoint manuellement :
+     ```bash
+     curl -X POST http://localhost:8788/api/contact \
+       -H "Content-Type: application/json" \
+       -d '{"nom":"Test","prenom":"Test","email":"test@test.com","sujet":"Test","message":"Message de test"}'
+     ```
 
-3. **Problèmes de déploiement** :
-   - Consulter les logs GitHub Actions
-   - Vérifier la configuration de déploiement
+3. **Emails non envoyés** :
+   - Vérifier `RESEND_API_KEY` : `wrangler pages secret list --project-name ovalsaone`
+   - Consulter le Dashboard Resend pour les logs d'envoi
+   - En local, sans `RESEND_API_KEY`, les emails sont simulés dans la console
+
+4. **Problèmes de déploiement** :
+   - Vérifier le build : `npm run build`
+   - Vérifier les erreurs Wrangler : `npm run deploy:pages`
+   - Vérifier les bindings D1 dans le Dashboard Cloudflare
 
 ## Sauvegarde et Récupération
 
 ### Sauvegarde du Code
 
-Le code source est naturellement sauvegardé dans Git, mais prenez ces précautions supplémentaires :
+Le code source est sauvegardé dans Git :
 
-1. **Créer des tags pour les versions** :
+1. **Tags de version** :
    ```bash
    git tag v1.0.0
    git push --tags
    ```
 
-2. **Utiliser des branches pour les fonctionnalités** :
+2. **Branches de fonctionnalités** :
    ```bash
    git checkout -b feature/nouvelle-fonctionnalite
    ```
 
-3. **Considérer un miroir du dépôt** pour une sécurité supplémentaire
+### Sauvegarde de la Base D1
+
+```bash
+# Export de la base D1
+wrangler d1 export ovalsaonedb --output=backup.sql
+
+# Ou requête spécifique
+wrangler d1 execute ovalsaonedb --command="SELECT * FROM convocations" --json > convocations-backup.json
+```
 
 ### Sauvegarde du Contenu
 
-Pour le contenu dynamique dans les fichiers JSON :
-
-1. **Sauvegarde régulière des données** :
-   - Copier les fichiers JSON dans un emplacement sécurisé
-   - Considérer l'automatisation de cette sauvegarde
-
-2. **Sauvegarde des images** :
-   - Conserver les originaux des images
-   - Sauvegarder régulièrement le dossier `assets/`
+- **Fichiers JSON** : Versionnés dans Git (`src/_data/`)
+- **Images** : Versionnées dans Git (`src/assets/`)
+- **Base D1** : Export régulier via Wrangler
 
 ### Récupération
 
-En cas de problème :
+```bash
+# Retour à une version précédente
+git checkout v1.0.0
 
-1. **Retour à une version précédente** :
-   ```bash
-   git checkout v1.0.0
-   git push -f origin main
-   ```
+# Redéployer
+npm run deploy:pages
 
-2. **Restauration du contenu** :
-   - Restaurer les fichiers JSON et images
-   - Déployer à nouveau
+# Restaurer la base D1
+wrangler d1 execute ovalsaonedb --file=backup.sql
+```
 
 ## Bonnes Pratiques
 
 ### Gestion des Versions
 
-1. **Suivre le versionnement sémantique** :
-   - X.Y.Z (Majeur.Mineur.Correctif)
-   - Incrémenter selon l'importance des changements
-
-2. **Documenter les changements** :
-   - Maintenir un fichier CHANGELOG.md
-   - Décrire clairement les modifications
-
-3. **Tester avant de déployer** :
-   - Toujours tester localement
-   - Utiliser les environnements de prévisualisation pour les pull requests
+1. **Versionnement sémantique** : X.Y.Z (Majeur.Mineur.Correctif)
+2. **Commits atomiques** avec messages clairs
+3. **Tester localement** avant chaque push
 
 ### Documentation
 
-1. **Maintenir la documentation à jour** :
-   - Mettre à jour ce guide après des modifications significatives
-   - Documenter les nouvelles fonctionnalités
+1. Mettre à jour ce guide après des modifications significatives
+2. Documenter les nouvelles fonctionnalités
+3. Maintenir les README à jour dans chaque composant
 
-2. **Documenter les procédures opérationnelles** :
-   - Créer des runbooks pour les tâches courantes
-   - Documenter les problèmes rencontrés et leurs solutions
+### Sécurité
+
+1. **Ne jamais commiter de secrets** — utiliser `wrangler pages secret put`
+2. **Vérifier régulièrement** les dépendances (`npm audit`)
+3. **Turnstile** protège les formulaires publics
 
 ### Collaboration
 
-1. **Utiliser les issues GitHub** pour suivre les tâches et bugs
+1. **Issues GitHub** pour suivre les tâches et bugs
+2. **Pull requests** pour les changements importants
+3. **Environnements de prévisualisation** Cloudflare pour valider avant fusion
 
-2. **Communiquer les changements** à toutes les parties prenantes
+## Voir aussi
 
-3. **Former les nouveaux contributeurs** à la base de code
+- [Guide de Développement](guide-developpement.md)
+- [Guide de Déploiement](guide-deploiement.md)
+- [Architecture Technique](architecture-technique.md)
+- [FAQ](faq.md)
 
 ---
 
-*Guide mis à jour le 14 juin 2025*
+*Guide mis à jour le 20 février 2026*

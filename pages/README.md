@@ -1,275 +1,178 @@
-# Site Web Oval Saône - Azure Static Web App
+# Site Web Oval Saône
 
-Site web moderne pour un club de rugby développé avec Azure Static Web App, utilisant des technologies web standard et des Azure Functions en C#.
+Site web du club de rugby Oval Saône, construit avec Eleventy 3 (SSG) et déployé sur Cloudflare Pages avec des Pages Functions en TypeScript.
 
 ## 🏉 Fonctionnalités
 
 ### Pages du site
-- **Accueil** - Page d'accueil avec actualités et présentation
-- **Équipes** - Présentation des catégories (U6, U8, U10, U12, U14, Seniors)
-- **L'École** - Histoire du club, bureau et entraîneurs
-- **Partenariat** - Sponsors et informations de partenariat
-- **Boutique** - Produits et équipements du club
-- **Inscription** - Formulaire d'inscription avec calcul automatique des catégories
-- **Contact** - Formulaire de contact avec carte
+- **Accueil** — Actualités, galerie photo, sponsors
+- **Équipes** — Catégories (U6, U8, U10, U12, U14, Seniors)
+- **École de rugby** — Histoire du club, bureau, entraîneurs
+- **Événements** — Calendrier Google intégré
+- **Partenariat** — Sponsors et informations partenaires
+- **Boutique** — Produits et équipements du club
+- **Inscription** — Formulaire d'inscription avec catégories automatiques
+- **Contact** — Formulaire avec vérification Turnstile et envoi via Resend
+- **FAQ** — Questions fréquentes
+- **Convocations** — Réponse aux convocations de match
 
 ### Fonctionnalités techniques
-- **Design responsive** avec menu mobile hamburger
+- **Design responsive** mobile-first avec menu hamburger
 - **Navigation sticky** avec réduction au scroll
-- **Effets parallax** pour les sections hero et histoire
-- **Bandeau RGPD** pour la conformité cookies
-- **Chargement dynamique des données** depuis des fichiers JSON
-- **Validation de formulaires** côté client et serveur
-- **Azure Functions C#** pour le traitement des formulaires
-- **Système de cache** pour les données JSON
+- **Effets parallax** (hero, histoire)
+- **Galerie photo** avec filtres, lightbox et carousel
+- **Validation des formulaires** côté client + serveur (Turnstile)
+- **Pages Functions TypeScript** pour contact et convocations
+- **Base de données D1** pour les convocations
+- **Envoi d'emails** via Resend API
+- **Decap CMS** pour l'édition du contenu (via admin)
 
-## 🛠️ Technologies utilisées
+## 🛠️ Technologies
 
-### Frontend
-- HTML5 sémantique
-- CSS3 avec Custom Properties et Grid/Flexbox
-- JavaScript ES6+ modulaire
-- Font Awesome pour les icônes
-- Design mobile-first responsive
-
-### Backend
-- Azure Functions v4 (.NET 8)
-- C# avec modèles de validation
-- MailKit pour l'envoi d'emails
-- API REST avec gestion CORS
-
-### Déploiement
-- Azure Static Web Apps
-- SWA CLI pour le développement local
-- Configuration automatique CI/CD avec GitHub
+| Couche | Technologies |
+|--------|-------------|
+| **Frontend** | Eleventy 3, Liquid, Nunjucks, CSS3 Grid/Flexbox, JavaScript ES6+, Font Awesome |
+| **Backend** | Cloudflare Pages Functions (TypeScript) |
+| **Base de données** | Cloudflare D1 (SQLite distribué) |
+| **Email** | Resend API |
+| **Anti-bot** | Cloudflare Turnstile |
+| **CMS** | Decap CMS (via admin) |
+| **Déploiement** | Cloudflare Pages, Wrangler CLI |
 
 ## 📁 Structure du projet
 
 ```
-kme-rugby-aswapp/
-├── index.html                 # Page d'accueil
-├── equipes.html              # Page équipes
-├── ecole.html                # Page école de rugby
-├── partenariat.html          # Page partenariats
-├── boutique.html             # Page boutique
-├── inscription.html          # Page inscription
-├── contact.html              # Page contact
-├── staticwebapp.config.json  # Configuration Azure SWA
-├── swa-cli.config.json       # Configuration SWA CLI
-├── css/
-│   └── styles.css           # Styles principaux
-├── js/
-│   ├── main.js              # JavaScript principal
-│   ├── data-loader.js       # Chargement des données JSON
-│   └── [page].js           # Scripts spécifiques par page
-├── data/
-│   ├── actualites.json      # Données des actualités
-│   ├── equipes.json         # Données des équipes
-│   ├── ecole.json           # Données de l'école
-│   ├── partenariat.json     # Données des partenaires
-│   ├── boutique.json        # Produits de la boutique
-│   ├── inscription.json     # Tarifs et documents
-│   └── sponsors.json        # Logos des sponsors
-├── assets/
-│   ├── *.svg               # Images et logos
-│   ├── actualites/         # Images des actualités
-│   ├── boutique/           # Images des produits
-│   ├── sponsors/           # Logos des sponsors
-│   ├── entraineurs/        # Photos des entraîneurs
-│   └── bureau/             # Photos du bureau
-└── api/
-    ├── RugbyClubApi.csproj # Projet .NET
-    ├── Program.cs          # Point d'entrée
-    ├── host.json           # Configuration Functions
-    ├── local.settings.json # Variables d'environnement
-    ├── Functions/
-    │   ├── ContactFunction.cs     # API contact
-    │   └── InscriptionFunction.cs # API inscription
-    ├── Models/
-    │   └── FormModels.cs   # Modèles de données
-    └── Services/
-        └── EmailService.cs # Service d'envoi d'emails
+pages/
+├── eleventy.config.js         # Configuration Eleventy
+├── package.json               # Dépendances et scripts npm
+├── wrangler.toml              # Configuration Cloudflare (bindings, vars, D1)
+├── _site/                     # Site généré (output Eleventy — ne pas éditer)
+├── functions/                 # Pages Functions TypeScript (API)
+│   ├── api/
+│   │   ├── _shared.ts        # Utilitaires partagés (Turnstile, réponses)
+│   │   ├── contact.ts        # POST /api/contact
+│   │   └── convocation.ts    # GET /api/convocation
+│   └── tsconfig.json
+├── src/                       # Code source Eleventy
+│   ├── *.liquid               # Pages templates
+│   ├── _includes/
+│   │   └── layout.njk        # Layout principal Nunjucks
+│   ├── _data/                 # Données JSON (Decap CMS + manuelles)
+│   ├── css/                   # Styles CSS
+│   │   ├── styles.css         # Variables et resets
+│   │   ├── components/        # Composants (nav, footer, hero…)
+│   │   ├── pages/             # Styles par page
+│   │   └── themes/            # Thèmes
+│   ├── js/                    # Scripts JavaScript ESM
+│   ├── assets/                # Images et ressources
+│   ├── css-bundle.njk         # Concaténation CSS
+│   └── js-bundle.njk          # Concaténation JS
+├── static/
+│   └── _headers               # Headers HTTP de production
+├── migrations/                # Migrations D1
+└── docs/                      # Documentation technique
 ```
 
 ## 🚀 Installation et développement
 
 ### Prérequis
-- Node.js 18+ 
-- .NET 8 SDK
-- Azure Static Web Apps CLI
+- Node.js 18+
+- npm
 - Git
 
 ### Installation
+
 ```bash
-# Cloner le repository
-git clone [url-du-repo]
-cd kme-rugby-aswapp
-
-# Installer SWA CLI globalement
-npm install -g @azure/static-web-apps-cli
-
-# Restaurer les packages .NET
-cd api
-dotnet restore
-cd ..
+cd pages
+npm install
 ```
 
 ### Développement local
-```bash
-# Démarrer l'application en mode développement
-swa start . --api-location ./api
 
-# L'application sera disponible sur http://localhost:4280
-# L'API sera disponible sur http://localhost:7071/api
+```bash
+# Build Eleventy + servir via Wrangler Pages dev (port 8788)
+npm run dev:pages
 ```
 
-### Configuration email (optionnel)
-Pour tester l'envoi d'emails en local, configurer les variables dans `api/local.settings.json` :
-```json
-{
-  "Values": {
-    "SMTP_HOST": "smtp.gmail.com",
-    "SMTP_PORT": "587",
-    "SMTP_USER": "votre-email@gmail.com",
-    "SMTP_PASS": "votre-mot-de-passe-app",
-    "CONTACT_EMAIL": "contact@rugbyclub.fr",
-    "INSCRIPTION_EMAIL": "secretaire@rugbyclub.fr"
-  }
-}
+Le site est accessible sur **http://localhost:8788** avec les Pages Functions actives.
+
+### Build seul
+
+```bash
+npm run build              # Build standard
+npm run build:prod         # Build + PurgeCSS + cssnano + terser
+```
+
+### Déploiement
+
+```bash
+npm run deploy:pages       # Build prod + déploiement Cloudflare Pages
+```
+
+### Configuration des secrets
+
+```bash
+# Clé API Resend (emails)
+wrangler pages secret put RESEND_API_KEY --project-name ovalsaone
+
+# Clé Turnstile (protection anti-bot)
+wrangler pages secret put TURNSTILE_SECRET_KEY --project-name ovalsaone
+```
+
+### Migrations D1
+
+```bash
+npm run db:migrate         # Appliquer les migrations (remote)
+npm run db:migrate:local   # Appliquer les migrations (local)
 ```
 
 ## 📝 Gestion du contenu
 
-### Actualités
-Éditer `data/actualites.json` pour ajouter/modifier les actualités :
-```json
-{
-  "actualites": [
-    {
-      "id": 1,
-      "titre": "Titre de l'actualité",
-      "extrait": "Résumé court",
-      "date": "2024-09-01",
-      "image": "assets/actualites/image.svg",
-      "contenu": "Contenu complet..."
-    }
-  ]
-}
-```
+Le contenu dynamique est géré via les fichiers JSON dans `src/_data/`. Certains sont éditables via Decap CMS (actualités, galerie, bureau, équipes, sponsors, entraîneurs).
 
-### Équipes et catégories
-Éditer `data/equipes.json` pour gérer les catégories :
-```json
-{
-  "categories": [
-    {
-      "id": 1,
-      "nom": "U6",
-      "description": "École de rugby pour les moins de 6 ans",
-      "age_min": 3,
-      "age_max": 5,
-      "entraineur": {
-        "nom": "Nom de l'entraîneur",
-        "experience": "5 ans d'expérience",
-        "diplomes": ["Éducateur Rugby", "BAFA"]
-      }
-    }
-  ]
-}
-```
-
-### Sponsors et partenaires
-Éditer `data/sponsors.json` et `data/partenariat.json` pour gérer les partenariats.
+Pour modifier manuellement :
+1. Éditer le fichier JSON concerné dans `src/_data/`
+2. Ajouter les images associées dans `src/assets/`
+3. Lancer `npm run build` pour vérifier
+4. Commit + push pour déclencher le déploiement
 
 ## 🔧 Personnalisation
 
 ### Couleurs et styles
-Les couleurs principales sont définies dans `css/styles.css` via des custom properties :
-```css
-:root {
-  --color-primary: #1a5f1a;    /* Vert rugby */
-  --color-secondary: #2d5016;   /* Vert foncé */
-  --color-accent: #4caf50;      /* Vert clair */
-}
-```
+Les design tokens sont dans `src/css/styles.css` via des custom properties CSS.
 
-### Logo et images
-- Remplacer `assets/logo.png` par votre logo
-- Remplacer `assets/hero-image.svg` par votre image hero
-- Ajouter vos images dans les dossiers correspondants
+### Ajouter un style
+1. Créer le fichier dans `src/css/components/` ou `src/css/pages/`
+2. L'inclure dans `src/css-bundle.njk`
 
-## 🚀 Déploiement sur Azure
+### Ajouter un script
+1. Créer le module dans `src/js/`
+2. L'inclure dans `src/js-bundle.njk`
 
-### Via GitHub Actions (recommandé)
-1. Créer un repository GitHub
-2. Pousser le code
-3. Créer une Azure Static Web App depuis le portail Azure
-4. Connecter le repository GitHub
-5. Azure configure automatiquement le workflow CI/CD
+## 🔒 Sécurité
 
-### Via SWA CLI
-```bash
-# Se connecter à Azure
-swa login
-
-# Déployer
-swa deploy
-```
-
-### Configuration de production
-- Configurer les variables d'environnement dans Azure
-- Ajouter un domaine personnalisé
-- Configurer les certificats SSL automatiques
-
-## 📧 Configuration email de production
-
-Dans le portail Azure, configurer les Application Settings :
-- `SMTP_HOST` : serveur SMTP
-- `SMTP_PORT` : port SMTP (587)
-- `SMTP_USER` : nom d'utilisateur SMTP
-- `SMTP_PASS` : mot de passe SMTP
-- `CONTACT_EMAIL` : email de destination pour les contacts
-- `INSCRIPTION_EMAIL` : email de destination pour les inscriptions
-
-## 🔒 Sécurité et RGPD
-
-- Bandeau de cookies conforme RGPD
-- Validation stricte des formulaires
-- Protection contre les injections (paramètres SQL non utilisés)
-- HTTPS automatique avec Azure
-- Headers de sécurité configurés
+- **HTTPS** automatique via Cloudflare
+- **Turnstile** sur les formulaires (protection anti-bot)
+- **Validation serveur** dans les Pages Functions
+- **CORS** explicites sur les endpoints API
+- **Headers de sécurité** configurés dans `static/_headers`
 
 ## 📱 Compatibilité
 
-- Responsive design pour mobile, tablette et desktop
-- Compatible avec tous les navigateurs modernes
+- Design responsive (mobile, tablette, desktop)
+- Navigateurs modernes (Chrome, Firefox, Safari, Edge)
 - Progressive Enhancement
-- Accessibilité WCAG de base
 
-## 🆘 Support et maintenance
+## 📚 Documentation
 
-### Logs et monitoring
-- Consulter les logs dans Application Insights
-- Surveiller les métriques de performance
-- Alertes automatiques en cas d'erreur
+Voir le dossier [docs/](docs/index.md) pour la documentation complète.
 
-### Mises à jour
-- Mise à jour automatique des dépendances de sécurité
-- Tests automatisés via GitHub Actions
-- Rollback facile via le portail Azure
+## 🆘 Troubleshooting
 
-## 📄 Licence
-
-Ce projet est un template pour clubs de rugby. Libre d'utilisation et de modification.
-
-## 🤝 Contribution
-
-1. Fork le project
-2. Créer une branche feature
-3. Commiter les changements
-4. Pousser vers la branche
-5. Ouvrir une Pull Request
+- **Données périmées** : supprimer `_site/` et relancer `npm run build`
+- **API en erreur** : inspecter la console Wrangler avec `npm run dev:pages`
+- **Emails non envoyés** : vérifier `RESEND_API_KEY` (voir [DEBUG.md](DEBUG.md))
 
 ---
 
-**Développé avec ❤️ pour la communauté rugby**
+*Dernière mise à jour : 20 février 2026*

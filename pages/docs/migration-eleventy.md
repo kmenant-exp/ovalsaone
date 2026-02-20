@@ -27,7 +27,7 @@ Cette documentation détaille la migration du site web Oval Saône d'une archite
 ### Avant : HTML Statique
 
 ```
-kme-rugby-aswapp/
+ovalsaone/
 ├── index.html
 ├── equipes.html
 ├── ecole.html
@@ -52,7 +52,7 @@ kme-rugby-aswapp/
 ### Après : Eleventy
 
 ```
-kme-rugby-aswapp/
+ovalsaone/
 ├── src/
 │   ├── *.liquid              # Templates de pages
 │   ├── _includes/
@@ -258,7 +258,7 @@ Migration des données codées en dur vers des fichiers JSON :
 
 - **Bundling CSS/JS** : Réduction du nombre de requêtes HTTP
 - **Site statique** : Temps de chargement optimisés
-- **CDN intégré** : Distribution mondiale via Azure Static Web Apps
+- **CDN intégré** : Distribution mondiale via Cloudflare Pages
 
 ### Maintenabilité
 
@@ -282,12 +282,8 @@ Mise à jour du workflow pour inclure le build Eleventy :
 - name: Build Eleventy site
   run: npx @11ty/eleventy --config=src/eleventy.config.js --input=src --output=src/_site
 
-- name: Build And Deploy
-  uses: Azure/static-web-apps-deploy@v1
-  with:
-    app_location: "src/_site"  # Site généré par Eleventy
-    api_location: "src/api"
-    output_location: ""
+- name: Deploy to Cloudflare Pages
+  run: wrangler pages deploy _site --project-name ovalsaone
 ```
 
 ## Recommandations pour l'Avenir

@@ -108,15 +108,11 @@ Pour tester localement :
 
 ```bash
 # Lancer le serveur de développement avec l'API
-npm run start:swa
-
-# Ou juste le frontend
-npm run start
+npm run dev:pages
 ```
 
 Puis accéder à :
-- http://localhost:8002 (Eleventy seul)
-- http://127.0.0.1:4280 (SWA CLI avec API)
+- http://localhost:8788 (Wrangler Pages dev avec API)
 
 Vérifier que les adresses des événements :
 1. Sont cliquables
@@ -144,7 +140,7 @@ Voici à quoi ressemble un événement avec l'adresse cliquable :
 ### Test sur mobile
 
 Pour tester sur mobile :
-1. Déployez sur Azure Static Web Apps ou utilisez un tunnel (ngrok, cloudflared)
+1. Déployez sur Cloudflare Pages ou utilisez un tunnel (cloudflared, ngrok)
 2. Ouvrez le site sur votre smartphone
 3. Tapez sur une adresse d'événement
 4. Vérifiez que Google Maps s'ouvre (application native si installée, sinon navigateur)

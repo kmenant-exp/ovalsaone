@@ -1,811 +1,529 @@
-# Guide de Développement du Site Web Oval Saône
+# Guide de Développement — Oval Saône
+
+> Dernière mise à jour : 15 juin 2025
 
 ## Sommaire
-1. [Introduction](#introduction)
-2. [Configuration de l'Environnement](#configuration-de-lenvironnement)
-3. [Structure du Code](#structure-du-code)
-4. [Frontend Eleventy](#frontend-eleventy)
-5. [Backend (Azure Functions)](#backend-azure-functions)
-6. [Développement Local](#développement-local)
-7. [Déploiement](#déploiement)
-8. [Bonnes Pratiques](#bonnes-pratiques)
-9. [Résolution des Problèmes](#résolution-des-problèmes)
 
-## Introduction
+1. [Prérequis](#1-prérequis)
+2. [Installation et configuration](#2-installation-et-configuration)
+3. [Structure du projet](#3-structure-du-projet)
+4. [Développement local](#4-développement-local)
+5. [Templates Liquid et layout Nunjucks](#5-templates-liquid-et-layout-nunjucks)
+6. [Données JSON et Decap CMS](#6-données-json-et-decap-cms)
+7. [CSS — Organisation et conventions](#7-css--organisation-et-conventions)
+8. [JavaScript — Modules et bundle](#8-javascript--modules-et-bundle)
+9. [Pages Functions (API TypeScript)](#9-pages-functions-api-typescript)
+10. [Base de données D1](#10-base-de-données-d1)
+11. [Build et déploiement](#11-build-et-déploiement)
+12. [Conventions de code](#12-conventions-de-code)
+13. [Dépannage](#13-dépannage)
 
-Ce guide est destiné aux développeurs qui maintiennent ou étendent le site web Oval Saône. Il couvre les aspects techniques du développement avec Eleventy, du déploiement et de la maintenance.
+---
 
-## Configuration de l'Environnement
+## 1. Prérequis
 
-### Prérequis
+| Outil | Version | Installation |
+|---|---|---|
+| Node.js | >= 18 | [nodejs.org](https://nodejs.org/) |
+| npm | >= 9 | Inclus avec Node.js |
+| Wrangler CLI | >= 4 | `npm install -g wrangler` |
+| Git | >= 2 | [git-scm.com](https://git-scm.com/) |
 
-- **Node.js** : Version 18.0.0 ou supérieure (pour Eleventy et SWA CLI)
-- **.NET SDK** : Version 8.0 ou supérieure (pour Azure Functions)
-- **Azure Functions Core Tools** : Version 4.x
-- **Azure Static Web Apps CLI** : Dernière version
-- **Eleventy** : Version 3.x (inclus dans package.json)
-- **Visual Studio Code** (recommandé)
-- **Git**
-
-### Extensions VS Code Recommandées
-
-- **Azure Functions** : Développement Azure Functions
-- **Azure Static Web Apps** : Intégration SWA
-- **C#** : Support du langage C#
-- **Liquid** : Syntaxe highlighting pour templates Liquid
-- **Nunjucks** : Support des templates Nunjucks
-- **ESLint** : Linting JavaScript
-- **Live Server** : Serveur de développement
-
-### Installation des Outils
+### Vérifier l'installation
 
 ```bash
-# Node.js (via nvm pour macOS)
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-nvm install 18
-nvm use 18
+node --version    # v18+ requis
+npm --version     # 9+
+wrangler --version # 4+
+git --version
+```
 
-# .NET SDK
-brew install dotnet-sdk
+---
 
-# Cloner le projet et installer les dépendances
-git clone https://github.com/votre-repo/kme-rugby-aswapp.git
-cd kme-rugby-aswapp
+## 2. Installation et configuration
+
+### 2.1 Cloner le projet
+
+```bash
+git clone https://github.com/votre-org/ovalsaone.git
+cd ovalsaone
+```
+
+### 2.2 Installer les dépendances
+
+Chaque composant a ses propres dépendances :
+
+```bash
+# Site public
+cd pages
 npm install
 
-# Les outils Azure peuvent être installés globalement (optionnel)
-npm install -g azure-functions-core-tools@4
-npm install -g @azure/static-web-apps-cli
+# Dashboard admin
+cd ../admin
+npm install
 
-# Les dépendances .NET
-cd src/api
-dotnet restore
+# Worker de notification
+cd ../workers/weekly-notification
+npm install
 ```
 
-## Structure du Code
+### 2.3 Configurer les secrets locaux
 
-### Architecture Globale
+Créer le fichier `pages/.dev.vars` pour les secrets de développement :
 
-```
-kme-rugby-aswapp/
-├── src/                       # Code source Eleventy
-│   ├── *.liquid               # Pages templates Liquid
-│   ├── _includes/             # Templates partagés
-│   │   └── layout.njk         # Layout principal Nunjucks
-│   ├── _data/                 # Données JSON globales
-│   │   ├── actualites.json
-│   │   ├── sponsors.json
-│   │   └── teams.json
-│   ├── _site/                 # Site généré (output Eleventy)
-│   ├── css-bundle.njk         # Bundle CSS automatique
-│   ├── js-bundle.njk          # Bundle JavaScript automatique
-│   ├── css/                   # Styles CSS sources
-│   │   ├── styles.css
-│   │   ├── components/        # Styles par composant
-│   │   └── pages/             # Styles par page
-│   ├── js/                    # Scripts JavaScript
-│   ├── assets/                # Ressources statiques
-│   ├── api/                   # Azure Functions (Backend)
-│   │   ├── Functions/         # Définitions des fonctions
-│   │   ├── Models/            # Modèles de données
-│   │   └── Services/          # Services (email, etc.)
-│   ├── staticwebapp.config.json # Configuration Azure SWA
-│   └── eleventy.config.js     # Configuration Eleventy
-├── package.json               # Dépendances Node.js et scripts
-├── swa-cli.config.json        # Configuration SWA CLI
-├── docs/                      # Documentation
-└── .vscode/                   # Configuration VS Code
+```ini
+RESEND_API_KEY=re_xxxxxxxxxxxxx
+TURNSTILE_SECRET_KEY=0x4AAAAAA...
 ```
 
-### Conventions de Nommage
+💡 **Astuce :** Sans `RESEND_API_KEY`, l'envoi d'email renverra une erreur 500. Sans `TURNSTILE_SECRET_KEY`, la vérification Turnstile est automatiquement ignorée (mode dev).
 
-- **Templates Liquid** : Noms en minuscules, séparés par des tirets (exemple: `page-exemple.liquid`)
-- **Fichiers de données** : Noms en minuscules, format JSON (exemple: `actualites.json`)
-- **Classes CSS** : Noms en minuscules, séparés par des tirets (exemple: `.component-name`)
-- **JavaScript** : camelCase pour les variables et fonctions, PascalCase pour les classes
-- **C#** : PascalCase pour les classes, méthodes et propriétés publiques, camelCase pour les variables locales
-- **Assets** : Noms descriptifs en minuscules avec tirets (exemple: `hero-image.jpg`)
+### 2.4 Configurer la base D1 locale
 
-## Frontend Eleventy
-
-Le frontend utilise Eleventy (11ty) comme générateur de site statique moderne, offrant de nombreux avantages pour le développement et la maintenance.
-
-### Workflow de Développement Eleventy
-
-```
-Édition Templates ──▶ Build Eleventy ──▶ Site Statique ──▶ SWA CLI ──▶ Navigateur
-   (.liquid)            (npm script)        (_site/)       (dev server)
+```bash
+cd pages
+npm run db:migrate:local
 ```
 
-### Templates Liquid
+Cela crée une base SQLite locale dans `.wrangler/state/`.
 
-Les pages principales utilisent le format Liquid avec front matter YAML :
+---
+
+## 3. Structure du projet
+
+```
+ovalsaone/
+├── pages/                      # Site public (Eleventy + Cloudflare Pages)
+│   ├── src/                    # Sources Eleventy
+│   │   ├── *.liquid            # Pages (index, contact, equipes…)
+│   │   ├── _includes/
+│   │   │   └── layout.njk      # Layout principal Nunjucks
+│   │   ├── _data/              # Données JSON (actualites, gallery, teams…)
+│   │   ├── css/                # Feuilles de style
+│   │   │   ├── styles.css      # Design tokens + reset global
+│   │   │   ├── components/     # Composants réutilisables
+│   │   │   ├── pages/          # Styles spécifiques par page
+│   │   │   └── themes/         # Thèmes (couleurs)
+│   │   ├── js/                 # Modules JavaScript (ESM)
+│   │   │   ├── main.js         # Comportements cross-page
+│   │   │   ├── gallery.js      # Galerie photo
+│   │   │   ├── contact.js      # Formulaire de contact
+│   │   │   └── convocations.js # Système de convocations
+│   │   ├── assets/             # Images, fonts, icônes
+│   │   ├── css-bundle.njk      # Concaténation CSS
+│   │   └── js-bundle.njk       # Concaténation JS
+│   ├── functions/              # Cloudflare Pages Functions
+│   │   └── api/
+│   │       ├── _shared.ts      # Utilitaires partagés (Turnstile)
+│   │       ├── contact.ts      # POST /api/contact
+│   │       └── convocation.ts  # POST /api/convocation
+│   ├── _site/                  # Build output (ne pas éditer)
+│   ├── migrations/             # Migrations D1
+│   ├── static/                 # Fichiers statiques (_headers)
+│   ├── eleventy.config.js      # Configuration Eleventy
+│   ├── wrangler.toml           # Configuration Wrangler/Cloudflare
+│   └── package.json            # Scripts npm
+├── admin/                      # Dashboard admin (Hono + Cloudflare Pages)
+│   ├── public/                 # Frontend statique (HTML/CSS/JS)
+│   │   └── cms/                # Decap CMS
+│   ├── functions/              # Backend Hono (Pages Functions)
+│   │   ├── auth/               # Google OAuth (login, callback, me)
+│   │   └── api/                # API admin (convocations, events, stats)
+│   └── wrangler.toml
+├── workers/                    # Cloudflare Workers
+│   └── weekly-notification/    # Cron Trigger (jeudi 08:00 UTC)
+│       ├── src/index.ts
+│       └── wrangler.toml
+└── docs/                       # Documentation transversale
+```
+
+---
+
+## 4. Développement local
+
+### 4.1 Lancer le serveur de développement
+
+```bash
+cd pages
+npm run dev:pages
+```
+
+Cette commande :
+1. Build le site avec Eleventy (`npx @11ty/eleventy --input=./src`)
+2. Lance Wrangler Pages Dev sur **http://localhost:8788**
+3. Sert les fichiers statiques ET les Pages Functions
+
+### 4.2 Workflow de développement
+
+```
+Modifier les sources (src/)
+       │
+       ▼
+Arrêter le serveur (Ctrl+C)
+       │
+       ▼
+Relancer : npm run dev:pages
+       │
+       ▼
+Tester sur http://localhost:8788
+```
+
+📌 **Important :** Eleventy ne dispose pas de hot-reload dans cette configuration. Il faut relancer `npm run dev:pages` après chaque modification.
+
+### 4.3 Tester les Pages Functions
+
+Les fonctions sont automatiquement servies par Wrangler :
+- `POST http://localhost:8788/api/contact` — Formulaire de contact
+- `POST http://localhost:8788/api/convocation` — Convocations
+
+Les bindings D1 locaux utilisent la base SQLite dans `.wrangler/state/`.
+
+---
+
+## 5. Templates Liquid et layout Nunjucks
+
+### 5.1 Layout principal
+
+Le layout `src/_includes/layout.njk` fournit la structure HTML commune (head, nav, footer). Chaque page Liquid l'utilise via le front matter :
 
 ```liquid
 ---
 layout: layout.njk
-title: "Titre de la page"
-hero_title: "Titre personnalisé"
-meta_description: "Description SEO"
-custom_data: "Données spécifiques"
+title: Ma Page
+description: Description pour le SEO
 ---
 
-<!-- Contenu de la page avec variables -->
-<section class="hero">
-    <h1>{{ hero_title }}</h1>
-    <p>{{ meta_description }}</p>
+<section class="ma-page section">
+  <div class="container">
+    <h1>{{ title }}</h1>
+    <!-- Contenu de la page -->
+  </div>
 </section>
-
-<!-- Utilisation des données globales -->
-{% for actualite in actualites.actualites %}
-    <article class="news-card">
-        <h3>{{ actualite.title }}</h3>
-        <p>{{ actualite.excerpt }}</p>
-        <time datetime="{{ actualite.date }}">{{ actualite.date | date: "%d/%m/%Y" }}</time>
-    </article>
-{% endfor %}
-
-<!-- Logique conditionnelle -->
-{% if custom_data %}
-    <div class="custom-section">
-        {{ custom_data }}
-    </div>
-{% endif %}
 ```
 
-### Layout Principal (layout.njk)
+### 5.2 Créer une nouvelle page
 
-Le layout Nunjucks définit la structure HTML commune :
+1. Créer `src/ma-page.liquid` avec le front matter ci-dessus
+2. Le permalink est automatique : `/ma-page/`
+3. Ajouter les styles si nécessaire dans `src/css/pages/`
+4. Référencer les styles dans `src/css-bundle.njk`
+5. Rebuilder le site
 
-```html
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
-    
-    <!-- SEO Meta Tags -->
-    {% if meta_description %}
-    <meta name="description" content="{{ meta_description }}">
-    {% endif %}
-    
-    <!-- Styles bundlés -->
-    <link rel="stylesheet" href="/css-bundle.css">
-    
-    <!-- External Resources -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-</head>
-<body>
-    <!-- Bandeau cookies RGPD -->
-    <div id="cookie-banner" class="cookie-banner hidden">
-        <div class="cookie-content">
-            <p>Ce site utilise des cookies pour améliorer votre expérience...</p>
-            <div class="cookie-buttons">
-                <button id="accept-cookies" class="btn btn-primary">Accepter</button>
-                <button id="decline-cookies" class="btn btn-secondary">Refuser</button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Navigation commune -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <!-- Navigation menu généré automatiquement -->
-        </div>
-    </nav>
-    
-    <!-- Contenu de la page injecté ici -->
-    {{ content | safe }}
-    
-    <!-- Footer commun -->
-    <footer class="footer">
-        <!-- Footer content -->
-    </footer>
-    
-    <!-- Scripts bundlés -->
-    <script src="/bundle.js"></script>
-</body>
-</html>
-```
-
-### Système de Bundling CSS
-
-Le fichier `css-bundle.njk` concatène automatiquement tous les styles :
-
-```njk
----
-permalink: /css-bundle.css
----
-{% include "./css/styles.css" %}
-{% include "./css/components/button.css" %}
-{% include "./css/components/footer.css" %}
-{% include "./css/components/nav.css" %}
-{% include "./css/components/page-hero.css" %}
-{% include "./css/components/cookie-banner.css" %}
-{% include "./css/pages/index.css" %}
-{% include "./css/pages/equipes.css" %}
-{% include "./css/pages/ecole.css" %}
-{% include "./css/pages/partenariat.css" %}
-{% include "./css/pages/boutique.css" %}
-{% include "./css/pages/inscription.css" %}
-{% include "./css/pages/contact.css" %}
-```
-
-### Organisation des Styles CSS
-
-```
-css/
-├── styles.css                 # Styles de base et variables CSS
-├── components/                # Styles par composant
-│   ├── button.css            # Boutons
-│   ├── footer.css            # Pied de page
-│   ├── nav.css               # Navigation
-│   ├── page-hero.css         # Section hero
-│   └── cookie-banner.css     # Bandeau RGPD
-└── pages/                    # Styles spécifiques par page
-    ├── index.css             # Page d'accueil
-    ├── equipes.css           # Page équipes
-    ├── ecole.css             # Page école
-    ├── partenariat.css       # Page partenariat
-    ├── boutique.css          # Page boutique
-    ├── inscription.css       # Page inscription
-    └── contact.css           # Page contact
-```
-
-### Gestion des Données
-
-#### Données Globales (_data/)
-
-Les fichiers JSON dans `_data/` sont automatiquement disponibles dans tous les templates :
-
-```json
-// _data/actualites.json
-{
-  "actualites": [
-    {
-      "id": 1,
-      "title": "Reprise des entraînements",
-      "excerpt": "Les entraînements reprennent le 5 septembre...",
-      "date": "2025-08-20",
-      "image": "assets/actualites/reprise.jpg"
-    }
-  ]
-}
-
-// _data/teams.json
-{
-  "teams": [
-    {
-      "category": "U6-U8",
-      "name": "École de Rugby",
-      "description": "Éveil rugby pour les plus petits",
-      "training_days": ["Mercredi", "Samedi"],
-      "coach": "Coach Name"
-    }
-  ]
-}
-
-// _data/sponsors.json
-{
-  "sponsors": [
-    {
-      "name": "Sponsor Principal",
-      "logo": "assets/sponsors/logo-principal.png",
-      "url": "https://sponsor.com",
-      "category": "partenaire-principal"
-    }
-  ]
-}
-```
-
-#### Utilisation des Données dans les Templates
+### 5.3 Boucles sur les données
 
 ```liquid
-<!-- Affichage des actualités -->
-<section class="news-section">
-    <h2>Actualités</h2>
-    <div class="news-grid">
-    {% for actualite in actualites.actualites limit: 3 %}
-        <article class="news-card">
-            <img src="{{ actualite.image }}" alt="{{ actualite.title }}">
-            <h3>{{ actualite.title }}</h3>
-            <p>{{ actualite.excerpt }}</p>
-            <time datetime="{{ actualite.date }}">
-                {{ actualite.date | date: "%d/%m/%Y" }}
-            </time>
-        </article>
-    {% endfor %}
-    </div>
-</section>
-
-<!-- Affichage des équipes -->
-<section class="teams-section">
-    <h2>Nos Équipes</h2>
-    <div class="teams-grid">
-    {% for team in teams.teams %}
-        <div class="team-card">
-            <h3>{{ team.category }}</h3>
-            <h4>{{ team.name }}</h4>
-            <p>{{ team.description }}</p>
-            <div class="training-info">
-                <strong>Entraînements :</strong>
-                {% for day in team.training_days %}
-                    {{ day }}{% unless forloop.last %}, {% endunless %}
-                {% endfor %}
-            </div>
-            <div class="coach-info">
-                <strong>Entraîneur :</strong> {{ team.coach }}
-            </div>
-        </div>
-    {% endfor %}
-    </div>
-</section>
+{% comment %} Les fichiers _data/*.json deviennent des variables globales {% endcomment %}
+{% for team in teams %}
+  <div class="team-card">
+    <h3>{{ team.nom }}</h3>
+    <p>{{ team.description }}</p>
+  </div>
+{% endfor %}
 ```
 
-Approche mobile-first avec des media queries pour les écrans plus larges :
+---
+
+## 6. Données JSON et Decap CMS
+
+### 6.1 Fichiers de données
+
+Les fichiers dans `src/_data/` sont automatiquement disponibles dans les templates :
+
+| Fichier | Variable | Contenu |
+|---|---|---|
+| `actualites.json` | `actualites` | Actualités du club |
+| `gallery.json` | `gallery` | Albums photo |
+| `teams.json` | `teams` | Équipes |
+| `sponsors.json` | `sponsors` | Partenaires |
+| `bureau.json` | `bureau` | Membres du bureau |
+| `entraineurs.json` | `entraineurs` | Entraîneurs |
+
+### 6.2 Auto-unwrap Decap CMS
+
+Decap CMS encapsule les données : `{"actualites": [...]}`. Eleventy les déplie automatiquement grâce à la configuration dans `eleventy.config.js`. On itère donc directement :
+
+```liquid
+{% for actu in actualites %}  {%- comment -%} PAS actualites.actualites {%- endcomment -%}
+  {{ actu.titre }}
+{% endfor %}
+```
+
+### 6.3 Ajouter un nouveau fichier de données
+
+1. Créer `src/_data/mon-fichier.json`
+2. Si géré par Decap CMS, ajouter la collection dans `admin/public/cms/config.yml`
+3. Si l'auto-unwrap est nécessaire, ajouter le nom dans `UNWRAP_DATA_FILES` de `eleventy.config.js`
+4. Utiliser la variable `mon-fichier` dans les templates Liquid
+
+---
+
+## 7. CSS — Organisation et conventions
+
+### 7.1 Architecture
+
+```
+src/css/
+├── styles.css          # Design tokens (:root), reset, utilitaires globaux
+├── components/         # Composants réutilisables (card, hero, gallery…)
+├── pages/              # Styles spécifiques à une page (contact, equipes…)
+└── themes/             # Thèmes de couleurs
+```
+
+### 7.2 Design tokens
+
+Les variables CSS sont définies dans `styles.css` :
 
 ```css
-/* Base (mobile first) */
-.container {
-    padding: 1rem;
-}
-
-/* Tablettes et écrans plus larges */
-@media (min-width: 768px) {
-    .container {
-        padding: 2rem;
-    }
-}
-
-/* Desktop */
-@media (min-width: 1024px) {
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
+:root {
+  --color-primary: #1a472a;
+  --color-secondary: #2d6a3e;
+  --color-accent: #f4a020;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --border-radius: 8px;
+  --transition: 0.3s ease;
 }
 ```
 
-### JavaScript
+### 7.3 Ajouter un composant CSS
 
-Le code JavaScript est organisé en modules ES6 :
+1. Créer `src/css/components/mon-composant.css`
+2. Utiliser les design tokens (`var(--color-primary)`, etc.)
+3. Ajouter dans `src/css-bundle.njk` :
 
-```javascript
-// data-loader.js - Module pour charger les données JSON
-export async function loadData(jsonFile) {
-    try {
-        const response = await fetch(`data/${jsonFile}`);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return await response.json();
-    } catch (error) {
-        console.error(`Erreur de chargement ${jsonFile}:`, error);
-        return null;
-    }
-}
-
-// Utilisation dans une page
-import { loadData } from './data-loader.js';
-
-document.addEventListener('DOMContentLoaded', async () => {
-    const data = await loadData('exemple.json');
-    // Utiliser les données...
-});
+```nunjucks
+{% include "css/components/mon-composant.css" %}
 ```
 
-#### Effet parallax responsive
-
-- Les sections parallax utilisent la classe `.parallax-section` qui définit les variables CSS `--parallax-base-position` et `--parallax-offset`. Le script `RugbyClubApp.setupParallax()` met à jour `--parallax-offset` sur les périphériques tactiles ou lorsque `background-attachment: fixed` n'est pas fiable.
-- Ajoutez `data-parallax-speed="0.25"` (par défaut `0.3`) sur une section pour ajuster la vitesse relative de défilement :
-
-```liquid
-<section class="hero parallax-section" data-parallax-speed="0.2">
-    <!-- contenu -->
-</section>
-```
-- L'effet est automatiquement désactivé si l'utilisateur a activé `prefers-reduced-motion`, afin de respecter l'accessibilité.
-
-## Backend (Azure Functions)
-
-### Structure des Azure Functions
-
-Les Azure Functions sont organisées selon le modèle d'architecture C# isolé :
-
-```csharp
-// ContactFunction.cs
-using System.Net;
-using Microsoft.Azure.Functions.Worker;
-using Microsoft.Azure.Functions.Worker.Http;
-using Microsoft.Extensions.Logging;
-using RugbyClubApi.Models;
-using RugbyClubApi.Services;
-
-namespace RugbyClubApi.Functions;
-
-public class ContactFunction
-{
-    private readonly ILogger _logger;
-    private readonly IEmailService _emailService;
-
-    public ContactFunction(ILoggerFactory loggerFactory)
-    {
-        _logger = loggerFactory.CreateLogger<ContactFunction>();
-        _emailService = new EmailService();
-    }
-
-    [Function("Contact")]
-    public async Task<HttpResponseData> RunAsync(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "post", "options")] HttpRequestData req)
-    {
-        // Implémentation...
-    }
-}
-```
-
-### Modèles de Données
-
-Les modèles utilisent les Data Annotations pour la validation :
-
-```csharp
-// FormModels.cs
-using System.ComponentModel.DataAnnotations;
-
-namespace RugbyClubApi.Models;
-
-public class ContactFormModel
-{
-    [Required(ErrorMessage = "Le nom est obligatoire")]
-    [StringLength(50, MinimumLength = 2, ErrorMessage = "Le nom doit contenir entre 2 et 50 caractères")]
-    public string Nom { get; set; } = string.Empty;
-    
-    // Autres propriétés...
-}
-```
-
-### Services
-
-Les services suivent le modèle d'injection de dépendances :
-
-```csharp
-// EmailService.cs
-namespace RugbyClubApi.Services;
-
-public interface IEmailService
-{
-    Task SendContactEmailAsync(string nom, string prenom, string email, string? telephone, string sujet, string message);
-    Task SendInscriptionEmailAsync(/* paramètres... */);
-}
-
-public class EmailService : IEmailService
-{
-    // Implémentation...
-}
-```
-
-## Développement Local
-
-### Configuration Locale
-
-1. **Cloner le dépôt** :
-   ```bash
-   git clone https://github.com/votre-utilisateur/kme-rugby-aswapp.git
-   cd kme-rugby-aswapp
-   ```
-
-2. **Installer les dépendances** :
-   ```bash
-   # Dépendances Node.js (Eleventy, SWA CLI)
-   npm install
-   
-   # Dépendances .NET pour l'API
-   cd src/api
-   dotnet restore
-   cd ../..
-   ```
-
-3. **Configurer les variables d'environnement** :
-   - Créer/modifier le fichier `src/api/local.settings.json` :
-   ```json
-   {
-     "IsEncrypted": false,
-     "Values": {
-       "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-       "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
-       "SMTP_HOST": "votre-serveur-smtp.com",
-       "SMTP_PORT": "587",
-       "SMTP_USERNAME": "votre-email@exemple.com",
-       "SMTP_PASSWORD": "votre-mot-de-passe",
-       "EMAIL_FROM": "no-reply@votre-domaine.com",
-       "EMAIL_TO": "contact@votre-domaine.com"
-     }
-   }
-   ```
-
-### Workflows de Développement
-
-#### Option 1 : Développement Standard (Recommandé)
-
-1. **Build Eleventy** :
-   ```bash
-   # Générer le site statique
-   npx @11ty/eleventy --config=src/eleventy.config.js --input=src --output=src/_site
-   ```
-
-2. **Compiler les Azure Functions** :
-   ```bash
-   cd src/api
-   dotnet build
-   cd ../..
-   ```
-
-3. **Lancer SWA CLI** :
-   ```bash
-   # Utilise la configuration dans swa-cli.config.json
-   npm run dev
-   
-   # Ou manuellement :
-   npx swa start src --api-location src/api --host 127.0.0.1 --port 4280
-   ```
-
-#### Option 2 : Développement avec Watch Mode
-
-Pour un développement avec rechargement automatique :
-
-```bash
-# Terminal 1 : Watch Eleventy (reconstruction automatique)
-npx @11ty/eleventy --config=src/eleventy.config.js --input=src --output=src/_site --watch
-
-# Terminal 2 : Watch .NET (compilation automatique)
-cd src/api
-dotnet watch build
-
-# Terminal 3 : SWA CLI pour servir l'application
-npx swa start src --api-location src/api
-```
-
-#### Option 3 : Utiliser les Tâches VS Code
-
-Le projet inclut des tâches VS Code préconfigurées :
-
-- **Build Functions** : Compile le projet Azure Functions
-- **Start SWA CLI** : Démarre le site complet en mode développement
-- **Stop SWA CLI** : Arrête le serveur de développement
-
-Raccourcis VS Code :
-1. `Ctrl+Shift+P` (ou `Cmd+Shift+P` sur Mac)
-2. "Tasks: Run Task"
-3. Sélectionner la tâche
-
-### Workflow Typique de Développement
-
-```
-1. Éditer templates (.liquid) ou données (_data/*.json)
-   ↓
-2. Build Eleventy (manuel ou automatique avec --watch)
-   ↓
-3. Tester dans le navigateur (localhost:4280)
-   ↓
-4. Éditer API (.cs) si nécessaire
-   ↓
-5. Build .NET (manuel ou automatique avec dotnet watch)
-   ↓
-6. Tester les APIs (Postman/curl)
-   ↓
-7. Commit et push
-```
-
-### Tests Locaux
-
-#### Tests Frontend
-
-1. **Tester la génération Eleventy** :
-   ```bash
-   # Vérifier que le build fonctionne
-   npx @11ty/eleventy --config=src/eleventy.config.js --input=src --output=src/_site
-   
-   # Vérifier le contenu généré
-   ls -la src/_site/
-   ```
-
-2. **Tester les templates** :
-   - Modifier un fichier .liquid
-   - Vérifier la régénération dans _site/
-   - Actualiser le navigateur
-
-3. **Tester les données** :
-   - Modifier un fichier JSON dans _data/
-   - Vérifier l'impact sur les pages concernées
-
-#### Tests API
-
-1. **Tester les fonctions Azure** :
-   ```bash
-   # Exemple : Test du formulaire de contact
-   curl -X POST http://localhost:4280/api/Contact \
-     -H "Content-Type: application/json" \
-     -d '{
-       "nom": "Test",
-       "email": "test@exemple.com",
-       "message": "Message de test"
-     }'
-   
-   # Exemple : Test du formulaire d'inscription
-   curl -X POST http://localhost:4280/api/Inscription \
-     -H "Content-Type: application/json" \
-     -d '{
-       "nomEnfant": "Prénom Nom",
-       "dateNaissance": "2010-05-15",
-       "nomParent": "Parent Test",
-       "emailParent": "parent@exemple.com",
-       "telephoneParent": "0123456789",
-       "categorie": "U10-U12"
-     }'
-   ```
-
-2. **Utiliser les DevTools** :
-   - Onglet Network pour vérifier les requêtes API
-   - Onglet Console pour les erreurs JavaScript
-   - Onglet Application pour vérifier les données locales
-
-### Débogage
-
-#### Débogage Frontend
-
-1. **Erreurs de build Eleventy** :
-   ```bash
-   # Mode verbose pour plus d'informations
-   npx @11ty/eleventy --config=src/eleventy.config.js --input=src --output=src/_site --debug
-   ```
-
-2. **Erreurs de templates** :
-   - Vérifier la syntaxe Liquid
-   - Vérifier l'existence des variables
-   - Utiliser des filtres debug : `{{ variable | json }}`
-
-#### Débogage Backend
-
-1. **Erreurs Azure Functions** :
-   ```bash
-   # Logs détaillés
-   func start --verbose
-   ```
-
-2. **Débogage VS Code** :
-   - Configurer les breakpoints dans VS Code
-   - Utiliser F5 pour démarrer en mode debug
-       "nom": "Test",
-       "prenom": "User",
-       "email": "test@example.com",
-       "telephone": "0123456789",
-       "sujet": "Test API",
-       "message": "Ceci est un message de test."
-     }'
-   ```
-
-2. **Tester le frontend** :
-   - Accéder à http://localhost:4280
-   - Tester les formulaires et la navigation
-   - Vérifier la responsivité avec les outils de développement du navigateur
-
-## Déploiement
-
-### Déploiement sur Azure Static Web Apps
-
-1. **Via GitHub Actions** (automatique) :
-   - Pousser les modifications sur la branche main
-   - Le workflow GitHub Actions déclenche le déploiement
-
-2. **Via Azure CLI** (manuel) :
-   ```bash
-   # Installer l'extension SWA pour Azure CLI
-   az extension add --name staticwebapps
-   
-   # Déployer
-   az staticwebapp deploy \
-     --source . \
-     --api-location api \
-     --app-location . \
-     --token <token_de_déploiement>
-   ```
-
-### Configuration des Secrets
-
-Pour ajouter ou modifier des secrets d'environnement :
-
-1. **Dans le portail Azure** :
-   - Accéder à la ressource Static Web App
-   - Naviguer vers "Configuration" > "Application settings"
-   - Ajouter ou modifier les variables
-
-2. **Via Azure CLI** :
-   ```bash
-   az staticwebapp appsettings set \
-     --name nom-de-votre-app \
-     --setting-names SMTP_HOST=nouveau-serveur.com
-   ```
-
-## Bonnes Pratiques
-
-### Sécurité
-
-1. **Validation des données** :
-   - Toujours valider les entrées côté client ET serveur
-   - Utiliser les Data Annotations dans les modèles C#
-   - Valider les formulaires en JavaScript avant soumission
-
-2. **Protection CORS** :
-   - Limiter les origines autorisées en production
-   - Configurer correctement les en-têtes CORS
-
-3. **Variables d'environnement** :
-   - Ne jamais stocker de secrets dans le code
-   - Utiliser les variables d'environnement d'Azure
-
-### Performance
-
-1. **Optimisation des images** :
-   - Utiliser des formats optimisés (WebP, SVG)
-   - Dimensionner correctement les images
-   - Utiliser des attributs width/height pour éviter le CLS
-
-2. **Chargement asynchrone** :
-   - Charger les scripts avec `defer` ou `async`
-   - Utiliser `fetch` avec async/await pour les données JSON
-
-3. **Mise en cache** :
-   - Configurer les en-têtes de cache pour les ressources statiques
-   - Mettre en cache les données JSON côté client
-
-### Maintenance
-
-1. **Versionnement** :
-   - Suivre les principes du versionnement sémantique
-   - Faire des commits atomiques avec messages clairs
-
-2. **Documentation** :
-   - Documenter les fonctions et classes importantes
-   - Mettre à jour la documentation lorsque le code change
-
-3. **Tests** :
-   - Écrire des tests unitaires pour les fonctions critiques
-   - Tester manuellement sur différents appareils et navigateurs
-
-## Résolution des Problèmes
-
-### Problèmes Courants de Développement
-
-1. **Les fonctions Azure ne démarrent pas** :
-   - Vérifier que .NET 8 SDK est installé
-   - Vérifier que local.settings.json est correctement configuré
-   - Essayer de nettoyer et reconstruire : `dotnet clean && dotnet build`
-
-2. **CORS dans SWA CLI** :
-   - Vérifier que l'API est accessible sur localhost:4280/api
-   - Vérifier les en-têtes CORS dans les réponses API
-
-3. **Problèmes de déploiement** :
-   - Vérifier les logs GitHub Actions
-   - S'assurer que la structure du projet correspond à la configuration de déploiement
-
-### Debugging
-
-1. **Fonctions Azure** :
-   - Utiliser les logs avec `_logger.LogInformation()` ou `_logger.LogError()`
-   - Consulter les logs dans le terminal ou le portail Azure
-
-2. **Frontend** :
-   - Utiliser les outils de développement du navigateur
-   - Ajouter des `console.log()` stratégiques
-
-### Support
-
-Pour les problèmes techniques non résolus, contacter :
-- **Développement** : dev@ovalsaone.fr
-- **Azure Static Web Apps** : Consulter la [documentation officielle](https://docs.microsoft.com/fr-fr/azure/static-web-apps/)
+### 7.4 Build CSS de production
+
+Le pipeline `build:prod` applique automatiquement :
+1. **PurgeCSS** — Supprime les classes CSS inutilisées
+2. **cssnano** — Minifie le CSS
+3. Le fichier final est `_site/css-bundle.css`
 
 ---
 
-*Guide mis à jour le 14 juin 2025*
+## 8. JavaScript — Modules et bundle
+
+### 8.1 Architecture
+
+```
+src/js/
+├── main.js             # Comportements cross-page (nav, scroll, animations)
+├── gallery.js          # Galerie photo (filtres, lightbox, carousel)
+├── contact.js          # Formulaire de contact (validation, Turnstile, fetch)
+├── convocations.js     # Système de convocations
+└── ...
+```
+
+### 8.2 Conventions
+
+- Les modules sont en **ES Module** (pas de bundler, pas d'import/export entre modules)
+- Chaque module est autonome et utilise `DOMContentLoaded`
+- Les comportements cross-page vont dans `main.js`
+- La logique spécifique à une page va dans un module dédié
+
+### 8.3 Ajouter un module JS
+
+1. Créer `src/js/mon-module.js`
+2. L'inclure dans `src/js-bundle.njk` :
+
+```nunjucks
+{% include "js/mon-module.js" %}
+```
+
+3. Le bundle final est `_site/bundle.js` (minifié par terser en production)
+
+---
+
+## 9. Pages Functions (API TypeScript)
+
+### 9.1 Emplacement et conventions
+
+Les fonctions sont dans `functions/api/`. Le routage est basé sur le système de fichiers :
+
+| Fichier | Route | Méthode |
+|---|---|---|
+| `functions/api/contact.ts` | `/api/contact` | POST, OPTIONS |
+| `functions/api/convocation.ts` | `/api/convocation` | POST, OPTIONS |
+| `functions/api/_shared.ts` | (utilitaire partagé) | — |
+
+### 9.2 Pattern standard
+
+Chaque fonction suit ce pattern :
+
+1. **Interface `Env`** — Déclare les bindings (D1, secrets, vars)
+2. **Interfaces de données** — Typage du body de requête
+3. **CORS headers** — Constante réutilisable
+4. **Helpers** — `jsonResponse()`, `errorResponse()`, `successResponse()`
+5. **Validation** — Règles de validation des champs
+6. **Handler** — `onRequestPost`, `onRequestGet`, `onRequestOptions`
+
+### 9.3 Ajouter une nouvelle fonction
+
+1. Créer `functions/api/ma-fonction.ts`
+2. Exporter un handler : `export const onRequestPost: PagesFunction<Env> = async (context) => { ... }`
+3. Ajouter les bindings nécessaires dans `wrangler.toml` si pas déjà présents
+4. Tester avec `npm run dev:pages` puis `curl -X POST http://localhost:8788/api/ma-fonction`
+
+### 9.4 Bindings Wrangler
+
+Définis dans `wrangler.toml` :
+
+```toml
+[[d1_databases]]
+binding = "DB"
+database_name = "ovalsaonedb"
+database_id = "cf056ba0-..."
+
+[vars]
+SMTP_FROM = "contact@ovalsaone.fr"
+CONTACT_EMAIL = "ovalsaone@gmail.com"
+```
+
+Les secrets (`RESEND_API_KEY`, `TURNSTILE_SECRET_KEY`) sont dans `.dev.vars` en local et configurés via `wrangler secret put` en production.
+
+---
+
+## 10. Base de données D1
+
+### 10.1 Présentation
+
+**Cloudflare D1** est une base SQLite serverless. Le binding `DB` est disponible dans toutes les Pages Functions via `env.DB`.
+
+### 10.2 Migrations
+
+Les fichiers SQL sont dans `migrations/` :
+
+```bash
+# Appliquer en local
+npm run db:migrate:local
+
+# Appliquer en production
+npm run db:migrate
+```
+
+### 10.3 Accès en dev
+
+En développement local, Wrangler crée une base SQLite dans `.wrangler/state/`. Les données sont indépendantes de la production.
+
+```bash
+# Exécuter une requête en local
+wrangler d1 execute ovalsaonedb --local --command "SELECT * FROM convocations"
+
+# Exécuter en production
+wrangler d1 execute ovalsaonedb --remote --command "SELECT count(*) FROM convocations"
+```
+
+---
+
+## 11. Build et déploiement
+
+### 11.1 Scripts npm
+
+| Script | Commande | Description |
+|---|---|---|
+| `npm run build` | `npx @11ty/eleventy --input=./src` | Build Eleventy |
+| `npm run build:prod` | Build + PurgeCSS + cssnano + terser | Build optimisé |
+| `npm run dev:pages` | Build + `wrangler pages dev` | Dev local (port 8788) |
+| `npm run deploy:pages` | `build:prod` + `wrangler pages deploy` | Déploiement production |
+| `npm run db:migrate` | `wrangler d1 migrations apply` | Migrations D1 (remote) |
+| `npm run db:migrate:local` | Idem `--local` | Migrations D1 (local) |
+
+### 11.2 Pipeline de build production
+
+```
+npm run build:prod
+    │
+    ├── 1. Eleventy compile src/ → _site/
+    ├── 2. PurgeCSS supprime le CSS inutilisé
+    ├── 3. cssnano minifie le CSS
+    └── 4. terser minifie le JS (supprime console.log)
+```
+
+### 11.3 Déploiement
+
+```bash
+cd pages
+npm run deploy:pages
+```
+
+Cela build le site en production et le déploie sur Cloudflare Pages via Wrangler.
+
+📌 **Déploiement automatique** : tout push sur la branche principale déclenche un build sur Cloudflare Pages.
+
+---
+
+## 12. Conventions de code
+
+### Nommage
+
+| Élément | Convention | Exemple |
+|---|---|---|
+| Fichiers Liquid | kebab-case | `rugby-enfants-trevoux.liquid` |
+| Fichiers CSS | kebab-case | `gallery.css`, `cookie-banner.css` |
+| Fichiers JS | camelCase ou kebab-case | `gallery.js`, `contact.js` |
+| Classes CSS | kebab-case (BEM simplifié) | `.gallery-item`, `.card-content` |
+| Variables CSS | kebab-case | `--color-primary`, `--spacing-md` |
+| Fonctions TS | camelCase | `verifyTurnstile()`, `sendEmail()` |
+
+### Bonnes pratiques
+
+- **Pas de bundler JS** — Les modules sont concaténés via `js-bundle.njk`
+- **Pas de framework CSS** — Styles custom avec design tokens
+- **Pas de framework frontend** — JavaScript vanilla uniquement
+- **Lazy loading** — Toujours `loading="lazy"` sur les images
+- **Accessibilité** — Attributs `alt`, `aria-label`, rôles ARIA
+- **Performance** — Images optimisées, PurgeCSS, minification
+
+---
+
+## 13. Dépannage
+
+### Le site ne se build pas
+
+```bash
+# Nettoyer et rebuilder
+rm -rf _site
+npm run build
+```
+
+### Les styles ou données semblent périmés
+
+```bash
+rm -rf _site && npm run build
+```
+
+### Erreur 500 sur /api/contact
+
+- Vérifier que `RESEND_API_KEY` est défini dans `.dev.vars`
+- Consulter les logs Wrangler dans le terminal
+
+### Turnstile échoue en local
+
+- Normal si `TURNSTILE_SECRET_KEY` n'est pas dans `.dev.vars`
+- La vérification est automatiquement ignorée en mode dev
+
+### La base D1 est vide en local
+
+```bash
+npm run db:migrate:local
+```
+
+### Les Pages Functions ne se chargent pas
+
+- Vérifier que Wrangler est installé : `wrangler --version`
+- Vérifier que le dossier `functions/` est au bon niveau (pas dans `src/`)
+
+---
+
+## Voir aussi
+
+- [architecture-technique.md](architecture-technique.md) — Architecture détaillée du projet
+- [exemples-code.md](exemples-code.md) — Exemples de code prêts à l'emploi
+- [guide-deploiement.md](guide-deploiement.md) — Procédure de déploiement
+- [guide-maintenance.md](guide-maintenance.md) — Maintenance et suivi
+
+*Dernière mise à jour : 15 juin 2025*

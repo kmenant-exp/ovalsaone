@@ -99,7 +99,7 @@ Toujours dans les paramètres du calendrier :
    - Cliquez sur **"Add"** pour ajouter les sites Web autorisés :
      - `*.ovalsaone.fr/*` (pour le domaine de production)
      - `http://localhost:8002/*` (pour le développement avec Eleventy)
-     - `https://polite-bay-00219b903.2.azurestaticapps.net/*` (pour les environnements de prévisualisation Azure)
+     - `https://*.ovalsaone.pages.dev/*` (pour les environnements de prévisualisation Cloudflare Pages)
    
    **Restrictions relatives aux API** :
    - Sélectionnez **"Restreindre la clé"**
