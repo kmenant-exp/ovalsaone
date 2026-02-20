@@ -1,5 +1,5 @@
 ---
-name: Dev Admin Ovalsaône
+name: Ovalsaône - Dev Admin 
 description: Agent spécialisé dans le développement du dashboard admin Oval Saône (Hono, Alpine.js, Google OAuth, Decap CMS, D1).
 tools: [execute, read, search, editFiles]
 target: github-copilot

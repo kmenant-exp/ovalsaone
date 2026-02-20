@@ -1,5 +1,5 @@
 ---
-name: Dev Pages Ovalsaône
+name: Ovalsaône - Dev Pages 
 description: Agent spécialisé dans le développement du site public Oval Saône (Eleventy 3, Liquid, CSS, Pages Functions).
 tools: [execute, read, search, editFiles]
 target: github-copilot

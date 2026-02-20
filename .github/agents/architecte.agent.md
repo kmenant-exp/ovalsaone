@@ -1,5 +1,5 @@
 ---
-name: Architecte Ovalsaône
+name: Ovalsaône - Architecte 
 description: Agent de spécification de fonctionnalités et de gestion d'issues GitHub pour le projet Oval Saône.
 tools: [execute, read, search, web, agent, todo]
 target: github-copilot
