@@ -60,6 +60,7 @@ gh issue create \
   --title "Titre de l'issue" \
   --body "Corps formaté en Markdown" \
   --label "enhancement"
+  --assignee "@dev-pages" // ou @dev-admin, @dev-workers, @documentation
 ```
 
 ### 5. Affectation aux agents de développement
