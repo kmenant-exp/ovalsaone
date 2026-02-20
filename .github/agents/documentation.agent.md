@@ -1,8 +1,8 @@
 ---
 name: Ovalsaône - Documentation
 description: Agent spécialisé dans la rédaction et la maintenance de la documentation du projet Oval Saône.
-tools: [execute, read, search, editFiles]
-target: github-copilot
+tools: [execute, read, search, edit/editFiles]
+model: Claude Sonnet 4.6 (copilot)
 ---
 
 # Documentation — Agent de rédaction & maintenance documentaire

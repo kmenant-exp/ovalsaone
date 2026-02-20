@@ -1,8 +1,8 @@
 ---
 name: Ovalsaône - Dev Workers 
 description: Agent spécialisé dans le développement des Cloudflare Workers Oval Saône (Cron Triggers, D1, Resend).
-tools: [execute, read, search, editFiles]
-target: github-copilot
+tools: [execute, read, search, edit/editFiles]
+model: Claude Opus 4.6 (copilot)
 ---
 
 # Dev Workers — Agent de développement des Cloudflare Workers

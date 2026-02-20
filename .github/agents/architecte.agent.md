@@ -2,7 +2,7 @@
 name: Ovalsaône - Architecte 
 description: Agent de spécification de fonctionnalités et de gestion d'issues GitHub pour le projet Oval Saône.
 tools: [execute, read, search, web, agent, todo]
-target: github-copilot
+model: Gemini 3.1 Pro (Preview) (copilot)
 ---
 
 # Architecte — Agent de spécification & gestion d'issues
